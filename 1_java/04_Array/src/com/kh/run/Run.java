@@ -2,6 +2,7 @@ package com.kh.run;
 
 import com.kh.array.A_Array;
 import com.kh.array.B_ArraySort;
+import com.kh.array.C_ArrayCopy;
 
 public class Run {
 
@@ -24,7 +25,13 @@ public class Run {
 //		as.method5();
 //		as.method6();
 //		as.method7();
-		as.method8();
+//		as.method8();
+		
+		C_ArrayCopy ac = new C_ArrayCopy();
+//		ac.method1();
+//		ac.method2();
+//		ac.method3();
+		ac.method4();
 	}
 
 }
