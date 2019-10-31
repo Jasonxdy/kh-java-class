@@ -11,7 +11,8 @@ public class Run {
 		DimensionalArray da = new DimensionalArray();
 //		da.method1();
 //		da.method2();
-		da.method3();
+//		da.method3();
+		da.method4();
 		
 
 	}
