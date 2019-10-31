@@ -1,6 +1,7 @@
 package com.kh.chap2_encapsulation.run;
 
 import com.kh.chap2_encapsulation.model.vo.Account;
+import com.kh.chap3_field.model.vo.Korean;
 
 public class AccountRun {
 	
@@ -26,6 +27,8 @@ public class AccountRun {
 		acc.setPassword("비밀번호");
 		acc.setBankCode(10);
 		acc.setBalance(100000000);
+		
+		System.out.println(Korean.nCode);
 		
 		System.out.println("계좌 정보");
 		System.out.println(acc.getName());
