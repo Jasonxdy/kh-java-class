@@ -45,7 +45,6 @@ public class BookController {
 				flag = false;
 				break; //메모리 아낌
 			}
-			
 			// 검색의 기본 알고리즘은 무언가를 찾았으면 지표를 주고 못찾으면 그 지표를 통해서 결과없음을 알려줌
 			}
 		if(flag) {
