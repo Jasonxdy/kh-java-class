@@ -22,8 +22,7 @@ public class Run {
 		User user2 = new User("user02", "pass02", "사용자2", 20, '여');
 		System.out.println(user2.inform());
 		
-		//
 		User user3 = new User();  //--> 이 경우에 에러가 나는 이유는 User클래스의 생성자가 매개변수가 있기 때문에 JVM이 자동으로 생성자 만들어주지 않음
-		
+		// 하지만 매개변수 없는 생성자도 하나 만들어 놓으면 이것도 가능..
 	}
 }

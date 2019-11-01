@@ -31,8 +31,31 @@ public class User {
 		System.out.println("User 객체가 생성됨");
 	}
 	
+	
 	// 매개변수 있는 생성자
 	// 객체 생성과 동시에 매개변수로 전달된 값들을 해당 멤버변수에 초기화하는 목적으로 사용
+
+	public User(String userId, String userPwd, String userName) {
+		// 매개변수의 개수가 다르므로 오버로딩 성립
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+	}
+	
+	/*
+	public User(String userId, String userPwd, int age) {
+		// 매개변수의 개수는 3개로 같지만 마지막 매개변수의 자료형이 다르므로 오버로딩 성립
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.age = age;
+	}
+	
+	public User(int age, String userId, String userPwd) {
+		// 매개변수의 개수, 자료형이 모두 같지만 순서가 다른 경우 오버로딩 성립
+		
+	}
+	*/
+	
 	public User(String userId, String userPwd, String userName, int age, char gender) {
 		this.userId = userId;
 		this.userPwd = userPwd;
@@ -41,7 +64,20 @@ public class User {
 		this.gender = gender;
 		System.out.println("매개변수 있는 생성자로 객체 생성");
 	}
+
 	
+	// 오버로딩(Over Loading)
+	// 한 클래스 내에서 동일한 이름의 메소드를 여러개 작성하는 기법
+	// (생성자는 객체를 생성할 때 사용되는 특별한 메소드이기 때문에 오버로딩 가능)
+
+	// ★ 오버로딩 조건
+	// 1) 메소드명이 동일해야 함
+	// 2) 단, 매개변수가 달라야함
+	// - 매개변수의 개수
+	// - 다른 자료형
+	// - 매개변수의 순서
+	// * 단, 매개변수명은 오버로딩 성립조건과 관계 없음. (매개변수명의 순서가 달라도 같은 자료형이면 안된다 -> 자료형의 순서가 달라야함)
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
