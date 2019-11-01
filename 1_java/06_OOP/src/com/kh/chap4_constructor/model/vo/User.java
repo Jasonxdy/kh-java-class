@@ -57,20 +57,28 @@ public class User {
 	*/
 	
 	public User(String userId, String userPwd, String userName, int age, char gender) {
+		/*
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
+		*/
+		
+		// this 생성자
+		// 반드시 첫번째 줄에 작성!
+		
+		this(userId, userPwd, userName);
 		this.age = age;
 		this.gender = gender;
 		System.out.println("매개변수 있는 생성자로 객체 생성");
 	}
-
+	
+	
 	
 	// 오버로딩(Over Loading)
 	// 한 클래스 내에서 동일한 이름의 메소드를 여러개 작성하는 기법
 	// (생성자는 객체를 생성할 때 사용되는 특별한 메소드이기 때문에 오버로딩 가능)
 
-	// ★ 오버로딩 조건
+	// 오버로딩 조건
 	// 1) 메소드명이 동일해야 함
 	// 2) 단, 매개변수가 달라야함
 	// - 매개변수의 개수
