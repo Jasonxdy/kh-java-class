@@ -36,6 +36,4 @@ public class ElectronicController {
 			return "판매가능";
 		}
 	}
-
-
 }
