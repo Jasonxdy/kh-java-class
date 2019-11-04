@@ -31,13 +31,13 @@ public class Run {
 		D_Cast cast = new D_Cast();
 		//cast.rule1();
 		//cast.rule2();
-		cast.dataloss();
+		//cast.dataloss();
 		
 		E_OverFlow of = new E_OverFlow();
 		of.overflow();
 		
 		F_Print print = new F_Print();
-		print.printMethod();
+		//print.printMethod();
 		
 	}
 }

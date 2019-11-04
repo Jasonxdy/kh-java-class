@@ -28,6 +28,7 @@ public final class Computer extends Product {
 	public void setHdd(int hdd) {
 		this.hdd = hdd;
 	}
+	
 	public int getHdd() {
 		return hdd;
 	}
@@ -52,12 +53,12 @@ public final class Computer extends Product {
 	@Override
 	public String inform() {
 		
-		return super.inform()+ ", " + cpu + ", " + hdd + ", " + ram;
+		return  super.inform()+ ", " + cpu + ", " + hdd + ", " + ram;
 	}
 
 	@Override
 	public void print() {
-		System.out.println("오버라이딩 했는데?");
+		System.out.println("오버라이딩 했는데?");	
 	}
 	
 	
