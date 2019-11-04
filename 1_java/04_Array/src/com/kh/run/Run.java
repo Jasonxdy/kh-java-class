@@ -1,5 +1,7 @@
 package com.kh.run;
 
+import java.util.Arrays;
+
 import com.kh.array.A_Array;
 import com.kh.array.B_ArraySort;
 import com.kh.array.C_ArrayCopy;
@@ -16,10 +18,9 @@ public class Run {
 //		arr.method5();
 //		arr.method6();
 
-		
 		B_ArraySort as = new B_ArraySort();
 //		as.method1();
-//		as.method2();
+		as.method2();
 //		as.method3();
 //		as.method4();
 //		as.method5();

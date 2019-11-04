@@ -93,7 +93,7 @@ public class A_Array {
 		System.out.print("인덱스 입력 : ");
 		int index = sc.nextInt();
 		if (0<=index&&index<fruit.length) {
-		System.out.print(fruit[index]);
+			System.out.print(fruit[index]);
 		} else {
 			System.out.println("잘못된 인덱스입니다");
 		}
