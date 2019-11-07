@@ -1,6 +1,6 @@
 package com.kh.practice.point.model.vo;
 
-public class Circle {
+public class Circle extends Point {
 	/*
 	- radius : int
 	+ Circle() : 기본생성자
