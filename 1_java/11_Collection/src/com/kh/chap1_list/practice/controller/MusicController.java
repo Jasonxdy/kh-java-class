@@ -1,9 +1,11 @@
 package com.kh.chap1_list.practice.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import com.kh.chap1_list.practice.model.compare.DescSinger;
 import com.kh.chap1_list.practice.model.vo.Music;
 
 public class MusicController {
@@ -75,17 +77,11 @@ public class MusicController {
 		return null;
 	}
 	
-	public Music setMusic(String title) {
+	public Music setMusic(String title, Music music) {
 	// 곡 명으로 객체 검색, 객체가 있으면 객체 정보 수정, 없으면 null 리턴
 		for (int i = 0; i < list.size(); i++) {
 			if(list.get(i).getTitle().equals(title)) {
-				System.out.print("수정할 곡 명 : ");
-				String newTitle = sc.nextLine();
-				System.out.print("수정할 가수 명 : ");
-				String newName = sc.nextLine();
-				list.get(i).setTitle(newTitle);
-				list.get(i).setSinger(newName);
-				return list.get(i);
+				return list.set(i, music);
 			}
 		}
 		return null;
@@ -93,12 +89,22 @@ public class MusicController {
 	
 	public int ascTitle() {
 	// 리스트 곡 명 오름차순 정렬, 제목이 같으면 가수 명으로 오름차순 정렬, 1 리턴
-		return 0;
+		try { // 예외처리 try - catch 구문 (특수한 조건문같은 개념)
+			Collections.sort(list); // Collections는 배열의 Arrays같은것->유용한 기능 모아놓음
+			return 1;
+		} catch (Exception e) { // catch : 시도 중에 예외 상황이 발생하는 경우 catch하겠다
+			return 0;
+		}
 	}
 	
 	public int descSinger() {
 	// 리스트 가수 명 내림차순 정렬, 1 리턴
-		return 0;
+		try {
+			Collections.sort(list, new DescSinger()); // 2번째 변수 : Comparator<? super T> c) -> Comparator를 상속받은 객체를 선언
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 	
 	

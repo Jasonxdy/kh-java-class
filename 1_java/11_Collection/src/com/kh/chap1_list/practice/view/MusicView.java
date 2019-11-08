@@ -63,9 +63,9 @@ public class MusicView {
 			case 3 : printAll(); break;
 			case 4 : searchMusic(); break;
 			case 5 : removeMusic(); break;
-			case 6 : break;
-			case 7 : break;
-			case 8 : break;
+			case 6 : setMusic(); break;
+			case 7 : ascTitle(); break;
+			case 8 : descSinger(); break;
 			case 9 : System.out.println("프로그램 종료"); break;
 			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
 			}
@@ -168,9 +168,21 @@ public class MusicView {
 //		// 검색 결과 값이 없으면 “수정할 곡이 없습니다.”, 검색 결과 값이 있고
 //		// 수정 했으면 “000(곡 명, 가수 명)의 값이 변경 되었습니다.” 콘솔 창에 출력
 		System.out.println("****** 특정 곡 정보 수정 ******");
-		System.out.print("검색할 곡 명 :");
-		String title = sc.nextLine();
+		System.out.print("검색할 곡 명 : ");
+		String searchTitle = sc.nextLine();
 		
+		System.out.println("수정할 곡 명 : ");
+		String title = sc.nextLine();
+		System.out.println("수정할 가수명 : ");
+		String singer = sc.nextLine();
+		
+		Music m = mc.setMusic(searchTitle, new Music(title,singer));
+		
+		if(m != null) {
+			System.out.println(m + "가 값이 변경되었습니다");
+		} else {
+			System.out.println("수정할 곡이 없습니다.");
+		}
 		//if(mc.setMusic(title, music))
 		
 		
@@ -179,11 +191,21 @@ public class MusicView {
 	public void ascTitle() {
 //		****** 곡 명 오름차순 정렬 ******
 //		// MusicController에 ascTitle()의 값에 따라 성공 시 “정렬 성공”, 실패 시 “정렬 실패”
+		if(mc.ascTitle()==1) {
+			System.out.println("정렬 성공");
+		} else {
+			System.out.println("정렬 실패");
+		}
 	}
 
 	public void descSinger() {
 //		****** 가수 명 내림차순 정렬 ******
 //		// musicController에 descSinger()의 값에 따라 성공 시 “정렬 성공”, 실패 시 “정렬 실패”
+		if (mc.descSinger()==1) {
+			System.out.println("정렬 성공");
+		} else {
+			System.out.println("정렬 실패");
+		}
 	}
 
 }

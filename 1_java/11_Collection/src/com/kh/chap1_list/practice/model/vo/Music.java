@@ -1,6 +1,6 @@
 package com.kh.chap1_list.practice.model.vo;
 
-public class Music {
+public class Music implements Comparable<Music> { // comparable<T> : T = type.. 비교할 타입을 정함
 	
 //	- title:String
 //	- singer:String
@@ -43,6 +43,11 @@ public class Music {
 
 	@Override
 	public String toString() {
-		return "Music [title=" + title + ", singer=" + singer + "]";
+		return title + " - " + singer;
+	}
+
+	@Override
+	public int compareTo(Music o) { // 자기 자신을 기준으로 했을 때 다른 객체랑 비교함
+		return title.compareTo(o.getTitle());
 	}
 }
