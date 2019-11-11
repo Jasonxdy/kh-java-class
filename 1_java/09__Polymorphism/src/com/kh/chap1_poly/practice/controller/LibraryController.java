@@ -35,7 +35,7 @@ public class LibraryController {
 	}
 	
 	public Book[] selectAll() {
-		return null;
+		return bList;
 	}
 	
 	public Book[] searchBook(String keyword) {

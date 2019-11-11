@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Run {
 
@@ -29,12 +30,10 @@ public class Run {
 		
 		System.out.println();
 		
-		List<Integer> list = new ArrayList<Integer>(num);
-		Collections.sort(list);
+		Set<Integer> list = new TreeSet<Integer>();
+		list.addAll(num);
 		
-		Set<Integer> lotto = new LinkedHashSet<Integer>();
-		lotto.addAll(list);
-		for (Integer integer : lotto) {
+		for (Integer integer : list) {
 			System.out.print(integer + " ");
 		}
 		

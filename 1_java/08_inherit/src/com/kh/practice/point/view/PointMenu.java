@@ -46,7 +46,7 @@ public class PointMenu {
 			case 1 : circleMenu(); break;
 			case 2 : rectangleMenu(); break;
 			case 9 : System.out.println("프로그램을 종료합니다"); return;
-			default : System.out.println("잘못 입력하셨습니다");
+			default : System.out.println("잘못 입력하셨습니다"); continue;
 			}
 			break;
 		}

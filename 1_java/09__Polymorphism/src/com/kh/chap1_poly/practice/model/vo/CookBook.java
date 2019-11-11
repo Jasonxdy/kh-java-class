@@ -18,11 +18,14 @@ public class CookBook extends Book {
 		super(title, author, publisher);
 		this.coupon = coupon;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "CookBook [coupon=" + coupon + "]";
 	}
+	
+	
+
 	
 	
 

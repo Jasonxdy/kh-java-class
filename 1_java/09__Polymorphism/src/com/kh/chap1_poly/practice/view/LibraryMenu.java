@@ -75,7 +75,9 @@ public class LibraryMenu {
 	}
 	
 	public void selectAll() {
-		
+		for (int i = 0; i < 5; i++) {
+			System.out.println(lc.selectAll()[i]);
+		}
 	}
 	
 	public void searchBook() {
