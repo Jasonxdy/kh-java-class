@@ -6,7 +6,10 @@ public class Run {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new PhoneController().method();
+		String[] print = new String[2];
+		for (int i = 0; i < print.length; i++) {
+			System.out.println(new PhoneController().method()[i]);
+			System.out.println();
+		}
 	}
-
 }
