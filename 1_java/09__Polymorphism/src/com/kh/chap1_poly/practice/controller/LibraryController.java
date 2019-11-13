@@ -39,11 +39,38 @@ public class LibraryController {
 	}
 	
 	public Book[] searchBook(String keyword) {
-		return null;
+		Book[] result = new Book[5];
+		
+		int count = 0;
+		
+		for (int i = 0; i < bList.length; i++) {
+			Book b = bList[i];
+			if (b.getTitle().contains(keyword)) {
+				result[count] = bList[i];
+				count++;
+			}
+		}
+		if (count == 0) {
+			return null;
+		} else {
+			return result;
+		}
 	}
 	
+	
 	public int rentBook(int index) {
-		return 0;
+		int result = 0;
+		if (bList[index] instanceof AniBook) {
+			if (mem.getAge() < ((AniBook) (bList[index])).getAccessAge()) {
+				result = 1;
+			}
+		} else if (bList[index] instanceof CookBook) {
+			if (((CookBook) (bList[index])).isCoupon()) {
+				mem.setCouponCount(mem.getCouponCount()+1);
+				result = 2;
+			}
+		}
+		return result;
 	}
 	
 }

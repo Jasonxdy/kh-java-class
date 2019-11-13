@@ -1,7 +1,9 @@
 package com.kh.chap3_map.practice.view;
 
 import java.util.Map.Entry;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -182,16 +184,29 @@ public class MemberMenu {
 			while(true) {
 				System.out.print("검색할 이름 : ");
 				String name = sc.nextLine();
-				
 				if(mc.sameName(name) != null) {
-					Set<Entry<String, Member>> entrySet = mc.sameName(name).entrySet();
-					Iterator<Entry<String, Member>> it = entrySet.iterator();
-					Entry<String, Member> entry = it.next();
-					System.out.println(entry.getKey() + " - " +entry.getValue().getName());
+					Map<String, String> same = mc.sameName(name);
+					Set<Entry<String, String>> entry = same.entrySet();
+					Iterator<Entry<String, String>> it = entry.iterator();
+					while(it.hasNext()) {
+						Entry<String, String> me = it.next();
+						System.out.println(me.getKey() + " - " + me.getValue());
+						break;
+					}
 					break;
 				} else {
 					System.out.println("검색하신 이름은 없습니다.");
 				}
+				
+//				if(mc.sameName(name) != null) {
+//					Set<Entry<String, Member>> entrySet = mc.sameName(name).entrySet();
+//					Iterator<Entry<String, Member>> it = entrySet.iterator();
+//					Entry<String, Member> entry = it.next();
+//					System.out.println(entry.getKey() + " - " +entry.getValue().getName());
+//					break;
+//				} else {
+//					System.out.println("검색하신 이름은 없습니다.");
+//				}
 			}
 		}
 	

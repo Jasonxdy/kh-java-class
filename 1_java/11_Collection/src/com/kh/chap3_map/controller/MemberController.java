@@ -66,18 +66,38 @@ public class MemberController {
 	//전달 받은 id를 통해 Member의 이름을 새로 입력한 이름으로 변경
 		map.replace(id, new Member(map.get(id).getPassword(), newName));
 	}
-	public Map sameName(String name){
+	public Map<String, String> sameName(String name){
 	// 전달 받은 name이 저장된 데이터의 이름과 같으면
 	// HashMap 객체에 해당 id와 이름 저장 후 객체 반환
 	// 단, 엘리먼트 하나씩 뽑아내는 과정에서 keySet()을 쓸 것
+		
+		HashMap<String, String> same = new HashMap<String, String>();
+		//id(String)와 이름 (String)을 저장할 해시맵을 새로 만듬
 		Set<String> set = map.keySet();
-		for (String s : set) {
-			if(map.get(s).getName().equals(name)){
-				return map;
-			} else {
-				return null;
+		// Iterator 검색을 위해 keySet을 따로 뽑음
+		Iterator<String> it = set.iterator();
+		// KeySet에 접근하기 위한 Iterator 객체 생성... 굳이 Iterator 사용하는 이유?
+		// 내가 보기엔 Set는 순서도 없고 중복도 없기 때문에 하나씩 지정하기 위해선 Iterator 필요
+		while(it.hasNext()) {
+			String key = it.next(); // it.next()하면 다음껄로 넘어가니까 일단 key 저장
+			Member m = map.get(key); // 해당 key에 저장된 객체를 m에 담음
+			if(m.getName().equals(name)) {
+				same.put(key, name);
 			}
 		}
-		return null; 
+		return same;
+		// 절대 VO에 있는거 그대로 전송하지 말고 값을 보낼 객체를 새로 만들어서 해당 값 담아서 보낼 것..
+		
+		
+//		Set<String> set = map.keySet();
+//		for (String s : set) {
+//			if(map.get(s).getName().equals(name)){
+//				return map;
+//			} else {
+//				return null;
+//			}
+//		}
+//		return null; 
+//		
 	} 
 }

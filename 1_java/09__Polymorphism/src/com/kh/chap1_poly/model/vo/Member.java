@@ -26,6 +26,40 @@ public class Member {
 		this.gender = gender;
 		this.couponCount = couponCount;
 	}
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public char getGender() {
+		return gender;
+	}
+
+	public void setGender(char gender) {
+		this.gender = gender;
+	}
+
+	public int getCouponCount() {
+		return couponCount;
+	}
+
+	public void setCouponCount(int couponCount) {
+		this.couponCount = couponCount;
+	}
 
 	@Override
 	public String toString() {
