@@ -171,3 +171,187 @@ SELECT
     *
 FROM EMPLOYEE
 WHERE HIRE_DATE BETWEEN '90/01/01' AND '01/01/01';
+
+
+-- 연결 연산자(||)
+-- 여러 컬럼을 하나의 컬럼인 것 처럼 연결하거나 컬럼과 리터럴을 연결할 수 있다.
+-- EMPLOYEE 테이블에서 사번, 이름, 급여를 연결하여 조회
+
+SELECT EMP_ID || EMP_NAME || SALARY
+FROM EMPLOYEE;
+
+-- 컬럼과 리터럴 연결
+SELECT EMP_NAME || '님의 월급은 ' || SALARY || '원 입니다.' AS 메세지
+FROM EMPLOYEE;
+
+
+-- ** LIKE (중요)
+/*
+비교하려는 값이 지정한 특정 패턴을 만족시키는지 조회할 때 
+비교대상컬럼명 LIKE '문자패턴'
+형식으로 검사 가능.
+
+- 문자 패턴
+'A%' (A로 시작하는 값)
+'%A' (A로 끝나는 값)
+'%A%' (A가 포함되는 값) : 중간이 아님에 유의
+
+- 문자 수
+'_' (한글자)
+'__' (두글자)
+*/
+
+--EMPLOYEE 테이블에성 성이 전씨인 사원의 사번, 이름, 고용일 조회
+SELECT EMP_ID, EMP_NAME, HIRE_DATE
+FROM EMPLOYEE
+WHERE EMP_NAME LIKE '전%';
+
+
+-- EMPLOYEE 테이블에서 이름에 '하'가 포함된 직원의 이름, 주민번호, 부서코드 조회
+SELECT EMP_NAME, EMP_NO, DEPT_CODE
+FROM EMPLOYEE
+WHERE EMP_NAME LIKE '%하%';
+
+-- EMPLOYEE 테이블에서 전화번호 네번째 자리가 7로 시작하는 사원의 사번, 이름, 전화번호 조회
+SELECT EMP_ID, EMP_NAME, PHONE
+FROM EMPLOYEE
+WHERE PHONE LIKE '___7%';
+
+-- EMPLOYEE 테이블에서 이메일 중 앞글자가 3자리인 사원의 사번, 이름, 이메일 주소 조회
+
+-- ESCAPE OPTIONS 사용 X
+SELECT EMP_ID, EMP_NAME, EMAIL
+FROM EMPLOYEE
+WHERE EMAIL LIKE '____%'; -- 언더바 구분이 안돼서 값 조회 실패
+
+-- ESCAPE OPTIONS 사용 O
+SELECT EMP_ID, EMP_NAME, EMAIL
+FROM EMPLOYEE
+WHERE EMAIL LIKE '___@_%' ESCAPE '@'; -- 언더바 구분이 안돼서 값 조회 실패
+
+-- NOT LIKE
+-- 특정 패턴을 만족하지 않는 값을 조회
+
+-- EMPLOYEE 테이블에서 김씨 성이 아닌 사원의 사번, 이름, 고용일 조회
+SELECT EMP_ID, EMP_NAME, HIRE_DATE
+FROM EMPLOYEE
+WHERE /*NOT*/ EMP_NAME NOT LIKE '김%';
+
+
+-------------- 실습 문제 -------------------
+
+-- 1. EMPLOYEE 테이블에서 이름 끝이 '연'으로 끝나는 사원의 이름 조회
+SELECT EMP_NAME
+FROM EMPLOYEE
+WHERE EMP_NAME LIKE '%연';
+
+-- 2. EMPLOYEE 테이블에서 전화번호 처음 3자리가 010이 아닌 사원의 이름, 전화번호를 조회
+SELECT EMP_NAME, PHONE
+FROM EMPLOYEE
+WHERE PHONE NOT LIKE '010%';
+
+-- 3. EMPLOYEE 테이블에서
+-- 메일주소 '_'의 앞이 4자 이면서 DEPT_CODE가 D9 또는 D6이고
+-- 고용일이 90/01/01 ~ 00/12/01이고,
+-- 급여가 270만 이상인 사원의 전체를 조회
+SELECT
+    *
+FROM EMPLOYEE
+WHERE EMAIL LIKE '____@_%' ESCAPE '@' 
+AND (DEPT_CODE = 'D9' OR DEPT_CODE = 'D6')
+AND HIRE_DATE BETWEEN '90/01/01' AND '00/12/01'
+AND SALARY >= 2700000;
+
+-- IS NULL : 컬럼값이 NULL인 경우
+--  IS NOT NULL : 컬럼값이 NULL이 아닌 경우
+
+-- EMPLOYEE 테이블에서 보너스를 받지 않는 사원의 사번, 이름, 급여, 보너스 조회
+SELECT EMP_ID, EMP_NAME, SALARY, BONUS
+FROM EMPLOYEE
+WHERE BONUS IS NULL;
+
+-- EMPLOYEE 테이블에서 보너스를 받는 사원의 사번, 이름, 급여, 보너스 조회
+SELECT EMP_ID, EMP_NAME, SALARY, BONUS
+FROM EMPLOYEE
+WHERE BONUS IS NOT NULL;
+
+-- EMPLOYEE 테이블에서 관리자도 없고 부서 배치도 받지 않은 사원의 이름, 관리자, 부서코드 조회
+SELECT EMP_NAME, MANAGER_ID, DEPT_CODE
+FROM EMPLOYEE
+WHERE MANAGER_ID IS NULL
+AND DEPT_CODE IS NULL;
+
+-- EMPLOYEE 테이블에서 부서배치를 받았지만 보너스를 지급받지 못하는 사원의 이름, 보너스, 부서코드 조회
+SELECT EMP_NAME, BONUS, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE IS NOT NULL
+AND BONUS IS NULL;
+
+-- EMPLOYEE 테이블에서 부서배치를 받았지만 보너스를 지급받지 못하는 사원의 이름, 보너스, 부서코드 조회
+SELECT EMP_NAME, BONUS, DEPT_CODE
+FROM EMPLOYEE
+WHERE DEPT_CODE IS NULL
+AND BONUS IS NOT NULL; 
+
+-- IN
+-- 비교하려는 값과 목록에 일치하는 값이 있으면 TRUE를 반환하는 연산자
+-- 비교대상컬럼명 IN (XXX, XXX, XXX, ...);
+
+-- EMPLOYEE 테이블에서 D6 부서와 D8 부서원들의 이름, 부서코드, 급여 조회
+
+-- IN 사용 X
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE = 'D6'
+OR DEPT_CODE = 'D8';
+-- IN 사용 O
+SELECT EMP_NAME, DEPT_CODE, SALARY
+FROM EMPLOYEE
+WHERE DEPT_CODE IN ('D6', 'D8');
+-- 코드 길이가 짧아져서 좋다는 장점이 있다
+
+
+-- 연산자 우선순위
+/*
+1. 산술 연산자
+2. 연결 연산자
+3. 비교 연산자
+4. IS NULL /IS NOT NULL, LIKE, IN, NOT IN
+5. BETWEEN AND / NOT BETWEEN AND
+6. NOT
+7. AND
+8. OR
+--> 순서를 잘 기억할것!!
+*/
+
+--------------------------------------------------------------------------------------------------
+-- *** (별 3개짜리) ORDER BY 절
+-- SELECT한 결과(RESULT SET)를 정렬할 때 작성하는 구문
+-- SELECT 구문 제일 마지막에 작성
+-- SELECT 실행 순서 중 가장 마지막!
+/*
+SELECT 컬럼명 [, 컬럼명, 컬럼명, ...]
+FROM 테이블명
+[WHERE 조건식]
+[ORDER BY 컬럼명 | 별칭 | 컬럼순서 정렬방법 [NULLS FIRST|LAST]]
+-- CF> DB쪽에서 또는은 | 한개만
+*/
+
+-- NULLS FIRST : 정렬 기준인 컬럼에 NULL 값이 있으면 앞부분에 정렬하기
+-- NULLS LAST : 정렬 기준인 컬럼에 NULL 값이 있으면 뒷부분에 정렬하기
+
+-- EMPLOYEE 테이블에서 급여 오름차순 순서대로 이름, 급여, 부서코드, 직급코드, 고용일 조회하기
+SELECT EMP_NAME, SALARY, DEPT_CODE, JOB_CODE, HIRE_DATE
+FROM EMPLOYEE
+ORDER BY SALARY; -- ASC : 오름차순(생략가능// 기본설정 되어있다)
+
+-- EMPLOYEE 테이블에서 연봉 오름차순 순서대로 이름, 급여, 부서코드, 직급코드, 고용일 조회하기
+SELECT EMP_NAME, SALARY*12 AS 연봉, DEPT_CODE, JOB_CODE, HIRE_DATE
+FROM EMPLOYEE
+-- ORDER BY SALARY*12 DESC; -- DESC : 내림
+-- ORDER BY 연봉 DESC; -- 별칭도 가능
+ORDER BY 2 DESC; -- 컬럼 순서(2번째)도 가능 // 잘 쓰지는 않는다.. 컬럼이 바뀔 수 있어서
+
+
+
+
