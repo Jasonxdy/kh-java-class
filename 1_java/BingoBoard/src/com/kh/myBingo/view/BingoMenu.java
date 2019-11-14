@@ -72,10 +72,12 @@ public class BingoMenu {
 	}
 
 	private void printBingo(Map<String, String> bingoBoard) {
-		Set<String> bingoSet = bingoBoard.keySet();
-		Iterator<String> it = bingoSet.iterator();
-		while(it.hasNext()) {
-			System.out.print(it.next() + " ");
+		Set<String> set = bingoBoard.keySet();
+		for (int i = 0; i < Math.sqrt(set.size()); i++) {
+			for (int j = 0; j < Math.sqrt(set.size()); j++) {
+				System.out.printf("%4s", bingoBoard.get(j+i));
+			}
+			System.out.println();
 		}
 	}
 }
