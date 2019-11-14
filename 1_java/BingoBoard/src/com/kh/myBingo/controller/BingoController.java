@@ -50,14 +50,28 @@ public class BingoController {
 		boolean colCheck = true;
 		boolean diaCheck1 = true;
 		boolean diaCheck2 = true;
+		int bingoCount = 0;
 		
 		for (int i = 0; i < bingoSize; i++) {
+			// 가로 빙고 체크
 			rowCheck = true;
 			for (int j = i*bingoSize; j < (i+1)*bingoSize; j++) {
 				if(!list.get(j).equals("X")) {
 					rowCheck = false;
 					break;
 				}
+			}
+			if(rowCheck) bingoCount++;
+			
+			// 세로 빙고 체크
+			colCheck = true;
+			if(!list.get(i*bingoSize).equals("X")) {
+				colCheck = false;
+			}
+			if(colCheck) bingoCount++;
+			
+			for (int j = bingoSize*i + i; j < bingoSize; j++) {
+				
 			}
 		}
 		

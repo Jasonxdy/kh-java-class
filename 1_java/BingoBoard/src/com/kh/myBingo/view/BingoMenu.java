@@ -1,7 +1,9 @@
 package com.kh.myBingo.view;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.kh.myBingo.controller.BingoController;
 
@@ -57,9 +59,8 @@ public class BingoMenu {
 			System.out.print("숫자를 입력하세요 : ");
 			input = sc.nextLine();
 			int bingoCount = bc.checkBingo(input);
-			for (int i = 0; i < 10; i++) { System.out.println();
-				printBingo(bc.getBingo());
-			}
+			for (int i = 0; i < 10; i++) System.out.println();
+			printBingo(bc.getBingo());
 			System.out.println();
 			System.out.println("현재 빙고 수 : " + bingoCount);
 			
@@ -70,8 +71,11 @@ public class BingoMenu {
 		}
 	}
 
-	private void printBingo(Map<String, String> bingo) {
-		// TODO Auto-generated method stub
-		
+	private void printBingo(Map<String, String> bingoBoard) {
+		Set<String> bingoSet = bingoBoard.keySet();
+		Iterator<String> it = bingoSet.iterator();
+		while(it.hasNext()) {
+			System.out.print(it.next() + " ");
+		}
 	}
 }
