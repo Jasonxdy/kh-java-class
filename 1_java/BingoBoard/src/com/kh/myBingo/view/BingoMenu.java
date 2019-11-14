@@ -1,5 +1,6 @@
 package com.kh.myBingo.view;
 
+import java.util.Map;
 import java.util.Scanner;
 
 import com.kh.myBingo.controller.BingoController;
@@ -46,5 +47,31 @@ public class BingoMenu {
 		
 		// 게임 시작 메소드 출력
 		startGame();
+	}
+
+	private void startGame() {
+		// TODO Auto-generated method stub
+		String input = null;
+		while(true) {
+			System.out.println();
+			System.out.print("숫자를 입력하세요 : ");
+			input = sc.nextLine();
+			int bingoCount = bc.checkBingo(input);
+			for (int i = 0; i < 10; i++) { System.out.println();
+				printBingo(bc.getBingo());
+			}
+			System.out.println();
+			System.out.println("현재 빙고 수 : " + bingoCount);
+			
+			if(bingoCount == BingoController.goal) {
+				System.out.println("BINGO!");
+				break;
+			}
+		}
+	}
+
+	private void printBingo(Map<String, String> bingo) {
+		// TODO Auto-generated method stub
+		
 	}
 }

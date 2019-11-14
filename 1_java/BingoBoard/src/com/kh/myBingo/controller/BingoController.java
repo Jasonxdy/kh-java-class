@@ -1,7 +1,9 @@
 package com.kh.myBingo.controller;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,13 +32,38 @@ public class BingoController {
 		// bingoSize 만큼의 key 개수와 각 key에 해당하는 객체
 		
 		int random = 0;
-		for (int i = 0; i < bingoSize * bingoSize; i++) {
+		for (int i = 0; i < bingoSize * bingoSize;) {
 			random = (int)(Math.random()*(bingoSize * bingoSize)+1);
 			if(bingoBoard.put(""+random, ""+random) == null) {
-				
+				i++;
+			}
+		}
+	}
+
+	public int checkBingo(String input) {
+		if(bingoBoard.containsKey(input)) {
+			bingoBoard.replace(input, "X");
+		}
+		
+		List<String> list = new ArrayList<String>(bingoBoard.values());
+		boolean rowCheck = true;
+		boolean colCheck = true;
+		boolean diaCheck1 = true;
+		boolean diaCheck2 = true;
+		
+		for (int i = 0; i < bingoSize; i++) {
+			rowCheck = true;
+			for (int j = i*bingoSize; j < (i+1)*bingoSize; j++) {
+				if(!list.get(j).equals("X")) {
+					rowCheck = false;
+					break;
+				}
 			}
 		}
 		
+		
+		
+		return 0;
 	}
 
 }
