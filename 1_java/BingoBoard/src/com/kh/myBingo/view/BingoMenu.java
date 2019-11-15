@@ -73,11 +73,25 @@ public class BingoMenu {
 
 	private void printBingo(Map<String, String> bingoBoard) {
 		Set<String> set = bingoBoard.keySet();
-		for (int i = 0; i < Math.sqrt(set.size()); i++) {
-			for (int j = 0; j < Math.sqrt(set.size()); j++) {
-				System.out.printf("%4s", bingoBoard.get(j+i));
+//		Iterator<String> it = set.iterator();
+//		while(it.hasNext()) {
+//			for (int i = 0; i < Math.sqrt(set.size()); i++) {
+//				System.out.printf("%4s",it.next());
+//			}
+//			System.out.println();
+//		}
+		
+//		2번째 방법 : 선생님 답안
+		int i = 1;
+		System.out.println();
+		for (String s : set) {
+			System.out.printf("%4s", bingoBoard.get(s));
+			if(i % Math.sqrt(set.size()) == 0){
+				System.out.println();				
 			}
-			System.out.println();
+			i++;
 		}
+		
+		
 	}
 }
