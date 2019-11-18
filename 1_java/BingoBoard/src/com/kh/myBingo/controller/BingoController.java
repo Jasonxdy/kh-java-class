@@ -77,7 +77,7 @@ public class BingoController {
 		
 		
 		
-		return 0;
+		return bingoCount;
 	}
 
 }
