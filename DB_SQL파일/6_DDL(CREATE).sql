@@ -432,7 +432,7 @@
  -- 이 관계를 맺기 위해 사용하는 제약조건이 FOREIGN KEY
     --> 테이블간의 연결고리 역할
  -- 이때, 부모 테이블 (참조하는 테이블)의 PRIMARY KEY는 자식 테이블(참조를 하는 컬럼을 보유한 테이블)의
- -- FOREIGN KEY로 지정을 하게됨
+ -- FOREIGN KEY로 지정을 하게됨 (무조건!! - 생략시 자동으로 참조함)
  -- 컬럼, 테이블 레벨 모두 가능
  
  -- 회원 등급을 나타내는 테이블 (부모테이블)
@@ -634,6 +634,57 @@
     -- 컬럼, 데이터타입만 복사된다!
  
  SELECT * FROM EMPLOYEE_COPY3;
+ 
+ 
+ 
+ -------------------------------------------------------------------------------------------------------------------------------
+ 
+ -- 제약 조건 추가 (ALTER TABLE ~~  ADD/MODIFY ~~)
+ 
+ -- ALTER TABLE 테이블명 ADD 제약조건(PK, FK, U, CHECK) // 제약조건의 추가 느낌 
+ -- ALTER TABLE 테이블명 MODIFY 컬럼명 NOT NULL  // 제약 조건 변경 느낌..NOT NULL만 다르다는 것 유의!
+ 
+ 
+ 
+ 
+ -- 테이블 제약조건 확인
+ SELECT
+     *
+ FROM USER_CONSTRAINTS UC
+ JOIN USER_CONS_COLUMNS UCC USING (CONSTRAINT_NAME)
+ WHERE UC.TABLE_NAME = 'EMPLOYEE_COPY';
+ -- AS를 이용하여 테이블을 복사한 경우 NOT NULL 제약조건만 복사(CHECK의 형태로 복사되는듯)되기 때문에 복사한 EMPLOYEE_COPY에는 PK가 없다
+ -- // CHECK는 NOT NULL의 제약조건을 포함하고 있음..!
+ -- 따라서 PK 추가해주기..
+ 
+ -- CONSTRAINT_TYPE : P(PRIMARY KEY) / C(CHECK) / U(UNIQUE) / F(FOREIGN KEY) / N (NOT NULL)
+ 
+ -- EMP_ID에 PRIMARY KEY 제약조건 추가
+ ALTER TABLE EMPLOYEE_COPY ADD PRIMARY KEY (EMP_ID);
+ 
+ 
+ 
+ -- EMPLOYEE 테이블의 DEPT_CODE에 DEPARTMENT 테이블의 기본키를 참조하도록 FOREIGN KEY 제약조건 추가
+ ALTER TABLE EMPLOYEE ADD FOREIGN KEY (DEPT_CODE) REFERENCES DEPARTMENT; -- DEPARTMENT (DEPT_ID)에서 괄호 생략 가능 (PK이므로)
+ 
+ -- EMPLOYEE 테이블의 JOB_CODE 컬럼이 JOB 테이블의 기본키를 참조하도록 FOREIGN KEY 제약조건 추가
+ ALTER TABLE EMPLOYEE ADD FOREIGN KEY (JOB_CODE) REFERENCES JOB;
+ 
+ -- EMPLOYEE 테이블의 SAL_LEVEL 컬럼이 SAL_GRADE 테이블의 기본키를 참조하도록 FOREIGN KEY 제약조건 추가
+ ALTER TABLE EMPLOYEE ADD FOREIGN KEY (SAL_LEVEL) REFERENCES SAL_GRADE;
+ 
+ -- DEPARTMENT 테이블의 LOCATION_ID 컬럼이 LOCATION 테이블의 기본키를 참조하도록 FOREIGN KEY 제약조건 추가
+ ALTER TABLE DEPARTMENT ADD FOREIGN KEY (LOCATION_ID) REFERENCES LOCATION (LOCAL_CODE);
+ 
+ -- LOCATION 테이블의 NATIONAL_CODE 컬럼이 NATIONAL 테이블의 기본키를 참조하도록 FOREIGN KEY 제약조건 추가
+ ALTER TABLE LOCATION ADD FOREIGN KEY (NATIONAL_CODE) REFERENCES NATIONAL;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
  --------------------------- --------------------------- --------------------------- ---------------------------
