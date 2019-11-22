@@ -3,6 +3,12 @@
 -- 비행기 티켓 발급 대상자의
 -- 사원번호, 사원명, 생일날짜, 부서명, 직급명, 연봉(보너스 포함)을 조회하시오
 -- (단, 생일날짜는 [OO월 OO일]로 표시하고 연봉은 [000,000,000] 3자리수 마다 ','표시) (조유상)
+SELECT EMP_ID, EMP_NAME, TO_DATE(SUBSTR(EMP_NO,3,2), 'MM') || '월', TO_DATE(SUBSTR(EMP_NO,5,2), 'DD') || '일',
+DEPT_TITLE, TO_CHAR(SALARY * (1+ NVL(BONUS,0)) * 12, 'L999,999,999')
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+WHERE EXTRACT (MONTH FROM SYSDATE) = TO_DATE(SUBSTR(EMP_NO,3,2), 'MM');
+
 
     
     
