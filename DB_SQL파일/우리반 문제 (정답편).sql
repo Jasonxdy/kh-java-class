@@ -141,7 +141,7 @@ ORDER BY 1;
 -- 직급이 가장 높은 사람의 사번, 이름, 입사년도, 부서코드, 부서명 조회
 -- 단 2000년도 이후의 입사자들만 조회
 -- 입사년도 오름차순 정렬 (윤소희)
-SELECT EMP_ID 사번, EMP_NAME 사원명, EXTRACT(YEAR FROM HIRE_DATE) 입사년도 ,MAX(JOB_CODE) 부서코드 ,JOB_NAME 부서명
+SELECT EMP_ID 사번, EMP_NAME 사원명, EXTRACT(YEAR FROM HIRE_DATE) 입사년도 ,MIN(JOB_CODE) 부서코드 ,JOB_NAME 부서명
 FROM EMPLOYEE 
 JOIN JOB USING (JOB_CODE)
 GROUP BY EMP_ID,EMP_NAME,EXTRACT(YEAR FROM HIRE_DATE),JOB_NAME

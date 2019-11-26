@@ -3,40 +3,76 @@
 -- 비행기 티켓 발급 대상자의
 -- 사원번호, 사원명, 생일날짜, 부서명, 직급명, 연봉(보너스 포함)을 조회하시오
 -- (단, 생일날짜는 [OO월 OO일]로 표시하고 연봉은 [000,000,000] 3자리수 마다 ','표시) (조유상)
-SELECT EMP_ID, EMP_NAME, TO_CHAR(TO_DATE(SUBSTR(EMP_NO,1,6), 'RRMMDD'), 'MM"월" DD"일"')
-DEPT_TITLE, TO_CHAR(SALARY * (1+ NVL(BONUS,0)) * 12, 'L999,999,999')
-FROM EMPLOYEE
-LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
-WHERE EXTRACT (MONTH FROM SYSDATE) = SUBSTR(EMP_NO,3,2)
-AND 
+
+
+SELECT EMP_ID, EMP_NAME, 생일, DEPT_TITLE, JOB_NAME, 연봉
+FROM (SELECT EMP_ID, EMP_NAME, TO_CHAR(TO_DATE(SUBSTR(EMP_NO,1,6), 'RRMMDD'), 'MM"월" DD"일"') 생일,
+        DEPT_TITLE, JOB_NAME, TO_CHAR(SALARY * (1+ NVL(BONUS,0)) * 12, 'L999,999,999') 연봉
+        FROM EMPLOYEE
+        LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+        JOIN JOB USING (JOB_CODE)
+        WHERE EXTRACT (MONTH FROM SYSDATE) = SUBSTR(EMP_NO,3,2)
+        ORDER BY TO_CHAR(SALARY * (1+ NVL(BONUS,0)) * 12, 'L999,999,999') ASC)
+WHERE ROWNUM <= 3
+ORDER BY 연봉 DESC;
     
 --EMPLOYEE 테이블에서 
 --중국에서 일하는 60년대생 직원의 
 --사번, 이름, 나이, 직급을 나이 많은 순으로 조회
---(헤더는 '사번', '이름', '나이', '직급'으로 표시) (양서원)
-
+--(헤더는 '사번', '이름', '나이', '
+JOIN JOB USING (JOB_CODE)
+JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN LOCATION ON (LOCAL_CODE = LOCATION_ID)
+JOIN NATIONAL USING (NATIONAL_CODE)
+WHERE NATIONAL_NAME = '중국'
+AND EMP_NO LIKE '6%';
 
 
 -- 직급이 대리인 사원들의 평균 급여보다 적은(미만) 급여를 받으면서  
 -- 2000년 이전에 입사한 사원들의 사번, 이름, 급여( 2,000,000원 으로 표기), 입사일 조회
 -- 출력 헤더는 "사번", "사원명", "급여(원)", "입사일"로 표시되도록 한다 (강정임)
+SELECT EMP_ID 사번, EMP_NAME 사원명, TO_CHAR(SALARY, '9,999,999') "급여(원)", HIRE_DATE 입사일
+FROM EMPLOYEE
+WHERE SALARY < (SELECT AVG(SALARY)
+                FROM EMPLOYEE
+                LEFT JOIN JOB USING (JOB_CODE)
+                WHERE JOB_NAME = '대리')
+AND HIRE_DATE < TO_DATE('00/01/01', 'RR/MM/DD');
+-- AND HIRE_DATE < '2000/01/01';
 
 
 
 -- 일본에서 근무하고 있는 직원들 중 
 -- 남자 사원들의 사번, 이름, 지역코드, 부서명, 직급명, 월급을 조회하시오
 -- 단, 월급은 보너스가 반영된 '\999,999,999'의 형태로 조회할 것 (김지원)
+SELECT EMP_ID, EMP_NAME, LOCAL_CODE, DEPT_TITLE, JOB_NAME, TO_CHAR(SALARY*(1+NVL(BONUS,0)), 'L999,999,999')
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN JOB USING (JOB_CODE)
+JOIN LOCATION ON (LOCAL_CODE = LOCATION_ID)
+JOIN NATIONAL USING (NATIONAL_CODE)
+WHERE NATIONAL_NAME = '일본'
+AND SUBSTR(EMP_NO,8,1) = '1';
 
 
 
 -- 11월에 태어난 여자 사원과 동일한 직급이면서 동일한 사수를 가진 사원의
 -- 사번, 이름, 직급명, 사수번호, 주민번호, 고용일을 조회하시오. (김희원)
-
+SELECT EMP_ID, EMP_NAME, JOB_NAME, MANAGER_ID, EMP_NO, HIRE_DATE
+FROM EMPLOYEE
+LEFT JOIN JOB USING (JOB_CODE)
+WHERE (JOB_CODE, MANAGER_ID) = (SELECT JOB_CODE, MANAGER_ID
+                                FROM EMPLOYEE
+                                WHERE SUBSTR(EMP_NO,3,2) = '11'
+                                AND SUBSTR(EMP_NO,8,1) = '2');
 
 
 -- 전 직원의 평균 급여보다 적은 급여를 받고 러시아에서 일하고 있는 직원의 
 -- 사번, 이름, 부서명 ,지역명, 국가명 , 급여조회
 -- 단, 급여의 내림차순으로 정렬하시오 (신덕수)
+
+-- PASS
+
 
 
 -- 직급별 80년대생 사원들 중 가장 어린 사원의
@@ -45,7 +81,16 @@ AND
 -- 단, 출력 헤더는 '사번', '사원이름', '주민번호', '나이', '부서명', '직급명', '입사일', '연봉' 으로 한다.
 -- 그리고 주민번호의 뒷자리는 성별을 표시하는 것 빼고는 *로 표현하시오.
 -- 그리고 연봉은 \124,800,000 으로 출력되게 하세요. (\ : 원 단위 기호)  (이혜선)
-
+SELECT EMP_ID 사번, EMP_NAME 이름, EMP_NO 주민번호, EXTRACT (YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(SUBSTR(EMP_NO,1,2),'RR')) 나이,
+NVL(DEPT_TITLE,'소속없음') 부서명, JOB_NAME 직급명, HIRE_DATE 입사일, SALARY * (1 + NVL(BONUS, 0)) * 12 연봉
+FROM EMPLOYEE E
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN JOB USING (JOB_CODE)
+WHERE EMP_NO = (SELECT MAX(EMP_NO)
+                FROM EMPLOYEE M
+                WHERE (E.DEPT_CODE = M.DEPT_CODE
+                OR (E.DEPT_CODE IS NULL AND M.DEPT_CODE IS NULL))
+                AND M.EMP_NO LIKE '8%');
 
 
 --KH 대학교 수학과에서 학술 동아리를 만들었다.
@@ -56,13 +101,32 @@ AND
 --- 4. 재학중이어야한다.
 --수학과 모든 학생 중 가입이 가능한 학생들의
 --학번, 이름, 평점, 입학년도를 조회하시오.(서진웅)
-
+SELECT STUDENT_NO, STUDENT_NAME, TRUNC(AVG(POINT),8), ENTRANCE_DATE
+FROM TB_STUDENT S
+JOIN TB_DEPARTMENT USING (DEPARTMENT_NO)
+JOIN TB_GRADE USING (STUDENT_NO)
+WHERE DEPARTMENT_NAME = '수학과'
+AND ENTRANCE_DATE >= '20000101'
+AND ABSENCE_YN = 'N'
+GROUP BY STUDENT_NO, STUDENT_NAME,ENTRANCE_DATE
+HAVING AVG(POINT) >= 3.0;
 
 
 -- 같은 년도에 입사를 한 사람들 중 에서
 -- 직급이 가장 높은 사람의 사번, 이름, 입사년도, 부서코드, 부서명 조회
 -- 단 2000년도 이후의 입사자들만 조회
 -- 입사년도 오름차순 정렬 (윤소희)
+
+SELECT EMP_ID, EMP_NAME, EXTRACT(YEAR FROM HIRE_DATE), DEPT_CODE, DEPT_TITLE
+FROM EMPLOYEE E
+JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+WHERE JOB_CODE = (SELECT MIN(JOB_CODE)
+                    FROM EMPLOYEE J
+                    JOIN JOB USING (JOB_CODE)
+                    WHERE EXTRACT(YEAR FROM E.HIRE_DATE) = EXTRACT(YEAR FROM J.HIRE_DATE)
+                    AND HIRE_DATE >= '20000101');
+-- 일단 포기
+
 
 
 
@@ -72,6 +136,18 @@ AND
 -- 가장 직급이 높은 사원의 사번, 이름, 부서명, 직급명, 삭감된 급여, 
 --  보너스 포함 연봉을 조회하시오.
 --  (만약, 부서명이 존재하지 않는 경우 '미지정'으로 출력) (최유리)
+
+SELECT EMP_ID, EMP_NAME, NVL(DEPT_TITLE, '미지정'), JOB_NAME, SALARY * 0.9, SALARY * (1+NVL(BONUS,0)) * 12 연봉
+FROM EMPLOYEE E
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN JOB USING (JOB_CODE)
+WHERE (DEPT_CODE, JOB_CODE) IN (SELECT DEPT_CODE, MIN(JOB_CODE)
+                                FROM EMPLOYEE
+                                JOIN JOB USING (JOB_CODE)
+                                GROUP BY DEPT_CODE)
+AND ENT_YN = 'N';
+
+
 
 
 
