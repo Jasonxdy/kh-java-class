@@ -154,7 +154,17 @@ AND ENT_YN = 'N';
 -- 퇴직한 여성과 같은 부서에서 근무하고 있으면서
 -- NATIONAL_CODE가 EU인 직원들의
 -- 사번, 이름, 부서명, 직급명, 급여(순위를 매겨서)를 나타내시오. (박준건)
-
+SELECT EMP_ID, EMP_NAME, DEPT_TITLE, JOB_NAME, SALARY, RANK()OVER (ORDER BY SALARY DESC) 순위
+FROM EMPLOYEE
+LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)
+JOIN JOB USING (JOB_CODE)
+JOIN LOCATION ON (LOCAL_CODE = LOCATION_ID)
+WHERE DEPT_CODE = (SELECT DEPT_CODE
+                    FROM EMPLOYEE
+                    WHERE ENT_YN = 'Y'
+                    AND SUBSTR(EMP_NO, 8,1) = '2')
+AND NATIONAL_CODE = 'RU'
+AND ENT_YN = 'N';
 
 
 
@@ -167,7 +177,7 @@ AND ENT_YN = 'N';
 --        3.연봉과 퇴직금은 원화단위로 조회)
 --    ***퇴직금 = 1일평균임금 * 30일 * (근무일수/365)***
 --(조미현)
-
+SELECT EMP_ID, EMP_NAME, JOB_NAME, HIRE_DATE, TO_CHAR(SALARY*(1+NVL(BONUS,0))*12, )
 
 
 
