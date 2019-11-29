@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -147,8 +148,22 @@ public class EmpDAO {
 		
 		// 2_7. JDBC 관련 객체 선언
 		Connection conn = null; // DB 연결 정보 (일종의 연결 통로)
-		Statement stmt = null; // SQL문 DB 전달 및 결과 반환
+//		Statement stmt = null; // SQL문 DB 전달 및 결과 반환
 		ResultSet rset = null; // DB 조회 결과 저장
+		
+		PreparedStatement pstmt = null;
+		/*
+		 * PreparedStatement
+		 * - Statement와 같은 SQL 문을 전달하고 실행하여 결과를 반환 받는 객체
+		 * 
+		 * - 차이점은 실행 시간 동안 인수값을 위한 공간을 확보할 수 있다는 점. 
+		 *
+		 * - SQL문에서 인수가 필요한 각 부분에 위치 홀더 (?)를 작성하여 SQL문을 정의할 수 있음.
+		 * 
+		 * - ? (위치 홀더) : SQL 문장에 나타나는 토큰
+		 * 				  SQL 구문이 실행되기 전에만 실제 값으로 대체하면 됨.
+		 * 
+		 */
 		
 		EMP emp = null; // 조회 결과 임시 저장 변수
 		
@@ -157,14 +172,36 @@ public class EmpDAO {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager
 					.getConnection("jdbc:oracle:thin:@localhost:1521:xe","SCOTT","TIGER");
-			
+
+			// ----------------------------------------------------------------------------
 			// 2_9. Statement를 이용하여 정보 조회
-			
 			// 해당 사번의 사원 정보를 조회하는 쿼리문 작성
-			String query = "SELECT * FROM EMP WHERE EMPNO = " + empNo;
+//			String query = "SELECT * FROM EMP WHERE EMPNO = " + empNo;
+//			
+//			stmt = conn.createStatement();
+//			rset = stmt.executeQuery(query);
+			// ----------------------------------------------------------------------------
 			
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(query);
+			
+			
+			
+			// 2_20. PreparedStatement를 이용하여 조회
+			String query = "SELECT * FROM EMP WHERE EMPNO = ?";
+			// SELECT EMPNO, ENAME, SAL FROM EMP WHERE EMPNO = " + .. AND + " 이런식은
+			// 조건이 많아질수록 굉장히 복잡하므로 PreparedStatement 사용하는 것이 좋다
+			pstmt = conn.prepareStatement(query);
+			// query를 PreparedStatement 객체 위에 올려두고 홀더 (?)를 채울 준비를 함
+			
+			// 홀더에 값 세팅 방법
+			// pstmt.set[Type] (?순번, 적용할 값);
+			pstmt.setInt(1, empNo);
+			// == SQL문의 1번 홀더 자리에 empNo 값을 대입
+			
+			// SQL문 완성 후 DB에서 실행 후 결과를 반환 받음
+			rset = pstmt.executeQuery();
+			
+
+			
 			
 			
 			// 2_10. 조회된 결과를 EMP 객체에 저장
@@ -189,7 +226,8 @@ public class EmpDAO {
 			// 2_11. DB 연결 자원 반환
 			try {
 				rset.close();
-				stmt.close();
+//				stmt.close();
+				pstmt.close(); // 2_21. pstmt 반환
 				conn.close();
 			} catch (SQLException e) {
 				 e.printStackTrace();
@@ -199,6 +237,58 @@ public class EmpDAO {
 		// 2_12. 조회 정보를 저장한 emp 반환
 		return emp;
 		
+	}
+	
+	
+	
+	public ArrayList<EMP> selectSalary(int lowSal, int highSal) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<EMP> empList = null;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "SCOTT","TIGER");
+			String query = "SELECT * FROM EMP WHERE SAL BETWEEN ? AND ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, lowSal);
+			pstmt.setInt(2, highSal);
+			rset = pstmt.executeQuery();
+//			EMP emp = null;
+//			empList = new ArrayList<EMP>();
+			
+			while(rset.next()) {
+				int empNo = rset.getInt("EMPNO");
+				String eName = rset.getString("ENAME");
+				String job = rset.getString("JOB");
+				int mgr = rset.getInt("MGR");
+				Date hireDate = rset.getDate("HIREDATE");
+				int sal = rset.getInt("SAL");
+				int comm = rset.getInt("COMM");
+				int deptNo = rset.getInt("DEPTNO");
+				
+				EMP emp = new EMP(empNo, eName, job, mgr, hireDate, sal, comm, deptNo);
+
+				empList.add(emp);
+				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return empList;
 	}
 	
 	

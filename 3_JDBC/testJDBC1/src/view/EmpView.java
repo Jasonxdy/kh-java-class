@@ -29,6 +29,7 @@ public class EmpView {
 			System.out.println("3. 새로운 사원 정보 추가");
 			System.out.println("4. 사번으로 사원 정보 수정");
 			System.out.println("5. 사번으로 사원 정보 삭제");
+			System.out.println("6. 조회 하고자 하는 급여 범위를 입력받아 해당하는 모든 사원 정보 조회");
 			System.out.println("0. 프로그램 종료");
 			System.out.println("=================================");
 			
@@ -42,6 +43,7 @@ public class EmpView {
 			case 3 : break;
 			case 4 : break;
 			case 5 : break;
+			case 6 : selectSalary(); break;
 			case 0 : System.out.println("프로그램을 종료합니다."); break;
 			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요."); 
 			}
@@ -92,6 +94,33 @@ public class EmpView {
 		System.out.println("급여 : " + emp.getSal());
 		System.out.println("커미션 : " + emp.getComm());
 		System.out.println("부서번호 : " + emp.getDeptNo());
+	}
+	
+	
+	// 조회 하고자 하는 급여 범위를 입력받아 해당하는 모든 사원 조회
+	/*
+	 * 최저 급여 : 800
+	 * 최고 급여 : 1000
+	 * (800 이상 1000 이하의 급여를 받는 사원 모두 조회)
+	 * 
+	 * 사번	이름	직책		직속상사	고용일	급여	커미션	부서번호
+	 */
+	
+	public void selectSalary() {
+		
+		EmpController controller = new EmpController();
+		
+		System.out.print("최저 급여 : ");
+		int lowSal = sc.nextInt();
+		sc.nextLine();
+		System.out.print("최고 급여 : ");
+		int highSal = sc.nextInt();
+		sc.nextLine();
+		
+		controller.selectSalary(lowSal,highSal);
+		
+		
+		
 	}
 	
 	
