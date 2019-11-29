@@ -1,0 +1,24 @@
+package com.kh.chap5_properties.run;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class Run2 {
+
+	public static void main(String[] args) {
+		
+		Properties prop = new Properties();
+		
+		// load (FileInputStream fis)
+		// 파일에 있는 정보를 불러와 Properties 객체에 저장
+		try {
+			prop.load(new FileInputStream("test.properties"));
+			System.out.println(prop);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

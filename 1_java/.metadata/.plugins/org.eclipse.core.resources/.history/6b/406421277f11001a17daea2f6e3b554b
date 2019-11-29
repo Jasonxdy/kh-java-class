@@ -1,0 +1,19 @@
+package com.kh.chap02_byte.model.dao;
+
+public class FileByteDAO {
+	// DAO (Data Access Object) 
+	// -> DBMS에 접속하여 실제 데이터를 전송하거나 결과 값을 전달 받는데 사용되는 클래스
+	
+	
+	// 바이트 기반 스트림 : 1byte 단위로 데이터를 입력/출력하는 스트림
+
+	// FileInputStream : 바이트 기반 파일 입력 스트림
+	// -> 프로그램 외부 파일을 바이트 단위로 읽어들일 경우 사용
+	public void fileOpen() {
+		
+	}
+	
+	
+	
+
+}

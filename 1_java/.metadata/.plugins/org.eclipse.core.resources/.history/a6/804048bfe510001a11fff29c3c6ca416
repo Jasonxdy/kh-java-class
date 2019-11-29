@@ -1,0 +1,5 @@
+package com.kh.chap04_userException.model.exception;
+
+public class UserException {
+
+}

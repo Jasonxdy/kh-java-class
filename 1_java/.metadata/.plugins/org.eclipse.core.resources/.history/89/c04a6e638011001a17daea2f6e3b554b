@@ -1,0 +1,71 @@
+package com.kh.chap02_byte.model.dao;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class FileByteDAO {
+	// DAO (Data Access Object) 
+	// -> DBMS에 접속하여 실제 데이터를 전송하거나 결과 값을 전달 받는데 사용되는 클래스
+	
+	
+	// 바이트 기반 스트림 : 1byte 단위로 데이터를 입력/출력하는 스트림
+
+	// FileInputStream : 바이트 기반 파일 입력 스트림
+	// -> 프로그램 외부 파일을 바이트 단위로 읽어들일 경우 사용
+	public void fileOpen() {
+		
+		FileInputStream fis = null;
+		// FileInputStream 객체 생성 시 바로 파일과 직접 연결이됨.
+		// 만약 파일이 없다면 FileNotFoundException 발생
+		
+		// 그래서 try 구문으로 캐치해보자!
+		
+		try {
+			fis = new FileInputStream("a_byte.txt");
+			// 현재 프로그램의 외부에 있는 a_byte.txt 파일의 데이터를 읽어올 
+			// FileInputStream 객체 생성 (일단 연결이 된 상태로 만듬)
+			
+			// InputStream.read()
+			// 파일의 데이터를 1바이트 읽어와서 반환
+			// 만약 더이상 읽어올 데이터가 없으면 -1을 반환
+			/*
+			System.out.print(fis.read());
+			System.out.print(fis.read());
+			System.out.print(fis.read());
+			System.out.print(fis.read());
+			System.out.print(fis.read());
+			System.out.print(fis.read());
+			*/
+			
+			// read() 메소드의 반환형은 int로 실제 저장된 값과 다르게 표시됨
+			// --> char로 형변환 해주면 해결!
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			System.out.print((char)fis.read());
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("파일이 존재하지 않음");
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
+	
+
+}
