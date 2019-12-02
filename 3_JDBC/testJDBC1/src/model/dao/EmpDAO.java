@@ -308,6 +308,37 @@ public class EmpDAO {
 	
 	
 	
+	// 4_8. 매개변수로 전달받은 회원 정보 중 사번이 일치하는 사원의 정보 수정
+	public int updateEmp(EMP emp) {
+		
+		// 4_9. JDBC, DB 연결, 수정 결과 저장 변수 선언
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		
+		// 4_10. JDBC 드라이버 로드
+		try {
+			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "SCOTT", "TIGER");
+			String query = "UPDATE EMP SET ";
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return 1;
+	}
+	
+	
+	
+	
+	
+	
 	// 6번 예제 내 풀이
 	public ArrayList<EMP> selectSalary(int lowSal, int highSal) {
 		

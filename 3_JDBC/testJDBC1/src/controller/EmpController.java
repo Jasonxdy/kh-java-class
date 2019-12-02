@@ -140,6 +140,40 @@ public class EmpController {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	// 4. 사번으로 사원 정보 수정
+	public void updateEmp() {
+		
+		// 4_1. EmpDAO 객체 생성
+		EmpDAO empDAO = new EmpDAO();
+		
+		// 4_2. 사번을 입력받는 View 호출
+		int empNo = view.selectEmpNo();
+		
+		// 4_3. 사원 정보 수정 내용을 입력할 View 작성
+		// -> EmpView.updateEmp() 메소드 작성
+		
+		// 4_5. 사원 정보 수정 내용 입력 View 호출 후 반환받은 내용 저장
+		EMP emp = view.updateEmp();
+		
+		// 4_6. 입력받은 사번을 emp 객체에 저장
+		emp.setEmpNo(empNo);
+		
+		
+		// 4_7. 입력받은 사번과 일치하는 사원의 정보를 DB에서 찾아 수정한 후 결과를 반환하는 메소드
+		// EmpDAO.updateEmp(emp) 작성
+		
+		
+		
+		
+	}
+	
 
 	
 	
