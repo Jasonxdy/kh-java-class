@@ -41,7 +41,7 @@ public class EmpView {
 			case 1 : controller.selectAll(); break;
 			case 2 : controller.selectEmp(); break;
 			case 3 : controller.insertEmp(); break;
-			case 4 : break;
+			case 4 : controller.updateEmp(); break;
 			case 5 : break;
 			case 6 : selectSalary(); break;
 			case 0 : System.out.println("프로그램을 종료합니다."); break;
@@ -149,7 +149,7 @@ public class EmpView {
 	
 	// 4_4. 사원 정보 수정 내용 입력용 View
 	public EMP updateEmp() {
-System.out.println("[사원 정보 수정]");
+		System.out.println("[사원 정보 수정]");
 		
 		System.out.print("직책 : ");
 		String job = sc.nextLine();

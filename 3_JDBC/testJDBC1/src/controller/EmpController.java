@@ -170,6 +170,16 @@ public class EmpController {
 		// EmpDAO.updateEmp(emp) 작성
 		
 		
+		// 4_18. DB 수정 결과를 반환 받아 저장
+		int result = empDAO.updateEmp(emp);
+		
+		// 4_19. 수정 결과에 따른 View 연결 처리
+		if(result > 0) { // 삽입 성공 시
+			view.displaySuccess(result + "개의 행이 삽입되었습니다.");
+		} else { // 삽입 실패 시
+			view.displayError("데이터 수정 과정 중 오류 발생");
+		}
+		
 		
 	}
 	

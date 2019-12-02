@@ -322,16 +322,47 @@ public class EmpDAO {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "SCOTT", "TIGER");
-			String query = "UPDATE EMP SET ";
+
+			// 4_11. 사원 정보 수정을 위한 SQL 구문 작성
+			String query = "UPDATE EMP "
+					+ "SET JOB = ?, MGR = ?, SAL = ?, COMM =?, DEPTNO = ? "
+					+ "WHERE EMPNO = ?";
 			
+			// 4_12. SQL을 전달하기 위한 PreparedStatement 객체 생성
+			pstmt = conn.prepareStatement(query);
 			
+			// 4_13. 각 홀더 (?)에 알맞은 값 대입
+			pstmt.setString(1, emp.getJob());
+			pstmt.setInt(2, emp.getMgr());
+			pstmt.setInt(3, emp.getSal());
+			pstmt.setInt(4, emp.getComm());
+			pstmt.setInt(5, emp.getDeptNo());
+			pstmt.setInt(6, emp.getEmpNo());
+			
+			// 4_14. SQL 수행 후 결과를 반환받음
+			result = pstmt.executeUpdate(); // UPDATE가 된 행의 개수 반환 받아 저장
+			
+			// 4_15. SQL 수행 결과에 따라 트랜잭션 처리
+			if (result > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 4_16. DB 자원 반환
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				 e.printStackTrace();
+			}
 		}
 		
-		
-		return 1;
+		// 4_17. Update 결과 반환
+		return result;
 	}
 	
 	
