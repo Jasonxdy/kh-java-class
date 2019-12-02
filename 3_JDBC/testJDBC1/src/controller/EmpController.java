@@ -99,9 +99,20 @@ public class EmpController {
 			// 2_18. displayError() 메소드에 "해당 사번의 검색 결과가 없습니다." 메세지 전달
 			view.displayError("해당 사번의 검색 결과가 없습니다.");
 		}
+	}
+	
+	// 6번 예제 문제 - 조회하고자 하는 급여를 입력받아 사이의 사원의 모든 정보 조회
+	public void selectSalary(int lowSal, int highSal) {
 		
+		EmpDAO empDAO = new EmpDAO();
 		
+		ArrayList<EMP> empList = empDAO.selectSalary(lowSal, highSal);
 		
+		if (!empList.isEmpty() && empList != null) {
+			view.selectAll(empList);
+		} else {
+			view.displayError("검색 결과가 없습니다.");
+		}
 		
 		
 	}
