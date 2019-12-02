@@ -101,6 +101,7 @@ public class EmpController {
 		}
 	}
 	
+<<<<<<< HEAD
 	
 	
 	
@@ -186,6 +187,15 @@ public class EmpController {
 		
 		ArrayList<EMP> empList = empDAO.selectSalary(lowSal, highSal);
 		
+=======
+	// 6번 예제 문제 - 조회하고자 하는 급여를 입력받아 사이의 사원의 모든 정보 조회
+	public void selectSalary(int lowSal, int highSal) {
+		
+		EmpDAO empDAO = new EmpDAO();
+		
+		ArrayList<EMP> empList = empDAO.selectSalary(lowSal, highSal);
+		
+>>>>>>> d446e6327e8a2ab18211f54b731a574ae68ca76f
 		if (!empList.isEmpty() && empList != null) {
 			view.selectAll(empList);
 		} else {

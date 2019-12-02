@@ -10,7 +10,11 @@
 	</list>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
 		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="500,500"/>
+<<<<<<< HEAD
 		<item key="STAGING_SASH_FORM_WEIGHT" value="695,304"/>
+=======
+		<item key="STAGING_SASH_FORM_WEIGHT" value="691,303"/>
+>>>>>>> d446e6327e8a2ab18211f54b731a574ae68ca76f
 		<item key="sortItemState" value="true"/>
 	</section>
 	<section name="GitCommitMessageComponent">

@@ -392,5 +392,57 @@ public class EmpDAO {
 	
 	
 	
+	public ArrayList<EMP> selectSalary(int lowSal, int highSal) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<EMP> empList = null;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "SCOTT","TIGER");
+			String query = "SELECT * FROM EMP WHERE SAL BETWEEN ? AND ?";
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, lowSal);
+			pstmt.setInt(2, highSal);
+			rset = pstmt.executeQuery();
+//			EMP emp = null;
+//			empList = new ArrayList<EMP>();
+			
+			while(rset.next()) {
+				int empNo = rset.getInt("EMPNO");
+				String eName = rset.getString("ENAME");
+				String job = rset.getString("JOB");
+				int mgr = rset.getInt("MGR");
+				Date hireDate = rset.getDate("HIREDATE");
+				int sal = rset.getInt("SAL");
+				int comm = rset.getInt("COMM");
+				int deptNo = rset.getInt("DEPTNO");
+				
+				EMP emp = new EMP(empNo, eName, job, mgr, hireDate, sal, comm, deptNo);
+
+				empList.add(emp);
+				
+			}
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return empList;
+	}
+	
+	
+	
 	
 }

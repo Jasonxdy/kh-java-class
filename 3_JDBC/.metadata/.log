@@ -379,6 +379,7 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
 
 !ENTRY org.eclipse.egit.ui 2 0 2019-11-29 17:50:10.032
+<<<<<<< HEAD
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
@@ -425,11 +426,16 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
 
 !ENTRY org.eclipse.egit.ui 2 0 2019-12-02 11:38:31.359
+=======
+>>>>>>> d446e6327e8a2ab18211f54b731a574ae68ca76f
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+<<<<<<< HEAD
 
 !ENTRY org.eclipse.jface.text 2 0 2019-12-02 11:38:47.744
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+=======
+>>>>>>> d446e6327e8a2ab18211f54b731a574ae68ca76f
