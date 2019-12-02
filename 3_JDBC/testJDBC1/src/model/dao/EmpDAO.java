@@ -236,11 +236,18 @@ public class EmpDAO {
 		
 		// 2_12. 조회 정보를 저장한 emp 반환
 		return emp;
-		
 	}
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	// 6번 예제 내 풀이
 	public ArrayList<EMP> selectSalary(int lowSal, int highSal) {
 		
 		Connection conn = null;
@@ -289,6 +296,12 @@ public class EmpDAO {
 			}
 		}
 		return empList;
+	}
+
+
+	public void insertEmp(EMP emp) {
+		
+		
 	}
 	
 	

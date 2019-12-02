@@ -101,6 +101,35 @@ public class EmpController {
 		}
 	}
 	
+	
+	
+	
+	
+	
+	
+	// 3. 새로운 사원 정보 추가
+	
+	public void insertEmp() {
+		
+		// 3_1. EmpDAO 객체 생성
+		EmpDAO empDAO = new EmpDAO();
+		
+		// 3_2. 사원 정보를 입력받을 수 있는 View 작성
+		// -> Empview.insertEmp() 작성
+		
+		
+		// 3_4. 사원 정보 입력 View를 호출하고 반환값 저장
+		EMP emp = view.insertEmp();
+		
+		// 3_5. 입력받은 사원 정보를 DB에 삽입하기 위한 EmpDAO.insertEmp(emp) 메소드 작성
+		empDAO.insertEmp(emp);
+		
+	}
+
+	
+	
+	
+	
 	// 6번 예제 문제 - 조회하고자 하는 급여를 입력받아 사이의 사원의 모든 정보 조회
 	public void selectSalary(int lowSal, int highSal) {
 		

@@ -29,16 +29,23 @@ public class EMP {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EMP(int empNo, String eName, String job, int mgr, Date hireDate, int sal, int comm, int deptNo) { // 모든 매개변수 있는 생성자
+	
+	public EMP(int empNo, String eName, String job, int mgr, int sal, int comm, int deptNo) {
 		super();
 		this.empNo = empNo;
 		this.eName = eName;
 		this.job = job;
 		this.mgr = mgr;
-		this.hireDate = hireDate;
 		this.sal = sal;
 		this.comm = comm;
 		this.deptNo = deptNo;
+	}
+
+
+	// 모든 매개변수 있는 생성자
+	public EMP(int empNo, String eName, String job, int mgr, Date hireDate, int sal, int comm, int deptNo) { // 모든 매개변수 있는 생성자
+		this(empNo, eName, job, mgr, sal, comm, deptNo);
+		this.hireDate = hireDate;
 	}
 	
 	

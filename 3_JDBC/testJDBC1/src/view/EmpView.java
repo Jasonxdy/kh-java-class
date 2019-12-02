@@ -97,6 +97,64 @@ public class EmpView {
 	}
 	
 	
+	
+	
+	
+	
+	// 3_3. 새로운 사원 정보 추가 View
+	
+	public EMP insertEmp() {
+		System.out.println("[새로운 사원 정보 추가]");
+		
+		System.out.print("사번 : ");
+		int empNo = sc.nextInt();
+		sc.nextLine(); // 개행 문자 제거
+		
+		System.out.print("이름 : ");
+		String eName = sc.nextLine();
+		
+		System.out.print("직책 : ");
+		String job = sc.nextLine();
+		
+		System.out.print("직속 상사 번호 : ");
+		int mgr = sc.nextInt();
+		
+		
+		// HIREDATE는 오늘 날짜 입력  -> DB INSERT시 SYSDATE로 처리 가능
+		
+		System.out.print("급여 : ");
+		int sal = sc.nextInt();
+
+		System.out.print("커미션 : ");
+		int comm = sc.nextInt();
+		
+		System.out.print("부서 번호 : ");
+		int deptNo = sc.nextInt();
+		sc.nextLine(); // 개행문자
+		
+		return new EMP(empNo, eName, job, mgr, sal, comm, deptNo);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 조회 하고자 하는 급여 범위를 입력받아 해당하는 모든 사원 조회
 	/*
 	 * 최저 급여 : 800
