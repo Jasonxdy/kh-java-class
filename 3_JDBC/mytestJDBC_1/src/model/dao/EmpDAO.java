@@ -24,14 +24,14 @@ public class EmpDAO {
 			conn = DriverManager
 					.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe","SCOTT","TIGER");
 			
-			stmt = conn.createStatement();
+			stmt = conn.createStatement(); // 그냥 Statement인 경우는 createStatement 메소드 사용하여 객체 생성해야함
 			String query = "SELECT * FROM EMP";
-			rset = stmt.executeQuery(query);
+			rset = stmt.executeQuery(query);  // executeQuery(String query)로 쿼리문 날리면 결과값이 ResultSet
 			
-			empList = new ArrayList<EMP>();
-			EMP emp = null;
+			empList = new ArrayList<EMP>(); // ArrayList 객체 생성
 			
-			while (rset.next()) {
+			while (rset.next()) { // ResultSet.next() -> 반환값은 boolean, cursor는 다음것으로 이동
+
 				int empNo = rset.getInt("EMPNO");
 				String eName = rset.getString("ENAME");
 				String job = rset.getString("JOB");
@@ -41,20 +41,25 @@ public class EmpDAO {
 				int comm = rset.getInt("COMM");
 				int deptNo = rset.getInt("DEPTNO");
 				
-				emp = new EMP(empNo, eName, job, mgr, hireDate, sal, comm, deptNo);
-				
-				
+				EMP emp = new EMP(empNo, eName, job, mgr, hireDate, sal, comm, deptNo);
+				empList.add(emp);
 			}
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally { // DB 객체 사용 후 반환처리
+			try {
+				rset.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
-		
-		
-		return null;
-		
+		return empList;
 		
 	}
 	

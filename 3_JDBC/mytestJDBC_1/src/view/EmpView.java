@@ -1,8 +1,10 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.EmpController;
+import model.vo.EMP;
 
 public class EmpView {
 	
@@ -46,5 +48,15 @@ public class EmpView {
 			System.out.println();
 			
 		} while (select != 0);
+	}
+
+
+	public void selectAll(ArrayList<EMP> empList) {
+		
+		System.out.println("사번 \t 이름 ");
+		
+		
+		
+		
 	}
 }
