@@ -1,0 +1,5 @@
+package com.kh.chap03_char.model.dao;
+
+public class FileCharDAO {
+
+}

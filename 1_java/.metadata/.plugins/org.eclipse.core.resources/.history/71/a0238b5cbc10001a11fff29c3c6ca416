@@ -1,0 +1,38 @@
+package com.kh.chap01_exception.controller;
+
+import java.util.Scanner;
+
+public class ExceptionController {
+	
+	/* Unchecked Exception
+	 * - 별도의 예외처리를 하지 않아도 되는 예외 (Exception)
+	 * - 주로 프로그래머의 부주의로 인한 경우가 많기 때문에 
+	 * 예외처리 보다는 조건문 등을 이용한 코드 수정 필요
+	 */
+	
+	public void method1() {
+
+		// Scanner를 이용하여 두 수를 입력받아 나누는 프로그램 작성
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("입력받은 두 수 나누기");
+		System.out.print("입력 1 : ");
+		int num1 = sc.nextInt();
+		System.out.print("입력 2 : ");
+		int num2 = sc.nextInt();
+
+		if (num2 == 0) {
+			System.out.println("0으로 나눌 수 없습니다.");
+		} else {
+		}
+		// 이런식으로 예외를 막을 수 있다
+		System.out.println("num1 / num2 = " + num1 / num2);
+	}
+	
+	// Checked Exception 
+	// 특정 코드가 예외를 발생시킬 가능성이 있으므로 사용 시 반드시 예외처리를 해야하는 예외.
+	public void method2() {
+		
+	}
+	
+}

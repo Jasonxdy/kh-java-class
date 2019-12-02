@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;find&apos; in &apos;com.kh.chap1_poly.practice.view.LibraryMenu.searchBook()&apos; to &apos;keyword&apos;&#x0D;&#x0A;- Original project: &apos;09__Polymorphism&apos;&#x0D;&#x0A;- Original element: &apos;com.kh.chap1_poly.practice.view.LibraryMenu.searchBook().find&apos;&#x0D;&#x0A;- Renamed element: &apos;find&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;find&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.kh.chap1_poly.practice.view{LibraryMenu.java[LibraryMenu~searchBook@find!2561!2588!2568!2571!QString;!0!false" name="keyword" references="true" stamp="1573540460574" version="1.0"/>
+</session>

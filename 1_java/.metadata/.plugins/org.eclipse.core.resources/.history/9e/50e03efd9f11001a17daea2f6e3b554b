@@ -1,0 +1,27 @@
+package com.kh.chap5_properties.run;
+
+import java.util.HashMap;
+import java.util.Properties;
+
+public class Run {
+	public static void main(String[] args) {
+			
+			// properties : K,V 모두 String 타입인 Map
+			
+			Properties prop = new Properties(); // 무조건 타입제한 String으로
+			HashMap<String, String> map  // 이건 Generic을 일부러 String으로 걸어준 HashMap
+				= new HashMap<String, String>();
+			
+			//Properties는 무조건 K, V가 String이기 때문에, 별도의 제네릭을 사용한 타입 제한이 필요없음.
+			
+			// setProperty(key, value) : 값 추가
+			prop.setProperty("List", "ArrayList");
+			prop.setProperty("Set", "HashSet");
+			prop.setProperty("Map", "HashMap");
+			
+			
+		}
+
+	}
+
+}

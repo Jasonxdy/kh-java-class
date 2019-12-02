@@ -1,0 +1,31 @@
+package com.kh.chap03_char.model.dao;
+
+import java.io.FileReader;
+
+public class FileCharDAO {
+	
+	// FileReader : 문자 기반 파일 입력 스트림
+	// 프로그램 <--- 파일
+	
+	public void fileOpen() {
+		FileReader fr = null;
+		// FileReader 객체가 생성될 때 파일과 직접 연결됨
+		// -> 연결될 파일이 없는 경우 FileNotFoundException 발생
+		try {
+			fr = new FileReader("a_byte.txt");
+			
+			int value = 0;
+			
+			// Reader.read()는 2바이트 문자 단위로 입력이 됨 (읽어옴)
+			while ((value = fr.read()) != -1) {
+				System.out.println((char)value);
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}
