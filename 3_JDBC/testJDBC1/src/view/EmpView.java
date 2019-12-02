@@ -40,7 +40,7 @@ public class EmpView {
 			switch(select) {
 			case 1 : controller.selectAll(); break;
 			case 2 : controller.selectEmp(); break;
-			case 3 : break;
+			case 3 : controller.insertEmp(); break;
 			case 4 : break;
 			case 5 : break;
 			case 6 : selectSalary(); break;
@@ -134,6 +134,12 @@ public class EmpView {
 		
 		return new EMP(empNo, eName, job, mgr, sal, comm, deptNo);
 		
+	}
+	
+	
+	// 3_18. DML 구문 성공 메세지 출력 View
+	public void displaySuccess(String msg) {
+		System.out.println("서비스 요청 성공 : " + msg);
 	}
 	
 	

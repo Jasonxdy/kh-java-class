@@ -243,6 +243,67 @@ public class EmpDAO {
 	
 	
 	
+	// 3_6. 새로운 사원 정보 추가
+	public int insertEmp(EMP emp) {
+//		3_7. JDBC 드라이버 등록, DB 연결/수행, 삽입 결과 저장용 변수 선언
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0; // 삽입 결과 저장용 변수
+		// DML (insert,update, delete) 구문 실행 시 반환되는 값은 SQL 구문 처리 성공한 행의 개수
+		
+		// 3_8. JDBC 드라이버 로드 작업
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "SCOTT", "TIGER");
+			
+			// PreparedStatement를 사용한 사원 정보 삽입을 위한 INSERT 구문 작성
+			String query = "INSERT INTO EMP VALUES"
+					+ "(?,?,?,?,SYSDATE,?,?,?)";
+			
+			// 3_10. INSERT문 전달을 위한 PreparedStatement 객체 생성 후 
+			//		 각 위치 홀더에 알맞은 값을 대입
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, emp.getEmpNo());
+			pstmt.setString(2, emp.geteName());
+			pstmt.setString(3, emp.getJob());
+			pstmt.setInt(4, emp.getMgr());
+			pstmt.setInt(5, emp.getSal());
+			pstmt.setInt(6, emp.getComm());
+			pstmt.setInt(7, emp.getDeptNo());
+			
+			
+			result = pstmt.executeUpdate();
+			// 3_11. SQL문을 실행하고 실행 결과를 result에 저장
+			// DML 구문의 실행 결과는 처리 성공한 행의 개수가 반환됨 (int 형)
+			// 처리 실패 시 0을 반환 (처리된 행이 없음)
+			
+			
+			// 3_12. SQL 수행 결과에 따라 트랜잭션 처리 (commit, rollback 지정)
+			if (result > 0) { // 삽입 성공 시
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 3_13. DB 연결 객체 반환
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		// 3_14. INSERT 수행 결과 반환
+		return result;
+	}
+	
 	
 	
 	
@@ -296,12 +357,6 @@ public class EmpDAO {
 			}
 		}
 		return empList;
-	}
-
-
-	public void insertEmp(EMP emp) {
-		
-		
 	}
 	
 	
