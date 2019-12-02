@@ -42,7 +42,7 @@ public class EmpView {
 			case 2 : controller.selectEmp(); break;
 			case 3 : controller.insertEmp(); break;
 			case 4 : controller.updateEmp(); break;
-			case 5 : break;
+			case 5 : controller.deleteEmp(); break;
 			case 6 : selectSalary(); break;
 			case 0 : System.out.println("프로그램을 종료합니다."); break;
 			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요."); 
@@ -174,6 +174,16 @@ public class EmpView {
 	
 	
 	
+	
+	// 5_4. 사원 정보 삭제 확인 View 
+	
+	public char deleteEmp() {
+		
+		System.out.print("정말로 삭제 하시겠습니까? (Y/N) : ");
+		char check = sc.nextLine().charAt(0);
+		return check;
+		
+	}
 	
 	
 	

@@ -183,6 +183,52 @@ public class EmpController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	// 5.  사번으로 사원 정보 삭제
+	public void deleteEmp() {
+		
+		// 5_1. EmpDAO 객체 생성
+		EmpDAO empDAO = new EmpDAO();
+		
+		// 5_2. 사번 입력 View 호출
+		int empNo = view.selectEmpNo();
+		
+		// 5_3. 사원 정보를 정말로 삭제할 것인지 확인하는
+		// -> EmpView.deleteEmp() 메소드 작성
+		
+		
+		// 5_5. 입력받은 check 저장
+		char check = Character.toUpperCase(view.deleteEmp());
+		// Character.toUpperCase(char) -> 전달받은 값을 모두 대문자로 변경
+		
+		// 5_6. check 값에 따라서 DAO 또는 메인 메뉴로 갈지 처리
+		if (check == 'Y') {
+			
+			// 5_6. 입력받은 사번과 일치하는 사원 정보를 DB에서 삭제하는 EmpDAO.deleteEmp(empNo) 메소드 작성
+			
+			
+			
+			// 5_18. DB 삭제 결과를 저장
+			int result = empDAO.deleteEmp(empNo);
+			
+			// 5_19. 삭제 결과에 따른 View 연결 처리
+			if (result > 0) {
+				view.displaySuccess(result + "개의 행이 삭제되었습니다.");				
+			} else {
+				view.displayError("데이터 삭제 과정 중 오류 발생");
+			}
+			
+		} else if (check == 'N') {
+			view.displaySuccess("사원 정보 삭제 취소");
+		} else {
+			view.displayError("잘못 입력하셨습니다. 다시 삭제를 실행해주세요");
+		}
+	}
 
 	
 	

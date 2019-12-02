@@ -370,6 +370,72 @@ public class EmpDAO {
 	
 	
 	
+	
+	
+	
+
+	
+	// 5_8. 전달받은 사번과 일치하는 사원 정보 삭제
+	public int deleteEmp(int empNo) {
+		
+		// 5_9. JDBC 드라이버 등록, DB 연결/수행, 삭제 결과 저장을 위한 변수 선언
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		// 5_10. JDBC 드라이버 로드
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe"
+					, "SCOTT", "TIGER");
+			
+			// 5_12. 사원 정보 삭제를 위한 SQL 구문 작성
+			String query = 
+					"DELETE FROM EMP "
+					+ "WHERE EMPNO = ?";
+			
+			// 5_13. PreparedStatement 객체 생성 후 위치 홀더에 값 대입
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, empNo);
+			
+			
+			// 5_14. SQL 수행 후 결과 값 반환받기
+			result = pstmt.executeUpdate();
+			
+			// 5_15. SQL 수행 결과에 따라 트랜잭션 처리
+			if(result > 0) {
+				conn.commit();
+			} else {
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 5_16. DB 연결 자원 반환
+			
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		// 5_17. DELETE 결과 반환
+		return result;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 	// 6번 예제 내 풀이
 	public ArrayList<EMP> selectSalary(int lowSal, int highSal) {
 		
@@ -387,7 +453,7 @@ public class EmpDAO {
 			pstmt.setInt(2, highSal);
 			rset = pstmt.executeQuery();
 //			EMP emp = null;
-//			empList = new ArrayList<EMP>();
+			empList = new ArrayList<EMP>();
 			
 			while(rset.next()) {
 				int empNo = rset.getInt("EMPNO");
@@ -420,9 +486,10 @@ public class EmpDAO {
 		}
 		return empList;
 	}
-	
-	
 
+
+	
+	
 	
 	
 	
