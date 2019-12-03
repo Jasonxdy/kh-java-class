@@ -32,6 +32,14 @@ public class MemberDAO {
 	
 	// 1_14. 새로운 회원 정보 추가 DAO
 	// Service에서 생성한 Connection 객체를 전달 받을 예정
+	
+	/**
+	 * 새로운 회원 정보 추가용 DAO
+	 * @param conn : Connection
+	 * @param member : Member
+	 * @return result : int
+	 * @throws Exception
+	 */
 	public int insertMember(Connection conn, Member member) throws Exception {
 		
 		// SQL 수행, DB 자원 반환 (-- Service에서 나머지를 다 떼어감)
@@ -66,7 +74,7 @@ public class MemberDAO {
 			
 			// 1_20. SQL 구문 실행 후 결과를 반환받아 저장
 			result = pstmt.executeUpdate();
-		} finally {
+		} finally { 		// -- 여기서 throws 사용하는데도 try-catch 사용하는 이유 finally를 사용하기 위해 
 			// 1_21. SQL 수행에 사용된 자원 반환
 			// -> JDBCTemplate에서 자원 반환 메소드 작성
 			

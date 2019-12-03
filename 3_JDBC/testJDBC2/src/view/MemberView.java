@@ -28,7 +28,7 @@ public class MemberView {
 			System.out.println("4. 회원 정보 수정");
 			System.out.println("5. 회원 탈퇴");
 			System.out.println("0. 프로그램 종료");
-			
+			System.out.println();
 			System.out.print("메뉴 선택 >> ");
 			sel = sc.nextInt();
 			sc.nextLine(); // Scanner 버퍼에 남아있는 개행 문자 제거
@@ -81,7 +81,23 @@ public class MemberView {
 		String address = sc.nextLine();
 		
 		return new Member(memberId, memberPwd, memberName, gender, email, phone, address, age);
-		
+	}
+	
+	
+	// 1_29. DML 성공 메세지 출력용 View
+	public void displaySuccess(String msg) {
+		System.out.println("서비스 요청 성공 : " + msg);
+	}
+	
+	//1_32. 실패 메세지 출력용 View
+	public void disaplayFail(String msg) {
+		System.out.println("서비스 요청 실패" + msg);
+	}
+	
+	// 1_35. 에러 메세지 출력용 View
+	public void displayError(String msg, Exception e) {
+		System.out.println("서비스 요청 중 오류 발생 : " + msg);
+		e.printStackTrace();
 	}
 
 }

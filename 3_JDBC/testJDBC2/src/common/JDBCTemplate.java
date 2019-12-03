@@ -71,7 +71,7 @@ public class JDBCTemplate {
 				conn = DriverManager.getConnection(prop.getProperty("url"),
 						prop.getProperty("user"), prop.getProperty("password"));
 				
-				// Auto Commit 비활성화
+				// Auto Commit 비활성화 --하는 이유 : 동적 코딩으로 변경되었기때문에 DB 버전등의 차이로 인해 AutoCommit될 가능성이 있음.. 그래서 꺼둠
 				conn.setAutoCommit(false);
 			} catch (Exception e) {
 				e.printStackTrace();
