@@ -50,13 +50,16 @@ public class EmpView {
 		} while (select != 0);
 	}
 
-
 	public void selectAll(ArrayList<EMP> empList) {
-		
-		System.out.println("사번 \t 이름 ");
-		
-		
-		
-		
+		System.out.println("사번\t이름\t직책\t\t직속상사\t" + "고용일\t급여\t커미션\t부서번호");
+
+		// 향상된 for문으로 empList 출력
+		for (EMP emp : empList) {
+			System.out.println(emp);
+		}
+	}
+
+	public void displayError(String msg) {
+		System.out.println("서비스 요청 실패 : " + msg);
 	}
 }

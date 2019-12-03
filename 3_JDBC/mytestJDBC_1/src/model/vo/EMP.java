@@ -94,7 +94,7 @@ public class EMP {
 
 	@Override
 	public String toString() {
-		return empNo + ",\t" + eName + ",\t" + job + ",\t" + mgr + ",\t" + hireDate
-				+ ",\t" + sal + ",\t" + comm + ",\t" + deptNo;
+		return empNo + "\t" + eName + "\t" + job + "\t\t" + mgr + "\t" + hireDate
+				+ "\t" + sal + "\t" + comm + "\t" + deptNo;
 	}
 }
