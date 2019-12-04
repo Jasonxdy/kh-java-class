@@ -264,15 +264,18 @@ public class MemberController {
 				
 				if(view.checkDelete() == 'Y') {
 					// view.checkString() 메소드 작성
-					String rString = mService.randomString();
-					
-					if(view.checkString(rString).equals(rString)) {
-						int result = mService.deleteMember(memberId);
-						if(result > 0) view.displaySuccess(result + "개의 행이 삭제되었습니다.");
-						else view.disaplayFail("데이터 삭제 실패");	
-					} else {
-						view.disaplayFail("보안 문자 불일치");
-					}
+					do {
+						String rString = mService.randomString();
+						if(view.checkString(rString).equals(rString)) {
+							int result = mService.deleteMember(memberId);
+							if(result > 0) view.displaySuccess(result + "개의 행이 삭제되었습니다.");
+							else view.disaplayFail("데이터 삭제 실패");
+							break;
+						} else {
+							view.disaplayFail("보안 문자 불일치");
+							if(view.checkStringAgain() != 'Y') break;
+						}
+					} while (true);
 				} else {
 					return;
 				}
@@ -287,7 +290,6 @@ public class MemberController {
 	// 6. 프로그램 종료
 	public void exitProgram() {
 		mService.exitProgram();
-		
 	}
 	
 	

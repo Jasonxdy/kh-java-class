@@ -219,6 +219,13 @@ public class MemberView {
 		System.out.print("자동 입력 방지 문자를 입력해주세요 (" + str + ") : ");
 		return sc.nextLine();
 	}
+
+
+
+	public char checkStringAgain() {
+		System.out.print("다시 입력하시겠습니까? (Y / N) : ");
+		return sc.nextLine().toUpperCase().charAt(0);
+	}
 	
 	
 	
