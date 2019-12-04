@@ -4,7 +4,6 @@ package model.service;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.MemberDAO;
@@ -190,7 +189,6 @@ public class MemberService {
 
 		
 		// 3항 연산자 가능?
-		
 //		result > 0 ? commit(conn) : rollback(conn);
 		
 		
@@ -200,6 +198,57 @@ public class MemberService {
 		
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	public int deleteMember(String memberId) throws Exception {
+		Connection conn = getConnection();
+		MemberDAO memberDAO = new MemberDAO();
+		
+		int result = memberDAO.deleteMember(conn, memberId);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		return result;
+	}
+	
+	
+	// 보안문자 생성용 Service
+	public String randomString() {
+		
+		String str = "";
+		int random = 0;
+		for(int i = 0; i < 6;) {
+			random = (int)(Math.random() * ('Z'+1 - '0') + '0'); // int형으로 받음
+			if(random >= '0' && random <= '9' ||
+					random >= 'A' && random <= 'Z' ||
+					random >= 'a' && random <= 'z') {
+				str += (char)random;
+				i++;
+			}
+		}
+		return str;
+	}
+
+
+
+	
+	
+
+
+
+	public void exitProgram() {
+		close(getConnection());
+	}
+	
+	
+	
 	
 	
 }

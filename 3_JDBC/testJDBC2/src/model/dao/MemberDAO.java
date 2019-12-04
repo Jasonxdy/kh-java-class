@@ -324,8 +324,6 @@ public class MemberDAO {
 	
 	
 	
-	
-	
 	// 4_33. 회원 정보 수정용 DAO
 	public int updateMember(Connection conn, String updateQuery, String memberId, String Input)
 	throws Exception {
@@ -358,6 +356,41 @@ public class MemberDAO {
 		// 4_40. 수정 결과 반환
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	public int deleteMember(Connection conn, String memberId) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

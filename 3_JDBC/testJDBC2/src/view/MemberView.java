@@ -39,8 +39,9 @@ public class MemberView {
 			case 2 : mController.selectAll(); break;
 			case 3 : mController.selectMember(); break;
 			case 4 : mController.updateMember(); break;
-			case 5 : break;
-			case 0 : System.out.println("프로그램을 종료합니다."); break;
+			case 5 : mController.deleteMember(); break;
+			case 0 : mController.exitProgram();
+					 System.out.println("프로그램을 종료합니다."); break;
 			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
 			}
 		} while(sel != 0);
@@ -206,6 +207,18 @@ public class MemberView {
 	}
 	
 	
+	
+	
+	public char checkDelete() {
+		System.out.print("존재하는 아이디입니다.\n정말로 삭제 하시겠습니까? (Y / N) : ");
+		return sc.nextLine().toUpperCase().charAt(0);
+	}
+	
+	
+	public String checkString(String str) {
+		System.out.print("자동 입력 방지 문자를 입력해주세요 (" + str + ") : ");
+		return sc.nextLine();
+	}
 	
 	
 	
