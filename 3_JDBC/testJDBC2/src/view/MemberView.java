@@ -1,5 +1,6 @@
 package view;
 
+import java.util.List;
 import java.util.Scanner;
 
 import controller.MemberController;
@@ -35,9 +36,9 @@ public class MemberView {
 			
 			switch(sel) {
 			case 1 : mController.insertMember(); break;
-			case 2 : break;
-			case 3 : break;
-			case 4 : break;
+			case 2 : mController.selectAll(); break;
+			case 3 : mController.selectMember(); break;
+			case 4 : mController.updateMember(); break;
 			case 5 : break;
 			case 0 : System.out.println("프로그램을 종료합니다."); break;
 			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요");
@@ -91,7 +92,7 @@ public class MemberView {
 	
 	//1_32. 실패 메세지 출력용 View
 	public void disaplayFail(String msg) {
-		System.out.println("서비스 요청 실패" + msg);
+		System.out.println("서비스 요청 실패 : " + msg);
 	}
 	
 	// 1_35. 에러 메세지 출력용 View
@@ -99,5 +100,113 @@ public class MemberView {
 		System.out.println("서비스 요청 중 오류 발생 : " + msg);
 		e.printStackTrace();
 	}
-
+	
+	
+	// 2_21. 회원 정보 출력용 View
+	public void displayMember(List<Member> mList) {
+		System.out.printf("%-10s %-10s %-5s %-5s %-20s %-15s %-4s %-20s %-15s\n",
+				"ID", "PWD", "NAME", "GENDER", "EMAIL", 
+				"PHONE", "AGE", "ADDRESS", "EROLLDATE");
+		
+		for(Member m : mList) {
+			System.out.printf("%-10s %-10s %-8s %-5c %-20s %-15s %-4d %-20s %-15s\n",
+				m.getMemberId(), m.getMemberPwd(), m.getMemberName(),
+				m.getGender(), m.getEmail(), m.getPhone(),
+				m.getAge(), m.getAddress(), m.getEnrollDate());
+		}
+	}
+	
+	
+	
+	
+	// 3_3. 검색 조건 선택용 View
+	public int selectCondition() {
+		
+		
+		int sel = 0;
+		
+		do { // 단순 while도 가능
+			System.out.println("1. 성별 조회");
+			System.out.println("2. 특정 단어가 포함된 아이디 조회");
+			System.out.println("3. 특정 지명이 포함된 주소 조회");
+			System.out.println("0. 메인 메뉴로 돌아가기");
+			System.out.print("검색 조건 선택 --> ");
+			sel = sc.nextInt();
+			sc.nextLine();
+			
+			switch(sel) {
+			case 1 : case 2 : case 3 : case 0 : return sel;
+			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+			}
+		} while (true);
+	}
+	
+	
+	// 3_6_1. 성별 입력용 View
+	public char inputGender() {
+		char gender = ' ';
+		while(true) {
+			System.out.print("성별 입력 (M / F) : ");
+			gender = sc.nextLine().toUpperCase().charAt(0);
+			
+			if(gender == 'M' || gender == 'F') break;
+			else System.out.println("M 또는 F만 입력해주세요.");
+		}
+		return gender;
+	}
+	
+	// 3_6_2. 아이디에 포함된 단어 입력용 View
+	public String inputMemberId() {
+		System.out.print("조회하고자 하는 아이디에 포함된 단어 입력 : ");
+		String id = sc.nextLine();
+		return id;
+	}
+	
+	// 3_6_3. 주소에 포함된 지명 입력용 View
+	public String inputAddress() {
+		System.out.print("조회하고자 하는 주소에 포함된 지명 입력 : ");
+		String addr = sc.nextLine();
+		return addr;
+	}
+	
+	
+	// 4_2. 아이디 입력용 View
+	public String selectMemberId() {
+		System.out.print("아이디 : ");
+		return sc.nextLine();
+	}
+	
+	// 4_22. 회원 정보 수정 서브메뉴 View
+	public int updateMember() {
+		
+		int sel = 0;
+		
+		while(true) {
+			System.out.println("존재하는 아이디입니다.\n");
+			System.out.println("1. 비밀번호 변경");
+			System.out.println("2. 이메일 변경");
+			System.out.println("3. 전화번호 변경");
+			System.out.println("4. 주소 변경");
+			System.out.println("0. 메인 메뉴로 돌아가기");
+			System.out.print("수정할 메뉴 선택 >> ");
+			sel = sc.nextInt();
+			sc.nextLine();
+			
+			switch(sel) {
+			case 1 : case 2: case 3: case 4: case 0: return sel; 
+			default : System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+			}
+		}
+	}
+	
+	// 4_26. 수정할 값을 입력받을 View
+	public String inputUpdate() {
+		System.out.print("수정할 값 입력 : ");
+		return sc.nextLine();
+	}
+	
+	
+	
+	
+	
 }
