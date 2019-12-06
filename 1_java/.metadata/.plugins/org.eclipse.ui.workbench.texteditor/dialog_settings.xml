@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="user"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="iterator"/>
 			<item value="user"/>
 			<item value="detailMessage"/>
 			<item value="’"/>
@@ -22,7 +23,6 @@
 			<item value="Deprecated"/>
 			<item value="deprecated"/>
 			<item value="BYTES"/>
-			<item value="&quot;&quot;"/>
 		</list>
 		<list key="replacehistory">
 			<item value="&apos;"/>

@@ -1,6 +1,0 @@
-#collections
-#Thu Nov 28 14:35:54 KST 2019
-Map=HashMap
-List=ArrayList
-Set=TreeSet
-Collection = Array
