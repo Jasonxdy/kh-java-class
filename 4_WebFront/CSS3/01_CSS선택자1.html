@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>CSS 선택자 1</title>
+        <style>
+            /* CSS 주석 */
+            /* style 태그 : 적용할 CSS를 작성하는 태그 */
+
+            /* 모든 선택자 -> '*' 기호 사용 */
+            /* *{color: red;} */
+
+            /*태그 선택자*/
+            p{ color: red;}
+
+            /* 아이디 선택자 */
+            #id2{
+                background-color: yellow;
+                color: green;
+            }
+
+            /* 클래스 선택자 */
+            .class1{
+                background-color: black;
+                color: white;
+            }
+
+            .class2{
+                color: orange;
+            }
+
+            .class3{
+                background-color: springgreen;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>CSS 기본 선택자</h1>
+        <h3>CSS란?</h3>
+        <p>
+            Cascading Style Sheets 약자로<br>
+            HTML 같은 마크업 언어에 종속되어 레이아웃과 스타일을 정의하는
+            자유도 높은 마크업 언어.
+        </p>
+
+        <hr>
+        <h3>선택자란?</h3>
+        <p>
+            특정한 HTML 태그를 선택할 때 사용하는 기능으로, <br>
+            원하는 태그를 선택하여 스타일, 기능을 적용할 수 있음.
+        </p>
+
+        <hr>
+
+        <h3>모든 (전체) 선택자</h3>
+        <p>HTML 문서 내 모든 태그를 선택하는 선택자</p>
+
+        <ul>
+            <li>테스트1</li>
+            <li>테스트2</li>
+            <li>테스트3</li>
+        </ul>
+
+        <hr>
+
+        <h3>태그 선택자</h3>
+        <p>
+            HTML 문서 내에 같은 태그를 모두 선택하는 선택자.
+        </p>
+
+        <hr>
+
+        <h3>아이디 선택자</h3>
+        <p>
+            HTML 문서 내에 해당하는 아이디를 속성으로 가진 태그만 <br>
+            선택할 때 사용하는 선택자.
+        </p>
+
+        <pre>
+            #아이디값{ color : blue }
+            이러한 형태로 작성
+            # : 아이디를 나타내는 기호
+        </pre>
+
+        <ol>
+            <li id="id1">아이디 선택자 테스트1</li>
+            <li id="id2">아이디 선택자 테스트2</li>
+            <li id="id3">아이디 선택자 테스트3</li>
+            <li id="id4">아이디 선택자 테스트4</li>
+            <li id="id5">아이디 선택자 테스트5</li>
+        </ol>
+
+        <hr>
+
+        <h3>클래스 선택자</h3> <!--자바에서의 Class랑 아예 다름-->
+        <p>
+            HTML 문서 내에 여러 태그를 한번에 지정하여 선택할 때 사용하는 선택자
+        </p>
+        <pre>
+            .클래스명{ color : blue }의 형태로 사용됨
+        </pre>
+        <ul>
+            <li class="class1">클래스 선택자 테스트1</li>
+            <li class="class2 class3">클래스 선택자 테스트2</li>
+            <li class="class1">클래스 선택자 테스트3</li>
+            <li class="class2 class3">클래스 선택자 테스트4</li>
+            <li class="class1">클래스 선택자 테스트5</li>
+        </ul>
+
+
+    </body>
+</html>

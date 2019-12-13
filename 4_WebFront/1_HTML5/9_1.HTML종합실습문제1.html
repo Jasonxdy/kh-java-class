@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>9_1.HTML 종합 실습 문제 1</title>
+    </head>
+    <body>
+
+
+
+
+
+        <form name="order" method="get">
+            
+            <label>고객명 : </label>
+            <input type="text"> <br>
+
+            <label>전화번호(필수) : </label>
+            <input type="tel" required><br>
+
+            <label>E-mail : </label>
+            <input type="email"><br>
+
+            <label>피자선택(필수) : </label>
+            <select required>
+                <option>피자를 선택하세요</option>
+                <option value="potato">포테이토 피자</option>
+                <option value="peperoni">페페로니 피자</option>
+                <option value="cheese">치즈 피자</option>
+            </select>
+            <br>
+
+
+            <fieldset>
+                <legend>피자 사이즈(필수)</legend>
+                <input type="radio" id="small" name="size"><label for="small">Small</label><br>
+                <input type="radio" id="Medium" name="size"><label for="Medium">Medium</label><br>
+                <input type="radio" id="Large" name="size"><label for="Large">Large</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>토핑 선택</legend>
+                <input type="checkbox" id="bacon"><label for="bacon">베이컨</label><br>
+                <input type="checkbox" id="cheese"><label for="cheese">치즈</label><br>
+                <input type="checkbox" id="onion"><label for="onion">양파</label><br>
+                <input type="checkbox" id="mushroom"><label for="mushroom">버섯</label>
+            </fieldset>
+
+            <label>희망 배송 시간 : </label>
+            <input type="time"><br><br>
+
+            <label>배송시 요청사항 : </label>
+            <textarea rows="3" cols="20"></textarea><br><br>
+
+
+            <button>주문하기</button>
+        </form>
+
+    </body>
+</html>

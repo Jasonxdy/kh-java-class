@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>CSS 선택자 2</title>
+
+        <style>
+
+            #active-test, #hover-test{
+                background-color: orangered;
+                color: white;
+                width: 300px;
+                height: 300px;
+            }
+
+            /* 반응 선택자 */
+            #active-test:active{ 
+                background-color: black;
+                color: yellow;
+            }
+
+            #hover-test:hover{
+                width: 500px;
+                height: 500px;
+            }
+
+            /* 기본 속성 선택자 */
+            div[name=name2]{
+                background-color: yellow;
+            }
+
+            /* 자손 선택자 */
+            #test1>h4{
+                background-color: orange;
+            }
+
+            #test1>ul{
+                background-color: yellow;
+            }
+
+            #test1>ul>li{
+                background-color: cyan;
+            }
+
+            /* 후손 선택자 */
+            #test1 ul{
+                color: red;
+            }
+
+            #test1 li{
+                color: hotpink;
+            }
+
+            /* 동위 선택자 */
+            #div-test2 + div{ 
+                background-color: lightpink;
+            }
+
+            #div-test3 ~ div{
+                background-color: orange;
+                color: white;
+            }
+
+            /* 체크 상태 선택자 */
+            input[name="fruits"]:checked{
+                width: 30px;
+                height: 30px;
+            }
+
+            /* 포커스 선택자 */
+            #inputId:focus, #inputPwd:focus{
+                background-color: lightpink;
+            }
+
+            /* 사용 가능 여부 선택자 */
+            option:enabled{
+                background-color: lightblue;
+            }
+
+            option:disabled{
+                background-color: gray;
+            }
+            
+
+            
+
+
+        </style>
+
+    </head>
+    <body>
+        <h2>반응 선택자</h2>
+        <p>사용자의 움직임에 따라 동작을 하는 선택자</p>
+        <pre>
+        사용자가 클릭한 경우:
+        선택자:active{설정 내용}
+
+        사용자가 마우스를 태그 위에 올려두는 경우:
+        선택자:hover{설정 내용}
+        </pre>
+
+        <div id="active-test">active 테스트</div>
+        <br>
+        <div id="hover-test">hover 테스트</div>
+
+        <hr>
+
+        <h2>기본 속성 선택자</h2>
+        <p>기본 선택자 뒤에 [속성=속성값]의 형식으로 작성</p>
+        <div class="div-class" name="name1">div1</div>
+        <div class="div-class" name="name2">div2</div>
+        <div class="div-class" name="name3">div3</div>
+        <div class="div-class" name="name4">div4</div>
+
+        <hr>
+
+        <h2>자손 선택자와 후손 선택자</h2>
+        <pre>
+            자손 선택자 : 선택자>자손선택자{설정 내용}
+            -> 선택자의 바로 하위 레벨 요소(태그)를 지정
+
+            후손 선택자 : 선택자 후손선택자{설정 내용}
+            -> 선택자의 모든 하위 레벨 요소 지정
+        </pre>
+
+        <div id="test1">
+            <h4>자손1</h4>
+            <h4>자손2</h4>
+
+            <ul id="test-ul"> 리스트
+                <li>ul의 자손이면서 div의 후손</li>
+                <li>ul의 자손이면서 div의 후손</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>동위 선택자</h2>
+        <p>동위 관계에서 뒤에 위치한 태그를 선택할 때 사용</p>
+
+        <pre>
+            바로 뒤 요소 하나 선택
+            선택자a + 선택자b{설정내용}
+
+            뒤에 있는 모든 요소 선택
+            선택자a ~ 선택자b{설정내용}
+        </pre>
+
+        <div id="div-test1">div test1</div>
+        <div id="div-test2">div test2</div>
+        <div id="div-test3">div test3</div>
+        <div id="div-test4">div test4</div>
+        <div id="div-test5">div test5</div>
+
+        <div>test</div>
+
+        <hr>
+
+        <h2>상태 선택자</h2>
+        <p>입력양식의 상태에 따라 선택되는 선택자</p>
+
+        <h3>체크 상태 선택자</h3>
+        <pre>
+            input태그선택자 : checked{설정 내용}
+        </pre>
+
+        <input type="checkbox" name="fruits" value="apple" id="apple">
+        <label for="apple">사과</label>
+
+        <input type="checkbox" name="fruits" value="orange" id="orange">
+        <label for="orange">오렌지</label>
+
+        <input type="checkbox" name="fruits" value="banana" id="banana">
+        <label for="banana">바나나</label>
+
+        <hr>
+
+        <h3>포커스 선택자</h3>
+        <label for="inputId">아이디 : </label>
+        <input type="text" id="inputId"
+        placeholder="아이디를 입력해주세요"><br>
+        <!-- autofocus : 화면 키면 자동으로 커서 가있음.. 따라서 화면 상단에만 처리할것-->
+        <label for="inputPwd">비밀번호 : </label>
+        <input type="password" id="inputPwd"
+        placeholder="비밀번호를 입력해주세요">
+
+        <hr>
+
+        <h3>사용 가능 여부 선택자</h3>
+        <pre>
+            사용 가능한 input 태그 선택
+                input태그선택자:enabled{설정 내용}
+
+            사용 불가능한 input 태그 선택
+                input태그선택자:disabled{설정 내용}
+        </pre>
+
+        <h3>당신의 연령대는?</h3>
+        <select id="select-age">
+            <option value="10" disabled>10대</option>
+            <option value="20">20대</option>
+            <option value="30">30대</option>
+            <option value="40">40대</option>
+            <option value="50">50대</option>
+            <option value="60" disabled>60대</option>
+        </select>
+
+    </body>
+</html>

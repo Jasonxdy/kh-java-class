@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>9_2.HTML 종합 실습 문제 2</title>
+    </head>
+    <body>
+        <form name="delivery" method="get">
+            <fieldset>
+                <legend>납품자 정보</legend>
+                <label>1. 납품자명(필수) : </label>
+                <input type="text" required><br><br>
+                <label>2. email(필수) : </label>
+                <input type="email" required placeholder="answer@naver.com"><br><br>
+                <label>3. 홈페이지 : </label>
+                <input type="url" value="http://" required><br><br>
+                <label>4. 지역 : </label>
+                <select>
+                    <option value="부산" selected>부산</option>
+                    <option value="서울">서울</option>
+                    <option value="수원">수원</option>
+                    <option value="인천">인천</option>
+                </select>
+            </fieldset>
+        
+            <fieldset>
+                <legend>납품 정보</legend>
+                <ul>
+                    <li>
+                        <label>상품명(필수) : </label>
+                        <input type="text" required><br>
+                    </li>
+                    <li>
+                        <label>납품수량(필수) : </label>
+                        <input type="number" min="100" placeholder="최소 100"><br>
+                    </li>
+                    <li>
+                        <label>납품등급(필수) : </label>
+                        <input type="range" required><br>
+                    </li>
+                    <li>
+                        <label>기타사항 : </label>
+                        <textarea></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <br>
+        
+            <button>send message</button>
+        
+        </form>
+    </body>
+</html>
+

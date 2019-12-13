@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>03_CSS 선택자3</title>
+
+        <style>
+            /* 형제 관계 태그 중 첫 번째 태그 선택 */
+            #test1 p:first-child{
+                background-color: red;
+                color: white;
+            }
+
+            /* 형제 관계 태그 중  마지막 태그 선택 */
+            #test1 p:last-child{
+                /* 선택하고자 하는 형제관계에 있는 태그가 가장 마지막에 있어야 함. */
+                background-color: red;
+                color: white;
+            }
+
+            /* 형제 관계 태그 중 앞에서 수열번 째 태그 선택  */
+            #test1 p:nth-child(2n){
+                background-color: yellowgreen;
+                color : white;
+            }
+
+            /* 형제 관계 태그 중 뒤에서 수열번 째 태그 선택  */
+            #test1 p:nth-last-child(4n){
+                background-color: coral;
+                color : white;
+            }
+
+            /* 형제 관계 태그 중 첫 번째 태그 선택 */
+            #test2 p:first-of-type{
+                background-color: red;
+                color: white;
+            }
+
+            /* 형제 관계 태그 중 마지막 태그 선택 */
+            #test2 p:last-of-type{
+                background-color: red;
+                color: white;
+            }
+
+            /* 형제 관계 태그 중 앞에서 수열번 째 태그 선택 */
+            #test2 p:nth-of-type(2n){
+                background-color: yellowgreen;
+                color: white;
+            }
+
+            /* 형제 관계 태그 중 뒤에서 수열번 째 태그 선택 */
+            #test2 p:nth-last-of-type(4){
+                background-color: coral;
+                color: white;
+            }
+
+            /* 부정 선택자 */
+            #test3 p:not(:nth-of-type(2n-1)){
+                background-color: orange;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2>일반 구조 선택자</h2>
+        <p>특정한 위치에 있는 태그 선택 (위치로 구분)</p>
+
+        <div id="test1">
+            <p>테스트1</p>
+            <p>테스트2</p>
+            <p>테스트3</p>
+            <p>테스트4</p>
+            <p>테스트5</p>
+            <!-- <pre>테스트6</pre> -->
+        </div>
+        
+        <hr>
+        
+        <h2>형태 구조 선택자</h2>
+        <p>특정한 위치에 있는 태그 선택(태그별로 구분)</p>
+            <div id="test2">
+                <p>테스트1</p>
+                <p>테스트2</p>
+                <p>테스트3</p>
+                <p>테스트4</p>
+                <p>테스트5</p>
+                <pre>테스트6</pre>
+            </div>
+            
+        <hr>
+            
+        <h2>부정 선택자</h2>
+            <div id="test3">
+                <p>테스트1</p>
+                <p>테스트2</p>
+                <p>테스트3</p>
+                <p>테스트4</p>
+                <p>테스트5</p>
+                <pre>테스트6</pre>
+            </div>
+            
+    </body>
+</html>

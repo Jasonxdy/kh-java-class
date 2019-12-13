@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>5.이미지 관련 태그</title>
+    </head>
+    <body>
+        <h1>이미지 관련 태그</h1>
+        <h3>&lt;img&gt; : 웹 페이지에 사진이나 그림을 삽입할 때 사용하는 태그</h3>
+
+        <pre>
+            img태그 속성
+            - src : 삽입할 이미지 경로를 지정하는 속성
+            - alt : 이미지를 설명하는 텍스트를 추가하는 속성
+                    이미지가 출력이 되지 않으면 표시됨.
+            - width/height
+        </pre>
+
+        <h3>src 속성</h3>
+        <img src="sample/image/river1.PNG">
+        <img src="https://www.iei.or.kr/resources/images/common/top_logo_s.jpg">
+        <!-- img태그는 inline 형식 -->
+
+        <hr>
+
+        <h3>alt 속성</h3>
+        <p>
+            이미지의 경로가 잘못되거나, 이미지를 제대로 표현할 수 없는 경우<br>
+            대체 텍스트를 표시하는 용도로 사용하는 속성.<br>
+            + 시각 장애인을 위한 ScreenReader에서 이미지를 대체하여 <br>
+              낭독해주는 텍스트를 작성.
+        </p>
+
+        <img src="sample/image/river.PNG" alt="이미지가 없습니다.">
+
+        <hr>
+
+        <h3>width / heigth</h3>
+        <p>
+            태그의 크기(높이, 너비)를 지정하는 속성.<br>
+            고정된 크기의 단위(px 등) 및 가변 크기 단위(% 등)로 지정 가능.
+        </p>
+
+        <h4>고정 크기 단위(px) : 화면 크기가 변경되어도 크기가 변하지 않음</h4>
+        <img src="sample/image/flower1.PNG" width="200px" height="150px">
+        <img src="sample/image/flower2.PNG" width="200px" height="150px">
+        <img src="sample/image/flower3.PNG" width="200px" height="150px">
+        <img src="sample/image/flower4.PNG" width="200px" height="150px">
+        <img src="sample/image/flower5.PNG" width="200px" height="150px">
+
+        <h4>가변 크기 단위(%) : 화면의 크기가 변경되면 기준 사이즈에 따라 크기가 변경됨</h4>
+        <img src="sample/image/flower1.PNG" width="15%" height="150px">
+        <img src="sample/image/flower2.PNG" width="15%" height="150px">
+        <img src="sample/image/flower3.PNG" width="15%" height="150px">
+        <img src="sample/image/flower4.PNG" width="15%" height="150px">
+        <img src="sample/image/flower5.PNG" width="15%" height="150px">
+
+
+
+    </body>
+</html>
