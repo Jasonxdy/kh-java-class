@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="Generator" content="EditPlus®">
+	<meta name="Author" content="">
+	<meta name="Keywords" content="">
+	<meta name="Description" content="">
+	<title>배경스타일2</title>
+	<style>
+		.linear-gradient {
+			width: 300px;
+			height: 300px;
+			border: 1px solid black;
+		}
+
+		#gradient1 {
+			background: linear-gradient(to bottom, blue, white);
+			background: -webkit-linear-gradient(top, blue, white);
+			background: -moz-linear-gradient(top, blue, white);
+			background: -ms-linear-gradient(top, blue, white);
+			background: -o-linear-gradient(top, blue, white);
+
+		}
+
+		#gradient2 {
+			background: linear-gradient(45deg, blue, white);
+			background: -webkit-linear-gradient(45deg, blue, white);
+			background: -moz-linear-gradient(45deg, blue, white);
+			background: -ms-linear-gradient(45deg, blue, white);
+			background: -o-linear-gradient(45deg, blue, white);
+
+		}
+
+		#gradient3 {
+			background: linear-gradient(to right, blue, white 50%, red);
+			background: -webkit-linear-gradient(left, blue, white 50%, red);
+			background: -moz-linear-gradient(left, blue, white 50%, red);
+			background: -ms-linear-gradient(left, , blue, white 50%, red);
+			background: -o-linear-gradient(left, , blue, white 50%, red);
+		}
+
+		#gradient4 {
+			background: linear-gradient(red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+			background: -webkit-linear-gradient(red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+			background: -moz-linear-gradient(red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+			background: -ms-linear-gradient(red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+			background: -o-linear-gradient(red, orange 15%, yellow 30%, green 45%, blue 60%, navy 75%, purple 90%);
+		}
+
+		#gradient5 {
+			background: repeating-linear-gradient(blue, red 30%);
+			background: -webkit-repeating-linear-gradient(blue, red 30%);
+			background: -moz-repeating-linear-gradient(blue, red 30%);
+			background: -ms-repeating-linear-gradient(blue, red 30%);
+			background: -o-repeating-linear-gradient(blue, red 30%);
+		}
+
+		#gradient6 {
+			background: repeating-linear-gradient(red, red 5%, orange 5%, orange 10%, yellow 10%, yellow 15%, green 15%, green 20%, blue 20%, blue 25%, navy 25%, navy 30%, purple 30%, purple 35%);
+			background: -webkit-repeating-linear-gradient(red, red 5%, orange 5%, orange 10%, yellow 10%, yellow 15%, green 15%, green 20%, blue 20%, blue 25%, navy 25%, navy 30%, purple 30%, purple 35%);
+			background: -moz-repeating-linear-gradient(red, red 5%, orange 5%, orange 10%, yellow 10%, yellow 15%, green 15%, green 20%, blue 20%, blue 25%, navy 25%, navy 30%, purple 30%, purple 35%);
+			background: -ms-repeating-linear-gradient(red, red 5%, orange 5%, orange 10%, yellow 10%, yellow 15%, green 15%, green 20%, blue 20%, blue 25%, navy 25%, navy 30%, purple 30%, purple 35%);
+			background: -o-repeating-linear-gradient(red, red 5%, orange 5%, orange 10%, yellow 10%, yellow 15%, green 15%, green 20%, blue 20%, blue 25%, navy 25%, navy 30%, purple 30%, purple 35%);
+		}
+
+		.circle-gradient {
+			width: 500px;
+			height: 300px;
+			border: 1px solid black;
+		}
+
+		#gradient7 {
+			background: radial-gradient(white, blue, red);
+			background: -webkit-radial-gradient(white, blue, red);
+			background: -moz-radial-gradient(white, blue, red);
+			background: -o-radial-gradient(white, blue, red);
+		}
+
+		#gradient8 {
+			background: radial-gradient(circle, white, blue, red);
+			background: -webkit-radial-gradient(circle, white, blue, red);
+			background: -moz-radial-gradient(circle, white, blue, red);
+			background: -ms-radial-gradient(circle, white, blue, red);
+			background: -o-radial-gradient(circle, white, blue, red);
+		}
+
+		#gradient9 {
+			background: radial-gradient(90% 90%, circle, white, blue, red);
+			background: -webkit-radial-gradient(90% 90%, circle, white, blue, red);
+			background: -moz-radial-gradient(90% 90%, circle, white, blue, red);
+			background: -ms-radial-gradient(90% 90%, circle, white, blue, red);
+			background: -o-radial-gradient(90% 90%, circle, white, blue, red);
+		}
+
+		#gradient10 {
+			background: radial-gradient(30% 40%, circle closest-side, white, blue, red);
+			background: -webkit-radial-gradient(30% 40%, circle closest-side, white, blue, red);
+			background: -moz-radial-gradient(30% 40%, circle closest-side, white, blue, red);
+			background: -ms-radial-gradient(30% 40%, circle closest-side, white, blue, red);
+			background: -o-radial-gradient(30% 40%, circle closest-side, white, blue, red);
+		}
+
+		#gradient11 {
+			background: radial-gradient(30% 40%, circle closest-corner, white, blue, red);
+			background: -webkit-radial-gradient(30% 40%, circle closest-corner, white, blue, red);
+			background: -moz-radial-gradient(30% 40%, circle closest-corner, white, blue, red);
+			background: -ms-radial-gradient(30% 40%, circle closest-corner, white, blue, red);
+			background: -o-radial-gradient(30% 40%, circle closest-corner, white, blue, red);
+		}
+
+		#gradient12 {
+			background: radial-gradient(30% 40%, circle farthest-side, white, blue, red);
+			background: -webkit-radial-gradient(30% 40%, circle farthest-side, white, blue, red);
+			background: -moz-radial-gradient(30% 40%, circle farthest-side, white, blue, red);
+			background: -ms-radial-gradient(30% 40%, circle farthest-side, white, blue, red);
+			background: -o-radial-gradient(30% 40%, circle farthest-side, white, blue, red);
+		}
+
+		#gradient13 {
+			background: radial-gradient(30% 40%, circle farthest-corner, white, blue, red);
+			background: -webkit-radial-gradient(30% 40%, circle farthest-corner, white, blue, red);
+			background: -moz-radial-gradient(30% 40%, circle farthest-corner, white, blue, red);
+			background: -ms-radial-gradient(30% 40%, circle farthest-corner, white, blue, red);
+			background: -o-radial-gradient(30% 40%, circle farthest-corner, white, blue, red);
+		}
+
+		#gradient14 {
+			background: repeating-radial-gradient(white, blue, red 10%);
+			background: -webkit-repeating-radial-gradient(white, blue, red 10%);
+			background: -moz-repeating-radial-gradient(white, blue, red 10%);
+			background: -ms-repeating-radial-gradient(white, blue, red 10%);
+			background: -o-repeating-radial-gradient(white, blue, red 10%);
+		}
+
+		#gradient15 {
+			background: repeating-radial-gradient(white, white 10%, blue 10%, blue 20%, red 20%, red 30%);
+			background: -webkit-repeating-radial-gradient(white, white 10%, blue 10%, blue 20%, red 20%, red 30%);
+			background: -moz-repeating-radial-gradient(white, white 10%, blue 10%, blue 20%, red 20%, red 30%);
+			background: -ms-repeating-radial-gradient(white, white 10%, blue 10%, blue 20%, red 20%, red 30%);
+			background: -o-repeating-radial-gradient(white, white 10%, blue 10%, blue 20%, red 20%, red 30%);
+
+		}
+	</style>
+</head>
+
+<body>
+	<h1>그라데이션</h2>
+		<p>웹 표준으로 지정되었지만 이전 버전과 호환을 위해 브라우저별 접두사를 이용한다.</p>
+
+		<h3>선형그라데이션</h3>
+		<p>색상이 수직, 수평, 대각선 방향으로 일정하게 변하는 것</p>
+		<h4>색상만 지정</h4>
+		<div id="gradient1" class="linear-gradient"></div>
+		<h4>방향을 지정</h4>
+		<div id="gradient2" class="linear-gradient"></div>
+		<h4>중간색 지정</h4>
+		<div id="gradient3" class="linear-gradient"></div>
+		<h4>중간색 여러개 지정</h4>
+		<div id="gradient4" class="linear-gradient"></div>
+		<h4>그라데이션 반복</h4>
+		<div id="gradient5" class="linear-gradient"></div>
+		<h4>그라데이션 반복(색 구분 명확하게)</h4>
+		<div id="gradient6" class="linear-gradient"></div>
+		<hr>
+
+		<h3>원형 그라데이션</h3>
+		<p>색상이 원이나 타원의 중심부터 동심원을 그리며 바깥 방향으로 색상이 변경되는 것</p>
+		<h4>색상만 지정</h4>
+		<div id="gradient7" class="circle-gradient"></div>
+		<h4>모양 지정</h4>
+		<div id="gradient8" class="circle-gradient"></div>
+		<h4>시작점 지정</h4>
+		<div id="gradient9" class="circle-gradient"></div>
+		<h4>사이즈 지정</h4>
+		<div id="gradient10" class="circle-gradient"></div>
+		<div id="gradient11" class="circle-gradient"></div>
+		<div id="gradient12" class="circle-gradient"></div>
+		<div id="gradient13" class="circle-gradient"></div>
+		<h4>원형그라데이션 반복</h4>ㅈ
+		<div id="gradient14" class="circle-gradient"></div>
+		<h4>원형그라데이션 반복(색 구분 명확하게)</h4>
+		<div id="gradient15" class="circle-gradient"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>8.목록 스타일</title>
+
+        <style>
+            /* 불렛 모양 변경 */
+            #test1{ list-style-type: circle;}
+            /* circle, square, disc(default) */
+
+            /* 불렛 모양 없애기 */
+            #test2{ list-style-type: none;}
+
+            /* 불렛 대신 이미지 삽입 */
+            /* flaticon 사이트 활용 */
+            #test3{
+                list-style-image: url("sample/image/party.png");
+                }
+
+        </style>
+    </head>
+    <body>
+        <h1>목록 스타일</h1>
+
+        <h3>불렛 모양 바꾸기</h3>
+        
+        <ul id="test1">
+            <li>불렛 모양 바꾸기1</li>
+            <li>불렛 모양 바꾸기1</li>
+            <li>불렛 모양 바꾸기1</li>
+        </ul>
+        
+        <ul id="test2">
+            <li>불렛 모양 바꾸기2</li>
+            <li>불렛 모양 바꾸기2</li>
+            <li>불렛 모양 바꾸기2</li>
+        </ul>
+        
+        <hr>
+        
+        <h3>불렛 기호 대신 이미지 삽입</h3>
+        
+            <ul id="test3">
+                <li>불렛 대신 이미지 삽입</li>
+                <li>불렛 대신 이미지 삽입</li>
+                <li>불렛 대신 이미지 삽입</li>
+            </ul>
+
+    </body>
+</html>

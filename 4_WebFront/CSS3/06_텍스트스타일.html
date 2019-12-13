@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>06.텍스트 스타일</title>
+
+        <style>
+            /* 텍스트 색상 지정 */
+            /* 16진수 숫자 */
+            /* #color-test{color: #ff0000;} */
+            /* ff(R)00(G)00(B) -> 0~255 (2^8, 8bit)를 표현함 */
+
+            /* rgb 값 */
+            /* #color-test{color: rgb(255, 0, 0);} */
+
+            /* rgb값 + 투명도 */
+            #color-test{background-color: rgba(255, 0, 0, 0.5);}
+            /* rgba(R값, G값, B값, 0~1사이 투명도) */
+
+
+
+            /* 텍스트 밑줄 없애기 */
+            #deco{text-decoration: none;}
+
+            /* 삭제선 */
+            /* #deco-test{text-decoration: line-through;} */
+
+            /* 밑줄 */
+            /* #deco-test{text-decoration: underline;} */
+
+            /* 밑줄 */
+            #deco-test{text-decoration: overline;}
+
+
+
+            /* 텍스트 그림자 */
+            #shadow-test{
+                font-size: 30px;
+                font-weight: bold;
+                /* text-shadow: -5px 5px gray; */
+
+                /* color: white; */
+                /* text-shadow: 0px 1px 20px black; */
+
+                background-color: black;
+                text-shadow: 0px 0px 4px #cccccc,
+                             0px -5px 4px #ff33,
+                             2px -10px 6px #fd3,
+                             -2px -15px 11px #f80,
+                             2px -19px 18px #f20;
+                             /* 이런식으로 , 찍어서 그림자 쌓아올릴 수 있다 */
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>텍스트 스타일</h1>
+
+        <h3>color 속성</h3>
+        <p id="color-test">color 속성 테스트</p>
+
+        <h3>text-decoration 속성 : 텍스트에 밑줄, 삭제선 등을 긋거나 없애는 속성</h3>
+        <a href="#" id="deco">하이퍼링크 밑줄 없애기</a>
+        <!-- # : 아무 링크도 안걸때 사용 -->
+        <p id="deco-test">text-decoration 속성 테스트</p>
+        <!-- 주로 <a>태그에 사용해서 파랑색 글씨나 밑줄 없애는 데 사용 -->
+        
+        <h3>text-shadow 속성 : </h3>
+        <p id="shadow-test">text-shadow 속성 테스트</p>
+        
+
+    </body>
+</html>

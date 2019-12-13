@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>05_글꼴 관련 스타일</title>
+        
+        <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
+
+        <style>
+            #ff1{
+                font-family: "궁서체";
+            }
+            /* 시스템에 저장된 것 사용 시 쌍따옴표 "" */
+
+            #ff2{
+                font-family: "없는글꼴", "바탕체";
+                /* 없는 경우에 이렇게 콤마로 대체 가능 (font-family인 이유) */
+            }
+
+            #ff3{
+                font-family: 'Oswald', sans-serif;
+                font-size: large;
+            }
+
+            #size1{font-size: 30px;}
+            #size2{font-size: 1em;}
+            #size3{font-size: 200%;}
+            
+            #fw1{font-weight: bold;}
+            #fw2{font-weight: lighter;
+            font-size: 30px}
+            #fw3{font-size: 30px;}
+            #fw4{font-weight: bolder;
+            font-size: 30px}
+
+            #f1{
+                font : 30px/25px "궁서체";
+            }
+            #f2{
+                font : italic bold 30px/30px "고딕체";
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <h1>글꼴 관련 스타일(font)</h1>
+        <h3>font-family 속성 : 텍스트의 글꼴 지정 속성</h3>
+        <pre>선택자 {font-family: "글꼴이름"}</pre>
+
+        <p id="ff1">글꼴 변경 테스트1</p>
+        <p id="ff2">글꼴 변경 테스트2</p>
+        <p id="ff3">font change test3</p>
+        <p>
+            웹 폰트 사용하기<br>
+            구글 웹폰트 제공 사이트 :
+            <a href="https://fonts.google.com">구글 웹 폰트 사이트</a>
+        </p>
+
+        <hr>
+
+        <h2>나머지 글꼴 스타일</h2>
+        
+        <h3>font-size 속성 : 텍스트 크기 변경</h3>
+
+        <ul>
+            <li id="size1">고정 크기 px</li>
+            <li id="size2">가변 크기 em</li>
+            <!-- 1em, 2em : 기본 크기의 1배 2배 ... -->
+            <li id="size3">가변 크기 %</li>
+        </ul>
+        
+
+        <h3>font-weight 속성 : 텍스트 두께 변경</h3>
+        <ul>
+            <li id="fw1">굵게</li>
+            <li id="fw2">기존 글꼴보다 얇게</li>
+            <li id="fw3">기존 글꼴</li>
+            <li id="fw4">기존 글꼴보다 굵게</li>
+        </ul>
+
+        <h3>font 속성</h3>
+        <ul>
+            <li id="f1">글꼴 관련 스타일1</li>
+            <li id="f2">글꼴 관련 스타일2</li>
+        </ul>
+
+        
+
+
+
+    </body>
+</html>
