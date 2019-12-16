@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>19. 폴라로이드 사진</title>
+        <style>
+            img{
+                width: 300px;
+                height: 180px;
+            }
+
+            .polaroid{
+                /* margin-top: 50px;
+                margin-left: 100px; */
+
+                position: relative; /*혹은 absolute*/
+                left: 100px;
+                top: 50px;
+
+                border: 1px solid #bfbfbf;
+                width: 300px;
+
+                padding: 10px 10px 20px 10px;
+                background-color: white;
+                box-shadow: 2px 2px 3px rgba(135, 139, 133, 0.4);
+            }
+
+            .caption{
+                text-align: center;
+                color: green;
+                font-family: "바탕";
+                font-weight: 600;
+                font-size: 18px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>폴라로이드 느낌의 사진 만들기</h1>
+        <hr>
+        <div class="polaroid">
+            <img src="sample/image/river1.PNG">
+            <p class="caption">와 풍경 좋다</p>
+        </div>
+
+    </body>
+</html>

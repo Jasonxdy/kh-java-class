@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>변형3</title>
+  <style>
+    .wrap1{
+		border:1px solid black;
+		width:300px;
+		height:200px;
+		display:inline-block;
+	}
+	.flower {
+		width:300px;
+		height:200px;
+		border:1px solid black;
+		
+	}
+
+	.left-top:hover {
+		transform-origin:left top;
+		transform:rotateZ(25deg);
+	}
+	.right-top:hover {
+		transform-origin:right top;
+		transform:rotateZ(25deg);
+	}
+	.left-bottom:hover {
+		transform-origin:left bottom;
+		transform:rotateZ(25deg);
+	}
+	.right-bottom:hover {
+		transform-origin:right bottom;
+		transform:rotateZ(25deg);
+	}
+
+	.wrap2 {
+		width:200px;
+		height:200px;
+		border:1px black solid;
+		display:inline-block;
+	}
+	.box1 {
+		transform:perspective(500px) rotateY(45deg);
+		width:200px;
+		height:200px;
+		background:red;
+	}
+	.box2 {
+		transform:rotateX(45deg);
+		width:200px;
+		height:200px;
+		background:orange;
+		transform-origin:left top;
+	}
+	.style1 {
+		transform-style:flat;
+	}
+	.style2 {
+		transform-style:preserve-3d;
+	}
+
+	.wrap3 {
+		width:300px;
+		height:200px;
+		border:1px solid black;
+		display:inline-block;
+	}	
+	.back {
+		width:300px;
+		height:200px;
+	}
+    .back1:hover {
+		transform:rotateY(180deg);
+		backface-visibility:hidden;
+	}
+	.back2:hover {
+		transform:rotateY(180deg);
+		backface-visibility:visible;
+	}
+  </style>
+ </head>
+ <body>
+ <h1>기타 변형 속성</h1>
+  <h3>변형 기준점 설정하기</h3>
+  <p>transform-origin 속성으로 변형의 기준점을 설정할 수 있다.</p>
+  <div>
+	<div class="wrap1">
+		<img src="sample/image/flower1.png" class="flower left-top">
+	</div>
+	<div class="wrap1">
+		<img src="sample/image/flower1.png" class="flower right-top">
+	</div>
+	<div class="wrap1">
+		<img src="sample/image/flower1.png" class="flower left-bottom">
+	</div>
+	<div class="wrap1">
+		<img src="sample/image/flower1.png" class="flower right-bottom">
+	</div>
+	
+  </div>
+
+  <hr>
+
+  <h3>3d변형 적용하기</h3>
+  <div class="wrap2">
+	<div class="box1 style1">
+		<div class="box2"></div>
+	</div>
+  </div>
+  <div class="wrap2">
+	<div class="box1 style2">
+		<div class="box2"></div>
+	</div>
+  </div>
+  
+  <hr>
+
+  <h3>사진 뒷면 보이게 하기</h3>
+  <div>
+	<div class="wrap3">
+		<img src="sample/image/flower2.png" class="back back1">
+	</div>
+	<div class="wrap3">
+		<img src="sample/image/flower2.png" class="back back2">
+	</div>
+  </div>
+
+
+ </body>
+</html>

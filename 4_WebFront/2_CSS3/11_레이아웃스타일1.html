@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>11.레이아웃 스타일1</title>
+
+        <style>
+            .block{
+                width: 150px;
+                height: 150px;
+                border: 1px solid black;
+                color: white;
+            }
+
+            .area1{background-color: red;}
+            .area2{background-color: orange;}
+            .area3{background-color: yellow;}
+            .area4{background-color: green;}
+            .area5{background-color: blue;}
+
+            .inline-test{display: inline;}
+
+            .ib-test{display: inline-block;}
+
+            .block-test{display: block;}
+
+        </style>
+    </head>
+    <body>
+
+        <h1>레이아웃 스타일1</h1>
+        <h3>화면 배치 방법 변경</h3>
+        <h4>display : inline 테스트</h4>
+        <p>인라인 요소는 width, height 속성이 무시됨.</p>
+
+
+        <div class="block area1 inline-test">첫 번째 영역</div>
+        <div class="block area2 inline-test">두 번째 영역</div>
+        <div class="block area3 inline-test">세 번째 영역</div>
+        <div class="block area4 inline-test">네 번째 영역</div>
+        <div class="block area5 inline-test">다섯 번째 영역</div>
+        
+        <hr>
+        
+        <h4>display : inline-block 테스트</h4>
+        <p>
+            영역은 인라인 요소로 변경되지만
+            width, height 속성을 사용할 수 있음.
+        </p>
+        
+        <div class="block area1 ib-test">첫 번째 영역</div>
+        <div class="block area2 ib-test">두 번째 영역</div>
+        <div class="block area3 ib-test">세 번째 영역</div>
+        <div class="block area4 ib-test">네 번째 영역</div>
+        <div class="block area5 ib-test">다섯 번째 영역</div>
+        
+        <hr>
+        <h4>display : block 테스트</h4>
+        <p>인라인 요소를 블럭 요소로 변경</p>
+        
+        <span class="block area1 block-test">첫 번째 영역</span>
+        <span class="block area2 block-test">두 번째 영역</span>
+        <span class="block area3 block-test">세 번째 영역</span>
+        <span class="block area4 block-test">네 번째 영역</span>
+        <span class="block area5 block-test">다섯 번째 영역</span>
+        
+
+    </body>
+</html>

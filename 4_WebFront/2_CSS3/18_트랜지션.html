@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>18. 트랜지션</title>
+        <style>
+            div{
+                border: 1px solid black;
+            }
+
+            .tran1{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                transition-duration: 2s;
+            }
+
+            .tran1:hover{
+                transform: rotate(1080deg);
+                background-color: yellow;
+            }
+
+
+            .tran2{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                transition-property: width, height, transform, background-color;
+                transition-duration: 1s, 5s, 9s, 13s;
+            }
+
+            .tran2:hover{
+                width: 200px;
+                height: 200px;
+                transform: rotate(180deg);
+                background-color: yellow;
+            }
+
+            .tran3{
+                width: 100px;
+                height: 100px;
+                transition-duration:2s;
+                transition-timing-function: ease-in;
+            }
+
+            .tran3:hover{
+                transform: rotate(2000deg);
+            }
+
+            .tran4{
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                transition-duration:3s;
+                transition-delay: 1s;
+            }
+
+            .tran4:hover{
+                transform: rotate(180deg);
+                background-color: yellow;
+            }
+
+        </style>
+    </head>
+    <body>
+        <h1>트랜지션 (Transition)</h1>
+        <p>시간에 따라 웹 요소의 스타일 속성이 조금씩 바뀌는 것을 의미.</p>
+
+        <hr>
+
+        <h3>트랜지션 진행 시간 지정하기</h3>
+        <div class="tran1">
+            <img src="https://yt3.ggpht.com/a/AGF-l7_VQD4aTi5ekGDdaiCSkIeCqX-bnzwjE5m3mA=s900-c-k-c0xffffffff-no-rj-mo">
+        </div>
+        
+        <hr>
+        <h3>트랜지션 진행별 시간 설정하기</h3>
+        <div class="tran2"></div>
+        
+        <hr>
+        <h3>트랜지션 진행별 속도 설정</h3>
+        <div class="tran3">
+            <img src="https://yt3.ggpht.com/a/AGF-l7_VQD4aTi5ekGDdaiCSkIeCqX-bnzwjE5m3mA=s900-c-k-c0xffffffff-no-rj-mo">
+        </div>
+
+        <hr>
+        <h3>트랜지션 시간 지연하기</h3>
+        <div class="tran4"></div>
+
+    </body>
+</html>
