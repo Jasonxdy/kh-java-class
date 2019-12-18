@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>실습</title>
+        <style>
+            header, nav, section, article, aside, footer{
+                /* border: 1px solid red; */
+                box-sizing: border-box;
+
+                display : block;
+                /* ie8 이하 버전은 시맨틱 태그를 인식하지 못하므로
+                    시맨틱 태그를 inline 요소로 취급을 함.
+                    이를 방지하기 위하여 시맨틱 태그 사용 시
+                    display : block; 속성을 추가함*/
+            }
+
+            body{
+                width:1000px;
+                height: 850px;
+                margin: auto;
+            }
+
+            header{
+                width : 100%;
+                height: 15%;
+            }
+
+            nav{
+                width : 100%;
+                height: 5% ;
+                background-color: rgb(100, 170, 20);
+                margin: 5px 0;
+    
+            }
+
+            #content{
+                width : 100%;
+                height: 65%;
+            }
+
+            footer{
+                width : 100%;
+                height: 15%;
+                position: relative;
+            }
+
+
+            /****** header ******/
+
+            header>section{
+                float: left;
+            }
+
+            #header-1{
+                width: 20%;
+                height: 100%;
+                position: relative;
+            }
+            #header-2{
+                width: 65%;
+                height: 100%;
+                position: relative;
+            }
+            #header-3{
+                width: 15%;
+                height: 100%;
+            }
+
+            header>section img{
+                width : 90%;
+                height: 80%;
+                position: absolute;
+                margin: auto;
+                top : 0;
+                bottom:0;
+                left: 0;
+                right: 0;
+            }
+
+            
+
+            /****** nav ******/
+            nav>ul {
+                margin:0;
+                padding:0;
+                height:100%;
+                /* overflow: hidden; */
+            }
+            nav>ul li:hover{
+                background-color:limegreen;
+                cursor: pointer;
+            }
+            nav>ul a:link{
+                text-decoration: none;
+                color: white;
+            }
+            nav>ul a{
+                
+                width:100%;
+                display:block;
+            }
+            nav>ul li{
+                float:left;
+                
+                width:25%;
+                height:100%;
+                list-style-type: none;
+                text-align: center;
+                line-height:40px;
+                font-size: 18px;
+                color:white;
+            }
+
+
+            /****** content ******/
+
+            #content>aside{
+                width: 15%;
+                height: 100%;
+                float:left;
+            }
+            #content-1{
+                width: 60%;
+                height: 100%;
+                float:left;
+            }
+            #content-2{
+                width: 25%;
+                height: 100%;
+                float:left;
+                /* padding: 5px; */
+            }
+
+            #content-2>header{
+                width : 100%;
+                height: 20%;
+            }
+
+            #content-2-1{
+                width: 100%;
+                height : 50%;
+            }
+
+            #content-2-2{
+                width: 100%;
+                height : 30%;
+            }
+
+            /*aside*/
+            #content>aside>img{
+                width : 100%;
+                height : 100%;
+                box-sizing: border-box;
+            }
+
+            /*login*/
+            #login-form-input{
+                width: 100%;
+                height: 70%;
+                box-sizing: border-box;
+                /* border: 1px solid blue; */
+            }
+
+            #login-form-join{
+                width: 100%;
+                height: 30%;
+                text-align: center;
+            }
+
+            #login-input-id-pwd{
+                width: 65%;
+                height: 100%;
+                float: left;
+            }
+
+            #login-input-btn{
+                width : 35%;
+                height: 100%;
+                float: left;
+                position: relative;
+            }
+
+            #login-input-id{
+                width : 100%;
+                height: 50%;
+                padding-top:10px;
+            }
+
+            #login-input-pwd{
+                width : 100%;
+                height: 50%;
+                padding-bottom:10px;
+            }
+
+            #login-input-id-pwd input{
+                width: 100%;
+                height: 100%;
+                box-sizing:border-box;
+            }
+
+            #login-btn{
+                width: 70%;
+                height: 70%;
+                position: absolute;
+                margin: auto;
+                top:0;
+                bottom:0;
+                left:0;
+                right:0;
+            }
+
+            #login-form-join>a{
+                text-decoration: none;
+                color: black;
+                margin: 0 10px;
+            }
+
+            /*content-1*/
+            #content-1>section{
+                width : 100%;
+                height: 50%;
+            }
+
+            #content-1 a{
+                text-decoration: none;
+                color : black;
+            }
+
+            #content-1 article{
+                width: 50%;
+                height: 100%;
+                box-sizing: border-box;
+                float: left;
+            }
+
+            #content-1 article img{
+                /* width: 100%; */
+                width: 100%;
+                height: 90%;
+                box-sizing: border-box;
+                padding: 20px 10px 0 10px;
+            }
+
+            #content-1 article p{
+                margin: 0;
+                text-align: center;
+            }
+
+            /*content-2*/
+            #content-2 img{
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding: 5px 0;
+            }
+
+            /****** footer ******/
+            footer>img{
+                position: absolute;
+                margin: auto;
+                top:0;
+                bottom:0;
+                left:0;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <header>
+            <section id="header-1">
+                <a href="9.웹문서 구조 만들기(실습).html">
+                    <img src="img/logo.jpg">
+                </a>
+            </section>
+            <section id="header-2">
+                <img src="img/mainlogo.jpg">
+            </section>
+            <section id="header-3"></section>
+        </header>
+
+        <nav>
+            <ul>
+               <li><a href="#"></a>Home</li>
+               <li><a href="#"></a>Profile</li>
+               <li><a href="#"></a>Board</li>
+               <li><a href="#"></a>Contact</li> 
+            </ul>
+        </nav>
+
+        <section id="content">
+            <aside>
+                <img src="img/left_img.jpg">                
+            </aside>
+            <section id="content-1">
+                <section id="content-1-1">
+                    <article>
+                        <a href="#">
+                            <img src="img/main_img1.jpg">
+                            <p>나무를 심는 사람들</p>
+                        </a>
+                    </article>
+
+                    <article>
+                        <a href="#">
+                            <img src="img/main_img2.jpg">
+                            <p>아이들에게 녹색 미래를..</p>
+                        </a>
+                    </article>
+                </section>
+                <section id="content-1-2">
+                    <article>
+                        <a href="#">
+                            <img src="img/main_img3.jpg">
+                            <p>설악산 살리는 길</p>
+                        </a>
+                    </article>
+
+                    <article>
+                        <a href="#">
+                            <img src="img/main_img4.jpg">
+                            <p>사라지는 북극곰들</p>
+                        </a>
+                    </article>
+                </section>
+            </section>
+            <section id="content-2">
+                <header>
+                    <form method="GET" id="login-form-input">
+                        
+                        <section id="login-input-id-pwd">
+                            <article id="login-input-id">
+                                <input type="text" id="input-id"
+                                    name="inputId" 
+                                    placeholder="ID를 입력하세요.">
+                            </article>
+
+                            <article id="login-input-pwd">
+                                <input type="password" id="input-pwd"
+                                    name="inputPwd"
+                                    placeholder="PWD를 입력하세요.">
+                            </article>
+                        </section>
+
+                        <article id="login-input-btn">
+                            <button type="submit" id="login-btn">
+                                로그인
+                            </button>
+                        </article>
+
+                    </form>
+                    <article id="login-form-join">
+                        <a href="#">회원가입</a>
+                        <a href="#">ID/PWD찾기</a>
+                    </article>
+                </header>
+                <article id="content-2-1">
+                    <img src="img/right_img.jpg">
+                </article>
+                <article id="content-2-2">
+                    <img src="img/me_chat.jpg">
+                </article>
+            </section>
+        </section>
+
+        <footer>
+            <img src="img/footer.JPG">
+        </footer>
+        
+    </body>
+</html>

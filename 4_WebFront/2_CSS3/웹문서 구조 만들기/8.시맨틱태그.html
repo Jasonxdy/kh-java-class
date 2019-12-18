@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>8.시맨틱태그</title>
+        <style>
+            header, nav, section, article, aside, footer{
+                border: 1px solid red;
+                box-sizing: border-box;
+
+                display : block
+                /* ie8 이하 버전은 시맨틱 태그를 인식하지 못하므로
+                    시맨틱 태그를 inline 요소로 취급을 함.
+                    이를 방지하기 위하여 시맨틱 태그 사용 시
+                    display : block; 속성을 추가함*/
+            }
+
+            body{
+                width:1000px;
+                height: 800px;
+                margin: auto;
+            }
+
+            header{
+                width : 100%;
+                height: 20%
+            }
+
+            nav{
+                width : 100%;
+                height: 5% 
+            }
+
+            #content{
+                width : 100%;
+                height: 55%
+            }
+
+            footer{
+                width : 100%;
+                height: 20%
+            }
+
+            #content>aside{
+                width: 15%;
+                height: 100%;
+                float:left;
+            }
+            #content-1{
+                width: 65%;
+                height: 100%;
+                float:left;
+            }
+            #content-2{
+                width: 20%;
+                height: 100%;
+                float:left;
+            }
+
+            header>section{
+                float: left;
+            }
+
+            #header-1{
+                width: 20%;
+                height: 100%;
+            }
+            #header-2{
+                width: 65%;
+                height: 100%;
+            }
+            #header-3{
+                width: 15%;
+                height: 100%;
+            }
+
+            #content-2>header{
+                width : 100%;
+                height: 30%;
+            }
+
+            #content-2>article{
+                width: 100%;
+                height : 70%;
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <header>
+            <section id="header-1"></section>
+            <section id="header-2"></section>
+            <section id="header-3"></section>
+        </header>
+
+        <nav></nav>
+
+        <section id="content">
+            <aside></aside>
+            <section id="content-1"></section>
+            <section id="content-2">
+                <header></header>
+                <article></article>
+            </section>
+        </section>
+
+        <footer></footer>
+        
+    </body>
+</html>
