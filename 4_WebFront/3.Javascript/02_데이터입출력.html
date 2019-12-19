@@ -1,19 +1,129 @@
 <!DOCTYPE html>
-<html lang = "ko">
-    <head>
-    <meta charset="UTF-8">
-        <title>02.데이터 입출력</title>
-    </head>
-    <body>
-        <h1>자바 스크립트의 데이터 입출력</h1>
+<html lang="ko">
 
-        <h2>데이터 출력</h2>
-        <h3>window.alert()를 이용하여 경고창 출력하기</h3>
-        <script type="text/javascript">
-            alert("경고창으로 데이터 출력.");
+<head>
+    <meta charset="UTF-8">
+    <title>02.데이터 입출력</title>
+</head>
+
+<body>
+    <h1>자바 스크립트의 데이터 입출력</h1>
+
+    <h2>데이터 출력</h2>
+    <h3>window.alert()를 이용하여 경고창 출력하기</h3>
+
+    <script type="text/javascript">
+        // script 태그의 내용이 function으로 감싸져 있지 않으면
+        // html 페이지 로딩 과정에서 실행됨.
+        alert("경고창으로 데이터 출력.");
+    </script>
+
+    <hr>
+
+    <h3>document.write()를 이용하여 문서에 출력</h3>
+
+    <button onclick="writeFn();">출력</button>
+
+    <script type="text/javascript">
+        // script 태그에 type 생략 시 
+        // 기본값으로 type="text/javascript"
+        document.write("document.write()로 출력한 내용");
+
+        function writeFn() {
+            document.write("html 문서가 완전히 로드된 후 document.write()가 호출되면 기존에 html에 작성되어 있던 내용을 모두 삭제하고 출력됨(덮어쓰기)");
+        }
+    </script>
+
+    <hr>
+
+    <h3>innerHTML을 활용하여 요소 내용 변경하기</h3>
+    <div id="area1">
+        innerHTML : 자바스크립트에서 태그 요소의 값을 읽거나 <br>
+        변경할 때 사용하는 속성.
+    </div>
+    <button onclick="checkValue();">innerHTML 확인</button>
+    <script type="text/javascript">
+        function checkValue() {
+            // 요소의 아이디를 이용하여 요소 내부 값을 읽어와 경고창 출력
+            var divEl = document.getElementById("area1");
+            window.console.log(divEl);
+
+            // 읽어온 요소 중 내부 값만 경고창으로 출력
+            window.alert(divEl.innerHTML);
+
+            divEl.innerHTML = "innerHTML 속성으로 인하여 값이 변경됨";
+        }
+    </script>
+
+    <hr>
+
+    <h3>window.console.log()를 이용하여 개발자도구 콘솔화면에 출력하기</h3>
+    <p>개발자도구 콘솔화면은 주로 디버깅에 사용됨.</p>
+    <button onclick="printConsole();">콘솔출력</button>
+    <script>
+        function printConsole() {
+            window.console.log('콘솔화면에 출력');
+        }
+    </script>
+
+    <hr>
+    <hr>
+
+    <h2>데이터 입력</h2>
+    <h3>window.confirm()을 이용한 데이터 입력</h3>
+    <p>어떤 질문에 대한 true/false 결과를 얻을 때 사용함.</p>
+    <p>확인버튼 클릭 시 true, 취소버튼 클릭 시 false 리턴</p>
+
+    <div id="area2"></div>
+        <button onclick="checkSleepy()">졸린지 확인</button>
+        <script>
+            function checkSleepy() {
+                // var = 변수를 의미
+                var result = window.confirm("졸리면 확인, 아니면 취소를 누르세요");
+
+                // 콘솔에서 리턴값 확인
+                window.console.log("확인 결과 : " + result);
+
+                // 출력한 문자열을 저장할 변수 선언
+                var str = "";
+
+                if (result) {
+                    str = "졸려요ㅜㅜ";
+                } else {
+                    str = "안졸려요^^";
+                }
+
+                var area2 = document.getElementById("area2");
+                area2.innerHTML = "<br><h1>" + str + "</h1>";
+            }
         </script>
 
+    <hr>
+
+    <h3>window.prompt()를 이용한 데이터 입력</h3>
+    <p>텍스트 필드와 확인/취소버튼이 있는 대화상자 출력</p>
+    <p>
+        텍스트 입력 후 확인 클릭 시 작성된 텍스트 리턴 <br>
+        취소 시 null 리턴
+    </p>
+    <div id="area3"></div>
+    <button onclick="testPrompt();">이름 입력</button>
+    <script>
+        function testPrompt(){
+            var result = window.prompt("이름을 입력해주세요.");
+            
+            window.console.log("입력된 값 : " + result);
+
+            var area3 = document.getElementById("area3");
+
+            area3.innerHTML = result + "님 환영합니다."
+        }
+    </script>
 
 
-    </body>
+
+
+
+</body>
+
 </html>

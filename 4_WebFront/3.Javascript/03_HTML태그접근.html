@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>3.HTML 태그 접근</title>
+        <style>
+            .area{
+                border:  1px solid black;
+                width: 300px;
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML 태그 접근(선택)하기</h1>
+
+        <h3>아이디로 접근하기</h3>
+        <div id="area1"></div>
+        <button onclick="accessId();">아이디로 접근</button>
+
+        <script>
+
+            function accessId(){
+                var el = document.getElementById("area1");
+                el.style.backgroundColor = "yellow";
+                el.innerHTML = "아이디로 접근하기 성공!<br>";
+            }
+        </script>
+
+        <div id="area2" class="area"></div>
+        <button onclick="accessId2();">클릭마다 색 변경</button>
+        <script>
+
+            function accessId2(){
+                var el2 = document.getElementById("area2");
+    
+                var bgColor = el2.style.backgroundColor;
+                if(bgColor == "red"){
+                    el2.style.backgroundColor = "yellow";
+                } else {
+                    el2.style.backgroundColor = "red";
+                }
+            }
+        </script>
+
+        <hr>
+
+        <h3>클래스명으로 접근</h3>
+        <div class="area test"></div>
+        <div class="area test"></div>
+        <button onclick="accessClass();">클래스로 접근</button>
+        <script>
+            function accessClass(){
+                var arr = document.getElementsByClassName("test");
+
+                arr[0].style.backgroundColor = "yellow";
+                arr[1].style.backgroundColor = "black";
+            }
+        </script>
+
+        <hr>
+
+        <h3>태그명으로 접근</h3>
+        <ul>
+            <li>목록1</li>
+            <li>목록2</li>
+            <li>목록3</li>
+            <li>목록4</li>
+            <li>목록5</li>
+        </ul>
+
+        <button onclick="accessTagName();">태그명으로 접근</button>
+        <script>
+            function accessTagName(){
+                var list = document.getElementsByTagName("li");
+
+                window.console.log("전달받은 li 태그의 개수 : " + list.length);
+
+                var changeColor = 50;
+
+                for(var i=0; i<list.length; i++){
+                    list[i].style.backgroundColor = "rgb(0, 200, " + changeColor + ")";
+                    changeColor += 50;
+                }
+
+            }
+        </script>
+
+        <hr>
+
+        <h3>name 속성으로 접근</h3>
+        <form>
+            <fieldset>
+                <legend>취미</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="hobby" value="game" id="c1">
+                            <label for="c1">게임</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="hobby" value="music" id="c2">
+                            <label for="c2">음악감상</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="hobby" value="movie" id="c3">
+                            <label for="c3">영화감상</label>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="hobby" value="book" id="c4">
+                            <label for="c4">독서</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="hobby" value="travel" id="c5">
+                            <label for="c5">여행</label>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="hobby" value="excercise" id="c6">
+                            <label for="c6">운동</label>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+
+        <div id="area3" class="area">
+            <button onclick="accessName();">name 속성으로 접근</button>
+        </div>
+
+        <script>
+            function accessName(){
+                var list2 = document.getElementsByName("hobby");
+                
+                var checkItem = "";
+                var cnt = 0;
+
+                for(var i in list2){
+                    if(list2[i].checked == true){
+                        checkItem += "[" + list2[i].value + "] ";
+                        cnt++;
+                    }
+                }
+
+                document.getElementById("area3").innerHTML
+                = "선택한 취미 개수 : " + cnt + "\n";
+                document.getElementById("area3").innerHTML
+                += "<br>" + checkItem;
+            }
+        </script>
+
+        <hr>
+
+        <h3>입력 상자 (text 박스)의 값 읽어오기</h3>
+        <label for="username">이름 : </label>
+        <input type="text" name="username" id="username">
+        <br>
+        <button onclick="readValue();">입력값 확인</button>
+
+        <div id="area4" class="area"></div>
+        <script>
+            function readValue(){
+                var input = document.getElementById("username");
+                if(input.value == "" || input.value.length == 0){
+                    window.alert("이름을 입력하세요");
+                    document.getElementById("area4").innerHTML = "";
+                    input.focus();
+                } else {
+                    document.getElementById("area4").innerHTML
+                    = input.value + "님 환영합니다.";
+                }
+            }
+        </script>
+
+    </body>
+</html>
