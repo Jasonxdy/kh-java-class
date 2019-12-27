@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>05. 필터링 메소드</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>필터링 메소드 (filter())</h1>
+        <p>
+            선택자로 지정한 요소(객체)를 기준으로 <br>
+            요소 그룹에서 위치를 가지고 요소를 선택하는 메소드.
+        </p>
+
+        <h3>filter() 메소드 사용법</h3>
+
+        <h4 class="test">test-1</h4>
+        <h4 class="test">test-2</h4>
+        <h4 class="test">test-3</h4>
+        <h4 class="test">test-4</h4>
+        <h4>test-5</h4>
+        <h4 class="test">test-6</h4>
+        <h5 class="test">test-7</h5>
+
+        <script>
+            $(document).ready(function(){
+                // filter() 메소드는 
+                // 특정 기준과 일치하는 요소들을 반환함.
+
+                // test클래스 요소 중 짝수 인덱스의 css 변경
+                $(".test").filter(":even").css({"backgroundColor":"tomato",
+                "color":"white"})
+
+                // 함수를 매개변수로 하는 filter() 메소드 사용법
+                $(".test").filter(function(index){
+                    // index : 필터링이 되기 전 요소의 인덱스 값
+
+                    // test 클래스 요소 중 홀수 인덱스 요소의 css 변경
+                    return index % 2 == 1; // 리턴 결과가 true인 요소만 반환됨.
+                })/*여기까지 필터링한 것, 그것을 css ->*/.css({"backgroundColor":"yellowgreen", "color":"white"});
+
+
+                // 선택된 요소 중 제일 첫 번째 요소 선택
+                $("h4").first().css("font-size","2em")
+
+                // 선택된 요소 중 제일 마지막 요소 선택
+                $("h4").last().text($("h4").last().text() + " : 마지막 h4 태그 요소");
+                // setter의 역할        //getter의 역할
+                // text() : 요소의 content 값 반환 또는 세팅
+
+
+                // * 인덱스 번호와 일치하는 요소만 선택 (자주사용됨)
+                // h4 태그 그룹에서 3번 인덱스 요소 선택
+                $("h4").eq(3).text($("h4").eq(3).text() + " : eq() 메소드로 필터링됨.");
+
+                // 매개변수와 일치하지 않는 요소만 리턴
+                // h4 태그 중 test 클래스가 아닌 요소의 css 변경
+                $("h4").not(".test").css("backgroundColor","blue");
+            });
+
+
+        </script>
+
+    </body>
+</html>

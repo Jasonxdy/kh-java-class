@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>04. jQuery 기본선택자 3</title>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>기본 선택자3</h1>
+
+        <h3>입력 양식 필터 선택자2</h3>
+
+        <h3>checkbox의 상태에 대한 선택자</h3>
+        취미 : 
+        <input type="checkbox" value="game" id="game" name="hobby">
+        <label for="game">게임</label>
+
+        <input type="checkbox" value="movie" id="movie" name="hobby">
+        <label for="movie">영화감상</label>
+
+        <input type="checkbox" value="music" id="music" name="hobby">
+        <label for="music">노래듣기</label>
+
+        <script>
+            function checkedChange(){
+                // 체크박스의 체크여부를 판별하여 css 변경
+                if( $(this).prop("checked")){ // this = 선택한 요소를 나타냄
+                    // 선택한 요소(this)의 값이 'checked'인 경우
+
+                    $(this).css({"width":"50px", "height":"50px"});
+                } else {
+                    $(this).css({"width":"1em", "height":"1em"});
+                                        // 1em (가변길이) == 14px (고정길이) --> 기본크기를 나타낸다!
+                }
+
+            }
+
+            $(document).ready(function(){
+                // input 태그 중 checkbox 타입 객체에 값의 변화가 있을 경우
+                // checkedChange() 호출
+                $("input:checkbox").change(checkedChange);
+                // checkedChange()가 아닌 이유 : 이게 그대로 들어가는거..익명함수? 잘 못들음
+            });
+        </script>
+
+
+        <hr>
+
+        <h3>select, option 태그의 상태에 대한 선택자</h3>
+
+        <select id="national">
+            <option value="한국">한국</option>
+            <option value="미국" selected>미국</option>
+            <option value="중국">중국</option>
+            <option value="태국">태국</option>
+        </select>
+
+        <label>선택한 나라 : </label>
+        <input type="text" id="result" readonly>
+
+        <script>
+            function selectChange(){
+                
+                // select 태그 내부에 있는 option 태그 중
+                // 선택된 객체의 값 얻어오기
+                var value = $("option:selected").val();
+
+                // id가 result인 요소의 값을 value로 변경
+                
+                // javascript 방식
+                // document.getElementById("result").value = value;
+
+                // jQuery 방식
+                $("#result").val(value);
+            }
+
+            $(function(){
+                // 초기 select 값을 읽어서 입력 상자에 출력
+                // selectChange(); // javascript 방식 함수 호출
+                $(selectChange); // jQuery 방식 함수 호출
+
+                $("#national").change(selectChange);
+            });
+        </script>
+
+        <hr>
+
+        <h3>input 활성화 상태에 대한 선택자</h3>
+
+        <label>활성화 입력 상자</label>
+        <input type="text"><br>
+        <label>비활성화 입력 상자</label>
+        <input type="text" disabled><br>
+
+        <label>활성화버튼</label>
+        <input type="button" value="활성화"><br>
+        <label>비활성화버튼</label>
+        <input type="button" value="비활성화" disabled><br>
+
+        <script>
+            $(document).ready(function(){
+                // 활성화 상태 선택
+                $("input:enabled").css("backgroundColor","rgb(200,250,150)");
+                $("input:disabled").css("backgroundColor","rgba(255,170,200,0.5)");
+            });
+        </script>
+
+        <hr>
+
+        <h3>순서에 따른 필터 선택자</h3>
+
+        <pre>
+            요소:first : 첫번째 위치한 요소(객체) 선택
+            요소:last  : 마지막에 위치한 요소(객체) 선택
+            요소:odd   : 홀수 번째 인덱스 요소(객체) 선택
+            요소:even  : 짝수 번째 인덱스 요소(객체) 선택
+        </pre>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>혈액형</th>
+                <th>지역</th>
+            </tr>
+
+            <tr><td>홍길동</td><td>A형</td><td>서울</td></tr>
+            <tr><td>김영희</td><td>B형</td><td>경기도</td></tr>
+            <tr><td>김삼순</td><td>AB형</td><td>충청도</td></tr>
+            <tr><td>박철수</td><td>O형</td><td>경상도</td></tr>
+            <tr><td>최민철</td><td>A형</td><td>제주도</td></tr>
+
+            <tr>
+                <td colspan="2">총원</td>
+                <td>5명</td>
+            </tr>
+        </table>
+
+        <script>
+            // 중요 : index는 0부터 시작함 (0도 짝수)
+            $("tr:odd").css("backgroundColor","yellow");
+            $("tr:even").css("backgroundColor","lightgray");
+            $("tr:first").css("backgroundColor","black").css("color","white");
+            $("tr:last").css("backgroundColor","red").css("color","white");
+
+        </script>
+
+
+    </body>
+</html>

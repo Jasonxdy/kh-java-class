@@ -41,16 +41,45 @@
 
                 // 파일2 label 스타일 지정
                 $("#upBtn").css({"border":"1px solid gray", "display":"block", "width":"100px",
-            "backgroundColor":"lightblue", "text-align":"center"});
+            "backgroundColor":"lightblue", "text-align":"center"})
+            .mouseenter(function(){
+                $(this).css("cursor","pointer")
+            });
         
-                //mouseenter() : 마우스가 요소 경계(테두리) 내부로 들어왔을 때 이벤트 발생
-                $("input:image").mouseenter(function(){
+           7     //mouseenter() : 마우스가 요소 경계(테두리) 내부로 들어왔을 때 이벤트 발생
+                // $("input:image").mouseenter(function(){
+                //     $(this).attr("src","image/flower2.png");
+                // });
+
+                //mouseleave() : 마우스가 요소 경계 (테두리) 외부로 나갔을 때 이벤트 발생
+                // $("input:image").mouseleave(function(){
+                //     $(this).attr("src","image/flower1.png");
+                // })
+        
+                // hover() : mouseenter() + mouseleave()
+                $("input:image").hover(function(){
+                    // mouseenter 이벤트
                     $(this).attr("src","image/flower2.png");
+                }, function(){
+                    // mouseleave 이벤트
+                    $(this).attr("src","image/flower1.png");
                 });
-        
+
+
+                $("input:password").css("backgroundColor","pink");
+
+                $("input:radio").prop("checked", true);
+
+                $("input:reset").css({"backgroundColor":"blue", "color":"white"}).val("Reset");
+
+                $("input:submit").css({"backgroundColor":"lightyellow", "width":"100px", "height":"100px"})
+                .val("SUBMIT").hover(function(){
+                    $(this).css({"backgroundColor":"orange","cursor":"pointer"});
+                }, function(){
+                    $(this).css("backgroundColor","lightyellow");
+                });
         });
 
-                
 
         </script>
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>07. 순회(탐색) 메소드 2</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <style>
+            .wrap *{
+                border: 1px solid lightgray;
+                display: block;
+                padding: 5px;
+                margin: 15px;
+                color: gray;
+            }
+            .type{width: 500px;}
+        </style>
+    </head>
+    <body>
+        <h1>Traversing-2</h1>
+
+        <h2>descendants(자손, 후손) 메소드</h2>
+        <p>선택된 요소의 하위 요소들을 선택할 수 있는 메소드</p>
+
+        <pre>
+        $("선택자").children([매개변수])
+        - 선택된 요소의 모든 자식 (바로 하위) 요소 리턴
+        - 매개변수가 있으면 매개변수와 일치하는 자식 요소만 리턴
+        
+        $("선택자").find(매개변수)
+        - 선택된 요소 하위에서 매개변수와 일치하는 모든 후손 요소 리턴
+
+        </pre>
+        
+        <div class="wrap">
+            <div class="type"> div (great-grand parent)
+                <ul> ul (grand parent)
+                    <li>li (direct parent)
+                        <span>sapn</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="type"> div (grand parent)
+                <p> p (direct parent)
+                    <span>span</span>
+                </p>
+            </div>
+        </div>
+
+        <script>
+            // .css() 매개변수로 자바스크립트 객체를 직접 작성할 경우
+            // 코드가 난잡해지는 문제 발생
+            // -> 별도로 자바스크립트 객체를 미리 작성해주자!
+            var style1 = {"color":"red", "border":"2px solid red"};
+            var style2 = {"color":"blue", "border":"2px solid blue"};
+            var style3 = {"color":"green", "border":"2px solid green"};
+            var style4 = {"color":"orange", "border":"2px solid orange"};
+
+            // children()
+            // wrap 클래스 요소의 자식 스타일 설정
+            $(".wrap").children().css(style1);
+
+            // wrap 클래스 요소의 자식의 자식(손자) 스타일 설정
+            $(".wrap").children().children().css(style2);
+
+            // wrap 클래스의 자식의 자식 중 ul 태그 스타일 설정
+            $(".wrap").children().children("ul").css(style3);
+
+            // wrap 클래스 요소를 기준으로 li 태그 스타일을 style4로 변경
+            $(".wrap").children().children().children("li").css(style4);
+
+            // find()
+            // wrap 클래스 요소 후손 중 span 태그 스타일 설정
+            $(".wrap").find("span").css(style1);
+
+
+
+
+        </script>
+
+    </body>
+</html>

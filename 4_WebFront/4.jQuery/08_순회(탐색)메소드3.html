@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>08. 순회(탐색) 메소드 3</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <style>
+            .wrap, .wrap *{
+                border: 1px solid lightgray;
+                display: block;
+                padding: 5px;
+                margin: 15px;
+                color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Traversing-3</h1>
+        <h3>sideways(옆으로, 옆에서) 메소드</h3>
+        <p>같은 레벨에 있는 요소(형제)를 선택할 수 있는 메소드</p>
+
+        <pre>
+            $('요소명').siblings([매개변수])
+            - 선택된 요소와 같은 레벨(형제)에 있는 모든 요소 리턴
+            - 매개변수가 있으면 같은 레벨에 있는 요소 중 매개변수와 일치하는 모든 요소 리턴
+    
+            $('요소명').next()
+            - 선택된 요소의 같은 레벨 중 선택된 요소 다음 한 개 요소 리턴
+    
+            $('요소명').nextAll()
+            - 선택된 요소의 같은 레벨 중 선택된 요소 다음의 모든 요소 리턴
+    
+            $('요소명').nextUntil(매개변수)
+            - 선택된 요소의 같은 레벨 중 매개변수 이전 까지의 모든 요소 리턴
+    
+    
+            $('요소명').prev()
+            - 선택된 요소의 같은 레벨 중 선택된 요소 이전 한 개 요소 리턴
+    
+            $('요소명').prevAll()
+            - 선택된 요소의 같은 레벨 중 선택된 요소 이전의 모든 요소 리턴
+    
+            $('요소명').prevUntil(매개변수)
+            - 선택된 요소의 같은 레벨 중 매개변수 이전 까지의 모든 요소 리턴
+        </pre>
+
+        <div class="wrap"> div(parent)
+            <p>p</p>
+            <span>span</span>
+            <h2>h2</h2>
+            <h3>h3</h3>
+            <p>p</p>
+        </div>
+
+        <script>
+            var style1 = {"color":"red", "border":"2px solid red"};
+            var style2 = {"color":"blue", "border":"2px solid blue"};
+            var style3 = {"color":"green", "border":"2px solid green"};
+            var style4 = {"color":"magenta", "backgroundColor":"yellow"};
+
+            // siblings()
+            // h2 태그의 형제 요소에 스타일 설정
+            $("h2").siblings().css(style1);
+
+            // h2 태그의 형제 요소 중 p태그 스타일 설정
+            $("h2").siblings("p").css(style2);
+
+
+            // next()
+            // h2 태그의 바로 다음 형제 요소의 스타일 설정
+            $("h2").next().css(style3);
+
+
+            // nextAll()
+            // h2 태그 다음에 오는 모든 형제 요소 스타일 설정
+            $("h2").nextAll().css(style4);
+
+
+            // nextUntil(매개변수)
+            // h2 태그부터 다음에 오는 형제 요소 중 p 태그 이전까지의
+            // 모든 형제요소 스타일 설정
+            $("h2").nextUntil("p").css("font-size","3em");
+
+
+            // $("선택자").is([매개변수]) 메소드
+            // 선택자로 지정된 범위에 매개변수에 작성된 요소가 존재하는지 검사하는 메소드
+            // 있으면 true, 없으면 false 반환
+
+            // h2태그 다음에 오는 모든 형제 요소 중
+            // p태그가 있는지 검사
+            console.log($("h2").nextAll().is("tr"));
+
+            
+
+        </script>
+
+
+
+
+
+
+    </body>
+</html>
