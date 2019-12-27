@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>16. 내장함수</title>
+<style>
+	.area {
+		background:lightgray;
+		border:1px solid black;
+		height:150px;
+	}
+	.bigarea {
+		background:lightgray;
+		border:1px solid black;
+		height:350px;
+	}
+</style>
+</head>
+<body>
+	<h1>JavaScript 내장함수</h1>
+	<h3>인코딩과 디코딩에 관련된 내장함수</h3>
+	<h4>웹 통신 시 유니코드 문자는 오작동을 일으킬 문제가 있어 인코딩 필요</h4>
+	
+	<p>escape : 영문 알파벳, 숫자, 일부 특수문자(@, *, -, _, ., /)를 제외한 모든 문자를 인코딩한다.<br>
+	encodeURI : escape에서 인터넷주소에 사용되는 일부 특수문자(:, ;, /, =, ?, &)는 변환하지 않는다.<br>
+	encodeURIComponent : 알파벳과 숫자를 제외한 모든 문자를 인코딩한다. (UTF-8방식)<br>
+	<br>
+	unescape : escape로 인코딩된 문자를 디코딩한다.<br>
+	decodeURI : encodeURI로 인코딩된 문자를 디코딩한다.<br>
+	decodeURIComponent : encodeURIComponent로 인코딩된 문자를 디코딩한다.
+	</p>
+
+	<button onclick="test1();">실행확인</button>
+	<div id="area1" class="area"></div>
+	<script>
+		function test1(){
+			var URI = 'http://www.naver.com?test=한글입니다.';
+			
+			var esURI = escape(URI);
+			var enURI = encodeURI(URI);
+			var enURIC = encodeURIComponent(URI);
+			
+			var area1 = document.getElementById("area1");
+			
+			area1.innerHTML = "";
+			area1.innerHTML += "원본 URI : " + URI + "<br>";
+
+			area1.innerHTML += "escape() : " + esURI + "<br>";
+			area1.innerHTML += "encodeURI() : " + enURI + "<br>";
+			area1.innerHTML += "encodeURIComponent() : " + enURIC + "<br>";
+			
+			area1.innerHTML += "unescape() : " + unescape(esURI) + "<br>";
+			area1.innerHTML += "decodeURI() : " + decodeURI(enURI) + "<br>";
+			area1.innerHTML += "decodeURIComponent() : " + decodeURIComponent(enURIC) + "<br>";
+		}
+	</script>
+	
+	<hr>
+	
+	<h3>eval()함수</h3>
+	<!-- evaluate / evaluation -->
+	<p>문자열을 자바스크립트 코드로 변환해 실행하는 함수이다.</p>
+	<label>숫자1 입력 : </label><input type="text" id="number1"><br>
+	<label>숫자2 입력 : </label><input type="text" id="number2"><br>
+	<button onclick="test2();">실행확인</button>
+	<div id="area2" class="area"></div>
+	<script>
+		function test2(){
+			var testEval = "";
+			
+			testEval += "var number1 = parseInt(document.getElementById('number1').value);";
+			testEval += "var number2 = parseInt(document.getElementById('number2').value);";
+			testEval += "var sum = 0;";
+			testEval += "sum = number1 + number2;";
+			testEval += "document.getElementById('area2').innerHTML += number1 + '과 ' + number2 + '의 합은 : ' + sum + '입니다.';";
+			
+			eval(testEval);
+			alert(number1 + '과 ' + number2 + '의 합은 뭘까요??');
+		}
+	</script>
+	
+</body>
+</html>

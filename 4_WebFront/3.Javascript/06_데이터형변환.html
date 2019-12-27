@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>06. 데이터 형변환</title>
+    <style>
+        .area {
+            border: 1px solid red;
+            height: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>데이터 형변환</h1>
+
+    <h3>강제 형변환</h3>
+    <p>
+        자바스크립트에서 문자열 -> 숫자 형변 환 시<br>
+        parseInt(), parseFloat() 내장 함수 <br>
+        + Number() 내장 객체를 이용하여 강제 형변환 가능.
+    </p>
+
+    <button onclick="castingTest();">casting 테스트</button>
+    <div id="el1" class="area"></div>
+
+    <script>
+        function castingTest() {
+            var iNum = 2;
+            var sNum = "3";
+            var fNum = "1.234";
+
+            var test1 = iNum + sNum;
+            var test2 = iNum + Number(sNum);
+            var test3 = iNum + parseInt(sNum);
+            var test4 = iNum + parseFloat(sNum);
+
+            var test5 = iNum + fNum;
+            var test6 = iNum + Number(fNum);
+            var test7 = iNum + parseInt(fNum);
+            var test8 = iNum + parseFloat(fNum);
+
+            var el1 = document.getElementById("el1");
+
+            el1.innerHTML = ""; // el1의 기존 내용 삭제
+            el1.innerHTML += '2 + "3" = ' + test1 + "<br>";
+            el1.innerHTML += '2 + Number("3") = ' + test2 + "<br>";
+            el1.innerHTML += '2 + parseInt("3") = ' + test3 + "<br>";
+            el1.innerHTML += '2 + parseFloat("3") = ' + test4 + "<br>";
+
+            el1.innerHTML += '2 + "1.234" = ' + test5 + "<br>";
+            el1.innerHTML += '2 + Number("1.234") = ' + test6 + "<br>";
+            el1.innerHTML += '2 + parseInt("1.234") = ' + test7 + "<br>";
+            el1.innerHTML += '2 + parseFloat("1.234") = ' + test8 + "<br>";
+
+        }
+    </script>
+</body>
+
+</html>

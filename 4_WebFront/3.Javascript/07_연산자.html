@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>07. 연산자</title>
+    <style>
+        .area {
+            border: 1px solid red;
+            height: 180px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>연산자</h1>
+
+    <h3> ==, != 연산자와 ===, !== 연산자 </h3>
+
+    <button onclick="opTest1();">확인하기</button>
+    <br>
+
+    <h4>동등 연산자(== , !=)</h4>
+    <p>자료형에 관계 없이 값 자체만 일치하면 true, 아니면 false</p>
+    <div id="area1" class="area"></div>
+
+    <h4>동일(일치) 연산자(===, !==)</h4>
+    <p>자료형과 값이 모두 일치하면 true, 아니면 false</p>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function opTest1() {
+            var num = 1;
+            var str1 = "1";
+            var boolT = true;
+            var strT = 'true';
+
+            var num0 = 0;
+            var str0 = "0";
+            var str = "";
+
+            var nullVal = null;
+            var unDef = undefined;
+
+
+            var area1 = document.getElementById("area1");
+            var area2 = document.getElementById("area2");
+
+            area1.innerHTML = ""; // area1의 기존 내용 삭제
+            area2.innerHTML = ""; // area2의 기존 내용 삭제
+
+            // 동등
+            area1.innerHTML += '1 == 1 : ' + (num == 1) + "<br>";
+            area1.innerHTML += '1 == "1" : ' + (num == str1) + "<br>";
+            area1.innerHTML += '1 == true : ' + (num == boolT) + "<br>";
+            area1.innerHTML += '1 == "true" : ' + (num == strT) + "<br>";
+
+
+            area1.innerHTML += '0 == "0" : ' + (num0 == str0) + "<br>";
+            area1.innerHTML += '0 == "" : ' + (num0 == str) + "<br>";
+            area1.innerHTML += '"0" == "" : ' + (str0 == str) + "<br>";
+
+
+            area1.innerHTML += 'null == undefined : ' + (nullVal == unDef);
+
+            // 일치 
+            area2.innerHTML += '1 === 1 : ' + (num === 1) + "<br>";
+            area2.innerHTML += '1 === "1" : ' + (num === str1) + "<br>";
+            area2.innerHTML += '1 === true : ' + (num === boolT) + "<br>";
+            area2.innerHTML += '1 === "true" : ' + (num === strT) + "<br>";
+
+            area2.innerHTML += '0 === "0" : ' + (num0 === str0) + "<br>";
+            area2.innerHTML += '0 === "" : ' + (num0 === str) + "<br>";
+            area2.innerHTML += '"0" === "" : ' + (str0 === str) + "<br>";
+
+            area2.innerHTML += 'null === undefined : ' + (nullVal === unDef);
+
+        }
+    </script>
+
+</body>
+
+</html>

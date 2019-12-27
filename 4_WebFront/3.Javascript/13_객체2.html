@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>13. 객체2</title>
+    <style>
+        .area {
+            border: 1px solid black;
+            background-color: lightgray;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>객체2</h1>
+
+    <h3>생성자 함수</h3>
+    <p>
+        - 객체를 생성하는 함수.<br>
+        - 일반적인 함수와 다르게 호출 시 new 키워드를 사용하며
+        호출 결과로 객체를 생성함.<br>
+        - 생성자 함수를 사용하면 동일한 속성과 메소드를 가진
+        객체를 다수 만들 수 있음.
+    </p>
+    <button onclick="test1()">실행확인</button>
+    <div id="area1" class="area"></div>
+    <script>
+        // 생성자 함수 선언
+        // 생성자 함수의 함수명은 대문자로 시작
+        function Student(name, java, oracle, html5, css3, javascript) {
+
+            // 객체의 속성 정의
+            this.name = name;
+            this.java = java;
+            this.oracle = oracle;
+            this.html5 = html5;
+            this.css3 = css3;
+            this.javascript = javascript;
+
+            // 객체의 메소드 정의
+            this.getSum = function () {
+                return this.java + this.oracle +
+                    this.html5 + this.css3 + this.javascript;
+            }
+
+            // 오버라이딩도 가능
+            this.toString = function () {
+                return this.name + "의 총점 : " + this.getSum() + "<br>";
+            }
+        }
+
+
+        function test1() {
+
+            var student1 = new Student("홍길동", 100, 90, 80, 70, 60);
+            document.getElementById("area1").innerHTML = student1;
+
+            var student2 = new Student(
+                prompt('이름을 입력하세요.'),
+                parseInt(prompt('java 점수를 입력하세요.')),
+                parseInt(prompt('oracle 점수를 입력하세요.')),
+                parseInt(prompt('html5 점수를 입력하세요.')),
+                parseInt(prompt('css3 점수를 입력하세요.')),
+                parseInt(prompt('javascript 점수를 입력하세요.'))
+            );
+
+            document.getElementById("area1").innerHTML += student2;
+        }
+    </script>
+
+
+    <hr>
+
+    <h3>객체 배열</h3>
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area"></div>
+    <script>
+        function test2() {
+            var student1 = new Student('홍길동', 45, 76, 34, 33, 56);
+            var student2 = new Student('유관순', 76, 34, 54, 56, 22);
+            var student3 = new Student('임꺽정', 43, 77, 12, 76, 34);
+            var student4 = new Student('윤봉길', 76, 88, 55, 34, 54);
+            var student5 = new Student('안중근', 98, 23, 76, 23, 45);
+            var student6 = new Student('신사임당', 34, 33, 13, 54, 45);
+            var student7 = new Student('세종대왕', 56, 56, 34, 77, 32);
+            var student8 = new Student('이순신', 34, 88, 77, 78, 22);
+            var student9 = new Student('이황', 88, 90, 99, 98, 87);
+
+            // 배열 선언
+            var students = [];
+
+            // push() : 배열 맨 뒤에 추가
+            students.push(student1);
+            students.push(student2);
+            students.push(student3);
+            students.push(student4);
+            students.push(student5);
+            students.push(student6);
+            students.push(student7);
+            students.push(student8);
+            students.push(student9);
+
+            // 각 배열 요소(객체)에 getAvg 메소드 추가
+            for (var i = 0; i < students.length; i++) {
+                students[i].getAvg = function () {
+                    return this.getSum() / 5;
+                }
+            }
+
+            // 이전 내용 삭제
+            document.getElementById("area2").innerHTML = "";
+
+            for (var i = 0; i < students.length; i++) {
+                with (students[i]) {
+                    document.getElementById("area2").innerHTML
+                        += "이름 : " + name
+                        + " / 총점 : " + getSum()
+                        + " / 평균 : " + getAvg() + "<br>";
+                }
+            }
+        }
+    </script>
+
+    <hr>
+
+    <h3>객체 관련 키워드</h3>
+    
+    <h4>instanceof 키워드</h4>
+    <p>해당 객체가 어떤 생성자함수로 생성이 되었는지 검사</p>
+    <button onclick="test3();">instanceof 확인</button>
+    <div id="area3" class="area"></div>
+
+    <script>
+        function CellPhone(pName, price) {
+            this.pName = pName;
+            this.price = price;
+        }
+
+        function test3() {
+            var myCellPhone = new CellPhone("갤럭시노트9", 1090000);
+
+            var area3 = document.getElementById("area3");
+
+            area3.innerHTML = "";
+            area3.innerHTML += "myCellPhone instanceof CellPhone : "
+                + (myCellPhone instanceof CellPhone) + "<br>";
+
+            area3.innerHTML += "myCellPhone instanceof Student : "
+                + (myCellPhone instanceof Student) + "<br>";
+
+        }
+
+    </script>
+</body>
+
+</html>

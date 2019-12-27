@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>01. jQuery 개요</title>
+        <!-- <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script> -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>jQuery 개요</h1>
+
+        <h3>jQuery란?</h3>
+        <p>
+            기존 복잡했던 클라이언트 측 HTML 스크립팅을<br>
+            간소화 하기 위해 고안된 javascript 라이브러리. <br>
+            적은양의 코드로 빠르고 풍부한 기능을 제공함.
+        </p>
+
+        <!-- 
+            library   : 프로그램 개발 시 필요한 외부 기능을 다운로드 받아 추가하는 것
+
+            API       : 프로그래밍 언어 자체에서 제공하는 기능
+
+            Framework : 프로그램 개발 시 사용되는 틀
+         -->
+
+         <hr>
+         <h3>jQuery 연결 방법</h3>
+         <pre>
+             - head 태그 내부에 script 태그를 이용하여 연결
+             &lt;script type="text/javascript" src="js파일경로"&gt;&lt;/script&gt;
+
+             <a href="https://jquery.com/">jQuery 공식 사이트</a>
+             
+             1. jQuery 라이브러리 다운로드를 통한 연결
+                - js 파일을 다운로드하여 파일 경로를 지정
+             
+                -> 장점 : 오프라인 사용 가능
+                -> 단점 : html 문서마다 상대 경로로 jQuery 라이브러리 등록 시
+                          경로가 계속 바뀌는 문제 발생
+
+             <a href="https://code.jquery.com">jQuery 각종 버전 라이브러리/CDN 제공페이지</a>
+             2. CDN (Content Delivery Network)을 이용한 연결
+             - 제공하는 주소를 이용해서 파일경로 지정
+
+             -> 장점 : 경로 변경 불필요
+             -> 단점 : 온라인 환경에서만 가능
+         </pre>
+
+         <hr>
+
+         <h3>jQuery 시작하기</h3>
+         <pre>
+             * jQuery 기본 형태
+
+                $('선택자').메소드명('속성', '속성값');
+
+                --> jQuery의 선택자는 CSS 선택자와 매우 유사
+         </pre>
+
+        <button onclick="test1();">
+            jQuery 전체 선택자 확인하기
+        </button>
+
+        <script>
+            function test1(){ // javaScript 함수 정의
+                $("*").css("color", "red");
+                // "*" : 전체 선택자
+                // css() 메소드 : 스타일 관련 기능 설정 메소드
+            }
+        </script>
+
+        <hr>
+        <h3>jQuery의 ready() 메소드(함수)</h3>
+        <pre>
+            - javascript의 window.onload와 같은 의미
+            - 여러가지 작성 방법이 있음.
+            - window.onload와 차이점도 있음.
+
+            - javascript의 onload 사용방법
+                window.onload = function(){ 소스코드 }
+
+            - jQuery에서 onload와 같은 ready()를 나타내는 방법
+            1) jQuery(document).ready(function(){});
+            2) $(document).ready("function(){}");
+                ($ == jQuery를 의미);
+
+            3) $(function(){});
+
+            // 주로 2), 3)을 사용
+
+
+            - window.onload와의 차이점
+            window.onload는 한 문서에 여러번 작성하여도 가장 마지막에
+            작성된 window.onload만 인식이 됨.
+            하지만 jQuery의 ready() 함수는 여러번 작성해도 모두 인식됨.
+        </pre>
+
+        <script>
+            // javascript window.onload 테스트
+
+            var js1;
+            var js2;
+
+            console.log("js1-1 : " + js1);
+            console.log("js2-1 : " + js2);
+
+            window.onload = function(){
+                console.log("js1-2 : " + js1);
+            }
+            js1 = "js1111";
+
+            window.onload = function(){
+                console.log("js2-2 : " + js2);
+            }
+            js2 = "js2222";
+
+            // window.onload는 한 번만 작성 가능하므로
+            // js1-2 : "js1111" 콘솔 출력 내용이 덮어씌워짐.
+
+            // jQuery ready() test
+
+            var jQuery1;
+            var jQuery2;
+
+            console.log("jQuery1-1 : " + jQuery1);
+            console.log("jQuery2-1 : " + jQuery2);
+
+            $(document).ready(function(){
+                console.log("jQuery1-2 : " + jQuery1);
+            });
+            jQuery1 = "jQuery1111";
+            
+            $(document).ready(function(){
+                console.log("jQuery2-2 : " + jQuery2);
+            });
+            jQuery2 = "jQuery2222";
+
+        </script>
+
+
+
+    </body>
+</html>

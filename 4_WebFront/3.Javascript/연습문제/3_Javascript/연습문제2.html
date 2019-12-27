@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>연습문제 2</title>
+        <style>
+            #result {
+                border : 1px solid black;
+                background-color: skyblue;
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>연습문제 2</h2>
+
+        <form action="#">
+            <fieldset>
+                <legend>납품정보</legend>
+                <ul>
+                    <li>
+                        <label for="productName">상품명 : </label>              
+                        <input type="text" id="productName" list="productList">
+                        <datalist id="productList">
+                            <option value="kanu">맥심 카누</option>
+                            <option value="lipton">립톤 아이스티</option>
+                            <option value="milk">우유</option>
+                        </datalist>
+                    </li>
+
+                    <li>
+                        <label for="productAmount">납품 수량 : </label>
+                        <input type="number" id="productAmount"
+                                min="10" max="100" step="10">
+                        <p>(최소 수량 : 10, 최대 수량 : 100, 10개 단위)</p>
+                    </li>
+
+                    <li>
+                        <label for="productLevel">납품등급(1~5등급)</label><br>
+                        <input type="range" id="productLevel"
+                               min="1" max="5" step="1"
+                               oninput="changeRange(this.value);"
+                               >
+
+                        <input type="text" id="rangeValue" size="3" readonly>
+                    </li>
+
+                    <li>
+                        <label for="message">기타사항</label><br>
+                        <textarea id="message" rows="3" cols="30"
+                            style="resize: none;"></textarea>
+                    </li>
+                </ul>
+
+            </fieldset>
+        </form>
+        <button onclick="printProduct();">send message</button>
+        
+        <div id="result"></div>
+
+
+        <script>
+            function printProduct(){
+
+                var result = document.getElementById("result");
+
+                var productName = document.getElementById("productName").value;
+                var productAmount = document.getElementById("productAmount").value;
+                var productLevel = document.getElementById("productLevel").value;
+                var message = document.getElementById("message").value;
+
+                result.innerHTML = "상품명 : " + productName + "<br>";
+                result.innerHTML += "납품수량 : " + productAmount + "개<br>";
+                result.innerHTML += "납품등급 : " + productLevel + "등급<br>";
+                result.innerHTML += "기타사항 : " + message + "<br>";
+            }
+            
+            function changeRange(val){
+                document.getElementById("rangeValue").value
+                    = val + "등급";
+            }
+        
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.area {
+		background:lightgray;
+		border:1px solid red;
+		height:150px;
+	}
+	.area-big {
+		background:lightgray;
+		border:1px solid red;
+		height:400px;
+	}
+</style>
+</head>
+<body>
+	<h1>내장객체</h1>
+	<h3>Object 객체</h3>
+	<p>자바스크립트의 가장 기본적인 내장객체이다.<br>
+	Object생성자함수를 통해 만들어진 인스턴스이다.</p>
+	<button onclick="test1();">실행확인</button>
+	<script>
+		function test1(){
+			//Object를 생성하는 방법
+			var obj1 = {};
+			var obj2 = new Object();
+			
+			console.log(obj1);
+			console.log(obj2);
+		}
+	</script>
+	
+	<br>
+	
+	<h3>Object 객체의 기본 메소드</h3>
+	<h4>hasOwnProperty()와 propertyIsEnumerable()메소드</h4>
+	<button onclick="test2()">실행확인</button>
+	<div id="area1" class="area"></div>
+	<script>
+		function test2(){
+			var object = { 
+					//name:"asd",
+					age:20
+			};
+			
+			var area1 = document.getElementById("area1");
+			
+			//속성을 가지고 있는지 확인하는 메소드로 true와 false를 리턴한다.
+			area1.innerHTML += "name 속성을 가지고 있나? : " + object.hasOwnProperty('name') + "<br>";
+			area1.innerHTML += "age 속성을 가지고 있나? : " + object.hasOwnProperty('age') + "<br>";
+			
+			area1.innerHTML += "age 속성은 반복문을 사용할 수 있나? : " + object.propertyIsEnumerable('age') + "<br>";
+			
+		}
+		
+	</script>
+	
+	<br>
+	
+	<h4>constructor()메소드</h4>
+	<p>Object가 가지는 객체의 생성자 메소드이다.<br>
+	자료형을 검사할 때 유용하게 사용할 수 있다.</p>
+	<button onclick="test4();">실행확인</button>
+	<div id="area3" class="area"></div>
+	<script>
+		function test4(){
+			var num1 = 120;
+			var num2 = new Number(120);
+			
+			var area3 = document.getElementById('area3');
+
+			console.log("num1 : " + num1 + ", num2 : " + num2);
+			console.log("num1의 자료형 : " + typeof(num1));
+			console.log("num2의 자료형 : " + typeof(num2));
+			console.log("num1 + num2 = " + (num1 + num2));
+			
+
+			area3.innerHTML = "num1의 자료형 : ";
+			if(typeof(num1) == 'number'){
+				area3.innerHTML += "숫자 <br>";
+			}else{
+				area3.innerHTML += "숫자아님 <br>";
+			}
+
+			area3.innerHTML += "num2의 자료형 : ";
+			if(typeof(num2) == 'number'){
+				area3.innerHTML += "숫자 <br>";
+			}else{
+				area3.innerHTML += "숫자아님 <br>";
+			}
+			
+			
+			//두 대상을 같은 자료형으로 취급하고 싶을 때 constructor메소드를 사용한다.
+
+			area3.innerHTML += "num1.constructor == Number :  " + (num1.constructor == Number)+"<br>";
+			area3.innerHTML += "num2.constructor == Number :  " + (num2.constructor == Number);
+	
+		}
+	</script>
+	
+	<hr>
+	
+	<h3>Number 객체</h3>
+	<button onclick="test5();">실행확인</button>
+	<p>toFixed Test()</p>
+	<div id="area6" class="area"></div>
+	<script>
+		function test5(){
+			var num1 = 123.456789;
+			var num2 = 123;
+			
+			var area6 = document.getElementById("area6");
+			
+			//숫자를 고정 소수점 자리로 나타낸 문자열을 만든다.
+			area6.innerHTML += "num1의 기본값 : " + num1 + "<br>";
+			area6.innerHTML += "num2의 기본값 : " + num2 + "<br>";
+			area6.innerHTML += "num1.toFixed(1) : " + num1.toFixed(1) + "<br>";
+			area6.innerHTML += "num1.toFixed(4) : " + num1.toFixed(4) + "<br>";
+			area6.innerHTML += "num2.toFixed(4) : " + num2.toFixed(4) + "<br>";
+			area6.innerHTML += "그럼 자료형은 ? : " + typeof(num1.toFixed(1)) + "<br>";
+	
+		}
+		
+	</script>
+	
+	<hr>
+	
+	<h3>String객체의 HTML관련 메소드</h3>
+	<button onclick="test6();">실행확인</button>
+	<p>String 객체의 메소드는 크게 기본메소드와 HTML관련 메소드로 구분할 수 있다.</p>
+	<div id="area7" class="area-big"></div>
+	<script>
+		function test6(){
+			var str = "javascript";
+			
+			var area7 = document.getElementById("area7");
+			
+			area7.innerHTML += "기본값 : " + str + "<br>";
+			area7.innerHTML += "anchor() : " + str.anchor() + "<br>";
+			area7.innerHTML += "big() : " + str.big() + "<br>";
+			area7.innerHTML += "bold() : " + str.bold() + "<br>";
+			area7.innerHTML += "fontcolor('red') : " + str.fontcolor("red") + "<br>";
+			area7.innerHTML += "fontsize(20) : " + str.fontsize(20) + "<br>";
+			area7.innerHTML += "italics() : " + str.italics() + "<br>";
+			area7.innerHTML += "link() : " + str.link("http://www.naver.com") + "<br>";
+			area7.innerHTML += "small() : " + str.small() + "<br>";
+			area7.innerHTML += "strike() : " + str.strike() + "<br>";
+			area7.innerHTML += "sub() : " + str.sub() + "<br>";
+			area7.innerHTML += "sup() : " + str.sup() + "<br>";
+		}	
+	
+	
+	
+	</script>
+	
+	<hr>
+	
+	<h3>Date객체</h3>
+	<p>날짜를 관리하는 객체</p>
+	<button onclick="test7();">실행확인</button>
+	<div id="area8" class="area area-big"></div>
+	<script>
+		function test7(){
+			//현재 시간
+			var area8 = document.getElementById("area8");
+			
+			//GMT 시간
+			var date1 = new Date();
+			var date2 = new Date('January 15');
+			var date3 = new Date('January 15, 2018');
+			var date4 = new Date('January 15, 2018 17:30:23');
+			
+			
+			area8.innerHTML += "Date() : " + date1 + "<br>";
+			area8.innerHTML += "Date('January 15') : " + date2 + "<br>";
+			area8.innerHTML += "Date('January 15, 2018') : " + date3 + "<br>";
+			area8.innerHTML += "Date('January 15, 2018 17:30:23') : " + date4 + "<br>";
+			
+			//UTC시간
+			var date5 = new Date(2018, 0, 15);
+			var date6 = new Date(2018, 0, 15, 17, 30, 23);
+			var date7 = new Date(2018, 0, 15, 17, 30, 23, 1);
+				
+			area8.innerHTML += "Date(2018, 0, 15) : " + date5 + "<br>";
+			area8.innerHTML += "Date(2018, 0, 15, 17, 30, 23) : " + date6 + "<br>";
+			area8.innerHTML += "Date(2018, 0, 15, 17, 30, 23, 1) : " + date7 + "<br>";
+		}
+	</script>
+	
+	<br>
+	
+	<h3>Date 객체의 메소드</h3>
+	<button onclick="test8();">실행확인</button>
+	<div id="area9" class="area-big"></div>
+	<script>
+		function test8(){
+			var date = new Date();
+			
+			var area9 = document.getElementById("area9");
+			
+			area9.innerHTML += "getFullYear() : " + date.getFullYear() + "<br>";
+			area9.innerHTML += "getMonth() : " + (date.getMonth() + 1) + "<br>";
+			area9.innerHTML += "getDate() : " + date.getDate() + "<br>";
+			area9.innerHTML += "getDay() : " + date.getDay() + "<br>";
+			area9.innerHTML += "getHours() : " + date.getHours() + "<br>";
+			area9.innerHTML += "getMinutes() : " + date.getMinutes() + "<br>";
+			area9.innerHTML += "getSeconds() : " + date.getSeconds() + "<br>";
+			area9.innerHTML += "getMilliseconds() : " + date.getMilliseconds() + "<br>";
+			area9.innerHTML += "getTimezoneOffset() : " + date.getTimezoneOffset() + "<br>";
+			area9.innerHTML += "getTime() : " + date.getTime() + "<br>";
+			
+			
+			//1970년 1월 1일 자정 기준 밀리세컨 단위로 객체 생성
+			var date2 = new Date(new Date(2018, 0, 15, 17, 30, 23, 1).getTime());
+			
+			console.log(date2);
+			
+			
+			//날짜 사이의 간격 구하기
+			var now = new Date();
+			var start = new Date('October 22, 2019');
+			
+			var interval = now.getTime() - start.getTime();
+			interval = Math.floor(interval / (1000 * 60 * 60 * 24));
+			
+			alert('개강한지 ' + interval + '일 째');
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>09. 함수</title>
+        <style>
+            p{
+                width: 500px;
+                height: 100px;
+                border: 1px solid black;
+                background-color: lightblue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>함수(function)</h1>
+
+        <h3>기본적인 함수 작성, 호출 방법</h3>
+        <pre>
+            - function 함수명([매개변수]){ 
+                소스 코드 작성 
+              }
+
+            - 이벤트를 이용하여 함수명으로 호출. 
+            - 다른 함수에서 함수명으로 호출.
+        </pre>
+
+        <button onclick="test1();">실행 확인</button>
+        <p id="p1"></p>
+        <script>
+            function test1(){
+                document.getElementById("p1").innerHTML
+                    = "test1() 함수가 호출됨.";
+            }
+        </script>
+
+        <hr>
+
+        <h3>익명함수(이름이 없는 함수)</h3>
+        <pre>
+            - function([매개변수]){
+                 소스 코드 작성
+              }
+
+            - 변수 선언, 이벤트 동작, 즉시 실행 함수 사용됨.
+        </pre>
+        <button onclick="test2();">실행 확인</button>
+        <!-- 
+            test2 -> 함수가 저장된 변수명
+            test2() -> test2 변수 내부에 저장된 익명함수 호출
+        -->
+        <p id="p2"></p>
+        <script>
+            var test2 = function(){
+                document.getElementById("p2").innerHTML
+                    = "test2 변수의 익명함수 실행 확인";
+            }
+        </script>
+        <hr>
+
+        <h3>즉시 실행 함수</h3>
+        <pre>
+            - (function([매개변수]){
+                소스 코드 작성
+              })();
+
+            - 함수가 정의 되자마자 실행되는 함수
+
+            - 익명 함수의 일종.
+        </pre>
+        <p id="p3"></p>
+        <script>
+            (function(){
+                document.getElementById("p3").innerHTML
+                    = "함수가 정의 되자마자 실행된 즉시 실행 함수";
+            })();
+        </script>
+        
+        <hr>
+
+        <h3>함수의 매개변수(전달인자)</h3>
+        <pre>
+            지정된 매개변수의 수 보다 많거나 적게 매개변수를 작성하여
+            함수를 호출할 수 있음.            
+        </pre>
+        <button id="btn4">실행 확인</button>
+        <p id="p4"></p>
+        <script>
+            function test4(value){
+                document.getElementById("p4").innerHTML 
+                    += value + "<br>";
+            }
+
+            // internal 방식의 이벤트 선언
+            document.getElementById("btn4").onclick = function(){
+                // 익명함수가 이벤트 핸들러로 사용됨.
+
+                // p4에 작성된 이전 내용 삭제
+                document.getElementById("p4").innerHTML = "";
+
+                test4( window.prompt("메세지를 입력하세요.") );
+
+
+                // 지정된 매개변수보다 많은 수를 전달
+
+                test4('안녕하세요', '반갑습니다.');
+                // 매개변수가 기준보다 초과해도 되지만
+                // 초과된 매개변수는 무시된다.
+
+
+                // 지정된 매개변수보다 적은 수 전달
+                test4();
+                // 선언되지 않은 매개변수는 undefined로 설정됨.
+            }
+        </script>
+        <hr>
+
+        <h3>함수의 리턴 처리</h3>
+        <pre>
+            함수를 호출한 부분이 리턴값으로 대체됨.
+        </pre>
+        <button onclick="test5();">실행 확인</button>
+        <p id="p5"></p>
+        <script>
+            function returnFunction(){
+                return Math.floor(Math.random() * 100) + 1;
+            }
+
+            function test5(){
+                document.getElementById("p5").innerHTML
+                    = returnFunction();
+            }
+        </script>
+
+        <hr>
+
+        <h3>가변인자 함수</h3>
+        <pre>
+            매개변수의 개수가 변하는 함수를 의미.
+            모든 함수 내부에는 arguments라는 객체가 자동으로 생성되어 있음.
+            artuments는 전달된 매개변수를 배열 형태로 저장함.
+        </pre>
+        <button onclick="test6();">실행 확인</button>
+        <p id="p6"></p>
+        <script>
+            function test6(){
+                //sumAll(1,2,3,4,5,6,7,8,9,10);
+                sumAll(1,2,3,4,5);
+            }
+
+            function sumAll(){
+
+                var p6 = document.getElementById("p6");
+
+                p6.innerHTML = 'arguments의 타입 :' + typeof arguments + "<br>";
+                p6.innerHTML += 'arguments의 길이 :' + arguments.length + "<br>";
+
+                var sum = 0;
+                for(var i in arguments){
+                    p6.innerHTML += arguments[i] + "&nbsp;";
+                    sum += arguments[i];
+                }
+
+                p6.innerHTML += "<br>총 합 : " + sum;
+            }
+
+
+        </script>
+
+        <hr>
+
+        <h3>내부함수(중첩함수)</h3>
+        <label>삼각형의 밑변 : </label>
+        <input type="number" id="width"  min="1" max="100" step="1"> <br>
+
+        <label>삼각형의 높이 : </label>
+        <input type="number" id="height" min="1" max="100" step="1"> <br>
+        <button onclick="test7();">실행 확인</button>
+        <p id="p7"></p>
+        <script>
+            function test7(){
+                var width = document.getElementById("width").value;
+                var height = document.getElementById("height").value;
+                
+                document.getElementById("p7").innerHTML
+                    = "빗변 길이(피타고라스 정리) : " + hypotenuse(width,height)
+            }
+
+            function hypotenuse(width,height){
+
+                function square(x){
+                    return x * x;
+                }
+
+                return Math.sqrt( square(width) + square(height) );
+            }
+        </script>
+
+
+    </body>
+</html>

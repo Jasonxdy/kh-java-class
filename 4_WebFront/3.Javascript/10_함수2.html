@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>10. 함수2</title>
+        <style>
+            .area{
+                border : 1px solid black;
+                height: 250px;
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>함수2</h1>
+
+        <h3>매개변수로 함수 타입 전달</h3>
+        <p>
+            자바스크립트에서는 함수(function)도 하나의 자료형이기 때문에<br>
+            매개변수로 전달이 가능하다.
+        </p>
+
+        <h4>선언적 함수를 매개변수로 전달</h4>
+        <button onclick="callFunctionTenTimes(otherFunction);">
+            실행하기
+        </button>
+        <script>
+            function otherFunction(i){
+                if(i > 5){
+                    alert(i + "번 더 클릭");
+                }else if(i > 3){
+                    alert(i + "번만 더 클릭하세요.")
+                }else if(i > 1){
+                    alert(i + "번만 더 클릭하면 됩니다!");
+                }else{
+                    alert("한번만 더!")
+                }
+            }
+
+            function callFunctionTenTimes(otherFn){
+                for(var i=10 ; i>0 ; i--){
+                    otherFn(i);
+                    // 매개변수로 전달받은 함수 otherFn 호출
+                }
+            }
+
+        </script>
+
+        <hr>
+
+        <h3>익명함수를 매개변수로 전달</h3>
+        <h4>익명함수 사용 이유</h4>
+        <p>
+            함수가 1회성으로 사용되는 경우에 코드길이 감소 효과가 있음.<br>
+            익명함수가 매개변수, 반환값으로 사용되는 경우 비동기적 효과를 나타냄.
+        </p>
+
+        <div id="area1" class="area"></div>
+
+        <script>
+            // 함수를 매개변수로 받는 함수
+            function callFunctionTenTimes2(otherFn){
+                for(var i=0 ; i<10 ; i++){
+                    otherFn(i);
+                    // 매개변수로 전달받은 함수 otherFn 호출
+                }
+            }
+
+            // script태그 바로 아래에서 함수 호출이 일어나면
+            // 페이지 로딩 시 바로 수행됨.
+            callFunctionTenTimes2(
+                function(i){
+                    document.getElementById("area1").innerHTML
+                        += "익명함수 " + (i + 1) + "번 호출함<br>";
+                }
+            );
+        </script>
+
+        <hr>
+
+        <h3>익명 함수를 리턴하는 함수</h3>
+        <p>
+            리턴받은 익명함수를 호출하는 방법 : 함수명()();
+        </p>
+
+        <input type="text" id="text1" size="30" readonly>
+        <button onclick="returnFunction()();">실행확인</button>
+        <!-- 
+            첫 번째 () : returnFunction 호출 
+            두 번째 () : returnFunction의 리턴된 익명함수 호출
+        -->
+
+        <script>
+            function returnFunction(){
+                return function(){
+                    document.getElementById("text1").value
+                        = "리턴받은 익명함수가 호출됨.";
+                }
+            }
+        </script>
+
+    </body>
+</html>

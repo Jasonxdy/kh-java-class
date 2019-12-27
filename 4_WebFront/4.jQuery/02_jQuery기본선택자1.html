@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>02. jQuery 기본 선택자1</title>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>기본 선택자1</h1>
+        <p>jQuery의 기본적인 선택자는 CSS와 동일함.</p>
+
+        <h3>태그 선택자</h3>
+
+        <h5>Java</h5>
+        <h5>Oracle</h5>
+        <h5>HTML5</h5>
+
+        <p>CSS3</p>
+        <p>Javascript</p>
+        <p>jQuery</p>
+
+        <script>
+            $(function(){
+
+                $("h5").css("color", "red");
+
+                $("p").css("color", "blue");
+
+                // 여러 선택자를 동시에 사용하고 싶을 경우
+                // 콤마(,)로 선택자를 구분하여 작성
+
+                $("h5, p").css("backgroundColor", "pink");
+            });
+        </script>
+
+        <hr>
+
+        <h3>클래스 선택자</h3>
+        <h1 class="item">class1</h1>
+        <h1 class="item select">class2</h1>
+        <h1 class="item">class3</h1>
+
+        <script>
+            $(function(){
+               $(".item").css("color", "orange")
+               
+               // 클래스 속성 값으로 item, select 가진 요소 선택
+               $(".item.select").css("backgroundColor","yellow");
+               // -> 여러 클래스 속성값이 있는 요소 선택 시 각 클래스 선택자를 붙여써야함.
+            });
+        </script>
+
+
+        <hr>
+        <h3>아이디 선택자</h3>
+        <h1 id="id1">id1</h1>
+        <h1 id="id2">id2</h1>
+        <script>
+            $(function(){
+                $("#id1").css("color", "yellow");
+
+                $("#id2").css("color", "pink");
+
+                $("#id1, #id2").css("backgroundColor", "lightblue");
+            });
+        </script>
+
+
+        <hr>
+        <h3>자식 선택자와 후손 선택자</h3>
+        <div>
+            <ul>
+                <li><h3>apple</h3></li>
+                <li>banana</li>
+                <li>orange</li>
+                <li class="ch">pineapple</li>
+                <li class="ch">peach</li>
+            </ul>
+            <h3>child h3</h3>
+            <h3 class="ch">class = ch</h3>
+        </div>
+
+        <script>
+            $(function(){
+                // 자식 선택자 : '부모 > 자식'
+                $("div > h3").css("color", "violet");
+            });
+
+            // ul 태그 자식 중 클래스가 ch인 요소 선택
+            $("ul>.ch").css("backgroundColor", "red");
+
+            // 후손 선택자 : "부모 후손"
+            $("div h3").css("backgroundColor", "lightblue");
+        </script>
+
+
+        <hr>
+        
+        <h3>속성 선택자</h3>
+        <pre>
+            <!-- $('선택자') -->
+            요소[속성명 = 속성값] : 해당 속성명과 속성값이 같은 객체(요소) 선택. (완전히 일치)
+
+            요소[속성명 ~= 속성값] : 속성값이 특정 단어를 포함한 객체 선택.
+                -> 클래스가 여러 개인 요소 선택 시 자주 사용됨.
+            
+            요소[속성명 ^= 속성값] : 속성값이 특정 단어로 시작하는 객체 선택.
+            
+            요소[속성명 $= 속성값] : 속성값이 특정 단어로 끝나는 객체 선택.
+
+            요소[속성명 *= 속성값] : 속성값이 특정 단어를 포함하고 있는 객체 선택. (일부)
+        </pre>
+
+        <input type="text"><br>
+        <input type="number" class="test test1"><br>
+        <input type="radio"><br>
+        <input type="checkbox"><br>
+        <input type="button" class="test2" value="button"><br>
+
+        <script>
+            $(function(){
+                // val() : value 관련된 기능 수행 메소드
+                // attr() : 속성과 관련된 기능 수행 메소드
+                // -> prop() : attr()의 최신버전 
+                $("input[type = text]").val("change value");
+                $("input[class ~= test").val("123456");
+                $("input[type ^= ra]").attr("checked", true);
+                $("input[type $= box]").prop("checked", true);
+                $("input[class *=2]").css("width", "100px").css("height", "100px");
+            });
+        </script>
+
+
+
+
+    </body>
+</html>

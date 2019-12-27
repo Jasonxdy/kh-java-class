@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>연습문제 3</title>
+    <style>
+        fieldset {
+            width: 400px;
+            text-align: center;
+            background-color: pink;
+        }
+
+        div.box {
+            width: 500px;
+            height: 50px;
+            margin: 10px;
+            padding: 10px;
+            background-color: orange;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>연습문제 3</h2>
+
+    <fieldset>
+        <legend>검색할 항목을 선택하세요.</legend>
+        <input type="radio" name="category" value="title" 
+            id="title" onclick="showDiv(this);">
+        <label for="title">제목</label>&nbsp;&nbsp;
+
+        <input type="radio" name="category" value="date" 
+            id="date" onclick="showDiv(this);">
+        <label for="date">날짜</label>&nbsp;&nbsp;
+
+        <input type="radio" name="category" value="writer"
+            id="writer" onclick="showDiv(this);">
+        <label for="writer">작성자</label>&nbsp;&nbsp;
+    </fieldset>
+    <hr>
+
+    <div id="titleBox" class="box">
+        <form method="post" action="#">
+            <label> 검색할 제목을 입력하세요 : </label>
+            <br>
+            <input type="search" name="title" size="50"> &nbsp;
+            <button>검색</button>
+        </form>
+    </div>
+
+    <div id="dateBox" class="box">
+        <form method="post" action="#">
+            <label> 검색할 날짜를 선택하세요 : </label>
+            <br>
+            <input type="date" name="start"> -
+            <input type="date" name="end"> &nbsp;
+            <button>검색</button>
+        </form>
+    </div>
+
+    <div id="writerBox" class="box">
+        <form method="post" action="#">
+            <label> 검색할 작성자 아이디를 입력하세요 : </label>
+            <br>
+            <input type="search" name="writer" size="25"> &nbsp;
+            <button>검색</button>
+        </form>
+    </div>
+
+    <script>
+        function showDiv2(element) {
+            if (element.checked == true && element.value == "title") {
+                document.getElementById("titleBox").style.display = "block";
+                document.getElementById("dateBox").style.display = "none";
+                document.getElementById("writerBox").style.display = "none";
+            }
+            else if (element.checked == true && element.value == "date") {
+                document.getElementById("titleBox").style.display = "none";
+                document.getElementById("dateBox").style.display = "block";
+                document.getElementById("writerBox").style.display = "none";
+            }
+            else if (element.checked == true && element.value == "writer") {
+                document.getElementById("titleBox").style.display = "none";
+                document.getElementById("dateBox").style.display = "none";
+                document.getElementById("writerBox").style.display = "block";
+            }
+        }
+
+        function showDiv(element){
+            var box = document.getElementsByClassName("box");
+            for(var i=0 ; i<box.length; i++){
+                if(element.checked && element.id+"Box" == box[i].id){
+                    box[i].style.display = "block";
+                }else{
+                    box[i].style.display = "none";
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

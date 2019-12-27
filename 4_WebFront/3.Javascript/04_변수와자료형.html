@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>04. 변수와 자료형</title>
+
+        <script>
+            // head 영역 script 태그 
+            // -> 페이지 로딩이 완료되기 전에 작성되어야할 
+            //    script를 작성하는 용도.(설정 관련)
+            // -> 페이지 로딩을 방해하지 않도록 가벼운 script 작성
+
+            // body 영역 script태그
+            // -> 일반적으로 기능을 작성하는 script
+            // -> 페이지 로딩이 완료된 상태에서 
+            //    스크립트가 실행되는 시점에 로딩됨.
+
+            // 전역 변수 선언
+            str = "전역 변수";
+
+            var str2 = "var 전역변수";
+            
+            // 전역변수 선언 시 자동으로 window객체의 필드로 추가됨.
+
+            var test;
+
+            //window.alert(test);
+
+            window.onload = function(){
+                // * window.onload : 페이지 로드가 완료된 후 
+                //                   페이지 전체를 다시 읽어들임.
+                //                   그 내용을 토대로 함수를 수행.
+                
+                //window.alert(test);
+
+                // 지역 변수 선언
+                var str = "지역 변수";
+                // 지역 변수 앞에는 var 붙임
+
+                var str3 = "새로운 지역 변수";
+
+                str4 = "새로운 전역 변수";
+
+                // 전역변수 호출 시 this. 또는 window. 으로 호출 가능.
+                console.log("str 호출");
+                console.log(str); // 지역
+                console.log(this.str); // 전역
+                console.log(window.str); // 전역
+
+                console.log("str2 호출")
+                console.log(str2); // 전역
+                console.log(this.str2); // 전역
+                console.log(window.str2); // 전역
+                
+                // 지역변수에는 this/window 사용 불가
+                console.log("str3 호출");
+                console.log(str3); // 지역
+                console.log(this.str3); 
+                console.log(window.str3); 
+                
+                console.log("str4 호출");
+                console.log(str4); // 지역? 전역?
+                console.log(this.str4); // 전역
+                console.log(window.str4); // 전역
+
+                showStr();
+            }
+
+            test = "window.onload 테스트";
+        </script>
+
+        <style>
+            .area{
+                border: 1px solid red;
+                height: 150px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>변수와 자료형</h1>
+        
+        <h3>window 객체</h3>
+        <p>
+            웹 브라우저에서 제공하는 창(window)
+            자체를 나타내는 객체
+        </p>
+
+        <hr>
+        <h3>변수 선언</h3>
+        <pre>
+        &lt;script&gt;
+            변수명; // 전역 변수(global)
+            // 한 화면 전체에서 사용할 수 있는 변수
+            // ex) name = "백동현";
+            
+            var 변수명; // 전역 변수(global)
+
+            function 함수명(){
+                변수명; // 전역 변수(global)
+
+                var 변수명; // 지역 변수(local)
+            }
+        &lt;/script&gt;
+        </pre>
+        <script>
+            function showStr(){
+                console.log("전역변수 확인");
+                console.log(str);
+                console.log(str2);
+                console.log(str4);
+            }
+        </script>
+
+        <hr>
+
+        <h3>자료형</h3>
+        <p>자바스크립트는 별도로 변수의 자료형을 지정하지 않음.<br>
+            -> 변수에 저장되는 값(리터럴)에 의해 자료형 결정됨.
+        </p>
+
+        <h4>자바스크립의 자료형</h4>
+        <ul>
+            <li>string(문자열)</li>
+            <li>number(숫자)</li>
+            <li>boolean(논리값)</li>
+            <li>object(객체)</li>
+            <li>function(함수)</li>
+            <li>undefined(정의되지 않음, 초기값이 없는 변수)</li>
+        </ul>
+        
+        <button onclick="typeTest()">자료형 테스트</button>
+        <br><br>
+
+        <div id="area1" class="area"></div>
+
+        <script>
+
+            function typeTest(){
+                var name = "홍길동"; // string
+                var age = 20; // number
+                var check = true; // boolean
+                var hobby = ["영화", "음악", "낮잠"]; // object
+
+                /** 자바스크립트 객체 **/
+                var user = { 
+                    name : "홍길동",
+                    age : 20,
+                    id : "user01"
+                }
+
+
+                // function
+                var tf = function testFunction(num1, num2){
+                            var sum = num1 + num2;
+
+                            alert(sum);
+                        } 
+
+                var noValue; // undefined
+                // undefined 와 null의 차이점
+                // - undefined : 변수 생성 시 초기값이 없는 상태
+                // - null : 의도적으로 변수가 참조하고 있는 값이 없다는걸 알리는 상태
+
+                var el1 = document.getElementById("area1");
+
+                // typeof = 값의 자료형을 확인하는 연산자
+                el1.innerHTML = ""; // 기존 area1에 작성된 내용 삭제
+                el1.innerHTML += name + "의 자료형 : " + typeof name + "<br>";
+                el1.innerHTML += age + "의 자료형 : " + typeof age + "<br>";
+                el1.innerHTML += check + "의 자료형 : " + typeof check + "<br>";
+             
+                el1.innerHTML += hobby + "의 자료형 : " + typeof hobby + "<br>";
+                
+                for(var i in hobby){
+                    console.log(hobby[i]);
+                }
+                
+                el1.innerHTML += user + "의 자료형 : " + typeof user + "<br>";
+                
+                console.log(user);
+                console.log(user.name + " / " + user.age + " / " + user.id);
+
+                el1.innerHTML += tf + "의 자료형 : " + typeof tf + "<br>";
+                tf(10, 20);
+                
+                el1.innerHTML += noValue + "의 자료형 : " + typeof noValue + "<br>";
+            }
+
+        </script>
+
+    </body>
+</html>

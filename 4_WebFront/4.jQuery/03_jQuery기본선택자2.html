@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>03. jQuery 기본선택자 2</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>기본 선택자2</h1>
+        <h3>입력 양식 필터 선택자1</h3>
+        <p>input 태그의 type 속성에 따라 문서 내 객체 선택 가능.</p>
+
+        <label>텍스트 상자</label><input type="text"><br>
+        <label>버튼</label><input type="button"><br>
+        <label>체크박스</label><input type="checkbox"><br>
+        <label>파일</label><input type="file"><br>
+        <label for="upload" id="upBtn">파일2</label><input type="file" id="upload"><br>
+        
+        <br>
+        <label>이미지</label><input type="image" src="image/flower1.PNG"><br>
+        <br>
+        <label>패스워드</label><input type="password"><br>
+        <label>라디오버튼</label><input type="radio"><br>
+        <label>리셋버튼</label><input type="reset"><br>
+        <label>제출버튼</label><input type="submit"><br>
+        
+        <script>
+            $(function(){ // jQuery의 ready() 함수
+                $("input:text").css("backgroundColor", "red");
+
+                $("input:button").css("width", "200px").css("height","50px").attr("value","버튼");
+
+                $("input:checkbox").prop("checked",true).css({"width":"50px", "height":"50px"});
+                                    // 자바스크립트 객체 리터럴 표기법
+                                    // { 키:속성, 키:속성, ... }
+
+                $("input:file").css("backgroundColor","red");
+
+                // 파일2 요소 숨김
+                $("#upload").css("display","none");
+
+                // 파일2 label 스타일 지정
+                $("#upBtn").css({"border":"1px solid gray", "display":"block", "width":"100px",
+            "backgroundColor":"lightblue", "text-align":"center"});
+        
+                //mouseenter() : 마우스가 요소 경계(테두리) 내부로 들어왔을 때 이벤트 발생
+                $("input:image").mouseenter(function(){
+                    $(this).attr("src","image/flower2.png");
+                });
+        
+        });
+
+                
+
+        </script>
+
+
+    </body>
+</html>
