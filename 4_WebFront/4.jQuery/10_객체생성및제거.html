@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>10. 객체 생성 및 제거</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.js"></script>
+
+    <style>
+        .item {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 5px 5px 0px 0;
+            text-align: center;
+            line-height: 100px;
+            background: yellowgreen;
+        }
+
+        .item span {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .lime {
+            background-color: lime;
+        }
+
+        .added {
+            color: orangered;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            padding: 5px 10px 15px 10px;
+            margin: 10px;
+        }
+
+        #remove-test {
+            border: 2px solid red;
+        }
+
+        #result {
+            border: 2px dashed blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>객체(== 태그, 요소) 생성 및 제거</h1>
+
+    <h3>객체 생성 방법</h3>
+
+    <div id="area1"></div>
+
+    <script>
+        $(function () {
+
+            // 1) HTML 태그 작성 방법으로 객체 생성
+            var tag1 = "<h4>Create tag with HTML</h4>"
+
+            // 2) DOM 객체를 이용한 객체 생성 방법
+            var tag2 = document.createElement("h4");
+            tag2.innerHTML = "Create tag with DOM"
+
+            // 3) jQuery 방식의 객체 생성 방법
+            var tag3 = $("<h4>").text("Create tag with jQuery");
+
+
+            // 2), 3) 방식으로 생성된 객체는 한번 삽입되면 재사용이 불가.
+            // -> 가장 마지막에 삽입된 객체만 사용 (? 못적음)
+            $("#area1").append(tag1, tag2, tag3);
+            $("#area1").append(tag1, tag2, tag3); // HTML만 재사용 가능, 나머지는 재활용이 안된다
+        });
+    </script>
+
+    <h3>객체 삽입 메소드 - 1</h3>
+    <pre>
+        선택자 요소(A)를 기준으로 삽입 메소드 매개변수에 작성된
+        생성된 요소(B) 또는 함수의 리턴값을 추가
+
+        $(A).append(B) : A요소 내 뒷부분에 B를 추가(자식)
+        $(A).prepend(B) : A요소 내 앞부분에 B를 추가(자식)
+        $(A).after(B) : A요소 뒷부분에 B를 추가(형제)
+        $(A).before(B) : A요소 앞부분에 B를 추가(형제)
+        </pre>
+
+    <h1 id="test1"><span>A</span></h1>
+    <h1 id="test2"><span>A</span></h1>
+    <h1 id="test3"><span>A</span></h1>
+    <hr>
+    <h1 id="test4"><span>A</span></h1>
+
+    <script>
+        $(function () {
+            // var spanTxt = "<span class = 'added'>B</span>";
+
+            // $("#test1").append(spanTxt);
+            // $("#test2").prepend(spanTxt);
+            // $("#test3").after(spanTxt);
+            // $("#test4").before(spanTxt);
+
+            // AJAX에서 밥먹듯이 사용되는 기능..
+
+            // interval을 이용하여 1초마다 객체 삽입
+            var arr = ["B", "C", "D", "E"];
+            var idx = 0;
+
+            var interval1 = setInterval(function () {
+                var content = "<span class = 'added'>" + arr[idx] + "</span>";
+                $("#test1").append(content);
+                $("#test2").prepend(content);
+                $("#test3").after(content);
+                $("#test4").before(content);
+
+                idx++;
+
+                if (idx > 3) clearInterval(interval1);
+            }, 1000);
+
+        });
+    </script>
+
+    <hr>
+
+    <h3>객체 삽입 메소드 - 2</h3>
+    <pre>
+    생성된 요소 (B)를 매개변수로 지정한 선택자 요소(A)에 삽입
+    -> 객체 삽입 메소드 - 1에서 선택자 요소와 생성된 요소의 작성 순서만 반대
+
+    $(B).appendTo(A) : B를 A의 요소 내 뒷부분에 추가(자식)
+    $(B).prependTo(A) : B를 A의 요소 내 앞부분에 추가(자식)
+    $(B).insertAfter(A) : B를 A의 요소 뒷부분에 추가(형제)
+    $(B).insertBefore(A) : B를 A의 요소 앞부분에 추가(형제)
+    </pre>
+
+    <h1 id="test5"><span>A</span></h1>
+    <h1 id="test6"><span>A</span></h1>
+    <h1 id="test7"><span>A</span></h1>
+    <hr>
+    <h1 id="test8"><span>A</span></h1>
+
+    <script>
+
+
+        $(function () {
+
+            var arr = ["B", "C", "D", "E"];
+            var idx = 0;
+
+            var interval2 = setInterval(function () {
+                var content = "<span class = 'added'>" + arr[idx] + "</span>";
+
+                $(content).appendTo("#test5");
+                $(content).prependTo("#test6");
+                $(content).insertAfter("#test7");
+                $(content).insertBefore("#test8");
+
+                if (++idx > 3) {
+                    clearInterval(interval2);
+                }
+            }, 1000);
+        });
+    </script>
+
+    <hr>
+
+    <h3>객체 복제 메소드</h3>
+    <pre>
+    clone([true | false])
+    - HTML 요소(객체)를 복사하는 메소드
+    - 매개변수로 객체에 부여된 이벤트 복제여부도 지정
+    (기본값 false)
+    </pre>
+
+    <button id="clone">Create Clone</button>
+    <div id="clone-test">
+        <div id="item1" class="item">
+            <span>안녕?</span>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            // 마우스 오버 (hover) 이벤트 추가
+            $("#item1").hover(function () {
+                // mouseenter 동작 작성
+                $(this).addClass("lime")
+            }, function () {
+                // mouseleave 동작 설정
+                $(this).removeClass("lime")
+            });
+
+            // 버튼 클릭 이벤트 핸들러
+            $("#clone").click(function () {
+                // $("#item1").clone().appendTo( $("#clone-test") );
+
+                // 이벤트까지 복사하도록 매개변수에 true 추가
+                $("#item1").clone(true).appendTo($("#clone-test"));
+            });
+        });
+    </script>
+
+    <h3>객체 제거 메소드</h3>
+
+    <pre>
+        empty() : 모든 자식요소 제거
+        remove() : DOM 요소 잘라내기. 연관된 이벤트는 제거됨.
+        detach() : DOM 요소 잘라내기. 연관된 이벤트를 모두 보관함.
+    </pre>
+
+    <button id="empty">empty</button> &nbsp;
+    <button id="remove">remove</button> &nbsp;
+    <button id="detach">detach</button> <br>
+
+    <div id="remove-test" class="box">
+        <div id="item2" class="item">
+            <span>안녕?</span>
+        </div>
+    </div>
+    <div id="result" class="box"></div>
+
+    <script>
+        // #item2에 hover() 이벤트 추가
+        $("#item2").hover(function () {
+            $(this).addClass("lime")
+        }, function () {
+            $(this).removeClass("lime")
+        });
+
+        // empty 테스트
+        $("#empty").click(function () {
+            $("#remove-test").empty();
+        });
+
+        // remove 테스트
+        $("#remove").click(function(){
+            var el = $("#item2").remove();
+            console.log(el);
+
+            // 붙여넣기
+            $("#result").html(el);
+        });
+
+        // detach 테스트 : 이벤트도 잘라내짐
+        $("#detach").click(function(){
+            var el = $("#item2").detach();
+            console.log(el);
+
+            $("#result").html(el);
+        });
+
+    </script>
+
+</body>
+
+</html>

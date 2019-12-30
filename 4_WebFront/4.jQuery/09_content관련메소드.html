@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>09. content 관련 메소드</title>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <h1>content 관련 메소드</h1>
+
+    <h3>html() 메소드</h3>
+    <pre>
+        - 선택된 요소의 태그 + content(태그 내부에 작성된 내용)을 리턴하거나 설정하는 메소드
+
+        - getter로 사용 시 해당 요소를 태그까지 포함한 content 값을 얻어옴.
+
+        - setter로 사용 시 작성된 html 태그가 포함된 문자열을 실제 태그요소로 인식시킴.
+
+        </pre>
+
+    <h1 id="test1"><a>네이버로 이동</a></h1>
+    <h1 id="test2"></h1>
+
+    <script>
+
+        // jQuery ready() 함수
+        $(document).ready(function () { // 문서가 준비가 되었을때 내부에 있는 함수를 실행해라
+            // ready함수는 문서를 다 읽고 나서 실행함!
+
+            // 1) getter로 사용
+            var tmp = $("#test1").html();
+            console.log("#test1의 html() 리턴값 : " + tmp);
+
+            // 2) setter로 사용
+            $("#test2").html(tmp);
+
+            // #test2 하위 요소 중 a태그에 href 속성 추가
+            $("#test2").children("a")
+                .prop("href", "https://naver.com");
+
+            // Javascript의 innerHTML과 같은 역할
+        });
+    </script>
+
+    <hr>
+
+    <div class="testClass1">testClass1-1</div>
+    <div class="testClass1">testClass1-2</div>
+    <div class="testClass1">testClass1-3</div>
+
+
+
+    <script>
+        $(function () {
+            /*
+            jQuery의 메소드 중 html(), text(), val() 등의 메소드는
+            매개 변수로 function(index, html/text/val)이라는 익명함수를 전달할 수 있음.
+
+            ex)
+            $('선택자').html(function(idex,html){ });
+
+            index : 현재 요소의 인덱스
+            html : html() 메소드로 인해 변경되기 전의 content 값
+            */
+
+            $(".testClass1").html(function (index, html) {
+                return "<h1>이전 값 : " + html + ", index : " + index + "</h1>"
+            });
+
+            // 이렇게 어떠한 메소드 (함수)의 매개 변수로 사용되어지는 함수를
+            // 콜백 함수(Callback Function)이라고 함.
+            // 이벤트 핸들러도 콜백함수의 일종. (정말 많이 사용됨)
+
+        });
+    </script>
+
+    <hr>
+
+    <h3>text() 메소드</h3>
+
+    <pre>
+    - 선택된 요소의 content 영역을 리턴하거나 설정하는 메소드
+
+    - getter로 사용 시 content 내부에 있는 태그를 무시함.
+
+    - setter로 사용 시 문자열 내부에 html 내그가 있을 경우
+      태그가 아닌 문자 자체로 인식함.
+    </pre>
+
+    <h1 id="test3"><a>구글로 이동</a></h1>
+    <h1 id="test4"></h1>
+
+    <script>
+        // getter로 사용
+        var tmp2 = $("#test3").text();
+        console.log("#test3의 text() 메소드 리턴값 : " + tmp2);
+        // .html()과 다르게 태그가 무시되고 내용만 리턴됨
+
+
+        // setter로 사용
+        var tmp3 = "<a>구글로 이동</a>";
+        $("#test4").text(tmp3);
+        // 태그가 인식이 안되고 텍스트의 형태로 인식됨.
+
+    </script>
+
+    <div class="testClass2">testClass2-1</div>
+    <div class="testClass2">testClass2-2</div>
+    <div class="testClass2">testClass2-3</div>
+
+    <script>
+        $(".testClass2").text(function (index, html) {
+            return "<h1>이전 값 : " + html + ", index : " + index + "</h1>"
+        });
+    </script>
+
+</body>
+
+</html>
