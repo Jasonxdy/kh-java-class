@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+</style>
+<title>input 태그 이벤트 메소드</title>
+
+</head>
+<body>
+	<h1>입력 양식 이벤트</h1>
+	<div id="wrap">
+		<h1 align="center">회원가입</h1>
+		<form method="post" action="">
+			<table align="center">
+				<tr>
+					<td><label>이름</label></td>
+					<td><input type="text" name="name" id="name" required></td>
+					<td><span id="nameresult"></span></td>
+				</tr>
+				<tr>
+					<td><label>아이디</label></td>
+					<td><input type="text" name="userid" id="userid" required></td>
+					<td><input type="button" value="중복확인"></td>
+				</tr>
+				<tr>
+					<td><label>비밀번호</label></td>
+					<td><input type="password" name="pwd1" id="pwd1" required></td>
+					<td><span id="pwdresult"></span></td>
+				</tr>
+				<tr>
+					<td><label>비밀번호확인</label></td>
+					<td><input type="password" name="pwd2" id="pwd2" required></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><label>이메일</label></td> 
+					<td><input type="email" name="email" id="email" required></td> <!--이메일타입은 자동으로 유효성검사해줌 *@*-->
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="reset"> &nbsp; <input type="submit"></td>
+					<td></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+
+	<script>
+		$(function(){
+			// input 관련 각종 이벤트
+			$("#name").focus(function(){
+				// 요소가 focus를 받을 때
+				console.log("focus");
+			}).blur(function(){
+				// 요소의 focus가 해제되었을 때
+				console.log("blur");
+			}).change(function(){
+				// 요소의 값이 변경되었을 때
+				// select, checkbox, radio에서는 값이 변경되었을 때 바로 이벤트 발생.
+				// text 타입의 input, textarea에서는 focus가 해제되었을 때 (blur)일 때 이벤트 발생.
+				console.log("change");
+			}).select(function(){
+				// 요소의 값이 블럭으로 잡힌 경우 이벤트 발생
+				console.log("select");
+			});
+
+			// focusin(), focusout()
+			// 해당 요소의 자식 요소가 포커스를 받거나 해제될 때 발생
+			$("td").focusin(function(){
+				// 선택된 요소의 자식이 포커스를 받을 때
+				$(this).css("backgroundColor","hotpink");
+			}).focusout(function(){
+				$(this).css("backgroundColor","white");
+			});
+
+
+			// name 유효성 검사
+			// 포커스를 잃었을 때 
+			// 한글 두 글자 이상인지 검사
+			$("#name").change(function(){
+				var regExp = /^[가-힣]{2,}$/;
+				if(regExp.test($(this).val())){
+					// 입력된 이름이 정규식을 만족하는 경우
+					$("#nameresult").text("정상 입력").css({"color":"green", "text-weight":"bold"});
+				} else {
+					$("#nameresult").text("한글 두 글자 이상 입력해 주세요").css({"color":"red", "text-weight":"bold"});
+				}
+			});
+
+
+			$("#pwd2").keyup(function(){
+				if ($("#pwd1").val().length != 0 && $("#pwd1").val() == $("#pwd2").val()){
+					$("#pwdresult").text("비밀번호 일치").css("color", "green");
+				} else {
+					$("#pwdresult").text("비밀번호 불일치").css("color", "red");
+				}
+			});
+
+			// form 태그 내부에서 submit 이벤트가 발생하였을 때
+			$("form").submit(function(){
+				if (!confirm("폼을 전송하시겠습니까?")){
+					// submit 기본 이벤트 제거
+					return false;
+				}
+			});
+
+		});
+	</script>
+</body>
+</html>

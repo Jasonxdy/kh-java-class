@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>17. display 속성 메소드</title>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <h1>fade 관련 메소드</h1>
+        <!-- fade : 색이 바래다 -->
+        <pre>
+        - fadeIn : 점점 진하게 변하면서 보여지는 효과
+        - fadeOut : 점점 희미하게 변하면서 사라지는 효과
+        - fadeToggle : fadeIn + fadeOut
+        - fadeTo : 설정한 값까지 희미해지는 효과
+            -> opacity 값을 이용하여 투명도 설정
+        </pre>
+
+        <h3>fadeIn(), fadeOut()</h3>
+        <button id="fadeIn">fadeIn()</button>
+        <button id="fadeOut">fadeOut()</button>
+        <br>
+        <img id="img1" src="image/river1.PNG">
+        <script>
+            $(function(){
+                $("#fadeIn").click(function(){
+                    $("#img1").fadeIn(1000);
+                });
+                $("#fadeOut").click(function(){
+                    $("#img1").fadeOut(1000);
+                });
+            })
+        </script>
+
+        <h3>fadeToggle()</h3>
+        <button id="fadeToggle">fadeToggle()</button>
+        <br>
+        <img id="img2" src="image/오늘할일.jpg">
+        <script>
+            $(function(){
+                $("#fadeToggle").click(function(){
+                    $("#img2").fadeToggle(1000);
+                })
+            });
+        </script>
+
+        <hr>
+
+        <h3>fadeTo()</h3>
+        <img id="img3" src="image/가즈아.jpg">
+        <script>
+            $("#img3").hover(function(){
+                $(this).fadeTo(500, 0.2);
+            }, function(){
+                $(this).fadeTo(500, 1);
+
+            });
+        </script>
+
+
+    </body>
+</html>

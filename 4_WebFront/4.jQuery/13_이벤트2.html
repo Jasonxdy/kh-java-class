@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>13. 이벤트 2</title>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<style>
+		.outer {
+			width: 200px;
+			height: 200px;
+			background: orange;
+			padding: 50px;
+
+		}
+
+		.inner {
+			width: 100%;
+			height: 100%;
+			background: red;
+
+		}
+	</style>
+</head>
+<body>
+	<h1>이벤트 연결 메소드</h1>
+	<h3>
+		mouseenter/mouseleave <br>
+		mouseover/mouseout
+	</h3>
+	<h4>mouseover-mouseout : 자식 요소에 접근 시에도 이벤트 핸들링함.<br></h4>
+	<div class="outer o1">
+		<div class="inner"></div>
+	</div>
+	<p id="output"></p>
+
+	<hr>
+	<h4>mouseenter-mouseleave : 자식 요소에 접근 시에는 이벤트 핸들링을 하지 않음. </h4>
+	<div class="outer o2">
+		<div class="inner"></div>
+	</div>
+	<p id="output2"></p>
+
+	<script>
+		$(document).ready(function () {
+			//mouseover(), mouseout()
+			//자식 요소에 접근 시에도 이벤트 발생
+
+			//mouseover() : 마우스가 요소에 있을 경우
+			$(".o1").mouseover(function () {
+				document.getElementById("output").innerHTML += "OVER! ";
+			});
+
+			//mouseout() : 마우스가 요소 child에서 나갈 떄
+			$(".o1").mouseout(function () {
+				document.getElementById("output").innerHTML += "OUT! ";
+			});
+
+
+			//mouseenter(), mouseleave()
+			//자식 요소에 접근 시에는 이벤트가 발생하지 않음
+
+			//mouseenter() : 마우스가 요소에 들어올 때
+			$(".o2").mouseenter(function () {
+				document.getElementById("output2").innerHTML += "ENTER! ";
+			});
+
+			//mouseleave() : 마우스가 요소에서 나갈 때
+			$(".o2").mouseleave(function () {
+				document.getElementById("output2").innerHTML += "LEAVE! ";
+			});
+		});
+	</script>
+
+	<hr>
+
+	<h3>키보드 이벤트</h3>
+	<pre>
+	keydown : 키보드가 눌러질 때
+	keypress : 글자가 입력될 때
+	keyup : 키보드가 떼어질 때
+	</pre>
+
+	<script>
+		$(function(){
+			
+			// $("#test").keydown(function(e){
+			// 	console.log("keydown : " + e.key) // 어떤 키를 눌렀는지 확인 가능
+			// });
+			
+			// $("#test").keypress(function(e){
+			// 	console.log("keypress : " + e.key)
+			// });
+
+			$("#test").keyup(function(e){
+				console.log("keyup : " + e.key)
+			});
+		});
+	</script>
+	<input type="text" id="test">
+
+	<hr>
+
+	<h3>동적으로 글자수 세기</h3>
+	<div>
+		<p><span id="counter">0</span>/150</p>
+		<textarea cols="70" rows="5"></textarea>
+	</div>
+
+	<script>
+		$(function(){
+			// textarea에서 keydown 이벤트가 발생했을 때
+			// 글자 수 카운트
+
+			// keyup, keydown 등 키보드 이벤트 사용 시 
+			// 마우스를 이용한 입력에 대해서는 동작하지 않음
+			// 이를 해결하기 위해서는 다수의 이벤트와 이벤트 핸들러를 작성해야 함
+			// -> on() 메소드를 활용하면 한방에 가능
+			
+			// $("textarea").keyup(function(){
+				$("textarea").on("input", function(){
+				// input 이벤트 : 입력과 관련된 모든 이벤트를 나타냄
+
+				// 현재 textarea에 작성된 문자 길이를 저장
+				var inputLength = $(this).val().length;
+
+				$("#counter").html(inputLength);
+
+				// 작성 가능한 글자 수
+				var remain = 150 - inputLength;
+
+				if(remain >= 0){
+					$("#counter").css("color","black");
+				} else { 
+					$("#counter").css("color","red");
+				}
+			});
+		});
+	</script>
+
+	<h3>동적으로 아이디 조건 확인하기</h3>
+	<pre>
+	- 첫 글자는 반드시 영문 소문자
+	- 영문 소문자 + 숫자로만 이루어진 ID
+	- 최소 4글자 최대 16글자
+	</pre>
+
+	<label for="memberId">아이디 : </label>
+	<input type="text" name="memberId" id="memberId">
+	<br>
+	<span id="idValidate"></span>
+
+	<script>
+		$(function(){
+			// 정규표현식 객체 선언
+			var regExp = /^[a-z][a-z\d]{3,15}$/;
+
+			$("#memberId").keyup(function(){
+				if(regExp.test($(this).val())){
+					$("#idValidate").text("사용 가능한 아이디 형식입니다.").css({"color":"green", "font-weight":"bold"});
+				} else {
+					$("#idValidate").text("사용할 수 없는 아이디 형식입니다.").css({"color":"red", "font-weight":"bold"});
+				}
+
+			});
+		});
+
+	</script>
+
+</body>
+</html>
+

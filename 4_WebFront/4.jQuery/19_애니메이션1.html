@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>    
+
+<!-- animate()컬러속성 추가하기 : jqueryUI는 컬러플러그인을 포함하고 있음. -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<title>애니메이션</title>
+<style>
+	.test {
+		width:200px;
+		height:200px;
+		background:orangered;
+	}
+	.image, .image2{
+		position:relative;
+	}
+	#scroller {
+		width:160px;
+		height:105px;
+		margin:auto;
+		overflow:hidden;
+		position:relative;
+	}
+</style> 
+</head>
+<body>
+	<h1>애니메이션</h1>
+	<p>애니메이션 효과를 만들기 위한 메소드 집합</p>
+	<h3>animate() 메소드</h3>
+	<p>
+		<code>.animate( properties [, duration ] [, easing ] [, complete ] )</code> <br>
+		properties : 변경할 css속성을 객체로 전달. <br>
+		duration : 기본값은 400,  millisec|slow|fast <br>
+		easing : 속도 옵션. swing|linear 기본값은 swing. <br>
+				더 많은 easign function은 jqueryUI 또는 별도의 plugin을 사용해야함. <br>
+				* swing : 시작/끝은 느리고, 중간은 빠름. (css animation-timing-function : ease-in-out)
+		complete : 애니메이션이 완료되었을때 호출될 콜백함수 작성 <br>
+	</p>
+	
+	<button id="btn1">실행</button>
+	<div id="test1" class="test"></div>
+	
+	<script>
+	//w3schools에서 기본지원되는 속성확인
+	//https://www.w3schools.com/jquery/eff_animate.asp
+	//color같은 경우 기본적으로 지원하지 않음. 
+	//jquery-ui의 color플러그인을 import해서 사용해야함.
+	//https://api.jqueryui.com/color-animation/
+	/*
+	color plugin은 다음속성을 지원함.
+		* backgroundColor
+		* borderBottomColor
+		* borderLeftColor
+		* borderRightColor
+		* borderTopColor
+		* color
+		* columnRuleColor
+		* outlineColor
+		* textDecorationColor
+		* textEmphasisColor
+	*/
+	$(function(){
+		$("#btn1").click(function(){
+			
+			$("#test1").animate({width:"500px", backgroundColor:"blue"},1000,function(){
+				alert("애니메이션 적용 완료")
+			});
+		});
+	});
+	</script>
+	
+	<hr>
+	
+	<h3>이미지 animate()1</h3>
+	<img src="image/가즈아.jpg" width="150px" height="100px" class="image" />
+	<script>
+		$(document).ready(function(){
+			$(".image").click(function(event){
+				$(this).animate({'left':'-158px'},'fast');//body의 기본 margin 8px을 추가함.
+			});
+		});
+	</script>
+	
+	<hr>
+	
+	<h3>이미지 animate()2</h3>
+	<p>
+		가운데 위치한 div컨테이너 안에서 img를 우측으로 slide해서 감추어보자. <br>
+		div컨테이너의 css속성 position, width, overflow등을 설정함.
+	</p>
+	<div id="scroller">	
+		<img src="image/오늘할일.jpg" width="150px" height="100px" class="image2" />
+	</div>
+	<script>
+		$(document).ready(function(){
+			$(".image2").click(function(event){
+				console.log("a");
+				$(this).animate({'right':'-160px'},1000);//-160은 image를 감싸고 있는 div에 대한 값이다.
+			});
+		});
+	</script>
+	
+</body>
+</html>

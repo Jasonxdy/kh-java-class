@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>11. jQuery 메소드</title>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <style>
+            .highlight-0{background-color: red;}
+            .highlight-1{background-color: orange;}
+            .highlight-2{background-color: yellow;}
+            .highlight-3{background-color: green;}
+            .highlight-4{background-color: blue;}
+        </style>
+    </head>
+    <body>
+        <h1>jQuery 메소드</h1>
+
+        <h3>each() 메소드</h3>
+
+        <pre>
+
+        - 객체나 배열을 관리하는 for in문과 비슷한 메소드
+        - 객체나 배열의 요소를 순차적으로 접근함.
+
+        1. $.each(object, function(index, item){ })
+        - object : 객체 또는 배열
+        - index : 배열의 인덱스 또는 객체 키를 의미.
+                  함수가 종료되면 1씩 증가 또는 다음 키로 이동.
+        - item : 현재 인덱스 또는 키가 가진 값을 의미.
+        
+
+        2. $("선택자").each(function(index, item){ })
+        - class 등의 속성으로 그룹화된 요소에 접근할 경우 사용
+        </pre>
+
+        <div id="area1"></div>
+        <script>
+            // 객체 배열 생성 [{key:value, ...}, {key:"value", ...}]
+            var arr = [{name:"네이버", link:"https://www.naver.com"},
+                       {name:"Goolge", link:"https://www.google.com"},
+                       {name:"w3schools", link:"https://www.w3schools.com"}];
+
+            var output = "";
+
+            $.each(arr, function(index, item){
+                output += "<h2><a href=" + item.link + ">" + index + ". " + item.name + "</a></h2>";
+            });
+            
+            $("#area1").html(output);
+        </script>
+
+        <hr>
+
+        <div id="wrap">
+            <h1>item-0</h1>
+            <h1>item-1</h1>
+            <h1>item-2</h1>
+            <h1>item-3</h1>
+            <h1>item-4</h1>
+        </div>
+
+        <script>
+            $(function(){
+                $("#wrap").children().each(function(index,item){
+                    // $(this).addClass("highlight-" + index);
+                    $(item).addClass("highlight-" + index); // 똑같이 나옴
+                    // this == item -> 현재 접근중인 요소
+                });
+            });
+        </script>
+
+        <hr>
+
+        <h3>$.noConflict()</h3> <!--conflict : 소스코드의 충돌-->
+
+        <pre>
+        많은 자바스크립트 라이브러리가 '$' 기호를 함수, 변수로 사용하고 있기 때문에
+        jQuery 라이브러리와 충돌하는 경우가 빈번함.
+
+        이를 방지하기 위해 noConflict() 메소드를 통해 '$' 기호 대신 새로운 alias(별칭)을
+        부여하여 충돌 방지.
+        </pre>
+
+        <h1 id="ncTest">noConflict() 테스트</h1>
+        <script>
+            $(function(){
+                $("#ncTest").css("color", "red");
+            });
+
+            var jq = $.noConflict();
+            // $표시 대신 jq가 대체함..
+
+            jq(function(){
+                
+                jq("h1").css("color", "red");
+                
+                jq("#ncTest").css("color","blue");
+            });
+
+        </script>
+
+    </body>
+</html>

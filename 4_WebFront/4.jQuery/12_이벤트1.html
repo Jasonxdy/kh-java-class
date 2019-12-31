@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>12. 이벤트 1</title>
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <style>
+            #test2{
+                width: 300px;
+                height: 300px;
+                background-color: orangered;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>이벤트</h1>
+
+        <h3>이벤트 관련 속성</h3>
+        <pre>
+        이벤트 핸들러의 매개변수로 event 객체를 전달함.
+        -> event 객체 : 이벤트가 발생한 객체의 온갖 정보를 담고 있음.
+
+        인라인 방식으로 이벤트 설정 시
+        매개변수로 event 객체를 전달할 경우 키워드는 event로 고정
+        </pre>
+
+        <button onclick="test1(event);">실행확인</button>
+
+        <script>
+            function test1(e){
+                // var e = e | window.event; -> 이렇게 안해도 됨
+
+                console.log(e);
+
+                // 이벤트가 발생한 객체 (요소) 리턴
+                console.log(e.target);
+            }
+        </script>
+
+        <hr>
+
+        <h3>이벤트 연결 종류</h3>
+        <pre>
+        $("선택자").bind() : 현재 존재하는 문서 객체만 이벤트 핸들러 연결
+
+        $("선택자").unbind() : bind()로 연결된 이벤트 핸들러 제거
+
+        <hr>
+
+        bind(), unbind() 메소드는 jQuery 3.0.0부터 deprecated로 설정
+        대신 on(), off() 메소드를 사용
+
+        $("선택자").on("이벤트명", "이벤트 핸들러")
+        -> 자바스크립트 표준 이벤트 모델과 모양이 비슷함
+
+        $("선택자").off("이벤트명")
+        </pre>
+
+        <h1 id="test1">마우스를 올려보세요.</h1>
+        <script>
+            // on() 이벤트의 기본적인 사용법
+            $("#test1").on("click", function(event){
+                console.log(event.target);
+            });
+
+            // 여러 이벤트를 등록
+            // -> 자바스크립트 객체 이용
+            $("#test1").on({
+                "mouseenter" : function(){
+                                    $(this).css("background-color","yellowgreen")
+                                            .text("마우스 들어옴");
+                                },
+                "mouseleave" : function(){
+                                    $(this).css("background-color","yellow")
+                                            .text("마우스 나감");
+                                },
+                "click"      : function(){
+                                    $(this).off("mouseenter").off("mouseleave")
+                                    .css("background-color", "orangered")
+                                    .text("이벤트 제거됨");
+                                }
+            });
+        </script>
+
+        <hr>
+
+        <h3>$("선택자").on("이벤트명", "selector", 이벤트 핸들러)</h3>
+        <pre>
+        선택자를 기준으로 매개변수로 전달된 selector에
+        지정한 이벤트 발생 시 해당 이벤트 핸들러를 동적 적용시켜
+        이벤트 처리를 함.
+        </pre>
+
+        <div id="wrap">
+            <h2>클릭 시 h2 태그 요소가 추가됨.</h2>
+        </div>
+
+        <script>
+            // 이벤트 핸들러 작성
+            var count = 0;
+            function add(e){
+                $(e.target).after("<h2>클릭으로 인해 추가됨-" + count++ + "</h2>");
+            }
+
+            $(document).on("click", "h2", add);
+            // 문서 전체 내 h2 태그에 대하여 이벤트 핸들러 설정
+            // bind와는 다르게 ready 함수 안에 안있어도 추가로 생성되는 것에도 적용됨 (on의 장점)
+        </script>
+
+        <hr>
+
+        <h3>one() 메소드</h3>
+
+        <p>
+            이벤트에 대한 동작을 딱 한 번만 연결할 때 사용
+        </p>
+
+        <button id="test4">클릭하세요</button>
+        <script>
+            $("#test4").one("click", function(){
+                alert("처음이자 마지막 이벤트 발생");
+                $(this).css("background-color", "red").text("사용된 버튼");
+                //.prop("disabled", true);
+            });
+        </script>
+
+    </body>
+
+</html>
