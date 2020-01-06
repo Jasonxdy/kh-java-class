@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>NCS test 1</title>
+        <script>
+            function sizeToMeter(){
+                var size = document.getElementById("size1").value;
+                // console.log(size);
+                var meter = size / 0.3025;
+                console.log(meter);
+                // document.getElementById("meter1") = meter.toFixed(2);
+                // // toFixed(n) : 소수점 n번째까지 표시하는 함수 (소수점 아래 n+1번째 자리에서 반올림)
+            }
+
+            function meterToSize(){
+                var meter = document.getElementById("meter2");
+                var size  = meter * 0.3025;
+                document.getElementById("size2") = size.toFixed(2);
+            }
+        </script>
+    </head>
+    <body>
+        <h2> 평 - m2 계산기</h2>
+
+        <label for="size1">평 : </label>
+        <input type="text" id="size1" size="10"> ->
+        <!-- 문제 1 : name -> id -->
+        <label for="meter1">m2 : </label>
+        <input type="text" id="meter1" size="10" readonly>
+        <button onclick="sizeToMeter();">변환</button>
+        
+        <br>
+        <label for="meter2">m2 : </label>
+        <input type="text" id="meter2" size="10"> ->
+        <label for="size2">평 : </label>
+        <input type="text" id="size2" size="10" readonly>
+        <button onclick="meterToSize();">변환</button>
+        
+
+    </body>
+</html>

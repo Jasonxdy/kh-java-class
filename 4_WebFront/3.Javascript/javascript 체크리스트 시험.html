@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>test1</title>
+        <style>
+            div{
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset>
+            <legend>출력창</legend>
+            <div id="print"></div>
+        </fieldset>
+        <button onclick="insertMember();">입력</button>
+        <button onclick="printMember();">출력</button>
+
+        <script>
+
+            var member;
+
+            function insertMember(){
+                var name = window.prompt("이름 입력 : ");
+                var age = window.prompt("나이 입력 : ");
+                var addr = window.prompt("주소 입력 : ");
+                member = {
+                    name : name,
+                    age : age,
+                    addr : addr,
+                    info : function(){
+                        return "이름 : " +  this.name + "<br>" +
+                        "나이 : " + this.age + "세<br>" +
+                        "주소 : " + this.addr
+                    }
+                }
+            }
+
+            function printMember(){
+                var el = document.getElementById("print");
+                
+                if(member != undefined) {
+                    el.innerHTML = member.info();
+                } else {
+                    window.alert("입력을 먼저 진행해주세요");
+                }
+            }
+        </script>
+
+    </body>
+</html>
