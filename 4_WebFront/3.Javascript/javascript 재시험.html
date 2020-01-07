@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang = "ko">
+    <head>
+    <meta charset="UTF-8">
+        <title>재시험</title>
+        <style>
+            #ingredient-list{
+                border: 1px solid black;
+                width: 250px;
+                height: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>재료 관리</h2>
+        <input type="text" id="add_bar">
+        <button onclick="addIngredient();">추가</button>
+        <br>
+        <br>
+        <div id="ingredient-list"></div>
+
+        <script>
+            function addIngredient(){
+                var ingredient = document.getElementById("add_bar");
+
+                var p = document.createElement("p");
+                // 문제 1
+                // p.innerHTML = ingredient.innerHTML;
+                p.innerHTML = ingredient.value;
+
+                // 문제 2 
+                // var btn = document.createElement("input");
+                var btn = document.createElement("button");
+                btn.innerHTML = "삭제";
+                btn.setAttribute("onclick", "this.parentElement.remove();");
+                // setAttribute("속성", "속성값") : 요소에 속성 추가
+                // parentElement : 부모 요소
+
+                p.appendChild(btn);
+                document.getElementById("ingredient-list").appendChild(p);
+
+                // 문제 3
+                // ingredient.innerHTML = "";
+                ingredient.value = "";
+            }
+        </script>
+
+    </body>
+</html>

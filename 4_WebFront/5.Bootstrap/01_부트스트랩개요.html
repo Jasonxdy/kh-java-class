@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shirink-to-fit=no">
+
+    <!-- 
+        viewport : 화면상의 표시 영역
+                   화면 크기가 변할 시 페이지 너비나 화면 배율을 조정
+                   ** 반응형 웹을 구현하기 위한 가장 기본적이면서 필수인 메타 태그
+
+        width : viewport 가로 크기 (너비) 조정
+                일반적인 숫자 값 또는 device=width와 같은 특정 값으로 조정 가능.
+
+        device-width : 웹 페이지의 기본 너비를 현재 접속중인 장치의 너비와 일치
+
+        initial-scale : 페이지가 처음 로딩될 때 줌(확대) 레벨 조정(1~10, 기본값 1)
+
+        shrink-to-fit=no : 사파리 11 이전 버전 브라우저의 문제 발생 방지를 위해 no 값을 선언
+
+     -->
+    <title>1. 부트스트랩 개요</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        #footer{
+            padding :50px 0px;
+            /*       상하  좌우 */
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- header / nav -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+                    <h5 class="my-0 mr-md-auto font-weight-normal">종로 A 클래스</h5>
+                    <nav class="my-2 my-md-0 mr-md-3">
+                      <a class="p-2 text-dark" href="#">회원가입</a>
+                    </nav>
+                    <a class="btn btn-outline-primary" href="#">로그인</a>
+                  </div>
+            </div>
+        </div>
+
+        <!-- jumbotron -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron">
+                    <h1 class="text-center">Bootstrap 소개</h1>
+                    <p class="text-center">
+                        부트스트랩은 웹 페이지 개발 시 화면을 쉽고 일관성있게 구현할 수 있도록<br>
+                        Twitter에서 개발한 Framework입니다.<br><br>
+
+                        각종 layout, button, input등의 Component를<br>
+                        HTML, CSS, Javascript (+jQuery)로 만들어 두어<br>
+                        개발자가 사용할 수 있도록 제공합니다.
+                    </p>
+                    <p class="text-center">
+                        <a href="https://getbootstrap.com/" class="btn btn-primary btn-lg">BootStrap 공식사이트</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Javascript란?</h3>
+                <p>
+                    웹 브라우저에서 많이 사용하는 인터프리터 방식의 객체지향 프로그래밍 언어.<br>
+                    ECMA 스크립트 표준을 따르는 대표적인 웹 기술이다.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h3>jQuery란?</h3>
+                <p>
+                    기존 복잡했던 클라이언트 측 HTML 스크립팅을 간소화 하기위해 고안된 Javascript 라이브러리로
+                    적은양의 코드로 빠르고, 풍부한 기능을 제공함.
+                </p>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="row" id="footer">
+            <div class="col-md-12">
+                <h3 class="text-center">Footer 영역</h3>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- 이 3개의 라이브러리가 용량이 크기 때문에 head에 넣어놓으면 로딩이 오래걸림.. 그래서 body 밑에둠 -->
+</body>
+
+</html>
