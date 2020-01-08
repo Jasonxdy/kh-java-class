@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>1_Servlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- TestServlet1 -->
+<!-- servlet을 정의하는 태그 -->
+  <servlet>
+  	<servlet-name>TestServlet1</servlet-name>
+<!-- servlet 이름 설정 : 보통 클래스명과 같이 하는 것이 관례-->
+  	<servlet-class>com.kh.servlet.TestServlet1</servlet-class>
+<!-- 해당 servlet이 저장된 경로 지정 -->
+  </servlet>
+
+<!-- HTML로부터 넘어온 요청을 어떤 servlet에 연결할지 정의해주는 태그 -->
+  <servlet-mapping>
+  	<servlet-name>TestServlet1</servlet-name>
+<!-- 해당 servlet-name을 지닌 servlet으로 처리해줄 것 -->
+  	<url-pattern>/testServlet1.do</url-pattern>
+<!-- 해당 action이 들어온 경우 (위로 이동) -->
+  	<!-- /testServlet1.do의 요청이 들어오면 해당 servlet을 연결(?) -->
+  </servlet-mapping>
+ 
+<!-- 해당 경로를 거치면 servlet에 request의 형태로 전달됨 -->
