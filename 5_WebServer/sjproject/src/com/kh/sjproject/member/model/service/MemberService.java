@@ -20,7 +20,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		Member loginMember = new MemberDAO().loginMember(conn, member);
 		
-		return null;
+		return loginMember;
 	}
 
 }

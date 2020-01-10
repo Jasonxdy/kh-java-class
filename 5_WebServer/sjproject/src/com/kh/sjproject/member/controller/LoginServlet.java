@@ -40,8 +40,21 @@ public class LoginServlet extends HttpServlet {
 			// login 기능을 수행할 메소드 호출 + 결과값 반환 받기
 			Member loginMember = new MemberService().loginMember(member);
 			
-		} catch (Exception e) {
+			// 로그인 동작 여부 확인 Test
+//			System.out.println("loginMember : " + loginMember);
 			
+			// 응답 데이터 문자 인코딩 처리
+			response.setContentType("text/html; charset=UTF-8");
+			
+			// 메인 페이지로 이동
+			// sendRedirect() <-> forward()
+			// sendRedirect()는 주소가 지정한 url로 변환되고
+			// --> 갱신이 되었다는 의미
+			// --> 갱신이 되면 request, response 객체 새로 생성됨.
+			response.sendRedirect(request.getContextPath());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
