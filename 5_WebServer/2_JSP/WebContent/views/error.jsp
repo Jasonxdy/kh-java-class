@@ -11,6 +11,8 @@
 <body>
 
 <h1 style="color: red">!! 에러 발생 !!</h1>
+<%= exception %>
+<!-- 이런식으로 에러 내용 확인도 가능 -->
 
 </body>
 </html>

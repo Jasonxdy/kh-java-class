@@ -90,8 +90,16 @@
                 <div class="col-md-4">
                     <h2>JSP - 2</h2>
                     <p>
-                        
-                    	
+                        페이지 지시자<br>
+                        JSP 맨 윗 부분에는 JSP 파일의 속성을 기술하는
+                        page 지시어(지시자)가 존재함.<br>
+
+                        language : 사용할 스클비트 언어 유형 지정<br>
+                        contentType : 웹 브라우저가 받아 볼 페이지의 형식, 인코딩 지정<br>
+                        pageEncoding : JSP 파일에 기록된 자바코드의 인코딩 방식 지정<br>
+                        import : Java의 import와 같이 타 클래스 사용 시 추가<br>
+                        errorPage : 해당 JSP에서 오류 발생 시 이동할 에러 페이지 지정<br>
+                        isErrorPage : 해당 JSP가 오류 처리 전용 페이지임을 지정
                     </p>
                     <p>
                         <a class="btn btn-secondary" href="views/02_directivePage.jsp" role="button">View
@@ -99,35 +107,34 @@
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <h2>Servlet - 3 (비즈니스 로직)</h2>
+                    <h2>JSP - 3</h2>
                     <p>
-                    	<!-- 비즈니스 로직 : 데이터 가공, DB에서 값을 얻어오는 것 등, 기능과 관련된 모든 것들-->
-                    	Servlet은 Java Class이기 때문에 비즈니스 로직(데이터 가공, DB 접근 등의 기능 수행을 위한 로직) 수행이
-                    	Front 관련 기술들 (HTML, Javascript, jQeury)보다 간편하고 효율적이다.<br>
-                    	
+                        include<br>
+                        정적 include 방식으로 페이지 내에 include한 소스 코드가
+                        단순 텍스트로 그대로 복사되어 포함된다.<br>
+                        <!-- 단순 텍스트로 그대로 jsp파일이 넘어와서 전체적으로 넘어온 상태로
+                            전체 컴파일되므로 정적 (프로그램 구동 중엔 변하지 않음) -->
+                        
+                        include한 페이지 코드 내부에 변수가 선언되어 있다면
+                        베이스가 되는 페이지의 변수와 충돌이 날 수 있으므로 유의해야함.<br>
+
+                        include 페이지 내의 import는 베이스와 다른 include 페이지와 공유된다.<br>
+
+                        include는 페이지를 조각내어 필요한 부분에 삽입할 때 주로 사용된다.<br>
                     </p>
                     <p>
-                        <a class="btn btn-secondary" href="views/testServlet3.html" role="button">View
+                        <a class="btn btn-secondary" href="views/03_include.jsp" role="button">View
                             details &raquo;</a>
                     </p>
                 </div>
                 
                 <div class="col-md-12">
-                    <h2>Servlet - 4 (Servlet + JSP)</h2>
+                    <h2>Servlet + JSP</h2>
                     <p>
-                    	Servlet은 응답 화면에 표현될 HTML 코드를 프로그램적으로 작성한다.<br>
-                    	이로 인해 생기는 단점은 비즈니스 로직과 화면 구현 디자인 코드가 같이 있어
-                    	가독성이 떨어지고 개발이 어려워진다.<br>
-                    	
-                    	이러한 구조는 협업을 중요시 하는 개발자들의 입장에서 좋지 않은 코딩 방법으로
-                    	비즈니스 로직과 디자인은 분리되는 것이 좋다.<br>
-                    	<!-- back-end 개발자와 front-end 개발자의 분리 -->
-                    	
-                    	또한 Servlet에서 HTML 코드를 수정하는 경우 재 컴파일을 위해
-                    	서버를 재시동 해야하는 문제가 있고, HTML에는 서버에서 얻어온 정보를 동적으로 반영하기 힘들다.
+                        피자 주문 기능
                     </p>
                     <p>
-                        <a class="btn btn-secondary" href="views/testServlet4.html" role="button">View
+                        <a class="btn btn-secondary" href="views/04_pizza.jsp" role="button">View
                             details &raquo;</a>
                     </p>
                 </div>
