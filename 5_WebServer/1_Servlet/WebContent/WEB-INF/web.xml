@@ -5,22 +5,45 @@
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   
-  <!-- TestServlet1 -->
-<!-- servlet을 정의하는 태그 -->
   <servlet>
-  	<servlet-name>TestServlet1</servlet-name>
-<!-- servlet 이름 설정 : 보통 클래스명과 같이 하는 것이 관례-->
-  	<servlet-class>com.kh.servlet.TestServlet1</servlet-class>
-<!-- 해당 servlet이 저장된 경로 지정 -->
+    <servlet-name>TestServlet1</servlet-name>
+    <servlet-class>com.kh.servlet.TestServlet1</servlet-class>
   </servlet>
-
-<!-- HTML로부터 넘어온 요청을 어떤 servlet에 연결할지 정의해주는 태그 -->
+  
   <servlet-mapping>
-  	<servlet-name>TestServlet1</servlet-name>
-<!-- 해당 servlet-name을 지닌 servlet으로 처리해줄 것 -->
-  	<url-pattern>/testServlet1.do</url-pattern>
-<!-- 해당 action이 들어온 경우 (위로 이동) -->
-  	<!-- /testServlet1.do의 요청이 들어오면 해당 servlet을 연결(?) -->
+    <servlet-name>TestServlet1</servlet-name>
+    <url-pattern>/testServlet1.do</url-pattern>
   </servlet-mapping>
- 
-<!-- 해당 경로를 거치면 servlet에 request의 형태로 전달됨 -->
+  
+  <servlet>
+    <servlet-name>TestServlet2</servlet-name>
+    <servlet-class>com.kh.servlet.TestServlet2</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet2</servlet-name>
+    <url-pattern>/testServlet2.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>TestServlet3</servlet-name>
+  	<servlet-class>com.kh.servlet.TestServlet3</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>TestServlet3</servlet-name>
+  	<url-pattern>/testServlet3.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>TestServlet4</servlet-name>
+  	<servlet-class>com.kh.servlet.TestServlet4</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>TestServlet4</servlet-name>
+  	<url-pattern>/testServlet4.do</url-pattern>
+  </servlet-mapping>
+  
+  
+</web-app>

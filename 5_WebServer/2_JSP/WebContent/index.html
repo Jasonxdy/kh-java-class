@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>1_Servlet</title>
+    <title>2_JSP</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -41,17 +41,20 @@
         
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-3">Hello, Servlet world!</h1>
+                <h1 class="display-3">Hello, JSP world!</h1>
                 <p>
-                	서블릿이란, 웹 서비스를 위한 자바 클래스를 말하며, 자바를 사용해 웹을 만들기 위해 필요한 기술로
-                	javax.servlet.http.HttpServlet 클래스를 상속 받는다. <br>
-                	
-                	다시 말해 기존의 java 파일에 웹 페이지 구현을 위한 html이 들어간 구조라고 볼 수 있다.<br>
-                	
-                	서블릿은 클라이언트의 요청을 처리하고 그 결과를 HTML을 사용하여 요청에 대한
-                	응답을 다시 클라이언트에게 전달하는 구현 규칙이 있다.<br>
-                	단, servlet에 작성된 HTML 코드 변경 시 재 컴파일 해야 한다는 단점이 있다.
-                
+                    JSP (Java Server Page)란,
+                    Java 코드가 들어가 있는 HTML 코드를 말하며 서블릿의 복잡함을 간단하게 작성,
+                    해결할 수 있다.<br>
+
+                    JSP의 가장 큰 장점은 Servlet에서 비즈니스 로직(Java)과 프레젠테이션 로직(HTML)을
+                    분리할 수 있다는 것이다.<br>
+
+                    프로그래머가 직접 Servlet에 코딩한 것보다 더욱 최적화된 형태의 Servlet을 생성해줌.<br>
+
+                    웹 애플리케이션 상에서 변수의 사용 가능한 범위 설정이 쉽다.<br>
+
+
                 </p>
                 <p>
                     <a class="btn btn-primary btn-lg" href="https://www.google.com/search?newwindow=1&rlz=1C1QJDB_enKR845KR845&ei=NGUVXo6KKMf7-Qa7no3oBA&q=servlet%EC%9D%B4%EB%9E%80&oq=servlet%EC%9D%B4%EB%9E%80&gs_l=psy-ab.3..0j0i5i30l3.0.0..24321...0.0..0.104.207.0j2......0......gws-wiz.......0i7i30.AhHyIDhDQfk&ved=0ahUKEwiO9Jq8n_PmAhXHfd4KHTtPA00Q4dUDCAs&uact=5" role="button">Learn
@@ -59,45 +62,39 @@
                 </p>
             </div>
         </div>
-    
+        
         <div class="container">
             <!-- Example row of columns -->
             <div class="row">
                 <div class="col-md-4">
-                    <h2>Servlet - 1 (GET)</h2>
+                    <h2>JSP - 1</h2>
                     <p>
-                    	GET방식은 URL에 변수(데이터)를 포함시켜 요청하는 것으로 
-                    	보안 유지가 불가능하다.<br>
-                    	
-                    	따라서 로그인, 회원가입 등의 경우는 GET 방식으로 요청하는 것은 부적합함.<br>
-                    	
-                    	GET 방식은 데이터를 HTTP Header에 포함하여 전송하는데
-                    	이 경우 보통 Body는 비어있는 상태로 전송이 됨.<br>
-                    	
-                    	Header에는 들어갈 수 있는 데이터의 길이에 제한이 있으며 
-                    	초과되는 경우 데이터가 절단된다.<br>
-                    	
-                    	GET 방식은 캐싱(즐겨찾기, 북마크, 링크공유)가 가능하다.<br>
+                        스크립팅 원소(Scripting Element)는
+                        JSP 페이지에서 자바 코드를 직접 기술할 수 있게 해주는 기능.<br>
+
+                        1. &lt;%!  %&gt; (선언문) : 
+                            멤버변수, 메소드를 선언하기 위해 사용된다. <br>
+
+                        2. &lt;%  %&gt; (스크립틀릿, scriptlet) : 
+                            JSP에서 자바코드 사용을 가능하게 해줌.
+
+                        3. &lt;%=  %&gt; (표현식, expression) :
+                            Java에서 작성한 변수, 결과값을 출력하기 위해 사용된다.
+
                     </p>
                     <p>
-                        <a class="btn btn-secondary" href="views/testServlet1.html" role="button">View
+                        <a class="btn btn-secondary" href="views/01_sum.jsp" role="button">View
                             details &raquo;</a>
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <h2>Servlet - 2 (Post)</h2>
+                    <h2>JSP - 2</h2>
                     <p>
-                    	POST 방식은 URL에 변수(데이터)를 노출하지 않고 요청하는 것으로 보안 유지가 가능하다.<br>
-                    	
-                    	HTTP Body에 데이터를 포함하여 전송하므로 데이터 길이에 제한은 없지만,
-                    	대신 최대 요청 받는시간(Time Out)이 존재해 페이지 요청에 대해 기다리는 시간이 있음.<br>
-                    	<!-- 보통 이런 경우는 티켓팅,, 요청시간이 지났다 등등 -->
-                    	
-                    	POST 방식은 URL에 데이터가 노출이 되지 않으므로 캐싱 불가능.
+                        
                     	
                     </p>
                     <p>
-                        <a class="btn btn-secondary" href="views/testServlet2.html" role="button">View
+                        <a class="btn btn-secondary" href="views/02_directivePage.jsp" role="button">View
                             details &raquo;</a>
                     </p>
                 </div>
