@@ -23,4 +23,16 @@ public class MemberService {
 		return loginMember;
 	}
 
+	/**
+	 * 아이디 중복 확인용 Service
+	 * @param id : String
+	 * @return result : int
+	 * @throws Exception
+	 */
+	public int idDupCheck(String id) throws Exception {
+		
+		Connection conn = getConnection();
+		return new MemberDAO().idDupCheck(conn, id);
+	}
+
 }

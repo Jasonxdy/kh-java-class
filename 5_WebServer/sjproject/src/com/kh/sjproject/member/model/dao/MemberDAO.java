@@ -72,4 +72,35 @@ public class MemberDAO {
 		return loginMember;
 	}
 
+	/**
+	 * 아이디 중복체크 확인용 DAO
+	 * @param conn : Connection
+	 * @param id : String
+	 * @return result : int
+	 * @throws Exception
+	 */
+	public int idDupCheck(Connection conn, String id) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("idDupCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+//				1번째 열의 값을 가져오기
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
