@@ -103,4 +103,102 @@ public class MemberDAO {
 		return result;
 	}
 
+	/**
+	 * 회원 가입용 DAO
+	 * @param conn : Connection
+	 * @param member : Member
+	 * @return result : int
+	 * @throws Exception
+	 */
+	public int signUp(Connection conn, Member member) throws Exception{
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("signUp");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPwd());
+			pstmt.setString(3, member.getMemberName());
+			pstmt.setString(4, member.getMemberPhone());
+			pstmt.setString(5, member.getMemberEmail());
+			pstmt.setString(6, member.getMemberAddress());
+			pstmt.setString(7, member.getMemberInterest());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/**
+	 * 회원 정보 조회용 DAO
+	 * @param conn : Connection
+	 * @param memberId : String
+	 * @return selectMebmer : Member
+	 * @throws Exception
+	 */
+	public Member selectMember(Connection conn, String memberId) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		Member selectMember = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, memberId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				selectMember = 	new Member(rset.getInt("MEMBER_NO"),
+								rset.getString("MEMBER_ID"),
+								rset.getString("MEMBER_NM"),
+								rset.getString("MEMBER_PHONE"),
+								rset.getString("MEMBER_EMAIL"),
+								rset.getString("MEMBER_ADDR"),
+								rset.getString("MEMBER_INTEREST"));
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return selectMember;
+	}
+
+	/**
+	 * 회원 정보 수정용 DAO
+	 * @param conn : Connection
+	 * @param member : Member
+	 * @return result : int
+	 */
+	public int updateMember(Connection conn, Member member) throws Exception{
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberPhone());
+			pstmt.setString(2, member.getMemberEmail());
+			pstmt.setString(3, member.getMemberAddress());
+			pstmt.setString(4, member.getMemberInterest());
+			pstmt.setString(5, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

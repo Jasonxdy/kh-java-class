@@ -30,7 +30,9 @@
             <div class="col-md-6 offset-md-3">
 
                 <form method="POST" action="signUp.do" class="needs-validation" name="signUpForm" onsubmit="return validate();">
-				<%-- action="<%=request.getContextPath() %>/member/signUp.do" --%>
+				<%-- signUp.do를 그냥 써도 되는 이유 : 상대경로 사용 시 앞에 슬래시 '/' 없이 사용하는 경우 같은 경로 내 다른 경로 호출하는 것임 --%>
+				<%-- 따라서 action="<%=request.getContextPath() %>/member/signUp.do"(절대경로)와 동일! --%>
+				<%-- 이때 Header의 경우 URL이 계속 이동해도 고정되어 있고 보통 URL은 Content의 주소를 따라가기 때문에 Header는 절대경로를 사용하는 것이 좋다--%>
 				
                     <!-- 아이디 -->
                     <div class="row mb-3 form-row">
@@ -289,11 +291,11 @@
 				if(!regExp.test($pwd1.val())){
 					$("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다.")
 					.css("color", "red");
-					signUpCheck.pwd = false;
+					signUpCheck.pwd1 = false;
 				} else {
 					$("#checkPwd1").text("유효한 형식의 비밀번호입니다.")
 					.css("color","green");
-					signUpCheck.pwd = true;
+					signUpCheck.pwd1 = true;
 				}
 			});		
 			
@@ -303,11 +305,11 @@
 				if($pwd1.val().trim() != $pwd2.val().trim()){
 					$("#checkPwd2").text("비밀번호가 일치하지 않습니다")
 					.css("color", "red");
-					signUpCheck.name = false;
+					signUpCheck.pwd2 = true;
 				} else {
 					$("#checkPwd2").text("비밀번호가 일치합니다")
 					.css("color","green");
-					signUpCheck.name = true;
+					signUpCheck.pwd2 = true;
 				}
 			});		
 			
@@ -321,9 +323,11 @@
 				if(!regExp.test($name.val())){
 					$("#checkName").text("이름 형식이 유효하지 않습니다.")
 					.css("color", "red");
+					signUpCheck.name = false;
 				} else {
 					$("#checkName").text("유효한 형식의 이름입니다.")
 					.css("color","green");
+					signUpCheck.name = true;
 				}
 			});		
 			
@@ -365,9 +369,11 @@
 				if(!regExp.test($email.val())){
 					$("#checkEmail").text("이메일 형식이 유효하지 않습니다.")
 					.css("color", "red");
+                	signUpCheck.email = true;
 				} else {
 					$("#checkEmail").text("유효한 형식의 이메일입니다.")
 					.css("color","green");
+                	signUpCheck.email = true;
 				}
 			});		
 			
@@ -391,6 +397,8 @@
 				}
 			}
 		}
+		
+		
 		
         </script>
 		

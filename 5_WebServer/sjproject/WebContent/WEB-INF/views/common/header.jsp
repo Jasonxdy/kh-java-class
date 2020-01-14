@@ -88,7 +88,7 @@
 			<% } else {%>
 				<div class="d-flex justify-content-end align-items-center">
 					<%= loginMember.getMemberName() %>님 환영합니다.&nbsp;
-					<a href="#" role="button" class="btn btn-sm btn-outline-secondary">
+					<a href="<%= request.getContextPath() %>/member/mypage.do" role="button" class="btn btn-sm btn-outline-secondary">
 						마이페이지
 					</a>
 					&nbsp;

@@ -46,14 +46,54 @@ public class Member {
 		this.memberGrade = memberGrade;
 	}
 	
-	
+	// 회원 가입용 생성자
+	public Member(String memberId, String memberPwd, String memberName, String memberPhone, String memberEmail,
+			String memberAddress, String memberInterest) {
+		super();
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+		this.memberInterest = memberInterest;
+	}
 
 	
+	// 회원 정보 조회용 생성자
+	public Member(int memberNo, String memberId, String memberName, String memberPhone, String memberEmail,
+			String memberAddress, String memberInterest) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+		this.memberInterest = memberInterest;
+	}
+
+
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String memberPhone,
 			String memberEmail, String memberAddress, String memberInterest, Date memberEnrollDate, String memberStatus,
 			String memberGrade) {
 		this(memberNo, memberId, memberName, memberPhone, memberEmail, memberAddress, memberInterest, memberEnrollDate, memberStatus, memberGrade);
 		this.memberPwd = memberPwd;
+	}
+	
+	
+
+
+
+	// 회원 정보 수정용 생성자
+	public Member(String memberId, String memberPhone, String memberEmail, String memberAddress,
+			String memberInterest) {
+		super();
+		this.memberId = memberId;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
+		this.memberAddress = memberAddress;
+		this.memberInterest = memberInterest;
 	}
 
 
