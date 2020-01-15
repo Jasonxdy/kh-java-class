@@ -201,4 +201,91 @@ public class MemberDAO {
 		return result;
 	}
 
+	/**
+	 * 현재 비밀번호 일치여부 확인용 DAO
+	 * @param conn : Connection
+	 * @param loginMember : Member
+	 * @return result :int
+	 * @throws Exception
+	 */
+	public int checkPwd(Connection conn, Member loginMember) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("checkPwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginMember.getMemberId());
+			pstmt.setString(2, loginMember.getMemberPwd());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 비밀번호 수정용 DAO
+	 * @param conn : Connection
+	 * @param loginMember : Member
+	 * @return result : int
+	 */
+	public int updatePwd(Connection conn, Member loginMember) throws Exception {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, loginMember.getMemberPwd());
+			pstmt.setString(2, loginMember.getMemberId());
+			
+			result = pstmt.executeUpdate();
+		
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
+	/**
+	 * 회원 탈퇴용 DAO
+	 * @param conn : Connection
+	 * @param memberId : String
+	 * @return result :int
+	 * @throws Exception
+	 */
+	public int deleteMember(Connection conn, String memberId) throws Exception {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

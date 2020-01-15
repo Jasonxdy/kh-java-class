@@ -1,3 +1,38 @@
+@font-face{
+  font-family: 'Sunflower';
+  src:url("Sunflower-Medium.ttf");
+}
+
+@media(max-width: 1400px){
+  #sidebarAll div{
+  width: 200px;
+  }
+  #demo div{
+    min-width: 1400px;
+    /* min-height: 100vh; */
+  }
+ 
+
+}
+
+@media(min-width: 1400px){
+  #sidebarAll{
+  width: 300px;
+  }
+  #demo{
+    max-width: 1600px;
+    /* height: 100vh; */
+  }
+}
+
+#demo{
+  position: absolute;
+}
+
+#demo div{
+  width: 100%;
+}
+
 #sidebarAll a{
     color: black;
     font-family: 'Sunflower', sans-serif;
@@ -7,7 +42,11 @@
 }
 
 #sidebarAll a:hover{
-    background-color:khaki
+    background-color:khaki;
+}
+
+#logo:hover{
+  background-color: white !important;
 }
 
 body{
@@ -20,13 +59,17 @@ container-fluid{
 }
 
 #sidebarAll{
-    opacity: 0.6;
+    opacity: 0.9;
     position: relative;
     height: 80%;
 }
 
 #header{
   height: 10%;
+}
+
+.btn-secondary{
+  border-color: rgba(255, 255, 255, 0);
 }
 
 #content{
@@ -87,6 +130,15 @@ sidebar-heading{
 #dropdown-menu a{
     color:black;
 }
+
+
+/* .container{
+  width: 800px;
+  max-width: none !important;
+} */
+/* @media screen and (max-width: 768px) { 
+  body { background-color: lightgreen; } 
+} */
 
 
 

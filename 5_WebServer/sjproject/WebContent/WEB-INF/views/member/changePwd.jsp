@@ -22,14 +22,15 @@
 				<h3>비밀번호 변경</h3>
 				<hr>
 				<div class="bg-white rounded shadow-sm container p-3">
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" role="form" method="post" 
+					action="updatePwd.do" onsubmit="return validate();">
 						<!-- 아이디 -->
 						<div class="row mb-3 form-row">
 							<div class="col-md-3">
 								<h6>아이디</h6>
 							</div>
 							<div class="col-md-6">
-								<h5 id="id">세션에 저장된 아이디</h5>
+								<h5 id="id"><%= loginMember.getMemberId() %></h5>
 							</div>
 						</div>
 
@@ -40,7 +41,7 @@
 								<h6>현재 비밀번호</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control" id="currentPwd"
+								<input type="password" class="form-control" id="currentPwd"
 									name="currentPwd">
 							</div>
 						</div>
@@ -51,7 +52,7 @@
 								<h6>새 비밀번호</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control" id="newPwd1"
+								<input type="password" class="form-control" id="newPwd1"
 									name="newPwd1">
 							</div>
 						</div>
@@ -62,7 +63,7 @@
 								<h6>새 비밀번호 확인</h6>
 							</div>
 							<div class="col-md-6">
-								<input type="text" class="form-control" id="newPwd2"
+								<input type="password" class="form-control" id="newPwd2"
 									name="newPwd2">
 							</div>
 						</div>
@@ -104,16 +105,32 @@
 
 		// submit 동작
 		function validate() {
-
-			for ( var key in singUpCheck) {
-				if (!singUpCheck[key]) {
-					alert("일부 입력값이 잘못되었습니다.");
-					var id = "#" + key;
-					$(id).focus();
-					return false;
-				}
+			// 비밀번호 유효성 검사
+			// 영어 대,소문자 + 숫자, 총 6~12글자
+			var regExp = /^[A-Za-z\d]{6,12}$/;
+			if(!regExp.test( $("#newPwd1").val() )){
+				alert("유효하지 않은 비밀번호 입니다.");
+				
+				$("newPwd1").val(""); // 칸 비워주기
+				$("newPwd1").focus(); // 커서 다시 올림
+				
+				return false;
 			}
+			
+			// 새 비밀번호 일치여부 확인
+			if($("#newPwd1").val() != $("#newPwd2").val()) {
+				alert("새 비밀번호가 일치하지 않습니다.");
+				
+				$("newPwd2").val(""); // 칸 비워주기
+				$("newPwd2").focus(); // 커서 다시 올림
+				return false;
+			}
+			
+			
 		}
+		
+		
+		
 		
 	</script>
 	

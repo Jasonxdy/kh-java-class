@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+
+  <title>Simple Sidebar - Start Bootstrap Template</title>
+
+  <style>
+    body {
+      /*overflow-x: hidden;*/
+
+      background-image: url("http://blogfiles.naver.net/MjAxNzA1MjJfMTI2/MDAxNDk1NDI0NTM1OTMz.yM2__BmEgLHczydXZuG2IEAvcc_o8IE5vzp1pW4hctQg.vyXHI2PiUPj8yyiAv_EhSGLVv6U2x8nj2OjxTFfVSNAg.JPEG.babymongdog/GettyImages-635988430.jpg");
+      background-attachment: fixed;
+      background-position: center;
+      background-size: cover;
+    }
+
+    #sidebar-wrapper {
+      /*position: fixed;*/
+      min-height: 100vh;
+      text-align: center;
+      margin-left: -15rem;
+      -webkit-transition: margin .25s ease-out;
+      -moz-transition: margin .25s ease-out;
+      -o-transition: margin .25s ease-out;
+      transition: margin .25s ease-out;
+    }
+
+    #sidebar-wrapper .sidebar-heading {
+      font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+      width: 15rem;
+    }
+
+    #page-content-wrapper {
+      min-width: 100vw;
+      /*padding-left: 15rem;*/
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: 0;
+    }
+
+    #list{
+      width: 100%;
+      position: relative;
+      display: block;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: -1px;
+      text-decoration: none;
+      z-index: 1;
+      color:black;
+    }
+
+    #list:hover{
+      color:gray;
+    }
+
+    .sidebar-divider {
+    margin: 1rem 1rem 1rem;
+    } 
+
+    #alram{
+      width: 3rem;
+      height: 3rem;
+    }
+
+    #footer{
+    height:5rem;
+    width: 100%;
+    background-color : lightgray;
+}
+
+    @media (min-width: 768px) {
+      #sidebar-wrapper {
+        margin-left: 0;
+      }
+
+      #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+      }
+    }
+    @media (max-width: 768px) {
+      #sidebar-wrapper {
+        margin-left: 0;
+      }
+
+      #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+        margin-left: 15rem;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right shadow" id="sidebar-wrapper">
+      
+      <div class="sidebar-heading pt-4 pb-5">
+        <a class="text-muted" href="#" id="">
+          <img class="img-fluid mx-auto" src="https://www.iei.or.kr/resources/images/common/top_logo.jpg" alt="">
+      </a>
+      </div>
+
+      <div class="pt-5 pb-5">
+        <a id="modal-120930" href="#modal-container-120930" role="button"
+          class="btn btn-sm btn-outline-secondary" data-toggle="modal">로그인</a>
+      </div>
+
+      <div class="list-group list-group-flush">
+        <a href="#" class="" id="list">찾아주세요</a>
+        <a href="#" class="" id="list">봤어요</a>
+        <a href="#" class="" id="list">입양</a>
+        <a href="#" class="" id="list">만남 그후</a>
+        <a href="#" class="" id="list">자유 게시판</a>
+        <hr class="sidebar-divider d-none d-md-block">
+        <a href="#" class="" id="list">Q & A</a>
+        <a href="#" class="" id="list">마이페이지</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar">
+        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <div class="float-right">
+        <a class="text-muted d-flex" href="#" id="alram">
+          <img class="img-fluid" src="https://image.flaticon.com/icons/svg/35/35006.svg" alt="">
+        </a>
+        </div>
+
+      </nav>
+
+      <div class="card bg-light text-black shadow ml-5 mt-4 mr-5 mb-5">
+        <div class="card-body">
+        <h1 class="mt-4">Simple Sidebar</h1>
+          <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+          <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+          
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+        </div>
+      </div>
+
+      <footer class="text-muted" id="footer">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p class="mt-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+          <p>New to Bootstrap? <a href="{{ site.url }}/">Visit the homepage</a> or read our <a href="{{ site.baseurl }}/docs/{{ site.docs_version }}/getting-started/introduction/">getting
+              started guide</a>.</p>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  
+  </div>
+  <!-- /#wrapper -->
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+    //   $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

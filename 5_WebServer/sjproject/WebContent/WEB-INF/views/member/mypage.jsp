@@ -32,8 +32,6 @@
 	}
 	
 	
-	
-	String updateMsg = (String)request.getAttribute("msg");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,11 +46,9 @@
 		margin: 0;
 	}
 </style>
+
 </head>
 <body>
-	<%if (updateMsg != null) {%>
-		alert("<%= updateMsg %>");
-	<% } %>
 	<div class="container">
 		<%@ include file="../common/header.jsp"%>
 		<%@ include file="../common/nav.jsp"%>

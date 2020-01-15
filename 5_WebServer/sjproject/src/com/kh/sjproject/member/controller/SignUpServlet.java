@@ -23,7 +23,7 @@ public class SignUpServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 1. POST 방식 + 한글 데이터 포함 -> 인코딩 설정
-		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
 		
 		// 2. 전달된 파라미터를 변수에 저장 후 Member 객체를 생성하여 저장
 		
@@ -44,10 +44,14 @@ public class SignUpServlet extends HttpServlet {
 		String memberInterest = null;
 		if(interest != null) memberInterest = String.join(",", interest);
 		
+		Member member = new Member(memberId, memberPwd, memberName, memberPhone, memberEmail, memberAddress, memberInterest);
+		
+		System.out.println(member);
 		
 		// 3. 비즈니스 로직을 수행하여 DB에 회원정보 저장
 		try {
-			int result = new MemberService().signUp(new Member(memberId, memberPwd, memberName, memberPhone, memberEmail, memberAddress, memberInterest));
+			int result = new MemberService().signUp(member);
+			
 			
 			// 4. result 값에 따라 경고창에 메세지 출력
 			String msg = null;

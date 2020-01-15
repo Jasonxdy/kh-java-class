@@ -6,6 +6,25 @@
 	String msg = (String)session.getAttribute("msg");
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	
+	// C6) 쿠키 사용을 위한 변수 생성
+	boolean save = false; // 아이디 저장 체크박스 값을 수정하기 위한 변수
+	String saveId = ""; // 쿠키에 저장된 saveId라는 키가 가지고 있는 값을 저장할 변수
+	Cookie[] cookies = request.getCookies(); //  전달받은 쿠키 저장 (key:value 값으로 ??)
+	
+	// 서버 첫 시작시 request.getCookies()의 값이 null
+	// -> if문으로 처리하지 않는 경우 페이지 로딩 시 NullPointerException이 발생됨
+	if(cookies != null) {
+		
+		for(Cookie c : cookies) {
+			// 쿠키 객체에서 name을 얻어와 그 값이 "saveId"와 같은지 비교
+			//			== key, 속성 
+			if(c.getName().equals("saveId")){
+				saveId = c.getValue();
+				save = true;
+			}
+		}
+	}
+	
 %>
 
 <!DOCTYPE html>
@@ -63,12 +82,14 @@
 									onsubmit="return loginValidate();"																		
 								>
 									<input type="text" class="form-control" id="memberId" name="memberId"
-										placeholder="아이디"> <br> 
+										placeholder="아이디" value=<%= saveId %>> <br> 
 									<input type="password" class="form-control" id="memberPwd" name="memberPwd"
 										placeholder="비밀번호"> <br>
 									<div class="checkbox mb-3">
-										<label> <input type="checkbox"> 아이디 저장
+										
+										<label> <input type="checkbox" id="save" name="save" <%= save ? "checked" : "" %>> 아이디 저장
 										</label>
+										
 									</div>
 									<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 									<a class="btn btn-lg btn-secondary btn-block" href="<%= request.getContextPath() %>/member/signUpForm.do">회원가입</a>
