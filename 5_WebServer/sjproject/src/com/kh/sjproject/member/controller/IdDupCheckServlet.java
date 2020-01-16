@@ -1,6 +1,7 @@
 package com.kh.sjproject.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,13 +31,22 @@ public class IdDupCheckServlet extends HttpServlet {
 		try {
 			int result = new MemberService().idDupCheck(id);
 			
-			request.setAttribute("result", result);
-			request.setAttribute("id", id);
 			
+			// ajax로 처리하기 때문에 주석처리!
+//			request.setAttribute("result", result);
+//			request.setAttribute("id", id);
+//			
+//			
+//			
+//			RequestDispatcher view = request.getRequestDispatcher("idDupForm.do");
+//			view.forward(request, response);
 			
+			// ajax로 처리하기
 			
-			RequestDispatcher view = request.getRequestDispatcher("idDupForm.do");
-			view.forward(request, response);
+			PrintWriter out = response.getWriter();
+			
+			if(result > 0) out.append("no"); // 중복 아이디 있음
+			else			out.append("yes"); // 중복 아이디 없음
 			
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", "아이디 중복 확인 과정에서 오류가 발생하였습니다.");

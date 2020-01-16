@@ -41,15 +41,14 @@
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="id" id="id" maxlength="12" placeholder="아이디를 입력하세요" autocomplete="off" required>
+                            <input type="hidden" name="idDup" id="idDup" value="false">
                             <!-- required : 필수 입력 항목으로 지정 -->
                             <!-- autocomplete="off" : input 태그 자동완성 기능을 끔 -->
                         </div>
-                        
-                        <!-- 필요 없어져서 삭제 (signUpForm_origin으로 넘어감) -->
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <button type="button" class="btn btn-primary" id="idDupCheck">중복검사</button>
-                            duplicate - 중복의
-                        </div> -->
+                            <!-- duplicate - 중복의 -->
+                        </div>
                         
                         <div class="col-md-6 offset-md-3">
                             <span id="checkId">&nbsp;</span>
@@ -272,46 +271,17 @@
 					.css("color", "red");
 					signUpCheck.id = false;
 				} else {
-					/* $("#checkId").text("유효한 형식의 아이디입니다.")
-					.css("color","green") */
+					$("#checkId").text("유효한 형식의 아이디입니다.")
+					.css("color","green")
 					signUpCheck.id = true;
-					// 유효 X, 사용 X, 사용 O -> ajax를 이용하여 재구성 할 것들
-					
-					// ajax를 이용한 실시간 아이디 중복검사
-					$.ajax({
-						url : "idDupCheck.do",
-						data : {id : $id.val()},
-						type : "GET",
-						success  : function(result){
-							if(result == "yes") {
-								$("#checkId").text("사용 가능한 아이디입니다.")
-								.css("color", "green");
-								
-								signUpCheck.idDup = true;
-							} else {
-								$("#checkId").text("사용할 수 없는 아이디입니다.")
-								.css("color", "red");
-								
-								signUpCheck.idDup = false;
-							}
-							
-						},
-						error : function(e){
-							console.log("아이디 중복검사 ajax 실패...ㅠㅠ");	
-							console.log(e);	
-							
-						}
-					});
-					
 				}
-			});
-			// ajax 이용으로 삭제
-			/* // 아이디 중복 체크창 오픈
+			});		
+			// 아이디 중복 체크창 오픈
 			$("#idDupCheck").click(function(){
 				window.open("idDupForm.do", "idDupForm", "width=400, height=300");
 				//			  팝업창 주소		   팝업창 이름	     설정
 				
-			}); */
+			});
 			
 			// 비밀번호  유효성 검사
 			//영어 대,소문자 + 숫자, 총 6~12글자
@@ -414,10 +384,9 @@
 		// submit 동작
 		function validate(){
 			
-			// ajax 사용으로 인한 삭제
 			// 아이디 중복 검사 결과
-			/* if( $("#idDup").val() == "true")	signUpCheck.idDup = true;
-			else				  				signUpCheck.idDup = false; */
+			if( $("#idDup").val() == "true")	signUpCheck.idDup = true;
+			else				  				signUpCheck.idDup = false;
 			
 			for(var key in signUpCheck){
 				if(!signUpCheck[key]){
