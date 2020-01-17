@@ -108,7 +108,13 @@ public class LoginServlet extends HttpServlet {
 			// sendRedirect()는 주소가 지정한 url로 변환되고
 			// --> 갱신이 되었다는 의미
 			// --> 갱신이 되면 request, response 객체 새로 생성됨.
-			response.sendRedirect(request.getContextPath());
+//			response.sendRedirect(request.getContextPath()); // 메인으로 돌아가기
+			
+			response.sendRedirect(request.getHeader("referer"));
+			// referer : 웹 브라우저가 방문한 사이트의 흔적을 저장하고 있음
+			// request.getHeader("referer") : 바로 이전 페이지 uri 반환
+			
+			
 
 		} catch (Exception e) {
 			request.setAttribute("errorMsg", "로그인 과정에서 오류가 발생하였습니다.");

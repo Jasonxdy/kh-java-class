@@ -17,15 +17,40 @@
 
 <body>
 
-  <!-- 전체 container div -->
+
+  <!-- ---
+        layout: examples
+        title: Dashboard Template
+        extra_css: "dashboard.css"
+        extra_js:
+          - "https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"
+          - "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"
+          - "dashboard.js"
+        --- -->
+
+  <!-- <div class="navbar navbar-white fixed-top bg-white flex-md-nowrap p-0 shadow bg-transparent">
+            <ul class="navbar-nav px-3">
+              <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">
+                    <img src="img/alert_icon.png" width="5%" height="10%">
+                </a>
+              </li>
+            </ul>
+          </div>
+         -->
+
+
+
+
+
+
   <div class="container-fluid">
 
-    <!-- 화면 분할 row div start -->
     <div class="row">
 
-      <div class="d-md-block bg-white sidebar" id="sidebarAll" style="height: 900px;">
+      <div class="d-md-block bg-white sidebar" id="sidebarAll" style="z-index: 1000;">
 
-        <div class="sidebar-sticky" id="sidebarAll">
+        <div class="sidebar-sticky" id="sidebarAll" style="height: 800px;">
 
           <table class="table-responsive">
 
@@ -72,48 +97,113 @@
                 </a>
               </li>
 
-              <li class="nav-item mb-5">
+              <li class="nav-item mb-3">
                 <a class="nav-link  text-center" href="#">
                   자유게시판
                 </a>
               </li>
 
             </ul>
-
-
             <div class="text-center">——————————</div>
 
 
-            <ul class="nav flex-column mt-5 text-center">
+            <ul class="nav flex-column text-center mt-3">
               <li class="nav-item">
                 <a class="nav-link  text-center" href="#">
                   Q&A
                 </a>
               </li>
 
-              <li class="nav-item mt-4">
+              <li class="nav-item">
                 <a class="nav-link  text-center" href="#">
                   마이페이지
                   <!-- 로그인 전 화면인데 마이페이지 구현? -->
                 </a>
               </li>
             </ul>
+
+
           </table>
         </div>
       </div>
 
-      
 
-      <!-- 마이페이지 content 시작 -->
-      <div id="mypage-wrapper">
-        <div class="row" id="">
+      <!-- 마이페이지 내용 작성 -->
+      <div class="container-fluid d-md-block" id="mypage-wrapper">
+
+        <!--  마이페이지 Header start -->
+        <div class="row ml-4 w-100 " id="mypage-header">
+          <h1 style="font-weight: bold;">마이페이지</h1>
+          <!-- 마이페이지 Header nav -->
+          <div class="row w-100">
+            <ul class="nav" id="mypage-nav">
+              <li class="nav-item">
+                <h5><a class="nav-link" href="#">프로필</a></h5>
+              </li>
+              <li class="nav-item">
+                <h5>
+                  <a class="nav-link" href="#">작성한 글</a>
+                </h5>
+              </li>
+              <li class="nav-item">
+                <h5>
+                  <a class="nav-link" href="#">작성한 댓글</a>
+                </h5>
+              </li>
+              <li class="nav-item">
+                <h5>
+                  <a class="nav-link" href="#">나의 관심펫</a>
+                </h5>
+              </li>
+              <li class="nav-item">
+                <h5>
+                  <a class="nav-link" href="#">1:1 문의</a>
+                </h5>
+              </li>
+              <li class="nav-item">
+                <h5>
+                  <a class="nav-link" href="#">알림 설정</a>
+                </h5>
+              </li>
+            </ul>
+            <!-- 마이페이지 Header nav end -->
+
+          </div>
+            
+        </div>
+        <!--  마이페이지 Header end -->
+          <!--  -->
+        <div id="mypage-content-wrapper">
+          <div id="mypage-content">
+
+          </div>
+          <div id="footer">
+  
+            <footer class="footer mt-4">
+              <div class="footer text-center " id="footer1">
+                <span class="text-muted">
+                  <b class="small"> | 상호명 : 청포도 | 대표 : 청포도 | 주소 : 서울특별시 광진구 자양로 54 2층 | 사업자 등록번호 : 206-87-05773 | Tel :
+                    010-0000-0000 <br>
+                    Copyright © 2019-2020 Muscat All rights Reserved.
+                  </b>
+                </span>
+      
+                <span class="footer mr-5 small " id="footer2">
+                  <a href="#">이용약관 </a> &nbsp;
+                  <a href="#">개인정보처리방침</a>
+                </span>
+              </div>
+            </footer>
+      
+          </div>
 
         </div>
-        
       </div>
 
 
-      <!-- 알림 버튼 div start -->
+
+
+
       <div class="dropdown col-md-12 mt-3 fixed-top pl-3 pr-4" id="alert_icon" align="right">
         <button class="btn btn-secondary dropdown-toggle btn-sm bg-transparent" type="button" id="dropdownMenuButton"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -152,32 +242,11 @@
 
         </div>
       </div>
-      <!-- 알림 버튼 div end -->
-
     </div>
-    <!-- 화면 분할 row div end -->
 
 
 
-    <div id="footer">
-
-      <footer class="footer mt-4">
-        <div class="footer text-center " id="footer1">
-          <span class="text-muted">
-            <b class="small"> | 상호명 : 청포도 | 대표 : 청포도 | 주소 : 서울특별시 광진구 자양로 54 2층 | 사업자 등록번호 : 206-87-05773 | Tel :
-              010-0000-0000 <br>
-              Copyright © 2019-2020 Muscat All rights Reserved.
-            </b>
-          </span>
-
-          <span class="footer mr-5 small " id="footer2">
-            <a href="#">이용약관 </a> &nbsp;
-            <a href="#">개인정보처리방침</a>
-          </span>
-        </div>
-      </footer>
-
-    </div>
+    
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

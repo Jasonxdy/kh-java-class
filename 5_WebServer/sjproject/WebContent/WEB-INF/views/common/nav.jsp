@@ -9,7 +9,7 @@
     <nav class="nav-scroller py-1 mb-2">
       <ul class="nav justify-content-center">
         <li class="nav-item col-md text-center">
-          <a class="nav-link active" href="#">공지사항</a>
+          <a class="nav-link active" href="<%= request.getContextPath()%>/notice/list">공지사항</a>
         </li>
         <li class="nav-item col-md text-center">
           <a class="nav-link" href="#">게시판</a>
