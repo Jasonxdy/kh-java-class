@@ -3,6 +3,11 @@ div {
   /* border: 1px solid black; */
 }
 
+/* Header 최우선용 css */
+body {
+  z-index: 0;
+}
+
 
 @font-face{
   font-family: 'Sunflower';
@@ -13,7 +18,7 @@ div {
   #sidebarAll div{
   width: 200px;
   }
-  #mypage-wrapper{
+  #mypage-wrapper, #mypage-wrapper>div{
     min-width: 1400px;
     margin-left: 200px;
     /* min-height: 100vh; */
@@ -24,7 +29,7 @@ div {
   #sidebarAll{
   width: 300px;
   }
-  #mypage-wrapper{
+  #mypage-wrapper, #mypage-wrapper>div{
     max-width: 1600px;
     margin-left: 300px;
 
@@ -39,26 +44,80 @@ div {
   position: absolute;
   width: 100%;
   height: 100%;
+
+  z-index: 0px !important;
+
+  /* 폰트 적용 */
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 #mypage-wrapper div{
-  width: 100%;
+  width: 100%;    
 }
 
 /* 마이페이지 header */
 #mypage-header {
   position: fixed;
-  margin-top: 70px;
+  padding-top: 70px;
+  height: 172px;
+  background-color: white !important;
+  z-index: 2000;
 }
+
+#mypage-nav{
+  border-bottom: 1px solid gray;
+  width: 80%;
+  height: 38px;
+}
+
+#mypage-nav li{
+  height: 37.5px;
+}
+
+#mypage-nav li :hover{
+  height: 37.5px;
+  border-bottom: 1px solid orangered;
+}
+
+#mypage-nav li a{
+  text-decoration: none;
+  color: black;
+}
+
+/* 프로필 선택시 css */
+#mypage-profile{
+  color: orangered !important;
+}
+
 /* 마이페이지 header end */
 
 #mypage-content-wrapper {
-  margin-top: 200px;
+  margin-top: 180px;
 }
 
-#mypage-content{
-  height: 800px;
+/* 프로필 사진 업로드 css */
+.avatar-pic {
+  width: 150px;
+  }
+
+/* 프로필 수정 CSS */
+#profile-description{
+  padding-top: 70px;
+  padding-right: 0px;
 }
+
+#profile-image-input{
+  padding-top: 50px;
+}
+
+#profile-update input {
+  width: 1010px;
+}
+
+
+/* #mypage-content{
+  height: 800px;
+} */
 
 /* 마이페이지 css end */
 
