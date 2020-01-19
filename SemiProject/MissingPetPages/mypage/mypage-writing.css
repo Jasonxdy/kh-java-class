@@ -18,6 +18,9 @@ body {
   #sidebarAll div{
   width: 200px;
   }
+  #mypage-header{
+    left: 200px;
+  }
   #mypage-wrapper, #mypage-wrapper>div{
     min-width: 1400px;
     margin-left: 200px;
@@ -27,7 +30,10 @@ body {
 
 @media(min-width: 1400px){
   #sidebarAll{
-  width: 300px;
+    width: 300px;
+  }
+  #mypage-header{
+    left: 300px;
   }
   #mypage-wrapper, #mypage-wrapper>div{
     max-width: 1600px;
@@ -44,6 +50,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
+  padding-left: 0px;
 
   z-index: 0px !important;
 
@@ -62,6 +69,7 @@ body {
   height: 172px;
   background-color: white !important;
   z-index: 2000;
+  margin-left: 0px;
 }
 
 #mypage-nav{
@@ -84,8 +92,8 @@ body {
   color: black;
 }
 
-/* 프로필 선택시 css */
-#mypage-profile{
+/* 작성한 글 선택시 css */
+#mypage-writing{
   color: orangered !important;
 }
 
@@ -95,29 +103,26 @@ body {
   margin-top: 180px;
 }
 
-/* 프로필 사진 업로드 css */
-.avatar-pic {
-  width: 150px;
-  }
 
-/* 프로필 수정 CSS */
-#profile-description{
-  padding-top: 70px;
-  padding-right: 0px;
+/* 작성한 글 CSS */
+
+#my-writing-row {
+  margin-bottom: 10px;
 }
 
-#profile-image-input{
-  padding-top: 50px;
+#my-writing-thumbnail{
+  box-sizing: border-box;
+  padding: 0px;
 }
 
-#profile-update input {
-  width: 1010px;
+#my-writing-thumbnail img{
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
 }
 
 
-/* #mypage-content{
-  height: 800px;
-} */
+
 
 /* 마이페이지 css end */
 
@@ -208,6 +213,11 @@ h6{ color: gray;}
 
 sidebar-heading{
   margin: 0;
+}
+
+#alert_icon{
+  z-index: 2100;
+  
 }
 
 #dropdown-menu{

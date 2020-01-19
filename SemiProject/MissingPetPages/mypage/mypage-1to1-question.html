@@ -7,7 +7,7 @@
   <title> 미씽펫 방문을 환영합니다! </title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="mypage.css">
+  <link rel="stylesheet" href="mypage-1to1-question.css">
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -120,7 +120,6 @@
               <li class="nav-item">
                 <a class="nav-link  text-center" href="#">
                   마이페이지
-                  <!-- 로그인 전 화면인데 마이페이지 구현? -->
                 </a>
               </li>
             </ul>
@@ -135,7 +134,7 @@
       <div class="container-fluid d-md-block" id="mypage-wrapper">
 
         <!--  마이페이지 Header start -->
-        <div class="row ml-4 w-100 " id="mypage-header">
+        <div class="row ml-1 w-100" id="mypage-header">
           <h1 style="font-weight: bold;">마이페이지</h1>
           <!-- 마이페이지 Header nav -->
           <div class="row w-100 mt-2">
@@ -155,11 +154,6 @@
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-mypet">나의 관심펫</a>
-                </h5>
-              </li>
-              <li class="nav-item mr-4">
-                <h5>
                   <a class="nav-link" href="#" id="mypage-1to1-question">1:1 문의</a>
                 </h5>
               </li>
@@ -172,93 +166,102 @@
             <!-- 마이페이지 Header nav end -->
 
           </div>
-
-
         </div>
         <!--  마이페이지 Header end -->
-        <!--  -->
-        <div class="ml-4 row" id="mypage-content-wrapper">
-          <h2>프로필 수정</h2>
 
-          <!-- 프로필 수정 form -->
-          <form class="row ml-1" id="profile-update">
 
-            <div class="row mt-2">
-              <div class="col-md-2" id="profile-description">
-                <h5>프로필 사진</h5>
-              </div>
-  
-              <div class="col-md-10">
-                <div class="row file-field">
-                  <div class="mb-4 col-md-2">
-                    <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                      class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
-                  </div>
-                  <div class="d-flex justify-content-center col-md-2" id="profile-image-input">
-                    <div class="btn btn-mdb-color btn-rounded float-left">
-                      <input type="file">
-                    </div>
-                  </div>
+        <!-- Content Wrapper -->
+        <div class="ml-1 row" id="mypage-content-wrapper">
+          <h2 class="mt-3">1:1 문의</h2>
+
+          <div class="row ml-3" id="1to1-question-wrapper">
+
+
+            <!-- 작성한 1:1 문의가 없는 경우 -->
+            <!--
+            <div class="row justify-content-center col-md-12 jumbotron" id="1to1-question-wrapper-none"
+            style="background-color: white; padding-left: 0 !important; height: 500px; margin-left: -150px;">
+              <p class="text-muted" style="line-height: 300px;">작성하신 1:1 문의가 없습니다</p>
+            </div>
+            -->
+
+            <div class="row">
+              <div class="container-fluid mt-4" style="padding-left: 0;">
+                <div>
+                  <table class="table table-hover table-striped" id="list-table">
+                    <thead>
+                      <tr>
+                        <th>제목 </th>
+                        <th>상태</th>
+                        <th>작성일</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>강아지 사진이 안올라가요 ㅠㅠㅠ</td>
+                        <td>
+                          <span class="badge badge-pill badge-success">답변 완료</span>
+                        </td>
+                        <td>
+                          <span>
+                            2019-12-24
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>개명했어요!</td>
+                        <td>
+                          <span class="badge badge-pill badge-dark">답변 대기중</span>
+                        </td>
+                        <td>
+                          <span>
+                            2020-01-16
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>게시글이 안지워져요</td>
+                        <td>
+                          <span class="badge badge-pill badge-dark">답변 대기중</span>
+                        </td>
+                        <td>
+                          <span>
+                            2020-01-20
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+
+                <hr>
+
+
+
+
               </div>
-  
-              <!-- 이미지 업로드 방법 정리
-              :https://codepen.io/siremilomir/pen/jBbQGo
-             -->
             </div>
 
 
-            <!-- 아이디 -->
-            <div class="row pt-3">
-              <div class="col-md-2 pt-2">
-                <h5>아이디</h5>
-              </div>
-                  <input type="text" class="form-control" id="userId" name="userId" disabled value="user01">
+          </div>
+
+          <!-- 게시글 목록 번호-->
+          <div class="row pt-5">
+            <div class="col-md-12">
+
+              <ul class="pagination justify-content-center" style="margin:20px 0">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+
             </div>
 
-            <!-- 이름 -->
-            <div class="row pt-5">
-              <div class="col-md-2 pt-2">
-                <h5>이름</h5>
-              </div>
-                  <input type="text" class="form-control" id="userName" name="userName" disabled value="userName">
-            </div>
-
-            <!-- 비밀번호 -->
-            <div class="row pt-5">
-              <div class="col-md-2 pt-2">
-                <h5>비밀번호</h5>
-              </div>
-                  <input type="password" class="form-control" id="userPwd1" name="userPwd1" value="">
-            </div>
-
-            <!-- 비밀번호 확인-->
-            <div class="row pt-5">
-              <div class="col-md-2 pt-2">
-                <h5>비밀번호 확인</h5>
-              </div>
-                  <input type="password" class="form-control" id="userPwd2" name="userPwd2" value="">
-            </div>
-            
-            <!-- 이메일 및 이메일 인증 -->
-            <div class="row pt-5">
-              <div class="col-md-2 pt-2">
-                <h5>이메일</h5>
-              </div>
-              <div class="col-md-10" id="profile-email">
-                <h5>
-                  <b>exampleEmail@google.com</b>
-                </h5>
-                <p>인증된 이메일입니다. <a href="#" style="color: purple;">이메일 변경하기</a></p>
-              </div>
-              
-              
-            </div>
-
-
-          </form>
-
-          <!-- 프로필 수정 form end -->
+          </div>
 
 
 
