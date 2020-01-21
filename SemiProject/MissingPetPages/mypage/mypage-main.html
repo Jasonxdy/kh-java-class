@@ -141,26 +141,26 @@
           <div class="row w-100 mt-2">
             <ul class="nav" id="mypage-nav">
               <li class="nav-item mr-4">
-                <h5><a class="nav-link" href="#" id="mypage-profile">프로필</a></h5>
+                <h5><a class="nav-link" href="mypage-main.html" id="mypage-profile">프로필</a></h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-writing">작성한 글</a>
+                  <a class="nav-link" href="mypage-writing.html" id="mypage-writing">작성한 글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-comment">작성한 댓글</a>
+                  <a class="nav-link" href="mypage-comment.html" id="mypage-comment">작성한 댓글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-1to1-question">1:1 문의</a>
+                  <a class="nav-link" href="mypage-1to1-question.html" id="mypage-1to1-question">1:1 문의</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-notification">알림 설정</a>
+                  <a class="nav-link" href="mypage-notification.html" id="mypage-notification">알림 설정</a>
                 </h5>
               </li>
             </ul>
@@ -179,27 +179,42 @@
           <form class="row ml-1" id="profile-update">
 
             <div class="row mt-2">
-              <div class="col-md-2" id="profile-description">
-                <h5>프로필 사진</h5>
-              </div>
-
               <div class="col-md-10">
                 <div class="row file-field">
                   <div class="mb-4 col-md-2">
                     <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                      class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
+                      class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar"
+                      id="imagePreview">
                   </div>
                   <div class="d-flex justify-content-center col-md-2" id="profile-image-input">
                     <div class="btn btn-mdb-color btn-rounded float-left">
-                      <input type="file">
+                      <input type="file" id="imageUpload" style="width: 300px">
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- 이미지 업로드 방법 정리
-              :https://codepen.io/siremilomir/pen/jBbQGo
+                https://victorydntmd.tistory.com/175
              -->
+
+
+              <!-- 이미지 업로드 jQuery -->
+              <script type="text/javascript">
+                function readURL(input) {
+                  if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                      $('#imagePreview').prop('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                  }
+                }
+
+                $("#imageUpload").change(function () {
+                  readURL(this);
+                });
+              </script>
             </div>
 
 
@@ -260,14 +275,14 @@
                 <div class="row mb-3 form-row">
 
                   <!-- 전화번호1 -->
-                    <select class="custom-select" id="phone1" name="phone1">
-                      <option>010</option>
-                      <option>011</option>
-                      <option>016</option>
-                      <option>017</option>
-                      <option>019</option>
-                    </select>
-                    &nbsp;&nbsp;
+                  <select class="custom-select" id="phone1" name="phone1">
+                    <option>010</option>
+                    <option>011</option>
+                    <option>016</option>
+                    <option>017</option>
+                    <option>019</option>
+                  </select>
+                  &nbsp;&nbsp;
 
                   <script>
                     /* jQuery의 for문 */
@@ -289,25 +304,25 @@
 
 
                   <!-- 전화번호2 -->
-                    <input type="number" class="form-control " id="phone2" name="phone2" maxlength="4"
-                      value="<%= phone[1]%>"> 
+                  <input type="number" class="form-control " id="phone2" name="phone2" maxlength="4"
+                    value="<%= phone[1]%>">
 
-                      &nbsp;&nbsp;
+                  &nbsp;&nbsp;
 
                   <!-- 전화번호3 -->
-                    <input type="number" class="form-control phone" id="phone3" name="phone3" maxlength="4"
-                      value="<%= phone[2]%>">
+                  <input type="number" class="form-control phone" id="phone3" name="phone3" maxlength="4"
+                    value="<%= phone[2]%>">
                 </div>
               </div>
 
-              
+
             </div>
             <div class="row">
               <div>
                 <hr class="mb-4">
               </div>
             </div>
-            
+
             <div class="row mt-4 mb-5">
               <div class="col-md-3">
               </div>
@@ -319,7 +334,7 @@
               </div>
               <div class="col-md-3">
               </div>
-              
+
             </div>
           </form>
 

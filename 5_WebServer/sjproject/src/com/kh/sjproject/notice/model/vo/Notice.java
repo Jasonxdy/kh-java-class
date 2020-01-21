@@ -1,4 +1,4 @@
-package com.kh.sjproject.member.model.vo;
+package com.kh.sjproject.notice.model.vo;
 
 import java.sql.Date;
 
@@ -14,6 +14,31 @@ public class Notice {
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+	}
+
+	public Notice(String noticeTitle, String noticeContent, String noticeWriter) {
+		super();
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+	}
+
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int noticeCount,
+			Date noticeModifyDt) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeWriter = noticeWriter;
+		this.noticeCount = noticeCount;
+		this.noticeModifyDt = noticeModifyDt;
 	}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeWriter, int noticeCount, Date noticeModifyDt) {

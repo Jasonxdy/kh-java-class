@@ -12,7 +12,7 @@
           <a class="nav-link active" href="<%= request.getContextPath()%>/notice/list">공지사항</a>
         </li>
         <li class="nav-item col-md text-center">
-          <a class="nav-link" href="#">게시판</a>
+          <a class="nav-link" href="<%= request.getContextPath()%>/board/list">게시판</a>
         </li>
         <li class="nav-item col-md text-center">
           <a class="nav-link" href="#">Q & A</a>

@@ -145,26 +145,26 @@
           <div class="row w-100 mt-2">
             <ul class="nav" id="mypage-nav">
               <li class="nav-item mr-4">
-                <h5><a class="nav-link" href="#" id="mypage-profile">프로필</a></h5>
+                <h5><a class="nav-link" href="mypage-main.html" id="mypage-profile">프로필</a></h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-writing">작성한 글</a>
+                  <a class="nav-link" href="mypage-writing.html" id="mypage-writing">작성한 글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-comment">작성한 댓글</a>
+                  <a class="nav-link" href="mypage-comment.html" id="mypage-comment">작성한 댓글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-1to1-question">1:1 문의</a>
+                  <a class="nav-link" href="mypage-1to1-question.html" id="mypage-1to1-question">1:1 문의</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="#" id="mypage-notification">알림 설정</a>
+                  <a class="nav-link" href="mypage-notification.html" id="mypage-notification">알림 설정</a>
                 </h5>
               </li>
             </ul>
@@ -190,7 +190,7 @@
               <div class="row">
                 <div class="col-md-1 ml-2 pl-4 mt-4 mb-2">
                   <label class="switch">
-                    <input type="checkbox" class="warning">
+                    <input type="checkbox" class="warning" id="webpage-notification" checked>
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -206,7 +206,7 @@
               <div class="row">
                 <div class="col-md-1 ml-5 pl-4 mt-4">
                   <label class="switch">
-                    <input type="checkbox" class="warning">
+                    <input type="checkbox" class="warning" id="comment-notification" checked>
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -221,7 +221,7 @@
               <div class="row">
                 <div class="col-md-1 ml-5 pl-4 mt-4 mb-5 pb-4">
                   <label class="switch">
-                    <input type="checkbox" class="warning">
+                    <input type="checkbox" class="warning" id="1to1-notification" checked>
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -237,7 +237,7 @@
 
                 <div class="col-md-1 ml-2 pl-4 mt-4 mb-2">
                   <label class="switch">
-                    <input type="checkbox" class="warning">
+                    <input type="checkbox" class="warning" checked>
                     <span class="slider round"></span>
                   </label>
                 </div>
@@ -258,6 +258,48 @@
 
 
           </div>
+
+
+          <!-- 웹페이지 알림 on/off시 전체 on/off script -->
+          <script>
+
+            $("#webpage-notification").change(function(){
+              if(!$(this).prop("checked")){
+                $("#comment-notification").prop("checked", false);
+                $("#1to1-notification").prop("checked", false);
+              }
+
+              console.log("웹페이지 알림 : " + $(this).prop("checked"));
+              console.log("댓글 알림 : " + $("#comment-notification").prop("checked"));
+              console.log("1:1문의 알림 : " + $("#1to1-notification").prop("checked"));
+
+            });
+
+            $("webpage-notification>input:checkbox").change(function(){
+              console.log("자식눌렸당");
+            });
+            
+              // if($("#comment-notification").prop("checked") || $("#1to1-notification").prop("checked")) {
+              //   $("#webpage-notification").prop("checked", true);
+              // }
+
+          
+          
+          </script>
+
+
+<input id='selectall' type="checkbox" checked="true">
+<script>
+  
+  $('#selectall').change(function () {
+      if ($(this).prop('checked')) {
+          $('input').prop('checked', true);
+      } else {
+          $('input').prop('checked', false);
+      }
+  });
+  $('#selectall').trigger('change');
+</script>
 
 
 
@@ -338,6 +380,39 @@
         </div>
       </div>
     </div>
+
+    <script>
+      $(document).ready(function () {
+
+        $("#webpage-notification").change(function () {
+           
+          if(!$(this).prop("checked")) {
+            $("#comment-notification").prop("checked", false);
+            $("#1to1-notification").prop("checked", false);
+          } else {
+            $("#comment-notification").prop("checked", true);
+            $("#1to1-notification").prop("checked", true);
+          }
+        });
+
+        $("#comment-notification").change(function() {
+          if($(this).prop("checked")) {
+            $("#webpage-notification").prop("checked", true);
+          } else if (!$(this).prop("checked") && !$("#1to1-notification").prop("checked")) {
+            $("#webpage-notification").prop("checked", false);
+          }
+        });
+
+        $("#1to1-notification").change(function() {
+          if($(this).prop("checked")) {
+            $("#webpage-notification").prop("checked", true);
+          } else if (!$(this).prop("checked") && !$("#comment-notification").prop("checked")) {
+            $("#webpage-notification").prop("checked", false);
+          }
+        });
+      });
+
+    </script>
 
 
 

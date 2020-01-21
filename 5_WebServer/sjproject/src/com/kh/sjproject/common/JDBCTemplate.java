@@ -14,9 +14,9 @@ public class JDBCTemplate {
 	
 	public static Connection getConnection() {
 		
-		if(conn == null) {
 			
 			try {
+				if(conn == null || conn.isClosed()) { // conn을 닫기 위해 싱글톤 패턴 포기 (connection 과부하 안걸림)
 				Properties prop = new Properties();
 				
 				String fileName
@@ -33,9 +33,9 @@ public class JDBCTemplate {
 						prop.getProperty("user"), prop.getProperty("password"));
 				
 				conn.setAutoCommit(false);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
 		}
 		return conn;
 	}
