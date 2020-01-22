@@ -28,6 +28,13 @@ public class Board {
 		this.boardCategory = boardCategory;
 	}
 
+	public Board(String boardTitle, String boardContent, String boardCategory) {
+		super();
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardCategory = boardCategory;
+	}
+
 	public Board(int boardNo, String boardTitle, int boardCount, Date boardModifyDate, String boardWriter,
 			String boardCategory) {
 		super();

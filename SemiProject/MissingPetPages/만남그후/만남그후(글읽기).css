@@ -93,7 +93,7 @@
       border-radius: 10px;
       border:1px solid lightgray;
       box-shadow: 2px 2px 3px rgba(135,139,133,0.4);
-      height: 45px;
+      height: 35px;
       padding-left:20px;
       margin-bottom : 20px;
    }
@@ -207,10 +207,11 @@
 
     
 #pic {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    height: 480px;
-    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 500px;
+    width: 880px;
+    background-color: lightskyblue;
 }
 
 

@@ -107,6 +107,10 @@ body {
 .avatar-pic {
   width: 150px;
   }
+#imagePreview{
+  width: 150px;
+  height: 150px;
+}
 
 /* 프로필 수정 CSS */
 #profile-description{

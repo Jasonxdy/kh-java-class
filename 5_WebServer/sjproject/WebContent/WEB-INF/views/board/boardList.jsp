@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.List, com.kh.sjproject.board.model.vo.Board, com.kh.sjproject.board.model.vo.PageInfo"%>
+<%@page import="com.kh.sjproject.board.model.vo.Attachment"%>
 	
 <% 
 	List<Board> bList = (List<Board>)request.getAttribute("bList");
+	List<Attachment> fList = (List<Attachment>)request.getAttribute("fList");
 	PageInfo pInf = (PageInfo)request.getAttribute("pInf");
 	String searchKey = request.getParameter("searchKey");
 	String searchValue = request.getParameter("searchValue");
@@ -29,6 +31,12 @@
 
         #searchForm>*{
             top : 0;
+        }
+        
+        .boardTitle > img {
+        	width : 50px;
+        	height : 50px;
+        
         }
 	</style>
 	
@@ -61,7 +69,23 @@
 							<tr>
 								<td><%= board.getBoardNo() %></td>
 								<td><%= board.getBoardCategory() %></td>
-								<td><%= board.getBoardTitle() %></td>
+								<td class="boardTitle">
+								
+									<!-- img(썸네일)  -->
+									<% 
+										String src = request.getContextPath() + "/resources/uploadImages/noimage.png";
+										for(Attachment file : fList) {
+											if(file.getBoardId() == board.getBoardNo()) {
+												src = request.getContextPath() + "/resources/uploadImages/" + file.getFileChangeName();
+											}
+										}
+									%>
+									
+									<img src = <%= src %>>
+									
+									
+									<%= board.getBoardTitle() %>
+								</td>
 								<td><%= board.getBoardWriter() %></td>
 								<td><%= board.getBoardCount() %></td>
 								<td><%= board.getBoardModifyDate() %></td>

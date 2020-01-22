@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="index copy.css">
-  <link rel="stylesheet" href="copy3.css">
+  <link rel="stylesheet" href="만남그후(글쓰기).css">
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -96,7 +96,7 @@
               </li>
 
               <li class="nav-item mt-4">
-                <a class="nav-link  text-center" href="#">
+                <a class="nav-link  text-center" href="../mypage/mypage-main.html">
                   마이페이지
                 </a>
               </li>
@@ -126,135 +126,60 @@
                 <section class="content">
                   <h2 id="title-top"><a href="#">만남 그 후 글쓰기</a></h2>
                   <hr>
-                  <div class="col-md-8 col-md-offset-2" id="panelwrap" >
+                  <div class="col-md-12 col-md-offset-2" id="panelwrap" >
 
+                    <div id="title">
+                      <!-- <label>말머리 :</label>
+                      &nbsp;
+                     <select>
+                       <option>&nbsp;&nbsp;&nbsp;공지&nbsp;&nbsp;&nbsp;</option>
+                       <option>잡담</option>
+                       <option>자유</option>
+                     </select>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                    <label> 제목 :</label>
+                    &nbsp;
+                    <input type="text" size="114">
+                    </div>
+                   <div id="pic">
 
-                    <fieldset>
-
-                    <table id="tb">
-                      <tr>
-                      <th width="130px"><label>등록인</label></th>
-                      <td><input type="text" size="14"></td>
-                      </tr>
-                      <tr>
-                        <th><label>휴대폰번호</label></th>
-                        <td colspan="2"><input type="text" size="3">&nbsp;-
-                          <input type="text" size="3">&nbsp;-
-                          <input type="text" size="3">
-                        </td>
-                      </tr>
-                      <tr>
-                        <th><label>E-mail</label></th>
-                        <td><input type="email" size="24"></td>
-                      </tr>
-                      <tr >
-                        <th><label>분양지역</label></th>
-                        <td><select >
-                          <option value="selected">&nbsp;지역 선택&nbsp;</option>
-                          <option value="1">서울</option>
-                          <option value="2">대전</option>
-                          <option value="3">대구</option>
-                          <option value="4">부산</option>
-                        </select>
-                        &nbsp;
-                        <select>
-                          <option value="selected">&nbsp;모든 지역&nbsp;</option>
-                          <option value="1">서울</option>
-                          <option value="2">대전</option>
-                          <option value="3">대구</option>
-                          <option value="4">부산</option>
-                        </select>
-                      </td>
-                        </tr>
-                        <tr>
-                          <th><label>동물종류</label></th>
-                          <td>
-                            <select>
-                              <option value="selected">&nbsp;강아지&nbsp;</option>
-                              <option value="1">고양이</option>
-                              <option value="2">기타</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label>기타동물 : </label>
-                            &nbsp;
-                            <input type="text" size="14">
-                          </td>
-                          <tr>
-                            <th><label>품종</label></th>
-                          <td>
-                            <select>
-                              <option value="selected">&nbsp;품종 선택&nbsp;</option>
-                              <option value="1">말티즈</option>
-                              <option value="2">슈나우저</option>
-                            </select>
-                            &nbsp;&nbsp;&nbsp;
-                            <label>기타품종 : </label>
-                            &nbsp;
-                            <input type="text" size="14">
-                          </td>
-                          </tr>
-                          <th><label>성별구분</label></th>
-                          <td>
-                            <input type="radio" value="남" name="gender" id="남">
-                            <label for="남">남아</label>
-                            &nbsp;&nbsp;
-                            <input type="radio" value="여" name="gender"  id="여">
-                            <label for="여">여아</label>
-                            &nbsp;&nbsp;
-                            <input type="radio" value="중" name="gender"  id="중">
-                            <label for="중">중성화</label>
-                          </td>
-                        </tr>
-                      <tr>
-                      <th><label>건강</label></th>
-                      <td>
-                        <label>건강상태 :</label>
-                        &nbsp;
-                        <input type="text" size="12">
-                        &nbsp;&nbsp;
-                        <input type="radio" value="남" name="gender" id="예방">
-                        <label for="예방">예방접종</label>
-                        &nbsp;&nbsp;
-                      </td>
-                    </tr>
-                    </table>
-                    <br>
-                    <textarea cols="85" rows="8"></textarea>
-                    </fieldset>
-
+                   </div>
+                   <div>
+                    <label><b>영상 첨부</b></label>
+                    &nbsp;&nbsp;
+                    <input type="text" size="30">
+                    &nbsp;&nbsp;&nbsp;
+                    <label><b>사진 첨부</b></label>
+                    &nbsp;&nbsp;
+                    <input type="file">
+                   </div>
+                   <div id="top-bt">
+                    <button type="submit" class="btn btn-primary mr-5">작성완료</button>
+                    <button type="submit" class="btn btn-primary ml-5">취소</button>
+                   </div>
+                   
 
 
 
                   </div>
 
                   <!--오른쪽 배너-->
-                  <div class="col-md-4" id="right-ban">
-                    <label><b>영상 첨부</b></label>
-                    <br>
-                    <input type="text" size="30">
-                    <br><br>
-                    <label><b>사진 첨부</b></label>
-        
-                    <input type="file">
-                    <br><br>
-                    <label><b>지도표시</b></label>
-                    <div id="map"></div>
-                    <br><br>
-                    <div id="bottom-bt">
-                      <button type="submit" class="btn btn-primary">등록하기</button>
-                    </div>
-
-                   </div>
-
+                 
 
                   <!--하단-->
-                  
+                   
+                 
 
 
                 </section>
                 
               </div>
             </div> <!-- container 종료-->
+
+
+
+
+
 
             <!-- 이 안에다가 작성하세요!!!!!!!! -->
            </div>
@@ -321,7 +246,6 @@
 
 
 
-
     <div id="footer" class="mt-4">
 
       <footer class="footer">
@@ -341,6 +265,7 @@
       </footer>
     
       </div> <!--#footer 종료-->
+
 
 
 
