@@ -1,5 +1,8 @@
 package com.kh.sjproject.board.controller;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -7,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.sjproject.board.model.service.BoardService;
 import com.kh.sjproject.board.model.vo.Attachment;
 import com.kh.sjproject.board.model.vo.Board;
 import com.kh.sjproject.board.model.vo.PageInfo;
+import com.kh.sjproject.board.model.vo.Reply;
 import com.kh.sjproject.common.ExceptionForward;
 import com.kh.sjproject.common.MyFileRenamePolicy;
 import com.kh.sjproject.member.model.vo.Member;
@@ -291,6 +298,152 @@ public class BoardController extends HttpServlet {
 			} catch (Exception e) {
 				ExceptionForward.errorPage(request, response, "게시글 등록", e);
 			}
+		}
+		
+		
+		
+		
+		
+		// 게시글 상세조회 Controller
+		else if (command.equals("/detail")) {
+			
+			int boardNo = Integer.parseInt(request.getParameter("no"));
+			
+			try {
+				
+				Board board = boardService.selectBoard(boardNo);
+				
+				if(board != null) {
+					
+					List<Attachment> files = boardService.selectFiles(boardNo);
+					
+					if(!files.isEmpty()) {
+						request.setAttribute("files", files);
+					}
+					
+					path = "/WEB-INF/views/board/boardDetail.jsp";
+					request.setAttribute("board", board);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				} else {
+					request.getSession().setAttribute("msg", "게시글 상세 조회 실패");
+					response.sendRedirect("list");
+				}
+				
+			} catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 상세 조회", e);
+			}
+			
+			
+		}
+		
+		
+		
+		// 이미지 다운로드용 Controller
+		else if(command.equals("/download")) {
+			int fNo = Integer.parseInt(request.getParameter("fNo"));
+			
+			try {
+				Attachment file = new BoardService().selectFile(fNo);
+				
+				if(file != null) {
+					
+					// 클라이언트로  파일을 내보낼 출력 스트림 연결(Servlet 기본 제공 클래스)
+					ServletOutputStream downOut = response.getOutputStream();
+					
+					// 스트림을 통해 내보낼 파일 객체 생성
+					// File 객체를 통하여 해당 파일에 접근 가능
+					File downloadFile = new File(file.getFilePath() + file.getFileChangeName());
+					
+					// 폴더에서 파일을 읽을 스트림 생성
+					// 파일을 바이트 단위로 읽어들여 버퍼에 담아 스트림을 통해 내보냄
+					BufferedInputStream bis = new BufferedInputStream(new FileInputStream(downloadFile));
+					
+					
+					// 파일명을 changeName이 아닌 originName으로 다운받을 수 있도록 처리
+					/*
+					 * Content-Disposition 
+					 * - 파일 다운로드를 처리하는 HTTP 헤더
+					 * - 웹 서버 응답에 이 헤더를 포함하면 해당 파일 데이터를 다운로드 받도록 설정할 수 있음. 
+					 *
+					 * attachment; 
+					 * - 파일을 다운로드 받을 수 있게 해주는 속성
+					 *  
+					 * filename="파일명"
+					 * - 다운로드를 받는 사용자에게 보여질 파일명 
+					 * */
+					response.setHeader("Content-Disposition", "attachment; filename=\"" 
+							+ new String(file.getFileOriginName().getBytes("UTF-8"), "ISO-8859-1") + "\"");
+					// 파일명 문자 인코딩 변환
+					// originName의 문자 인코딩 : UTF-8
+					// 웹 브라우저에서 다운로드시 파일명 문자 인코딩 : ISO-8859-1
+
+					// 스트림을 통해 내보낼 파일의 크기 지정
+					response.setContentLength((int)downloadFile.length());
+					
+					int readBytes = 0;
+					while((readBytes = bis.read()) != -1) {
+						downOut.write(readBytes);
+					}
+					
+					// 사용 스트림 반환
+					bis.close();
+					downOut.close();
+				}
+			
+			}catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "이미지 다운로드", e);
+			}
+		}
+		
+		
+		// 댓글 등록용 Controller
+		else if (command.equals("/insertReply")) {
+			
+			int replyWriter = Integer.parseInt(request.getParameter("writer"));
+			int boardId = Integer.parseInt(request.getParameter("boardNo"));
+			String replyContent = request.getParameter("content");
+			
+			Reply reply = new Reply(replyContent, boardId);
+			
+			try {
+				int result = boardService.insertReply(reply, replyWriter);
+				
+				// ajax는 forward 안씀 (어짜피 한 화면 안에서 처리되므로)
+				
+				response.getWriter().print(result);
+				// getWriter() : response에 문자열을 출력할 객체를 부름, print : 출력할 내용 작성
+				
+			} catch (Exception e) {
+				ExceptionForward.errorPage(request, response, "댓글 등록", e);
+			}
+			
+		}
+		
+		
+		// 댓글 리스트 출력용 controller
+		else if(command.equals("/selectReplyList")) {
+			
+			int boardId = Integer.parseInt(request.getParameter("boardNo"));
+			
+			try {
+				List<Reply> rList = boardService.selectReplyList(boardId);
+				
+				response.setCharacterEncoding("UTF-8"); // 보험용 characterEncoding
+				
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+						// GsonBuilder = Gson의 부모
+						// setDateFormat : timestamp의 출력을 원하는대로 변환하기 위함
+						// .create : gson 생성
+				gson.toJson(rList, response.getWriter());
+				
+				
+			} catch (Exception e) {
+				
+				ExceptionForward.errorPage(request, response, "댓글 조회", e);
+			}
+			
+			
 		}
 		
 		

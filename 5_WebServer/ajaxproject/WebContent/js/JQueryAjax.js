@@ -67,6 +67,121 @@ $(function() {
 
 		});
 
-	})
+	});
+	
+	
+	
+	// 3. 서버로 기본형 데이터 전송 후 응답을 객체(Object)로 전달 받기
+	$("#btn3").click(function(){
+		
+		var input = $("#input3").val();
+		
+		$.ajax({
+			url : "../jqTest3.do",
+			data : {input:input},
+			dataType : "json", // * json 데이터를 전달하는 방법 (3)
+			// dataType :  응답 데이터의 형식을 지정 (가장 간단한 방법)
+			type : "get",
+			success : function(obj){
+				// * json 데이터를 전달하는 방법 (2)
+//				obj = JSON.parse(obj);
+				console.log(obj);
+				
+				var result = "";
+				if(obj != null){
+					result = "번호 : " + obj.no + "\n";
+					result += "이름 : " + obj.name + "\n";
+					result += "나이 : " + obj.age + "\n";
+					result += "성별 : " + obj.gender;
+				} else {
+					result = "사용자 정보가 없습니다.";
+				}
+				
+				$("#textarea3").val(result);
+				
+			},
+			
+			error : function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
+	});
+	
+	
+	
+	
+	
+	//4. 서버로 기본형 데이터를 전송 후, 응답을 리스트(List)형태로 받기
+	$("#btn4").click(function(){
+		var gender = $('input[name="chk_gender4"]:checked').val();
+		$.ajax({
+			url : "../jqTest4.do",
+			data : {gender:gender},
+			type : "get",
+			dataType : "json",
+			success:function(list){
+				console.log(list);
+				
+				// $.each(배열명, function(index){});
+				// --> 배열명[index] 각 요소에 접근 가능
+				
+				var result ="";
+				
+				$.each(list, function(i){ // index, item을 파라미터로 쓰지만 그냥 1개짜리 사용하면 index임
+					result += list[i].no + " / "
+							 + list[i].name + " / "
+							 + list[i].age + " / "
+							 + list[i].gender + "\n"
+				});
+				
+				$("#textarea4").val(result);
+			},
+			error:function(){
+				consol.log("ajax 통신 실패")
+			}
+		
+		});
+	});
+	
+	
+	// 5번 건너뜀
+	
+	
+	// 6. Gson을 이용하여 응답을 List 형태로 전송받아 테이블에 출력하기
+	$("#btn6").click(function(){
+		$.ajax({
+			url : "../jqTest6.do",
+			type : "post",
+			dataType : "json",
+			success:function(list){
+				console.log(list);
+				
+				var $tableBody = $("#memberTable6 tbody");
+				
+				$tableBody.html("");
+				
+				var $result;
+				
+				$.each(list, function(i){
+					$result = "";
+					$result += "<tr><td>" + list[i].no + "</td>"
+							+  "<td>" + list[i].name + "</td>"
+							+  "<td>" + list[i].age + "</td>"
+							+  "<td>" + list[i].gender + "</td></tr>";
+					$tableBody.append($result);
+				});
+			},
+			error:function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
+		
+	});
+	
+	
+	
+	
 
 });

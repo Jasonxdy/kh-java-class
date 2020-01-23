@@ -8,6 +8,7 @@ import java.util.List;
 import com.kh.sjproject.board.model.dao.BoardDAO;
 import com.kh.sjproject.board.model.vo.Attachment;
 import com.kh.sjproject.board.model.vo.Board;
+import com.kh.sjproject.board.model.vo.Reply;
 
 import static com.kh.sjproject.common.JDBCTemplate.*;
 
@@ -138,5 +139,123 @@ public class BoardService {
 		close(conn);
 		return fList;
 	}
+
+	
+	
+	
+	
+	
+	/**
+	 * 게시글 상세 조회용 Service
+	 * @param boardNo
+	 * @return board : Board
+	 * @throws Exception
+	 */
+	public Board selectBoard(int boardNo) throws Exception {
+		Connection conn = getConnection();
+		BoardDAO boardDAO = new BoardDAO();
+		
+		// 1) 게시글 상세 조회
+		
+		Board board = boardDAO.selectBoard(conn, boardNo);
+		
+		
+		
+		
+		
+		// 2) 게시글 상세 조회 성공 시 조회수 증가
+		
+		close(conn);
+		return board;
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	/**
+	 * 게시글 이미지 파일 조회용 Service
+	 * @param boardNo
+	 * @return files
+	 * @throws Exception
+	 */
+	public List<Attachment> selectFiles(int boardNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		List<Attachment> files = new BoardDAO().selectFiles(conn, boardNo);
+		
+		close(conn);
+		
+		return files;
+	}
+	
+	
+	
+	
+	
+	
+	/** 파일 다운로드용 Service
+	 * @param fNo
+	 * @return file
+	 */
+	public Attachment selectFile(int fNo) throws Exception {
+		Connection conn = getConnection();
+		
+		Attachment file = new BoardDAO().selectFile(conn, fNo);
+		
+		close(conn);
+		return file;
+	}
+
+	
+	
+	
+	
+	
+	/**
+	 * 댓글 등록용 Service
+	 * @param reply
+	 * @param replyWriter
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReply(Reply reply, int replyWriter) throws Exception{
+		
+		Connection conn = getConnection();
+		int result = new BoardDAO().insertReply(conn, reply, replyWriter);
+		
+		if(result > 0) commit(conn);
+		else			rollback(conn);
+		
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	/**
+	 * 댓글 리스트 조회용 Service
+	 * @param boardId
+	 * @return rList
+	 * @throws Exception
+	 */
+	public List<Reply> selectReplyList(int boardId) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		List<Reply> reply = new BoardDAO().selectReplyList(conn, boardId);
+		
+		close(conn);
+		return reply;
+	}
+	
+	
 
 }

@@ -186,7 +186,7 @@
 			$("#list-table td").click(function(){
 				var boardNo = $(this).parent().children().eq(0).text();
 				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
-				location.href="<%= request.getContextPath() %>/board/detail?no="+boardNo;
+				location.href="<%= request.getContextPath() %>/board/detail?no="+boardNo + "&currentPage=" + <%= currentPage %>;
 			
 			}).mouseenter(function(){
 				$(this).parent().css("cursor", "pointer");
