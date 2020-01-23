@@ -13,6 +13,8 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+  <script src="https://kit.fontawesome.com/ec93b1bab1.js" crossorigin="anonymous"></script>
+
   <!-- 구글 폰트 추가 -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
@@ -174,182 +176,185 @@
         <div class="ml-4 row" id="mypage-content-wrapper">
           <h2 class="mt-3">작성한 댓글</h2>
 
-          <!-- 게시글 목록 1-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image1.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="row">
+            <div class="container-fluid mt-4 col-md-10" id="table-container">
+              <table class="table table-hover table-striped" id="list-table">
+                <thead>
+                  <tr>
+                    <th>게시판</th>
+                    <th>제목</th>
+                    <th>작성일</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-dark">자유게시판</span>
+                    </td>
+                    <td>
+                      강아지 사료 추천 받는다.
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        ㅋㅋㅋ 아무거나 먹이세요
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2019-12-24
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-success">분양합니다</span>
+                    </td>
+                    <td>
+                      우리집 강아지가 새끼를 10마리나 낳았어요
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        축하해요
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2020-01-16
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-dark">자유게시판</span>
+                    </td>
+                    <td>
+                      고양이 너무 귀엽다.
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        고먐미
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2019-12-24
+                      </span>
+                    </td>
+                  </tr>
 
-          <!-- 게시글 목록 2-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image2.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 게시글 목록 3-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image1.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-danger">찾아요</span>
+                    </td>
+                    <td>
+                      10년째 키우던 타란튤라가 사라졌습니다.....
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        ㄷㄷ
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2020-01-16
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-warning">봤어요</span>
+                    </td>
+                    <td>
+                      길냥이 데려왔어요 ^^
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        ㅊㅋㅊㅋ
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2019-12-24
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-success">분양합니다</span>
+                    </td>
+                    <td>
+                      우리집 강아지가 새끼를 10마리나 낳았어요
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        축하해요
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2020-01-16
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-dark">자유게시판</span>
+                    </td>
+                    <td>
+                      고양이 너무 귀엽다.
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        고먐미
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2019-12-24
+                      </span>
+                    </td>
+                  </tr>
 
-          <!-- 게시글 목록 4-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image2.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 게시글 목록 5-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image1.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <tr>
+                    <td>
+                      <span class="badge badge-pill badge-danger">찾아요</span>
+                    </td>
+                    <td>
+                      10년째 키우던 타란튤라가 사라졌습니다.....
+                      <p class="text-muted" id="my-reply">
+                        <span style="font-size: em; color: Tomato;">
+                          <i class="far fa-comment-dots"></i>
+                        </span>
+                        ㄷㄷ
+                      </p>
+                    </td>
+                    <td>
+                      <span>
+                        2020-01-16
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-          <!-- 게시글 목록 6-->
-          <div class="row mt-4 ml-1" id="my-writing-row">
-            <div class="col-md-1" id="my-writing-thumbnail">
-              <a href="#">
-                <img src="../mypage/img/myWriting-image2.jpg" class="img-thumbnail center-block" alt="Cinque Terre">
-              </a>
-            </div>
-            <div class="col-md-10" id="my-writing-content">
-              <div class="row">
-                <div class="col-md-12">
-                  <h4 class="">
-                    <a href="#" class="text-decoration-none text-reset">
-                      저희집 강아지를 찾아주세요
-                    </a>
-                  </h4>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <a href="#" class="text-decoration-none text-reset">
-                      꼭 찾길 바라겠습니다..
-                    </a>
-                  </p>
-                </div>
-              </div>
+              <hr>
+
+
+
             </div>
           </div>
 
           <!-- 게시글 목록 번호-->
           <div class="row pt-5">
             <div class="col-md-12">
-              
+
               <ul class="pagination justify-content-center" style="margin:20px 0">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -359,9 +364,9 @@
                 <li class="page-item"><a class="page-link" href="#">5</a></li>
                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
               </ul>
-              
+
             </div>
-            
+
           </div>
 
 

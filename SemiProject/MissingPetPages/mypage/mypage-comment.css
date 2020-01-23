@@ -106,21 +106,22 @@ body {
 
 /* 작성한 댓글 CSS */
 
-#my-writing-row {
-  margin-bottom: 10px;
+#table-container{
+  margin-left: 0;
 }
 
-#my-writing-thumbnail{
-  box-sizing: border-box;
-  padding: 0px;
+#list-table tr>td:first-child, thead>tr>th:first-child{
+  text-align: center;
+  width: 10%;
 }
 
-#my-writing-thumbnail img{
-  box-sizing: border-box;
-  width: 100px;
-  height: 100px;
+#my-reply{
+  margin-bottom: 0;
 }
 
+i{
+  padding-right: 5px;
+}
 
 
 

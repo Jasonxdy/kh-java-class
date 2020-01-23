@@ -103,10 +103,21 @@ body {
   margin-top: 180px;
 }
 
-
 /* 1:1문의 CSS */
+
+#list-table{
+  width : 100%;
+  /* width: 1270px; */
+}
+
 #list-table tr :hover{
    cursor: pointer;
+}
+
+#table-container {
+  width: 1100px;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 

@@ -101,26 +101,20 @@ body {
 
 #mypage-content-wrapper {
   margin-top: 180px;
+  padding-left: 0;
 }
 
 
 /* 작성한 글 CSS */
 
-#my-writing-row {
-  margin-bottom: 10px;
+#table-container{
+  margin-left: 0;
 }
 
-#my-writing-thumbnail{
-  box-sizing: border-box;
-  padding: 0px;
+#list-table tr>td:first-child, thead>tr>th:first-child{
+  text-align: center;
+  width: 10%;
 }
-
-#my-writing-thumbnail img{
-  box-sizing: border-box;
-  width: 100px;
-  height: 100px;
-}
-
 
 
 
