@@ -222,7 +222,7 @@ public class BoardController extends HttpServlet {
 					// Enumeration : Iterator의 옛날 버전 (Collection에 순차적으로 반복 접근하는 기능)
 					// cos.jar이 옛날꺼라서 그런듯
 					
-					while(files.hasMoreElements()) { // Iterator의 1hasNext() 같은 기능
+					while(files.hasMoreElements()) { // Iterator의 hasNext() 같은 기능
 						
 						// 업로드된 파일은 역순으로 전달됨. (즉, 1,2,3,4 이렇게 올리면 0번 인덱스부터 4,3,2,1 이렇게 저장)
 						String name = files.nextElement();

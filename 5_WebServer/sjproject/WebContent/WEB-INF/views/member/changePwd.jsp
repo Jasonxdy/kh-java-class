@@ -77,32 +77,8 @@
 	</div>
 	<%@ include file="../common/footer.jsp"%>
 
-	<script type="text/javascript">
-		$(".phone").on("input", function() {
-			if ($(this).val().length > $(this).prop("maxLength")) {
-				$(this).val($(this).val().slice(0, $(this).prop("maxLength")));
-			}
-		});
-	</script>
 
 	<script>
-		// 각 유효성 검사 결과를 저장할 객체
-		var singUpCheck = {
-			"phone" : false,
-			"email" : false
-		};
-
-		// 실시간 입력 형식 검사
-		// 정규표현식
-		$(document).ready(function() {
-
-			// jQuery 변수 : 변수에 직접적으로 jQuery메소드를 사용할 수 있음.
-			var $phone2 = $("#phone2");
-			var $phone3 = $("#phone3");
-			var $email = $("#email");
-		});
-
-
 		// submit 동작
 		function validate() {
 			// 비밀번호 유효성 검사
@@ -128,8 +104,6 @@
 			
 			
 		}
-		
-		
 		
 		
 	</script>
