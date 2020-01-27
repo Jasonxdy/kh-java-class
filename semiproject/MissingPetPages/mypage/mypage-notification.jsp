@@ -63,7 +63,7 @@
 
             <ul class="nav flex-column">
               <li class="align-items-center text-center">
-                <a id="logo" href="index.html">
+                <a id="logo" href="index.jsp">
                   <img src="img/logo7.png" width=150px>
                 </a>
               </li>
@@ -99,7 +99,7 @@
               </li>
 
               <li class="nav-item mb-1">
-                <a class="nav-link  text-center" href="../만남그후/만남그후.html">
+                <a class="nav-link  text-center" href="../만남그후/만남그후.jsp">
                   만남 그 후
                 </a>
               </li>
@@ -145,26 +145,26 @@
           <div class="row w-100 mt-2">
             <ul class="nav" id="mypage-nav">
               <li class="nav-item mr-4">
-                <h5><a class="nav-link" href="mypage-main.html" id="mypage-profile">프로필</a></h5>
+                <h5><a class="nav-link" href="mypage-main.jsp" id="mypage-profile">프로필</a></h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="mypage-writing.html" id="mypage-writing">작성한 글</a>
+                  <a class="nav-link" href="mypage-writing.jsp" id="mypage-writing">작성한 글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="mypage-comment.html" id="mypage-comment">작성한 댓글</a>
+                  <a class="nav-link" href="mypage-comment.jsp" id="mypage-comment">작성한 댓글</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="mypage-1to1-question.html" id="mypage-1to1-question">1:1 문의</a>
+                  <a class="nav-link" href="mypage-1to1-question.jsp" id="mypage-1to1-question">1:1 문의</a>
                 </h5>
               </li>
               <li class="nav-item mr-4">
                 <h5>
-                  <a class="nav-link" href="mypage-notification.html" id="mypage-notification">알림 설정</a>
+                  <a class="nav-link" href="mypage-notification.jsp" id="mypage-notification">알림 설정</a>
                 </h5>
               </li>
             </ul>
