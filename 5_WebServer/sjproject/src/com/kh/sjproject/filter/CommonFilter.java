@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 // filterName : 필터의 이름 지정(필터 순서 지정 시 사용)
 // urlPatterns : 필터가 적용될 url 패턴 지정( /* : 모든 url )
@@ -42,7 +43,14 @@ public class CommonFilter implements Filter {
 		request.setCharacterEncoding("UTF-8");
 		
 		// 2.view로 전달 (응답)할 값 변환
-		response.setContentType("text/html; charset=UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+		
+		
+		 String uri = ((HttpServletRequest)request).getRequestURI();
+         
+	      if(!uri.substring(uri.lastIndexOf(".")+1).equals("css")) {
+	         response.setContentType("text/html; charset=UTF-8");
+	      }
 		
 		chain.doFilter(request, response);
 		/*
