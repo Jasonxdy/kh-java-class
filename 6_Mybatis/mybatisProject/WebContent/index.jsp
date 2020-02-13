@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Servlet/JSP</title>
+<title>Mybatis</title>
 <style>
 	#jumbo1 {
 		background-image:
@@ -24,7 +24,7 @@
 		<div class="jumbotron p-4 p-md-5 text-white rounded bg-dark"
 			id="jumbo1">
 			<div class="col-md-6 px-0">
-				<h1 class="display-4 font-italic">Servlet/JSP 실습</h1>
+				<h1 class="display-4 font-italic">Mybatis 실습</h1>
 			</div>
 		</div>
 

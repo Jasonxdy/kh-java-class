@@ -14,20 +14,26 @@
 		
 </head>
 <body>
+	<!-- c:set = 변수선언 -->
+	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application"/>
+																			<!-- application : 서버가 꺼질때 까지 어디서든지 사용할 수 있는 전역변수 개념 -->
 
+
+	<!-- empty : 값이 비어있거나 null인 경우 true 반환 -->
 	<c:if test="${!empty msg}">
 		<script>
 			alert("${msg}");
 		</script>
 		<c:remove var="msg"/>
-		<!-- msg라는 속성을 제거, scope 미지정시 찾아서 지움 -->
+		<!-- msg라는 속성을 제거, scope 미지정시 모두(?) 찾아서 지움 -->
 	</c:if>
 
 	<header class="blog-header">
 		<div
 			class="row flex-nowrap justify-content-between align-items-center">
 			<div class="col-4 pt-1">
-				<a class="text-muted" href="<%= request.getContextPath()%>">
+				<%-- <a class="text-muted" href="<% request.getContextPath() %>"> --%>
+				<a class="text-muted" href="${contextPath}">
 												<!-- 서버 ip: 8080/sjproject 반환 // 현재 프로젝트의 최상위 주소가 나옴(?) -->
 												<!-- request: 내장객체이므로 사용가능 -->												 
 				<img src="https://www.iei.or.kr/resources/images/common/top_logo.jpg"
@@ -54,7 +60,8 @@
 							</div>
 							<div class="modal-body">
 																		<!-- action의 주소 : 완전 임의로 지정 가능한듯? -->
-								<form class="form-signin" method="POST" action="<%= request.getContextPath()%>/member/login.do"
+								<%-- <form class="form-signin" method="POST" action="<%= request.getContextPath()%>/member/login.do" --%>
+								<form class="form-signin" method="POST" action="${contextPath}/member/login.do"
 									onsubmit="return loginValidate();"																		
 								>
 									<input type="text" class="form-control" id="memberId" name="memberId"
@@ -65,17 +72,20 @@
 										
 										
 										<label> 
-											<c:if test="${!empty cookie.saveId.value}">
+										<!-- <input type="checkbox" 아이디 저장 -->
+										
+										<!-- Cookie 배운 후 -->
+											<c:if test="${!empty cookie.saveId}">
 												<input type="checkbox" id="save" name="save" checked> 아이디 저장
 											</c:if>
-											<c:if test="${empty cookie.saveId.value}">
+											<c:if test="${empty cookie.saveId}">
 												<input type="checkbox" id="save" name="save"> 아이디 저장
 											</c:if>
 										</label>
 										
 									</div>
 									<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-									<a class="btn btn-lg btn-secondary btn-block" href="<%= request.getContextPath() %>/member/signUpForm.do">회원가입</a>
+									<a class="btn btn-lg btn-secondary btn-block" href="${contextPath}/member/signUpForm.do">회원가입</a>
 								</form>
 							</div>
 							<div class="modal-footer">
@@ -94,11 +104,11 @@
 			<c:if test="${!empty sessionScope.loginMember }">
 				<div class="d-flex justify-content-end align-items-center">
 					${sessionScope.loginMember.memberName}님 환영합니다.&nbsp;
-					<a href="<%= request.getContextPath() %>/member/mypage.do" role="button" class="btn btn-sm btn-outline-secondary">
+					<a href="${contextPath}/member/mypage.do" role="button" class="btn btn-sm btn-outline-secondary">
 						마이페이지
 					</a>
 					&nbsp;
-					<a href="<%= request.getContextPath() %>/member/Logout.do" role="button" class="btn btn-sm btn-outline-secondary">
+					<a href="${contextPath}/member/Logout.do" role="button" class="btn btn-sm btn-outline-secondary">
 						로그아웃
 					</a>
 				</div>

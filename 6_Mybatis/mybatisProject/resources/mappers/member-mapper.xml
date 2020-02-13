@@ -41,8 +41,8 @@
 
 	<!-- Select 구문 -->
 	<!-- 
-		id : 외부(DAO)에서 참조하기 위한 쿼리문의 고유 아아디(네임스페이스 내 유일한 구분자)
-		parameterType : 구문에 전달될 파라미터의 패키지 경로를 포함한 전테 클래스 명이나 별칭(mybatis-config.xml에 설정된 alias 이용가능)
+		id : 외부(DAO)에서 참조하기 위한 쿼리문의 고유 아아디(네임스페이스 내 유일한 구분자) // key값
+		parameterType : 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래스 명이나 별칭(mybatis-config.xml에 설정된 alias 이용가능)
 		resultType/resultMap : 쿼리 실행 후 조회된 결과(ResultSet)를 자바에서 사용되게 끔 담게되는 객체
 		resultType : resultset 결과를 매핑해서 반환되는 타입의 전체 클래스명이나 별명
 		resultMap : resultset 결과를 매핑할 resultMap 참조 아이디명
@@ -64,6 +64,9 @@
 	 	AND MEMBER_PWD= #{memberPwd} 
 	 	AND MEMBER_STATUS='Y'
 	</select> -->
+	
+	<!-- id : key값, 쿼리문 : value값이 됨 (properties에서와 같음) -->
+	
 	<!-- 
 	 	해당 쿼리문 수행 결과가가 담긴 ResultSet은 resultType의 객체에 자동으로 mapping되어 리턴된다.
 	 	
@@ -77,6 +80,7 @@
 	  
 	<!-- 3. resultMap, Alias 적용 -->
 	<!-- 처음에 작성했던 loginMember는 주석 후 -->
+													<!-- Mapping이 필요한 ResultSet이 나오므로 -->
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT * 
 	 	FROM MEMBER 
@@ -84,6 +88,72 @@
 	 	AND MEMBER_PWD= #{memberPwd} 
 	 	AND MEMBER_STATUS='Y'
 	</select>	  
+	<!-- #{필드명} : getter가 알아서 작동함 -->
+	
+	
+	
+	<!-- 4. 아이디 중복 체크 -->
+	<!-- SELECT를 할 경우 반드시 resultType 또는 resultMap을 반드시 지정해야 함!! -->
+	<select id="idDupCheck" parameterType="string" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{id}
+		
+	</select>
+	
+	
+	<!-- 5. 회원 가입 -->
+	<!--
+	INSERT, UPDATE, DELETE 등의 DML은 설정할 수 있는 속성이 모두 동일하고 반환되는 타입(resultType)이 무조건
+	쿼리 수행이 성공한 행의 개수 (int)이기 때문에 resultType이 _int로 고정되어 있어 생략한다.
+	-->
+	<insert id="signUp" parameterType="Member">
+	
+		INSERT INTO MEMBER
+		VALUES(SEQ_UNO.NEXTVAL, 
+				#{memberId}, #{memberPwd}, #{memberName}, 
+				#{memberPhone}, #{memberEmail}, #{memberAddress}, 
+				#{memberInterest}, DEFAULT, DEFAULT, DEFAULT)
+	
+	</insert>
+	
+	
+	<!-- 6. 회원 정보 조회 -->
+	<select id="selectMember" parameterType="string" resultMap="memberResultSet">
+	
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_PHONE, 
+				MEMBER_EMAIL, MEMBER_ADDR, MEMBER_INTEREST
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+	
+		UPDATE MEMBER SET
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_EMAIL = #{memberEmail},
+		MEMBER_ADDR = #{memberAddress},
+		MEMBER_INTEREST = #{memberInterest}
+		WHERE MEMBER_ID = #{memberId}
+	
+	</update>
+	
+	<select id="checkPwd" parameterType="Member" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_PWD = #{memberPwd}
+	</select>
+	
+	
+	<update id="deleteMember" parameterType="Member">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'N'
+		WHERE MEMBER_ID = #{memberId}
+	</update>
 
 	
 </mapper>

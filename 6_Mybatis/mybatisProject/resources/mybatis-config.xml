@@ -5,7 +5,7 @@
 					"http://mybatis.org/dtd/mybatis-3-config.dtd" >
 					
 					
-<!-- configuration : 마이바티스 설정과 관련된 기본 세팅들을 선언할 수 있는 영역  -->
+<!-- configuration : 마이바티스 설정과 관련된 기본 세팅들을 선언할 수 있는 영역  // 이게 없는 경우 mybatis 사용 불가 -->
 <!-- 
 	** 주의사항 : 
 		configuration 내부에 작성되는 요소는 작성되는 순서가 존재하므로 
@@ -22,10 +22,11 @@
 		-->
 	</settings>
 	
-	
+	<!-- VO 클래스의 풀 네임을 매번 호출하기 번거롭기 때문에 별도의 별칭을 등록하는 부분 -->
 	<typeAliases>
-		<typeAlias type="com.kh.mybatis.member.model.vo.Member" alias="Member"/>
 		<!-- mybatis는 별칭 alias가 없으면 type에 있는 full name으로 불러야 하므로 꼭 지정해줄 것! -->
+		<typeAlias type="com.kh.mybatis.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Board" alias="Board"/>
 	</typeAliases>
 
 
@@ -69,6 +70,8 @@
 	<!-- mapper : DB에 사용되는 쿼리문들을 담은 파일을 등록하는 부분 -->	
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
+							<!-- resources 폴더가 source폴더로 등록되어 있기 때문에 최상단으로 인식된다 -->
+		<mapper resource="/mappers/board-mapper.xml"/>
 	</mappers>
 	
 </configuration>

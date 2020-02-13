@@ -23,12 +23,12 @@ public class Template {
 		// 마이바티스 라이브러리에서 제공하는 util성 클래스인
 		// Resources라는 클래스를 가지고 파일을 불러와보도록 하자.
 		try {
-			InputStream stream = Resources.getResourceAsStream("/mybatis-config.xml");
+			InputStream stream = Resources.getResourceAsStream("/mybatis-config.xml"); // 경로에서 "/~~" = resources, src 둘다 검색 대상에 포함됨.. source folder이므로
 			// -> source folder로 지정해 두어야지만 매개변수로 작성한 경로로 검색됨
 			// SqlSession을 만들기 위해서 SqlSessionFactory에서 openSession이라는 것을 해줘야 되는데
 			// SqlSessionFactory는 SqlSessionFactoryBuilder라는 클래스의 build()를 통해서 생성이된다.
 			// openSession(false)의 의미는 자동 커밋을 하지 않게 설정하는 것이다.
-			session = new SqlSessionFactoryBuilder().build(stream).openSession(false);
+			session = new SqlSessionFactoryBuilder().build(stream).openSession(false); //  SqlSession 공장에서 build 해야함, 경로(stream)에 의해 만듬.
 		}catch(Exception e) {
 			System.out.println("Template Exception catch");
 			e.printStackTrace();
