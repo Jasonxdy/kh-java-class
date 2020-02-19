@@ -64,8 +64,8 @@
 		
 		<tr>
 			<td>str1 != str2</td>
-			<td><%= str1 != str2 %></td> <!-- false -->
-			<td>${str1 != str2} 또는 ${str1 ne str2}</td> <!-- true -->
+			<td><%= str1 != str2 %></td> <!-- true -->
+			<td>${str1 != str2} 또는 ${str1 ne str2}</td> <!-- false -->
 			<!-- el의 == 연산은 equals()와 같은 동작을 함 -->
 		</tr>
 		
@@ -78,8 +78,8 @@
 	
 		<tr>
 			<td>person1 != person2</td>
-			<td><%= person1 != person2 %></td> <!-- false -->
-			<td>${person1 != person2} 또는 ${person1 ne person2}</td> <!-- true -->
+			<td><%= person1 != person2 %></td> <!-- true -->
+			<td>${person1 != person2} 또는 ${person1 ne person2}</td> <!-- false -->
 			<!-- el의 == 연산은 equals()와 같은 동작을 함 -->
 		</tr>
 	</table>

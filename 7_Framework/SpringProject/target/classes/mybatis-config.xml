@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+<!-- 1. 마이바티스 설정과 관련된 기본 세팅 선언 -->
+<settings>
+	<setting name="jdbcTypeForNull" value="NULL"/>
+										<!-- 소문자 null이면 진짜 null값이 되므로 소용 없음 -->
+</settings>
+
+<!-- 2. 별칭 작성 부분 -->
+<typeAliases>
+	<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
+</typeAliases>
+
+<!-- Spring JDBC때문에 여기 있는 DB 연결 부분이 다른 곳으로 넘어감! -->
+
+<!-- mapper 파일 등록 부분 -->
+<mappers>
+	<mapper resource="/mappers/member-mapper.xml"/>
+</mappers>
+
+</configuration>

@@ -297,16 +297,60 @@ public class BoardController extends HttpServlet {
 				
 			} catch (Exception e) {
 				ExceptionForward.errorPage(request, response, "게시글 검색", e);
-				
 			}
-			
-			
-			
-			
-			
-			
 		}
 
+		
+		
+		
+		
+		else if(command.equals("/search2")) {
+			try {
+				String[] searchCategory = request.getParameterValues("searchCategory");
+				String searchKey = request.getParameter("searchKey");
+				String searchValue = request.getParameter("searchValue");
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("searchCategory", searchCategory);
+				map.put("searchKey",searchKey);
+				map.put("searchValue",searchValue);
+				
+				// 검색된 총 게시글 수 조회
+				int listCount = boardService.getSearchListCount2(map);
+				
+//				System.out.println(listCount);
+				
+				
+				// 페이징 처리
+				int currentPage = 0; // 현재 페이지
+				if(request.getParameter("currentPage") == null) {
+					currentPage = 1;
+				} else {
+					currentPage = Integer.parseInt(request.getParameter("currentPage"));
+				}
+				
+				PageInfo pInf = Pagination.getPageInfo(5, 10, currentPage, listCount);
+				
+				List<Board> searchList = boardService.selectSearchList2(map, pInf);
+				
+				path = "/WEB-INF/views/board/searchList.jsp";
+				request.setAttribute("searchList", searchList);
+				request.setAttribute("pInf", pInf);
+				view = request.getRequestDispatcher(path);
+				
+				view.forward(request, response);
+				
+			} catch(Exception e) {
+				ExceptionForward.errorPage(request, response, "게시글 다중 조건 검색", e);
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

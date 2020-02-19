@@ -88,9 +88,16 @@
 	        <%-- <% } %> --%>
 	        
 	        <!-- 페이징바 -->
-	        <c:url var="searchUrl" value="/board/search">
+	        <c:url var="searchUrl" value="/board/search2">
 	        	<c:param name="searchKey" value="${param.searchKey }"/>
 	        	<c:param name="searchValue" value="${param.searchValue }"/>
+	        	
+	        	<!-- c:if문 써주는 이유 : 아무것도 체크가 안되었을 시 빈 문자열로 넘어가기 때문에... 주소창에 쿼리 스트링이 searchCategory= 이렇게 들어감 -->
+	        	<c:if test="${!empty paramValues.searchCategory}">
+	        		<c:forEach var="ct" items="${paramValues.searchCategory}">
+		        		<c:param name="searchCategory" value="${ct}"/>
+	        		</c:forEach>
+	        	</c:if>
 	        </c:url>
 	        
 	        <div style="clear: both;">
@@ -151,6 +158,45 @@
 	                <button class="form-control btn btn-primary" style="width:100px; display: inline-block;">검색</button>
 	            </form>
 	            
+	            
+	            
+	            <hr>
+                <h4>다중 조건 검색</h4>
+               <form action="search2" method="GET" class="text-center" id="searchForm2" style="margin-bottom:100px;">
+                  <span>
+                     카테고리(다중 선택 가능)<br>
+                      <label for="exercise">운동</label> 
+                      <input type="checkbox" name="searchCategory" value="운동" id="exercise">
+                      &nbsp;
+                      <label for="movie">영화</label> 
+                      <input type="checkbox" name="searchCategory" value="영화" id="movie">
+                      &nbsp;
+                      <label for="music">음악</label> 
+                      <input type="checkbox" name="searchCategory" value="음악" id="music">
+                      &nbsp;
+                      <label for="cooking">요리</label> 
+                      <input type="checkbox" name="searchCategory" value="요리" id="cooking">
+                      &nbsp;
+                      <label for="game">게임</label> 
+                      <input type="checkbox" name="searchCategory" value="게임" id="game">
+                      &nbsp;
+                      <label for="etc">기타</label> 
+                      <input type="checkbox" name="searchCategory" value="기타" id="etc">
+                      &nbsp;
+                   </span>
+                   <br>
+                   <select name="searchKey" class="form-control" style="width:100px; display: inline-block;">
+                       <option value="title">글제목</option>
+                       <option value="content">내용</option>
+                       <option value="titcont">제목+내용</option>
+                   </select>
+                   <input type="text" name="searchValue" class="form-control" style="width:25%; display: inline-block;">
+                   <button class="form-control btn btn-primary" style="width:100px; display: inline-block;">검색</button>
+               </form>
+	            
+	            
+	            
+	            
             	<script>
 					$(function(){
 						var searchKey = "${param.searchKey}";
@@ -167,6 +213,19 @@
 						}
 							
 					});
+					
+					// script 태그 내에서도 JSTL 사용 가능
+					// 대신 주의할 점이 있음!
+					// -> 서버 동작 시 읽어나가는 코드 종류의 순서
+					// JAVA > EL/JSTL > HTML > Javascript(jQuery)
+					// -- 단, 이는 script태그 안에 있으므로 우선순위 상관 없음..! script태그 불러질때 시작됨
+					<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+						$.each($("input[name=searchCategory]"), function(index, item){
+							if($(item).val() == "${ct}"){
+								$(item).prop("checked", "true");
+							}
+						});
+					</c:forEach>
 				</script>
 	            
 	        </div>

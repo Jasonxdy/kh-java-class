@@ -108,6 +108,78 @@
 		</choose>
 	</select>
 	
+	
+	<!-- 다중 조건 검색 총 게시글 수 조회 -->
+   <!-- where : where 엘리먼트 내부에 작성된 SQL구문의 시작부분에 where가 없다면 자동으로 where 구문 추가,
+            또는 시작 부분의 SQL이 AND 또는 OR일 경우   -->
+   <select id="getSearchListCount2" parameterType="map" resultType="_int">
+      SELECT COUNT(*)
+      FROM V_BOARD
+      <where>
+         <choose>
+            <when test="searchKey == 'title'">
+               AND BOARD_TITLE LIKE '%' || #{searchValue} ||'%'
+            </when>
+            <when test="searchKey == 'content'">
+               AND BOARD_CONTENT LIKE '%' || #{searchValue} ||'%'
+            </when>
+            <otherwise>
+               AND (BOARD_CONTENT LIKE '%' || #{searchValue} ||'%' OR BOARD_TITLE LIKE '%' || #{searchValue} ||'%') 
+            </otherwise>
+         </choose>
+         
+         <if test="searchCategory != null">
+            AND CATEGORY_NM IN
+            <foreach index="index" item="item" collection="searchCategory" open="(" separator="," close=")">
+               #{item} 
+               <!-- 영화, 음악, 게임, 기타 -->
+               <!-- ('영화','음악','게임','기타') -->
+            </foreach>
+         </if>
+         
+         AND BOARD_TYPE=1
+      </where>
+   </select>
+   
+   
+   
+   
+   <!-- 다중 조건 검색 게시글 목록 조회 -->
+   <select id="searchList2" parameterType="map" resultMap="BoardResultSet">
+   
+   	<!-- bind : 많이 사용되는 구문을 정의해놓는 태그! -->
+   	<bind name="sv" value="'%' + _parameter.searchValue + '%'"/> <!-- _parameter : 전달받은 파라미터를 의미 -->
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_COUNT, BOARD_MODIFY_DT, MEMBER_ID, CATEGORY_NM
+		FROM V_BOARD
+		<where>
+			<choose>
+				<when test="searchKey == 'title'">
+					AND BOARD_TITLE LIKE #{sv} 
+				</when>
+				<when test="searchKey == 'content'">
+					AND BOARD_CONTENT LIKE #{sv} 
+				</when>
+				<otherwise>
+					AND (BOARD_TITLE LIKE #{sv} OR BOARD_CONTENT LIKE #{sv})
+				</otherwise>
+			</choose>
+			
+			<if test="searchCategory != null">
+				AND CATEGORY_NM IN
+				<foreach collection="searchCategory" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			AND BOARD_TYPE = 1
+		</where>
+		
+		
+		
+   
+   
+   
+   
+   </select>	
 
 
 

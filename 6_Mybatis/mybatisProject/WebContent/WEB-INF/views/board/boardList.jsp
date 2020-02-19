@@ -194,6 +194,40 @@
 	                <button class="form-control btn btn-primary" style="width:100px; display: inline-block;">검색</button>
 	            </form>
 	            
+	            <hr>
+                <h4>다중 조건 검색</h4>
+               <form action="search2" method="GET" class="text-center" id="searchForm2" style="margin-bottom:100px;">
+                  <span>
+                     카테고리(다중 선택 가능)<br>
+                      <label for="exercise">운동</label> 
+                      <input type="checkbox" name="searchCategory" value="운동" id="exercise">
+                      &nbsp;
+                      <label for="movie">영화</label> 
+                      <input type="checkbox" name="searchCategory" value="영화" id="movie">
+                      &nbsp;
+                      <label for="music">음악</label> 
+                      <input type="checkbox" name="searchCategory" value="음악" id="music">
+                      &nbsp;
+                      <label for="cooking">요리</label> 
+                      <input type="checkbox" name="searchCategory" value="요리" id="cooking">
+                      &nbsp;
+                      <label for="game">게임</label> 
+                      <input type="checkbox" name="searchCategory" value="게임" id="game">
+                      &nbsp;
+                      <label for="etc">기타</label> 
+                      <input type="checkbox" name="searchCategory" value="기타" id="etc">
+                      &nbsp;
+                   </span>
+                   <br>
+                   <select name="searchKey" class="form-control" style="width:100px; display: inline-block;">
+                       <option value="title">글제목</option>
+                       <option value="content">내용</option>
+                       <option value="titcont">제목+내용</option>
+                   </select>
+                   <input type="text" name="searchValue" class="form-control" style="width:25%; display: inline-block;">
+                   <button class="form-control btn btn-primary" style="width:100px; display: inline-block;">검색</button>
+               </form>
+	            
             	<script>
 					$(function(){
 						<%-- var searchKey = "<%= searchKey %>";
