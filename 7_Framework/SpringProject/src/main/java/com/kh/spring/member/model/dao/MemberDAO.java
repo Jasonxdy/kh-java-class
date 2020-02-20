@@ -22,6 +22,27 @@ public class MemberDAO {
 	public Member selectMember(Member member) throws Exception{
 		return sqlSession.selectOne("memberMapper.loginMember", member);
 	}
+
+	
+	/**
+	 * 회원 가입용 DAO
+	 * @param signUpMember
+	 * @return result
+	 * @throws Exception
+	 */
+	public int signUp(Member signUpMember) throws Exception {
+		return sqlSession.insert("memberMapper.signUp", signUpMember);
+	}
+
+
+	/**
+	 * 아이디 중복 체크용 DAO
+	 * @param memberId
+	 * @return result
+	 */
+	public int idDupCheck(String memberId) throws Exception{
+		return sqlSession.selectOne("memberMapper.idDupCheck", memberId);
+	}
 	
 	
 

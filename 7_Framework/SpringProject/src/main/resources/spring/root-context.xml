@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- 
 		root-context.xml 파일은 서버 구동 시 web.xml을 거쳐 바로 로딩 되는 즉,
@@ -31,6 +33,31 @@
 	   <property name="password" value="spring"/>
 	   <property name="defaultAutoCommit" value="false"/>
 	</bean>
+	
+	
+	
+	
+	
+	<!-- 트랜잭션 처리를 위한 Transaction Manager 추가 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- property : 생성할때의 매개변수라고 생각하면 됨 -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 여기까지는 Transaction Manager bean 등록 -->
+	<!-- 이제 사용! -->
+	
+	<!-- 
+		@Transactional 어노테이션이 붙은 메소드를 찾아 트랜잭션 처리를
+		할 수 있도록 트랜잭션 어드바이스를 자동으로 적용하는 <tx:annotation-driven/> 추가
+	 -->
+	 
+	<!-- tx 태그를 사용하기 위하여 namespaces (하단에 tab 여러개중 하나)에서 tx 체크하기 -->
+	<tx:annotation-driven/>
+	
+	
+	
+	
 	
 	<!-- 마이바티스 SqlSession 등록하기 (xml 방식으로 bean 등록)-->
 	<!-- SqlSessionFactoryBean: MyBatis 설정파일(mybatis-config)을 바탕으로 SqlSessionFactory를 생성한다. Spring Bean으로 등록해야 한다. -->

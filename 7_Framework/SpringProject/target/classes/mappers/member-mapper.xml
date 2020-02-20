@@ -22,12 +22,28 @@
   		<result property="memberGrade" column="MEMBER_GRADE"/>
 	</resultMap>
 	 
-	 
+	<!-- 로그인 --> 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet"> <!-- 컬럼명 == 필드명일 경우 resultType사용해도 됨 -->
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID = #{memberId}
-		AND MEMBER_PWD = #{memberPwd}
+		<!-- AND MEMBER_PWD = #{memberPwd} : bCrypt 암호화 때문에 나가리 -->
 		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 회원가입 --> 
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES (SEQ_UNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName}, #{memberPhone}, 
+			#{memberEmail}, #{memberAddress}, #{memberInterest}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
 	</select>
 
 </mapper>
