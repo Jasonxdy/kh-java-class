@@ -2,6 +2,10 @@ package com.kh.spring.member.model.service;
 
 import com.kh.spring.member.model.vo.Member;
 
+/**
+ * @author user1
+ *
+ */
 public interface MemberService {
 	
 	// Service Interface를 사용하는 이유
@@ -47,6 +51,49 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	public abstract int idDupCheck(String memberId) throws Exception;
+
+
+
+	
+	
+	/**
+	 * 회원 정보 조회 Service
+	 * @param memberNo
+	 * @return member
+	 * @throws Exception
+	 */
+	public abstract Member selectMember(int memberNo) throws Exception;
+
+
+
+	/**
+	 * 회원 정보 수정용 Service
+	 * @param updateMember
+	 * @return result
+	 * @throws Exception
+	 */
+	public abstract int updateMember(Member member) throws Exception;
+
+
+
+	/**
+	 * 비밀번호 변경용 service
+	 * @param member
+	 * @param newPwd1
+	 * @return result
+	 * @throws Exception
+	 */
+	public abstract int updatePwd(Member member, String newPwd1) throws Exception;
+
+
+
+	/**
+	 * 회원 탈퇴 service
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public abstract int deleteMember(Member member) throws Exception;
 	
 	
 

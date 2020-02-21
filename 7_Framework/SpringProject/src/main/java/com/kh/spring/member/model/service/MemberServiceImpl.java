@@ -80,4 +80,59 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
+	
+	
+	
+	@Override
+	public Member selectMember(int memberNo) throws Exception {
+		return memberDAO.selectMember(memberNo);
+	}
+	
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateMember(Member member) throws Exception {
+		return memberDAO.updateMember(member);
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updatePwd(Member member, String newPwd1) throws Exception {
+		
+		int result = 0;
+		
+		// DB에 저장되어 있는 암호화된 비밀번호를 조회
+		String savePwd = memberDAO.checkCurrent(member.getMemberNo());
+		
+		if(bCryptPasswordEncoder.matches(member.getMemberPwd(), savePwd)) {
+			
+			// member 재활용
+			member.setMemberPwd(bCryptPasswordEncoder.encode(newPwd1));
+			result = memberDAO.updatePwd(member);
+			
+		} else {
+			result = -1;
+		}
+		return result;
+	}
+	
+	
+	
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteMember(Member member) throws Exception {
+		
+		int result = 0;
+		
+		// DB에 저장되어 있는 암호화된 비밀번호를 조회
+		String savePwd = memberDAO.checkCurrent(member.getMemberNo());
+		
+		if(bCryptPasswordEncoder.matches(member.getMemberPwd(), savePwd)) {
+			result = memberDAO.deleteMember(member.getMemberNo());
+		} else {
+			result = -1;
+		}
+		return result;
+	}
+	
 }

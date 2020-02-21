@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
@@ -308,5 +309,178 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	// 마이페이지
+	@RequestMapping("mypage")
+	public String mypage(Model model) {
+		// Session Scope에 있는 loginMember를 얻어옴.
+		Member loginMember = (Member)model.getAttribute("loginMember");
+		// @SessionAttributes의 매개변수로 작성된 Key 값을 model.getAttribute("key값")을 이용하여
+		// Session Scope에서 속성값을 얻어올 수 있음.
+		
+		try {
+			Member member = memberService.selectMember(loginMember.getMemberNo());
+			
+			model.addAttribute("member", member);
+			
+			return "member/mypage";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "마이페이지 조회 과정 중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	
+	// 커맨드 객체(VO 필드에 파라미터로 전달된 값 중 name 속성 값을 저장하는 객체) 사용조건
+	// 1) 기본 생성자 존재
+	// 2) setter 존재
+	
+	/*
+	 * RedirectAttributes
+	 * - 리다이렉트 시 데이터를 전달할 수 있는 객체 (redirect하면 request가 갱신되기 때문에 spring이 parameter로 값을 전달하는 상황 발생 (넘겨준 msg가 쿼리스트링 형태로 보임)
+	 * 
+	 * addFlashAttribute()
+	 * - 리다이렉트로 데이터 전달 시 쿼리스트링으로 전달되지 않게 현재 request에 세팅된 attribute를 
+	 * 	 잠시 Session scope로 올렸다가 페이지 이동 후 새로 생성된 request에 다시 추가해줌
+	 * 
+	 * 
+	 * 
+	 */
+	
+	// 회원 정보 수정
+	@RequestMapping("updateMember")
+	public String updateMember(Member member, Model model, RedirectAttributes rdAttr, String phone1, String phone2, String phone3,
+			String post, String address1, String address2, @RequestParam(value="memberInterest", required=false) String[] interest) {
+		
+		String memberPhone = phone1 + "-" + phone2 + "-" + phone3;
+		String memberAddress = post + "," + address1 + "," + address2;
+		
+		String memberInterest = null;
+		
+		if(interest != null) {
+			memberInterest = String.join(",", interest);
+		}
+		
+//		Member updateMember = new Member(((Member)model.getAttribute("loginMember")).getMemberNo(), 
+//										null, 
+//										null, 
+//										memberPhone, 
+//										member.getMemberEmail(), 
+//										memberAddress, 
+//										memberInterest);
+		
+		
+		// 매개변수에 있는 member 재활용
+		// -> member에는 현재 memberEmail 밖에 값이 없다.
+		member.setMemberPhone(memberPhone);
+		member.setMemberAddress(memberAddress);
+		member.setMemberInterest(memberInterest);
+		
+		// session에서 회원번호 받아와 member에 set
+		member.setMemberNo(((Member)model.getAttribute("loginMember")).getMemberNo());
+		
+		try {
+			int result = memberService.updateMember(member);
+			
+			String msg = null;
+			
+			if(result > 0) msg =  "회원 정보 수정 성공"; 
+			else		   msg =  "회원 정보 수정 실패";
+			
+			rdAttr.addFlashAttribute("msg", msg);
+			// model.addAttribute() --> request, session (이건 @SessionAttribute 때문에) 스코프에 둘다 올라감...;; 
+			// 따라서 일단 넘어갔을때 session의 msg를 사용하는 것은 맞지만 그냥 쿼리스트링에 올라간거 빼고 싶어서 addFlastAttribute 사용
+			
+			return "redirect:mypage";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "회원 정보 수정 과정 중 오류 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	
+	
+	// 비밀번호 변경 페이지 이동
+	@RequestMapping("changePwd")
+	public String changePwd() {
+		return "member/changePwd";
+	}
+	
+	
+	// 회원 탈퇴 페이지 이동
+	@RequestMapping("secession")
+	public String secession() {
+		return "member/secession";
+	}
+	
+	
 
+	// 비밀번호 변경
+	@RequestMapping("updatePwd")
+	public String updatePwd(Member member, Model model, RedirectAttributes rdAttr, String newPwd1) {
+		
+		// 현재 비밀번호에 입력한 값
+		// 새로운 비밀번호에 입력한 값
+		// 회원 번호 또는 회원 아이디
+		
+		member.setMemberNo(((Member)model.getAttribute("loginMember")).getMemberNo());
+		try {
+			int result = memberService.updatePwd(member, newPwd1);
+			String msg = null;
+			
+			if(result > 0) {
+				msg = "비밀번호 변경 성공";
+			} else if (result == 0) {
+				msg = "비밀번호 변경 실패";
+			} else {
+				msg = "현재 비밀번호가 일치하지 않습니다.";
+			}
+			
+			rdAttr.addFlashAttribute("msg", msg);
+			
+			return "redirect:changePwd";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "비밀번호 변경 과정 중 에러 발생");
+			return "common/errorPage";
+		}
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping("deleteMember")
+	public String deleteMember(Member member, Model model, RedirectAttributes rdAttr, SessionStatus status) {
+		
+		member.setMemberNo(((Member)model.getAttribute("loginMember")).getMemberNo());
+		
+		try {
+			int result = memberService.deleteMember(member);
+			String msg = null;
+			String path = "redirect:secession";
+			
+			if(result>0)		 {msg = "회원 탈퇴 성공"; path = "redirect:/main"; status.setComplete();}
+			else if(result == 0) {msg = "회원 탈퇴 실패";}
+			else				 {msg = "비밀번호가 일치하지 않습니다. 다시 확인해주세요";}
+			
+			rdAttr.addFlashAttribute("msg", msg);
+			
+			return path;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("errorMsg", "회원 탈퇴 과정 중 오류 발생");
+			return "common/errorPage";
+		}
+		
+		
+	}
+	
+	
 }
