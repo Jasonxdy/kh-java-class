@@ -290,3 +290,23 @@ SELECT REPLY_NO, REPLY_CONTENT, BOARD_ID, MEMBER_ID, REPLY_MODIFY_DT
 FROM  REPLY JOIN BOARD ON(BOARD_ID = BOARD_NO) JOIN MEMBER ON(REPLY_WRITER = MEMBER_NO)
 WHERE REPLY_STATUS='Y'
 ORDER BY REPLY_NO DESC;
+
+
+
+-- 공지사항 샘플데이터
+
+SET SERVEROUTPUT ON;
+
+BEGIN
+    FOR N IN 1..200 LOOP
+    
+        INSERT INTO NOTICE
+        VALUES (SEQ_NNO.NEXTVAL,
+                    N || ' 번째 게시글',
+                    N || ' 번째 게시글입니다.',
+                    'admin', DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+    END LOOP;
+END;
+/
+
+commit;

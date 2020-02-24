@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+
+	<resultMap type="Notice" id="noticeResultSet">
+		<id property="noticeNo" column="NOTICE_NO"/>
+		<result property="noticeTitle" column="NOTICE_TITLE"/>
+		<result property="noticeContent" column="NOTICE_CONTENT"/>
+		<result property="noticeWriter" column="NOTICE_WRITER"/>
+		<result property="noticeCount" column="NOTICE_COUNT"/>
+		<result property="noticeCreateDate" column="NOTICE_CREATE_DT"/>
+		<result property="noticeModifyDate" column="NOTICE_MODIFY_DT"/>
+		<result property="noticeStatus" column="NOTICE_STATUS"/>
+	</resultMap>
+
+	<!-- 공지사항 게시글 수 조회 (+ 검색) -->
+	<select id="getListCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM NOTICE
+		
+		<where>
+			<if test="searchValue != null">
+			<bind name="sv" value="'%' + _parameter.searchValue + '%'"/>
+				<choose>
+					<when test="searchKey == 'title'">
+						AND NOTICE_TITLE LIKE #{sv}
+					</when>
+					<when test="searchKey == 'content'">
+						AND NOTICE_CONTENT LIKE #{sv}
+					</when>
+					<otherwise>
+						AND (NOTICE_TITLE LIKE #{sv} OR NOTICE_CONTENT LIKE #{sv})
+					</otherwise>
+				</choose>
+			</if>
+				AND NOTICE_STATUS = 'Y'
+		</where>
+	</select>
+	
+	
+	
+	<!-- 공지시항 글 목록 조회 (+ 검색) -->	
+	<select id="selectList" parameterType="map" resultMap="noticeResultSet">
+	
+		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_WRITER, 
+		NOTICE_COUNT, NOTICE_MODIFY_DT 
+		FROM NOTICE
+		<where>
+			<if test="searchValue != null">
+				<bind name="sv" value="'%' + _parameter.searchValue + '%'"/>
+				<choose>
+					<when test="searchKey == 'title'">
+						AND NOTICE_TITLE LIKE #{sv}
+					</when>
+					<when test="searchKey == 'content'">
+						AND NOTICE_CONTENT LIKE #{sv}
+					</when>
+					<otherwise>
+						AND (NOTICE_TITLE LIKE #{sv} OR NOTICE_CONTENT LIKE #{sv})
+					</otherwise>
+				</choose>
+			</if>
+				AND NOTICE_STATUS = 'Y'
+		</where>
+		ORDER BY NOTICE_NO DESC
+	</select>
+	
+	
+	<!-- 공지사항 상세 조회  -->
+	<select id="selectNotice" parameterType="_int" resultMap="noticeResultSet">
+		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_WRITER, NOTICE_COUNT,
+				NOTICE_MODIFY_DT
+		FROM NOTICE
+		WHERE NOTICE_NO = #{noticeNo}
+	</select>
+	
+	
+	
+	
+	<!-- 공지사항 삭제 -->
+	<update id="deleteNotice" parameterType="_int">
+		UPDATE NOTICE SET
+		NOTICE_STATUS = 'N'
+		WHERE NOTICE_NO = #{noticeNo}
+	</update>	
+	
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE SET
+		NOTICE_TITLE = #{noticeTitle},
+		NOTICE_CONTENT = #{noticeContent}
+		WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	
+	<!-- 공지사항 번호 얻어오기 -->
+	<select id="getNoticeNo" resultType="_int">
+		SELECT SEQ_NNO.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+		VALUES (#{noticeNo},
+				#{noticeTitle},
+				#{noticeContent},
+				#{noticeWriter},
+				DEFAULT,
+				DEFAULT,
+				DEFAULT,
+				DEFAULT)
+	</insert>
+
+</mapper>
