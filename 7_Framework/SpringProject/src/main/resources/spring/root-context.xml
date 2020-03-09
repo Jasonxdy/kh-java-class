@@ -75,4 +75,24 @@
 	</bean>
 	
 	
+	
+	
+	
+	<!-- 파일 업로드 관련 bean 등록 -->
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="20000000"/> 
+		<property name="maxInMemorySize" value="10000000"/>
+	</bean>
+	
+	<!-- 
+		maxUploadSize : 한 요청당 업로드가 허용되는 최대 용량 (단위 : byte)
+						기본값은 -1 (-1은 제한이 없다라는 뜻, 위에 property 작성 안할경우 기본값으로 들어감)
+						
+		maxInMemorySize : 디스크 (하드)에 저장하지 않고 메모리에 유지하도록 허용하는 바이트 단위 최대 용량 설정
+						  사이즈가 지정된 크기보다 큰 경우 초과되는 데이터는 바로 파일로 저장됨.
+						  기본값은 10240 바이트
+	 -->
+	
+	
 </beans>

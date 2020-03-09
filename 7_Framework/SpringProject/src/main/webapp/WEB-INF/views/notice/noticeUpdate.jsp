@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +24,7 @@
 		          <div class="form-inline mb-2">
 		            <div class="input-group">
 		              <label class="input-group-addon mr-3">제목</label>
-		              <input type="text" class="form-control" id="title" name="noticeTitle" size="70" value="${notice.noticeTitle }">
+		              <input type="text" class="form-control" id="title" name="noticeTitle" size="70" value="${notice.noticeTitle}">
 		            </div>
 		          </div>
 		
@@ -40,7 +39,7 @@
 		          <div class="form-inline mb-2">
 		            <div class="input-group">
 		              <label class="input-group-addon mr-3">작성일</label>
-		              <h5 class="my-0" id="today">${notice.noticeModifyDate }</h5>
+		              <h5 class="my-0" id="today">${notice.noticeModifyDate}</h5>
 		            </div>
 		          </div>
 		
@@ -57,27 +56,18 @@
 		
 		        <div class="text-center">
 					<button type="submit" class="btn btn-primary">수정</button>
-					<a href="detail?no=${notice.noticeNo}" class="btn btn-primary">취소</a>
+					<a href="${header.referer}" class="btn btn-primary">취소</a>
+					<%-- ${header.referer}  : request 내장객체에 있는 getHeader() 메소드를 이용해 이전 페이지 url 정보를 담고있는 referer의 값을 얻어옴.--%>
 				</div>
 		        
 		        </form>
 		      </div>
 
-			<jsp:include page="../common/footer.jsp"/>	
+		<jsp:include page="../common/footer.jsp"/>
 		</div>
 	</div>
 	
 	<script>
-	
-		function validate() {
-			if($("#title").val() == ""){
-				alert("제목을 입력해주세요");
-				return false;
-			} else if ($("#content").val() == ""){
-				alert("내용을 입력해주세요");
-				return false;
-			}
-		}
 
 		
 	</script>

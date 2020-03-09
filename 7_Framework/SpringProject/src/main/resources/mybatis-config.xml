@@ -12,6 +12,8 @@
 <typeAliases>
 	<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
 	<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
+	<typeAlias type="com.kh.spring.board.model.vo.Board" alias="Board"/>
+	<typeAlias type="com.kh.spring.board.model.vo.Attachment" alias="Attachment"/>
 </typeAliases>
 
 <!-- Spring JDBC때문에 여기 있는 DB 연결 부분이 다른 곳으로 넘어감! -->
@@ -20,6 +22,7 @@
 <mappers>
 	<mapper resource="/mappers/member-mapper.xml"/>
 	<mapper resource="/mappers/notice-mapper.xml"/>
+	<mapper resource="/mappers/board-mapper.xml"/>
 </mappers>
 
 </configuration>

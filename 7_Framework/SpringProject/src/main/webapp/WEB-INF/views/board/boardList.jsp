@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>게시판</title>
     <style>
     	.pagination {
             justify-content: center;
@@ -17,6 +17,12 @@
         #searchForm>*{
             top : 0;
         }
+        
+        .boardTitle > img{
+        	width: 50px;
+        	height: 50px;
+        }
+        
 	</style>
 	
 </head>
@@ -31,6 +37,7 @@
 	                <thead>
 	                    <tr>
 	                        <th>글번호 </th>
+	                        <th>카테고리 </th>
 	                        <th>제목</th>
 	                        <th>작성자</th>
 	                        <th>조회수</th>
@@ -40,17 +47,29 @@
 	                <tbody>
 						<c:if test="${empty list }">
 							<tr>
-								<td colspan="5">존재하는 공지사항이 없습니다.</td>
+								<td colspan="6">존재하는 게시글이 없습니다.</td>
 							</tr>
 						</c:if>
+						
 						<c:if test="${!empty list }">
-							<c:forEach var="notice" items="${list}" varStatus="vs">
+							<c:forEach var="board" items="${list}" varStatus="vs">
+							
 								<tr>
-									<td>${notice.noticeNo}</td>
-									<td>${notice.noticeTitle}</td>
-									<td>${notice.noticeWriter}</td>
-									<td>${notice.noticeCount}</td>
-									<td>${notice.noticeModifyDate}</td>
+									<td>${board.boardNo}</td>
+									<td>${board.boardCategory}</td>
+									<td class="boardTitle">
+										
+										<!----------------- 썸네일 부분 ----------------->
+				                        
+				                        <img src="${src}">
+										
+										${board.boardTitle}
+									</td>
+									
+									<td>${board.boardWriter}</td>
+									<td>${board.boardCount}</td>
+									<td>${board.boardModifyDate}</td>
+									
 								</tr>
 							</c:forEach>
 						</c:if>
@@ -60,32 +79,34 @@
 	
 	        <hr>
 	        
-	        <%-- 로그인된 계정이 관리자 등급인 경우 --%>
-	        <c:if test="${ !empty loginMember && loginMember.memberGrade == 'A' }">
-	        	<button type="button" class="btn btn-success float-right" id="insertBtn" 
-	        		onclick="location.href = 'insertForm';">글쓰기</button>
+	        <%-- 로그인이 되어있는 경우 --%>
+	       	<c:if test="${!empty loginMember }">
+		        <button type="button" class="btn btn-success float-right" id="insertBtn" onclick="location.href='insertForm';">글쓰기</button>
 	        </c:if>
-	        
-  	       	<!--------------------------------- 페이징바  ---------------------------------->
+
+ 	       	<!--------------------------------- 페이징바  ---------------------------------->
 			<div style="clear: both;">
 	            <ul class="pagination">
 	            	<c:if test="${pInf.currentPage > 1}">
 		                <li>
 		                	<!-- 맨 처음으로(<<) -->
-	                    	<!-- 
-	                    		c:url 태그에 var 속성이 존재하지 않으면
-	                    		변수처럼 사용되는 것이 아닌, 작성된 자리에 바로 URL 형식으로 표기됨
-	                    	-->
 		                    <a class="page-link text-success" 
 		                    	href=" 
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
-						        	</c:if>
-						        	
-						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
+						        	
+						        	<%-- <c:if test="${!empty param.searchValue }">
+						        		<c:param name="searchValue" value="${param.searchValue}"/>
+						        	</c:if> --%>
+						        	
+						        	<c:if test="${!empty paramValues.searchCategory }">
+							       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+							       			<c:param name="searchCategory" value="${ct}"/>
+							       		</c:forEach>
+						       		</c:if>
 		                    		<c:param name="currentPage" value="1"/>
 		                    	</c:url>
 	                    	">
@@ -100,11 +121,15 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
-						        	</c:if>
-						        	
-						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
+						        	
+						        	<c:if test="${!empty paramValues.searchCategory }">
+							       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+							       			<c:param name="searchCategory" value="${ct}"/>
+							       		</c:forEach>
+						       		</c:if>
+						       		
 		                    		<c:param name="currentPage" value="${pInf.currentPage-1}"/>
 		                    	</c:url>
 	                    	">
@@ -130,11 +155,15 @@
 			                    	<c:url value="list">
 			                    		<c:if test="${!empty param.searchKey }">
 							        		<c:param name="searchKey" value="${param.searchKey}"/>
-							        	</c:if>
-							        	
-							        	<c:if test="${!empty param.searchValue }">
 							        		<c:param name="searchValue" value="${param.searchValue}"/>
 							        	</c:if>
+							        	
+							        	<c:if test="${!empty paramValues.searchCategory }">
+								       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+								       			<c:param name="searchCategory" value="${ct}"/>
+								       		</c:forEach>
+							       		</c:if>
+							       		
 			                    		<c:param name="currentPage" value="${p}"/>
 			                    	</c:url>
 		                    	">
@@ -153,11 +182,15 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
-						        	</c:if>
-						        	
-						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
+						        	
+						        	<c:if test="${!empty paramValues.searchCategory }">
+							       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+							       			<c:param name="searchCategory" value="${ct}"/>
+							       		</c:forEach>
+						       		</c:if>
+						       		
 		                    		<c:param name="currentPage" value="${pInf.currentPage+1}"/>
 		                    	</c:url>
 	                    	">
@@ -172,10 +205,15 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
-						        	</c:if>
-						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
+						        	
+						        	<c:if test="${!empty paramValues.searchCategory }">
+							       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+							       			<c:param name="searchCategory" value="${ct}"/>
+							       		</c:forEach>
+						       		</c:if>
+						       		
 		                    		<c:param name="currentPage" value="${pInf.maxPage}"/>
 		                    	</c:url>
 	                    	">
@@ -185,12 +223,33 @@
 	                
 	                </c:if>
 	            </ul>
-	        </div>
-	        
+	        </div>	        
+
 	        <div>
-	            <form action="list" method="GET" class="text-center" id="searchForm">
+	            <form action="list" method="GET" class="text-center" id="searchForm" style="margin-bottom:100px;">
+	            	<span>
+	            		카테고리(다중 선택 가능)<br>
+		                <label for="exercise">운동</label> 
+		                <input type="checkbox" name="searchCategory" value="운동" id="exercise">
+		                &nbsp;
+		                <label for="movie">영화</label> 
+		                <input type="checkbox" name="searchCategory" value="영화" id="movie">
+		                &nbsp;
+		                <label for="music">음악</label> 
+		                <input type="checkbox" name="searchCategory" value="음악" id="music">
+		                &nbsp;
+		                <label for="cooking">요리</label> 
+		                <input type="checkbox" name="searchCategory" value="요리" id="cooking">
+		                &nbsp;
+		                <label for="game">게임</label> 
+		                <input type="checkbox" name="searchCategory" value="게임" id="game">
+		                &nbsp;
+		                <label for="etc">기타</label> 
+		                <input type="checkbox" name="searchCategory" value="기타" id="etc">
+		                &nbsp;
+	                </span>
+	                <br>
 	                <select name="searchKey" class="form-control" style="width:100px; display: inline-block;">
-	                    <!-- <option value="title" selected>글제목</option> -->
 	                    <option value="title">글제목</option>
 	                    <option value="content">내용</option>
 	                    <option value="titcont">제목+내용</option>
@@ -200,7 +259,6 @@
 	            </form>
 	            
             	<script>
-            		// 페이지 이동 후에도 검색 결과가 검색창 input 태그에 표시되도록 하는 script
 					$(function(){
 						var searchKey = "${param.searchKey}";
 						var searchValue = "${param.searchValue}";
@@ -211,23 +269,36 @@
 									$(item).prop("selected","true");
 								} 
 							});
-							
 							$("input[name=searchValue]").val(searchValue);
 						}
-							
 					});
+					
+					// script 태그 내에서도 JSTL 사용 가능
+					// 서버 동작 시 코드를 읽어 나가는 우선 순서 
+					// JAVA > EL/JSTL > HTML > Javascript 
+					// -> EL/JSTL이 먼저 완성 되어있을 때 javascript와 혼용해서 사용해도 문제 없음.
+					<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+						$.each($("input[name=searchCategory]"), function(index, item){
+							console.log(1);
+							if($(item).val() == "${ct}"){
+								$(item).prop("checked","true");
+							} 
+						});
+						
+					</c:forEach>
 				</script>
 	            
 	        </div>
     	</div>
+    	
 		<jsp:include page="../common/footer.jsp"/>
 	</div>
 	
 	<script>
-		// 공지사항 상세보기 기능 (jquery를 통해 작업)
+		// 게시글 상세보기 기능 (jquery를 통해 작업)
 		$(function(){
 			$("#list-table td").click(function(){
-				var noticeNo = $(this).parent().children().eq(0).text();
+				var boardNo = $(this).parent().children().eq(0).text();
 				// 쿼리스트링을 이용하여 get 방식으로 글 번호를 server로 전달
 				<c:url var="detailUrl" value="detail">
               		<c:if test="${!empty param.searchKey }">
@@ -237,10 +308,18 @@
 		        		<c:param name="searchValue" value="${param.searchValue}"/>
 		        	</c:if>
 		        	
+		        	<c:if test="${!empty paramValues.searchCategory }">
+			       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
+			       			<c:param name="searchCategory" value="${ct}"/>
+			       		</c:forEach>
+		       		</c:if>
+		        	
                  	<c:param name="currentPage" value="${pInf.currentPage}"/>
                	</c:url>
 				
-				location.href="${detailUrl}&no="+noticeNo;
+				location.href="${detailUrl}&no="+boardNo;
+				
+				//location.href="${contextPath}/board/detail?no=" + boardNo +"&currentPage="+${pInf.currentPage};
 			
 			}).mouseenter(function(){
 				$(this).parent().css("cursor", "pointer");

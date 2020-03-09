@@ -47,52 +47,101 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	
+//	------------------------ my version ------------------------------
+//	/**
+//	 * 공지사항 상세조회 (검색 포함)
+//	 * @param noticeNo
+//	 * @return notice
+//	 * @throws Exception
+//	 */
+//	@Override
+//	public Notice selectNotice(int noticeNo) throws Exception {
+//		return noticeDAO.selectNotice(noticeNo);
+//	}
+//	
+//	
+//	
+//	
+//	/**
+//	 * 공지사항 삭제
+//	 * @param no
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	@Transactional(rollbackFor = Exception.class)
+//	@Override
+//	public int deleteNotice(int noticeNo) throws Exception {
+//		return noticeDAO.deleteNotice(noticeNo);
+//	}
+//	
+//	
+//	
+//	
+//	
+//	/**
+//	 * 공지사항 수정용 Service
+//	 * @param noticeNo
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	@Transactional(rollbackFor = Exception.class)
+//	@Override
+//	public int updateNotice(Notice notice) throws Exception {
+//		return noticeDAO.updateNotice(notice);
+//	}
+//	
+//	
+//	/**
+//	 * 공지사항 등록용 Service
+//	 * @param notice
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	@Transactional(rollbackFor = Exception.class)
+//	@Override
+//	public int insertNotice(Notice notice) throws Exception {
+//		
+//		int noticeNo = noticeDAO.getNoticeNo();
+//		
+//		notice.setNoticeNo(noticeNo);
+//		
+//		int result = noticeDAO.insertNotice(notice);
+//		
+//		if(result > 0) result = noticeNo;
+//		
+//		return result;
+//		
+//	}
+
+//	----------------------- teacher version -----------------------------
 	
-	/**
-	 * 공지사항 상세조회 (검색 포함)
-	 * @param noticeNo
+	/** 공지사항 상세조회용 Service
+	 * @param no
 	 * @return notice
 	 * @throws Exception
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public Notice selectNotice(int noticeNo) throws Exception {
-		return noticeDAO.selectNotice(noticeNo);
+	public Notice selectNotice(Integer no) throws Exception {
+		// 공지사항 조회
+		Notice notice = noticeDAO.selectNotice(no);
+		
+		if(notice != null) {
+			// 조회수 증가
+			int result = noticeDAO.increaseCount(no);
+			
+			if(result > 0) {
+				notice.setNoticeCount(notice.getNoticeCount() + 1);
+			}else {
+				notice = null;
+			}
+		}
+		
+		return notice;
 	}
-	
 
 	
-	
-	/**
-	 * 공지사항 삭제
-	 * @param no
-	 * @return result
-	 * @throws Exception
-	 */
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int deleteNotice(int noticeNo) throws Exception {
-		return noticeDAO.deleteNotice(noticeNo);
-	}
-	
-	
-	
-	
-	
-	/**
-	 * 공지사항 수정용 Service
-	 * @param noticeNo
-	 * @return result
-	 * @throws Exception
-	 */
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int updateNotice(Notice notice) throws Exception {
-		return noticeDAO.updateNotice(notice);
-	}
-	
-	
-	/**
-	 * 공지사항 등록용 Service
+	/** 공지사항 등록용 Service
 	 * @param notice
 	 * @return result
 	 * @throws Exception
@@ -101,16 +150,68 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int insertNotice(Notice notice) throws Exception {
 		
-		int noticeNo = noticeDAO.getNoticeNo();
+		int result = 0;
+		// 공지사항 다음 글번호 얻어오기
+		// -> 공지사항 등록 성공 시 해당 게시글로 돌아갈 수 있게하기 위함
+		int no = noticeDAO.selectNextNo();
+		System.out.println("no : " + no);
 		
-		notice.setNoticeNo(noticeNo);
-		
-		int result = noticeDAO.insertNotice(notice);
-		
-		if(result > 0) result = noticeNo;
+		if(no > 0) { // 글번호 얻어오기 성공 시 
+			// 조회된 글번호 세팅
+			notice.setNoticeNo(no);
+			
+			// DB 저장 시 개행문자를 <br>로 변경해줘야
+			// 상세 조회시 줄바꿈이 유지됨.
+			notice.setNoticeContent(
+					notice.getNoticeContent().replace("\r\n", "<br>"));
+			
+			result = noticeDAO.insertNotice(notice);
+			System.out.println("result : " + result);
+			
+			if(result > 0)	result = no;
+		}
 		
 		return result;
-		
 	}
 
+	/** 공지사항 수정 화면용 Service
+	 * @param no
+	 * @return notice
+	 * @throws Exception
+	 */
+	@Override
+	public Notice updateView(Integer no) throws Exception {
+		Notice notice = noticeDAO.selectNotice(no);
+		// 수정을 위해 textarea에 content를 출력할 경우
+		// <br>로 되어있는 부분을 개행문자로 변경해줘야됨.
+		notice.setNoticeContent(notice.getNoticeContent().replace("<br>", "\r\n"));
+		notice.setNoticeNo(no);
+		return notice;
+	}
+
+	
+	/** 공지사항 수정용 Service
+	 * @param notice
+	 * @return result
+	 * @throws Exception
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updatetNotice(Notice notice) throws Exception {
+		notice.setNoticeContent(
+				notice.getNoticeContent().replace("\r\n", "<br>"));
+		return noticeDAO.updateNotice(notice);
+	}
+
+	
+	/** 공지사항 삭제용 Service
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deletetNotice(Integer no) throws Exception {
+		return  noticeDAO.deleteNotice(no);
+	}	
 }

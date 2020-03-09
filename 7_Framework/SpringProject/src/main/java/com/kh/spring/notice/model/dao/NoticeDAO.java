@@ -52,67 +52,135 @@ public class NoticeDAO {
 
 
 
-
-	/**
-	 * 공지사항 상세조회 dao
-	 * @param noticeNo
+// ------------------------ My version -----------------------------
+//	/**
+//	 * 공지사항 상세조회 dao
+//	 * @param noticeNo
+//	 * @return notice
+//	 * @throws Exception
+//	 */
+//	public Notice selectNotice(int noticeNo) throws Exception {
+//		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNo);
+//	}
+//	
+////	---------- teacher version ----------
+//	/** 공지사항 조회수 증가용 DAO
+//	 * @param no
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int increaseCount(Integer no) throws Exception{
+//		return sqlSession.update("noticeMapper.increaseCount", no);
+//	}
+//
+//
+//
+//
+//	/**
+//	 * 공지사항 삭제용 dao
+//	 * @param no
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int deleteNotice(int noticeNo) throws Exception{
+//		return sqlSession.update("noticeMapper.deleteNotice", noticeNo);
+//	}
+//
+//
+//
+//
+//	/**
+//	 * 공지사항 수정용 DAO
+//	 * @param noticeNo
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int updateNotice(Notice notice) throws Exception{
+//		return sqlSession.update("noticeMapper.updateNotice", notice);
+//	}
+//
+//
+//
+//
+//	/**
+//	 * 공지사항 등록용 DAO
+//	 * @param notice
+//	 * @return result
+//	 * @throws Exception
+//	 */
+//	public int insertNotice(Notice notice) throws Exception {
+//		return sqlSession.insert("noticeMapper.insertNotice", notice);
+//	}
+//
+//
+//
+//
+//	/**
+//	 * 다음 공지사항 번호 얻어오기
+//	 * @return noticeNo
+//	 */
+//	public int getNoticeNo() {
+//		return sqlSession.selectOne("noticeMapper.getNoticeNo");
+//	}
+	
+	
+//	--------------------- Teacher version ----------------------------
+	/** 공지사항 상세조회용 DAO
+	 * @param no
 	 * @return notice
 	 * @throws Exception
 	 */
-	public Notice selectNotice(int noticeNo) throws Exception {
-		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNo);
+	public Notice selectNotice(Integer no) throws Exception{
+		return sqlSession.selectOne("noticeMapper.selectNotice", no);
 	}
 
 
-
-
-	/**
-	 * 공지사항 삭제용 dao
+	/** 공지사항 조회수 증가용 DAO
 	 * @param no
 	 * @return result
 	 * @throws Exception
 	 */
-	public int deleteNotice(int noticeNo) throws Exception{
-		return sqlSession.update("noticeMapper.deleteNotice", noticeNo);
+	public int increaseCount(Integer no) throws Exception{
+		return sqlSession.update("noticeMapper.increaseCount", no);
 	}
 
-
-
-
-	/**
-	 * 공지사항 수정용 DAO
-	 * @param noticeNo
-	 * @return result
-	 * @throws Exception
+	
+	/** 공지사항 다음 글번호 조회용 DAO
+	 * @return no
 	 */
-	public int updateNotice(Notice notice) throws Exception{
-		return sqlSession.update("noticeMapper.updateNotice", notice);
+	public int selectNextNo() {
+		return sqlSession.selectOne("noticeMapper.selectNextNo");
 	}
 
-
-
-
-	/**
-	 * 공지사항 등록용 DAO
+	/** 공지사항 등록용 DAO
 	 * @param notice
 	 * @return result
 	 * @throws Exception
 	 */
-	public int insertNotice(Notice notice) throws Exception {
+	public int insertNotice(Notice notice) throws Exception{
 		return sqlSession.insert("noticeMapper.insertNotice", notice);
 	}
 
 
-
-
-	/**
-	 * 다음 공지사항 번호 얻어오기
-	 * @return noticeNo
+	/** 공지사항 수정용 DAO
+	 * @param notice
+	 * @return result
+	 * @throws Exception
 	 */
-	public int getNoticeNo() {
-		return sqlSession.selectOne("noticeMapper.getNoticeNo");
+	public int updateNotice(Notice notice) {
+		return sqlSession.update("noticeMapper.updateNotice", notice);
 	}
-	
+
+
+	/** 공지사항 삭제용 DAO
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteNotice(Integer no) {
+		return sqlSession.update("noticeMapper.deleteNotice", no);
+	}	
+
 	
 
 }
