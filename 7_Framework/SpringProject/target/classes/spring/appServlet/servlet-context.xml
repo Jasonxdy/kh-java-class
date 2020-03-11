@@ -16,6 +16,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!--
+		servlet-context.xml : DispatcherServlet에 해당됨
 	
 		XML을 이용한 HandlerMapping 시 이 부분에 작성이 되지만
 		bean으로 등록된 Controller (@Controller가 작성된 클래스)에 작성된

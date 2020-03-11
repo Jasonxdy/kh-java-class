@@ -73,4 +73,62 @@ public class BoardDAO {
 	
 	
 	
+	/** 썸네일 목록 조회용 DAO
+	 * @param list
+	 * @return thList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(List<Board> list) throws Exception {
+		return sqlSession.selectList("boardMapper.selectThumbnailList", list);
+	}
+
+	/** 게시글 조회용 DAO
+	 * @param no
+	 * @return board
+	 * @throws Exception
+	 */
+	public Board selectBoard(Integer no) throws Exception {
+		return sqlSession.selectOne("boardMapper.selectBoard", no);
+	}
+
+	/** 게시글 이미지 조회용 DAO
+	 * @param no
+	 * @return files
+	 * @throws Exception
+	 */
+	public List<Attachment> selectFiles(Integer no) throws Exception {
+		return sqlSession.selectList("boardMapper.selectFiles", no);
+	}
+
+	/** 게시글 조회수 증가용 DAO
+	 * @param no
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseCount(Integer no) throws Exception {
+		return sqlSession.update("boardMapper.increaseCount", no);
+	}
+
+	/**
+	 * 게시글 수정용 DAO
+	 * @param board
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateBoard(Board board) throws Exception{
+		return sqlSession.update("boardMapper.updateBoard", board);
+	}
+
+	/**
+	 * 파일 수정용 DAO
+	 * @param at
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateAttachment(Attachment at) throws Exception{
+		return sqlSession.update("boardMapper.updateAttachment", at);
+	}
+	
+	
+	
 }

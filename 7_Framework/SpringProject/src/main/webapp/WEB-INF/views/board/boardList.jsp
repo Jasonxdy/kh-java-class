@@ -60,6 +60,12 @@
 									<td class="boardTitle">
 										
 										<!----------------- 썸네일 부분 ----------------->
+				                        <c:set var="src" value="${contextPath}/resources/images/noImage.png"/>
+				                        <c:forEach var="th" items="${thList }">
+				                        	<c:if test="${th.boardId == board.boardNo }">
+				                        		<c:set var="src" value="${contextPath }/resources/uploadFiles/${th.fileChangeName }"/>
+				                        	</c:if>
+				                        </c:forEach>
 				                        
 				                        <img src="${src}">
 										
@@ -95,12 +101,11 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
-						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
 						        	
-						        	<%-- <c:if test="${!empty param.searchValue }">
+						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
-						        	</c:if> --%>
+						        	</c:if>
 						        	
 						        	<c:if test="${!empty paramValues.searchCategory }">
 							       		<c:forEach var="ct" items="${paramValues.searchCategory}" varStatus="vs">
@@ -121,6 +126,9 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
+						        	</c:if>
+						        	
+						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
 						        	
@@ -155,6 +163,9 @@
 			                    	<c:url value="list">
 			                    		<c:if test="${!empty param.searchKey }">
 							        		<c:param name="searchKey" value="${param.searchKey}"/>
+							        	</c:if>
+							        	
+							        	<c:if test="${!empty param.searchValue }">
 							        		<c:param name="searchValue" value="${param.searchValue}"/>
 							        	</c:if>
 							        	
@@ -182,6 +193,9 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
+						        	</c:if>
+						        	
+						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
 						        	
@@ -205,6 +219,8 @@
 		                    	<c:url value="list">
 		                    		<c:if test="${!empty param.searchKey }">
 						        		<c:param name="searchKey" value="${param.searchKey}"/>
+						        	</c:if>
+						        	<c:if test="${!empty param.searchValue }">
 						        		<c:param name="searchValue" value="${param.searchValue}"/>
 						        	</c:if>
 						        	

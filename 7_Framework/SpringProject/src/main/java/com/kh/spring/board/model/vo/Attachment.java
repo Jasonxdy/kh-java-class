@@ -17,6 +17,13 @@ public class Attachment {
 		
 	}
 
+	public Attachment(int fileNo, String fileOriginName, String fileChangeName) {
+		super();
+		this.fileNo = fileNo;
+		this.fileOriginName = fileOriginName;
+		this.fileChangeName = fileChangeName;
+	}
+
 	public Attachment(int fileNo, int boardId, String fileChangeName) {
 		super();
 		this.fileNo = fileNo;
