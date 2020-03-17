@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.common.vo.PageInfo;
 
 @Repository
@@ -127,6 +128,25 @@ public class BoardDAO {
 	 */
 	public int updateAttachment(Attachment at) throws Exception{
 		return sqlSession.update("boardMapper.updateAttachment", at);
+	}
+
+	/**
+	 * 댓글 등록용 DAO
+	 * @param reply
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertReply(Reply reply) throws Exception{
+		return sqlSession.insert("boardMapper.insertReply", reply);
+	}
+
+	/**
+	 * 댓글 출력용 DAO
+	 * @param boardNo
+	 * @return rList
+	 */
+	public List<Reply> selectReplyList(int boardNo) {
+		return sqlSession.selectList("boardMapper.selectReplyList", boardNo);
 	}
 	
 	

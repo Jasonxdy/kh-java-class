@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.common.vo.PageInfo;
 
 public interface BoardService {
@@ -76,5 +77,20 @@ public interface BoardService {
 	 * @throws Exception
 	 */
 	public abstract int updateBoard(Board board, MultipartFile thumbnail, List<MultipartFile> images, String savePath) throws Exception;
+
+	/**
+	 * 댓글 등록용 Service
+	 * @param reply
+	 * @return result
+	 * @throws Exception
+	 */
+	public abstract int insertReply(Reply reply)throws Exception;
+
+	/**
+	 * 댓글 출력용 Service
+	 * @param boardNo
+	 * @return rList
+	 */
+	public abstract List<Reply> selectReplyList(int boardNo);
 
 }

@@ -15,13 +15,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.common.FileRename;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.common.vo.PageInfo;
@@ -354,6 +359,52 @@ public class BoardController {
 			return "common/errorPage";
 		}
 		
+	}
+	
+	
+	
+	
+	// 댓글 등록
+	@ResponseBody
+	@RequestMapping("insertReply")
+	public int insertReply(Reply reply) {
+		
+		int result = 0;
+		
+		try {
+			result = boardService.insertReply(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = -1;
+		}
+		return result;
+	}
+	
+	
+	
+	// 댓글 목록 조회
+	// JSON : 자바스크립트 객체 모양의 String
+	// 댓글 목록 조회
+	   // JSON : 자바스크립트 객체 모양의 String
+	   // produces : 조건에 지정한 미디어 타입과 관련된 응답을 생성하는데 사용한 실제 content type을 보장한다.
+	   //             -> 응답 데이터의 Content-type 지정 가능
+	   // text/html; charset=utf-8
+	
+	@ResponseBody
+	@RequestMapping(value = "selectReplyList",
+    produces = "application/json; charset=utf-8")
+	public String selectReplyList(int boardNo) {
+		
+		// parameter 타입은 Integer, int, String 아무거나로 해도 상관 없음
+		
+		// ajax 사용 시 try-catch 사용 안해줘도 됨.. -> 어짜피 화면 단 error : function에서 잡아줌
+		List<Reply> rList = boardService.selectReplyList(boardNo);
+		
+		// yyyy-MM-dd hh:mm:ss
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
+		
+		// gson을 String 형태인 Json으로 변환하여 return 해줌
+		return gson.toJson(rList);
 	}
 	
 	

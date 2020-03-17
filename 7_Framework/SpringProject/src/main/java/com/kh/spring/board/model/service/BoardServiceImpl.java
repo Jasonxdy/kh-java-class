@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.board.model.dao.BoardDAO;
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.common.FileRename;
 import com.kh.spring.common.vo.PageInfo;
 
@@ -326,11 +327,34 @@ public class BoardServiceImpl implements BoardService { // @Service("bean의 이
 				
 			}
 		}
-		
-		
 		return result;
-		
-		
+	}
+	
+	
+	
+	/**
+	 * 댓글 등록용 Service
+	 * @param reply
+	 * @return result
+	 * @throws Exception
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertReply(Reply reply) throws Exception {
+		reply.setReplyContent(reply.getReplyContent().replace("\n", "<br>"));
+//		form태그 유무로 \r 다름
+		return boardDAO.insertReply(reply);
+	}
+	
+	
+	/**
+	 * 댓글 출력용 Service
+	 * @param boardNo
+	 * @return rList
+	 */
+	@Override
+	public List<Reply> selectReplyList(int boardNo) {
+		return boardDAO.selectReplyList(boardNo);
 	}
 
 }

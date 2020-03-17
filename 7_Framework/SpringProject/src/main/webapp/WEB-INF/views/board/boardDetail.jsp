@@ -201,6 +201,112 @@
 			if(confirm("정말 삭제 하시겠습니까?")) location.href = "delete?no=${param.no}";
 		});
 		
+		
+		
+		// 댓글 등록 버튼 동작
+		
+		$("#addReply").on("click", function(){
+			
+			var memberNo; // 회원 번호
+			var boardNo = "${board.boardNo}"; // 게시글 번호
+			var replyContent = $("#replyContent").val(); // 댓글 내용
+			
+			// 로그인 여부 검사
+			if(${loginMember == null}) {
+				alert("로그인 후 이용해 주세요");
+			} else {
+				// Session에서 회원 번호를 얻어옴.
+				memberNo = "${loginMember.memberNo}";
+				/* EL을 쌍따옴표 안에 넣고 빼고의 차이를 알 것 */
+			}	
+				$.ajax({
+					url : "insertReply",
+					type : "POST",
+					data : {
+						"replyContent" : replyContent,
+						"boardNo" : boardNo,
+						"memberNo" : memberNo
+					},
+					success : function(result) {
+						var msg;
+						
+						switch(result) {
+						case 1 : 
+							msg = "댓글 등록 성공";
+							$("#replyContent").val("");
+							break;
+						case 0 : 
+							msg = "댓글 등록 실패";
+							break;
+						case -1 : 
+							msg = "댓글 등록 오류 발생";
+							break;
+						}
+						alert(msg);
+					},
+					error : function(){
+						console.log("ajax 통신 실패");
+					} 
+					
+				});
+		});
+		
+		
+		
+		// 댓글 목록 조회 함수
+		function selectRlist(){
+			var boardNo = "${board.boardNo}";
+			$.ajax({
+				url : "selectReplyList",
+				type : "GET",
+				data : {boardNo : boardNo},
+				dataType : "json",
+				success : function (rList){
+					/* <li class="reply-row" id="1"> 
+               		<span class="rWriter">작성자</span> 
+               		<span class="rDate">2020.01.23</span>
+               		<p class="rContent">댓글 내용</p>
+                </li> */
+					var $rArea = $("#replyListArea");
+                	// jQuery 변수 : 변수에 jQuery 메소드를 사용할 수 있음
+                	
+                	/* console.log(rList); */
+                	
+					if(rList == ""){
+		                  // JSON == String
+		                  // 응답된 JSON이 비어있다 == (String type) ""(빈 문자열)
+		                  
+		                  $rArea.html("<li>등록된 댓글이 없습니다.</li>");
+		               } else {
+		                  $rArea.html(""); // 기존 댓글 목록 삭제
+		                  
+		                  $.each(rList, function(i){
+		                     var $li = $("<li>");
+		                     var $rWriter = $("<span>").prop("class","rWriter").html(rList[i].memberId);
+		                     // <span class="rWriter">admin</span>
+		                     var $rDate = $("<span>").prop("class","rDate").html(rList[i].replyModifyDate);
+		                     var $rContent = $("<p>").prop("class","replyContent").html(rList[i].replyContent);
+		                     var $hr = $("<hr>");
+		                     
+		                     $li.append($rWriter).append($rDate).append($rContent);
+		                     
+		                     $rArea.append($li).append($hr);
+		                  });
+		               }
+                	
+				},
+				error : function (){
+					console.log("댓글 목록 조회 ajax 호출 실패");
+				}
+			});
+		}
+		
+		
+		$(function(){
+			selectRlist();
+		});
+		
 	</script>
+	
 </body>
 </html>

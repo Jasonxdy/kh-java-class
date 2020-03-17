@@ -14,6 +14,7 @@
 	<typeAlias type="com.kh.spring.notice.model.vo.Notice" alias="Notice"/>
 	<typeAlias type="com.kh.spring.board.model.vo.Board" alias="Board"/>
 	<typeAlias type="com.kh.spring.board.model.vo.Attachment" alias="Attachment"/>
+	<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="Reply"/>
 </typeAliases>
 
 <!-- Spring JDBC때문에 여기 있는 DB 연결 부분이 다른 곳으로 넘어감! -->
