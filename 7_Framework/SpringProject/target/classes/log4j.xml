@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<!DOCTYPE log4j:configuration SYSTEM
+"http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+	<!-- appender: 로그를 어디에 출력할지, 패턴은 어떻게 내보낼지 지정 -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender"> <!-- 이클립스 콘솔에 연결됨 -->
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
+	</appender>
+	
+	<!-- 날짜별 로그인 로그 파일 생성하기 -->
+	<appender name="myDailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+
+	    <!-- 로그 파일 생성 위치(C드라이브 하위 절대경로로 지정됨) -->
+		<param name="File" value="C:/workspace/Jason/7_Framework/SpringProject/src/main/webapp/resources/logs/member/login.log"/>
+		
+		<!-- 이전 내용에 이어서 작성 -->
+		<param name="Append" value="true"/>
+		
+		<!-- 로그파일 문자인코딩 -->
+	    <param name="encoding" value="UTF-8" />
+	    
+	    <!-- 파일명에 입력된 날짜 패턴(다음날 이전날 파일명에 추가됨) -->
+		<param name="DatePattern" value="yyyy-MM-dd"/>
+	
+		<!-- layout 지정 -->
+	    <layout class="org.apache.log4j.PatternLayout">
+	        <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss} [%p] %m%n"/>
+	    </layout>
 	</appender>
 	
 	<!-- Application Loggers -->
@@ -15,24 +38,18 @@
 		<level value="info" />
 	</logger>
 	
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
+	<logger name="com.kh.spring.log.LogTest">
+		<level value="debug" /> <!-- 지정된 level보다 낮은 level은 출력되지 않음 -->
+		<!-- <appender-ref ref="console"/> -->
 	</logger>
 	
-	<logger name="org.springframework.beans">
-		<level value="info" />
+	<logger name="com.kh.spring.common.aop.AfterReturningAdvice" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="myDailyRollingFile"/>
 	</logger>
 	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
 
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
-
-	<!-- Root Logger -->
+	<!-- Root Logger (최상위 로거) -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
