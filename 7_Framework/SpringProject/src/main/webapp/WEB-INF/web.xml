@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+<!-- 
+
+	web.xml
+	 - Tomcat (WAS) 등의 서버 구동 시 제일 먼저 읽어들이는 파일
+	 - 서버 실행 시 초기에 읽어야 할 설정 파일(xml)을 읽어 들이도록 내부에 작성 (등록).
+	 + Servlet 실행 이전에 Servlet 초기화(init)하는 용도로도 사용.
+	 
+ -->
+
+
+ 
+ <welcome-file-list>
+ 	<welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
+
+
+
+
+<!-- 
+	ContextConfigLocation : ContextLoaderListener로 pre-loading을 진행할 설정 xml 문서들의 경로를 등록하는 곳
+ -->
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring/root-context.xml
+			classpath:spring/spring-security.xml
+		</param-value>
+		<!-- classpath: // classpath로 등록된 (클래스를 검색할) 경로 내의 spring 폴더를 알아서 찾음...(?) -->
+	</context-param>
+	
+
+
+
+	
+<!-- 
+	ContextLoaderListener : web.xml 내부에 읽어 들여야 할 설정 xml 문서들 중
+							가장 먼저 로딩 (pre-loading)되어야 하는 xml 문서를 읽기 위한 리스너
+							
+		- 얘가 이제 위에있는 ContextConfigLocation를 로딩함
+ -->	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+
+<!-- 
+	
+	DispatcherServlet :  
+	요청되는 url-pattern에 해당하는 Controller를 HandlerMapping하고 
+	응답 되어질 페이지를 제어하는 View Resolver의 정보를 저장하고 있는 문서
+	
+	-> DispatcherServlet도 web.xml에 등록되어야만 사용 가능 
+	
+ -->
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+
+
+	<!-- 한글 깨짐 방지를 위한 Filter 추가 -->
+	<!-- 별도의 filter 클래스를 만들지 않고 스프링에서 제공하는 filter를 사용 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

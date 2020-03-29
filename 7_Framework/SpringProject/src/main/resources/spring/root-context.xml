@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 
+		root-context.xml 파일은 서버 구동 시 web.xml을 거쳐 바로 로딩 되는 즉,
+		pre-loading 되는 설정 파일이다. 따라서 서버 구동 시 바로 셋팅 해야 되는 내용들을 작성하는 설정 파일로 보통
+		DB연결 설정, 트랜잭션 처리, AOP 관련, 내 외부 모듈 연동 등등 스프링에서 제공하는 서비스들에 대한 설정을 관리한다. 
+	 -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- 
+		1. DataSource 등록 
+		- DataSourece는 서버 구동 시 동시에 연결이 되어야 하며
+		  연결 정보 설정 시 root-context 제일 위쪽이 작성
+		   -> 그래야지만 아래 작성되는 설정들에서 DataSource를
+		         참조해서 사용 가능!
+	-->	
+	
+	<!-- destroy-method="close" 
+	      -> 주어진 세션을 자동으로 close 하라는 의미 -->
+    <!-- bean으로 등록 시 Spring이 제어하기 시작함 : 연결 정보를 주면 spring이 처리함 -->
+	<bean id="dataSource"
+	   class="org.apache.commons.dbcp.BasicDataSource"
+	   destroy-method="close">
+	   <!-- dbcp 사용 시 connection pool이 알아서 설정이 됨 -->
+	   <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	   <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	   <property name="username" value="spring"/>
+	   <property name="password" value="spring"/>
+	   <property name="defaultAutoCommit" value="false"/>
+	</bean>
+	
+	
+	
+	
+	
+	<!-- 트랜잭션 처리를 위한 Transaction Manager 추가 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- property : 생성할때의 매개변수라고 생각하면 됨 -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 여기까지는 Transaction Manager bean 등록 -->
+	<!-- 이제 사용! -->
+	
+	<!-- 
+		@Transactional 어노테이션이 붙은 메소드를 찾아 트랜잭션 처리를
+		할 수 있도록 트랜잭션 어드바이스를 자동으로 적용하는 <tx:annotation-driven/> 추가
+	 -->
+	 
+	<!-- tx 태그를 사용하기 위하여 namespaces (하단에 tab 여러개중 하나)에서 tx 체크하기 -->
+	<tx:annotation-driven/>
+	
+	
+	
+	
+	
+	<!-- 마이바티스 SqlSession 등록하기 (xml 방식으로 bean 등록)-->
+	<!-- SqlSessionFactoryBean: MyBatis 설정파일(mybatis-config)을 바탕으로 SqlSessionFactory를 생성한다. Spring Bean으로 등록해야 한다. -->
+	<!-- sqlsession 역할도 spring이 함 (Bean으로 등록했으므로) -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- mybatis-config.xml 설정 불러오기 -->   
+		<property name="configLocation" 
+			value="classpath:mybatis-config.xml"/>  
+		<property name="dataSource" ref="dataSource"/>
+		<!-- ref="dataSource" : 위에 만들어진 Bean // 이걸 참조해라 --> 
+	</bean>
+	<!-- SqlSessionTemplate : SQL 실행이나 트랜잭션 관리 역할(Spring bean으로 등록해야함.) == SqlSession과 동일 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	
+	
+	
+	
+	<!-- 파일 업로드 관련 bean 등록 -->
+	<!-- MultipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="20000000"/> 
+		<property name="maxInMemorySize" value="10000000"/>
+	</bean>
+	
+	<!-- 
+		maxUploadSize : 한 요청당 업로드가 허용되는 최대 용량 (단위 : byte)
+						기본값은 -1 (-1은 제한이 없다라는 뜻, 위에 property 작성 안할경우 기본값으로 들어감)
+						
+		maxInMemorySize : 디스크 (하드)에 저장하지 않고 메모리에 유지하도록 허용하는 바이트 단위 최대 용량 설정
+						  사이즈가 지정된 크기보다 큰 경우 초과되는 데이터는 바로 파일로 저장됨.
+						  기본값은 10240 바이트
+	 -->
+	
+	
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!--
+		servlet-context.xml : DispatcherServlet에 해당됨
+	
+		XML을 이용한 HandlerMapping 시 이 부분에 작성이 되지만
+		bean으로 등록된 Controller (@Controller가 작성된 클래스)에 작성된
+		@RequestMapping이 이를 대체해준다.
+		
+	 -->
+
+	<!-- 
+		View Resolver
+		Controller에서 반환된 View 이름을 토대로 처리할 View 검색
+		prefix(접두사) +    반환된 view 이름    + suffix(접미사)
+		/WEB-INF/views/   redirect:/main   .jsp -> redirect는 의미만 갖고 무시됨
+	 -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	
+	<!--
+	bean scanning : 
+	지정된 패키지에 있는 @Component와 구체화된 어노테이션을 스캔하여 
+	bean으로 등록하는 기능을 가지고 있음.
+	 -->
+	<context:component-scan base-package="com.kh.spring" />
+	
+	
+	<!-- AOP -->
+	<aop:aspectj-autoproxy/>
+	<!-- 이거 있어야지 쓸 수 있고 proxy를 찾아줌? @Aspect.. -->
+	
+	
+</beans:beans>

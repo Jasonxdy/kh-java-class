@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+	<resultMap type="Board" id="boardResultSet">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardContent" column="BOARD_CONTENT"/>
+		<result property="boardCount" column="BOARD_COUNT"/>
+		<result property="boardModifyDate" column="BOARD_MODIFY_DT"/>
+		<result property="boardWriter" column="MEMBER_ID"/>
+		<result property="boardCategory" column="CATEGORY_NM"/>
+	</resultMap>
+
+
+	
+	<resultMap type="Attachment" id="attachmentResultSet">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="boardId" column="BOARD_ID"/>
+		<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+		<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileUploadDate" column="FILE_UPLOAD_DATE"/>
+		<result property="fileLevel" column="FILE_LEVEL"/>
+		<result property="fileDownloadCount" column="FILE_DOWNLOAD_COUNT"/>
+		<result property="fileStatus" column="FILE_STATUS"/>
+	</resultMap>
+	
+	
+	<resultMap type="Reply" id="replyResultSet">
+		<id property="replyNo" column="REPLY_NO"/>
+		<result property="replyContent" column="REPLY_CONTENT"/>
+		<result property="replyModifyDate" column="REPLY_MODIFY_DT"/>
+		<result property="boardNo" column="BOARD_NO"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+	</resultMap>
+	
+	
+	<!-- 전체 게시글 수 조회 -->
+	<select id="getListCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*) FROM V_BOARD
+		<where>
+			<if test="searchKey != null">
+				<bind name="sv" value="'%' + _parameter.searchValue + '%'"/>
+				<choose>
+					<when test="searchKey == 'title'">
+						AND BOARD_TITLE LIKE #{sv}
+					</when>
+					<when test="searchKey == 'content'">
+						AND BOARD_CONTENT LIKE #{sv}
+					</when>
+					<otherwise>
+						AND (BOARD_TITLE LIKE #{sv} 
+							OR BOARD_CONTENT LIKE #{sv}) 
+					</otherwise>
+				</choose>
+			</if>
+				
+			<if test="searchCategory != null">
+				AND CATEGORY_NM IN 
+				<foreach index="index" item="item" collection="searchCategory" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+				
+			AND BOARD_TYPE = 1
+			AND BOARD_STATUS = 'Y'
+		</where>
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	<!-- 게시글 목록 조회 -->
+	<select id="selectList" resultMap="boardResultSet" parameterType="map">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_COUNT, BOARD_MODIFY_DT, MEMBER_ID, CATEGORY_NM
+		FROM V_BOARD
+		<where>
+			<if test="searchKey != null">
+				<bind name="sv" value="'%' + _parameter.searchValue + '%'"/>
+				<choose>
+					<when test="searchKey == 'title'">
+						AND BOARD_TITLE LIKE #{sv}
+					</when>
+					<when test="searchKey == 'content'">
+						AND BOARD_CONTENT LIKE #{sv}
+					</when>
+					<otherwise>
+						AND (BOARD_TITLE LIKE #{sv} 
+							OR BOARD_CONTENT LIKE #{sv}) 
+					</otherwise>
+				</choose>
+			</if>
+				
+			<if test="searchCategory != null">
+				AND CATEGORY_NM IN 
+				<foreach index="index" item="item" collection="searchCategory" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+				
+			AND BOARD_TYPE = 1
+			AND BOARD_STATUS = 'Y'
+		</where>
+		ORDER BY BOARD_NO DESC
+	</select>
+	
+	
+	
+	<!-- 게시글 다음 번호 조회 -->
+	<select id="selectNextNo" resultType="_int">
+		SELECT SEQ_BNO.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 게시글 삽입 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES (#{boardNo}, #{boardTitle}, #{boardContent},
+				DEFAULT, DEFAULT, DEFAULT, DEFAULT, #{boardWriter},
+				#{boardCategory}, 1)
+	</insert>
+	
+	
+	
+	<!-- 이미지 삽입 -->
+	<insert id="insertAttachment" parameterType="Attachment">
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_FID.NEXTVAL, #{boardId}, #{fileOriginName},
+				#{fileChangeName}, #{filePath}, DEFAULT, #{fileLevel},
+				DEFAULT, DEFAULT)
+	</insert>
+
+	<!-- 썸네일 목록 조회 -->
+	<select id="selectThumbnailList" parameterType="list"
+		resultMap="attachmentResultSet">
+		SELECT * FROM ATTACHMENT
+		WHERE BOARD_ID IN
+		<foreach item="board" collection="list" open="(" separator=","
+			close=")">
+			#{board.boardNo}
+		</foreach>
+		AND FILE_LEVEL = 0
+		AND FILE_STATUS = 'Y'
+	</select>
+
+	<!-- 게시글 조회 -->
+	<select id="selectBoard" parameterType="_int"
+		resultMap="boardResultSet">
+		SELECT * FROM V_BOARD
+		WHERE BOARD_NO=#{no}
+		AND BOARD_STATUS='Y'
+	</select>
+
+	<!-- 게시글 이미지 조회 -->
+	<select id="selectFiles" parameterType="_int"
+		resultMap="attachmentResultSet">
+		SELECT * FROM ATTACHMENT
+		WHERE BOARD_ID =#{no}
+		AND FILE_STATUS ='Y'
+	</select>
+
+	<!-- 게시글 조회수 증가 -->
+	<update id="increaseCount" parameterType="_int">
+		UPDATE BOARD SET
+		BOARD_COUNT = BOARD_COUNT+1
+		WHERE BOARD_NO=#{no}
+	</update>
+	
+	
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD SET 
+		BOARD_TITLE = #{boardTitle},
+		BOARD_CONTENT = #{boardContent},
+		BOARD_MODIFY_DT = SYSDATE,
+		BOARD_CATEGORY = #{boardCategory}
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	<!-- 게시글 수정 시 파일 수정 -->
+	<update id="updateAttachment" parameterType="Attachment">
+		UPDATE ATTACHMENT SET
+		FILE_ORIGIN_NAME = #{fileOriginName},
+		FILE_CHANGE_NAME = #{fileChangeName},
+		FILE_UPLOAD_DATE = SYSDATE
+		WHERE FILE_NO = #{fileNo}
+	</update>
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{replyContent}, DEFAULT,
+		 DEFAULT, DEFAULT, #{boardNo}, #{memberNo})
+	</insert>
+	
+	<!-- 댓글 출력 -->
+	<select id="selectReplyList" parameterType="_int" resultMap="replyResultSet">
+		SELECT * FROM V_REPLY
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+
+
+
+
+</mapper>

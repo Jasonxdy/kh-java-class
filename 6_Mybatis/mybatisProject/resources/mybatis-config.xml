@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- XML 문서의 유효성 체크를 위해 필요한 부분 -->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+					
+					
+<!-- configuration : 마이바티스 설정과 관련된 기본 세팅들을 선언할 수 있는 영역  // 이게 없는 경우 mybatis 사용 불가 -->
+<!-- 
+	** 주의사항 : 
+		configuration 내부에 작성되는 요소는 작성되는 순서가 존재하므로 
+		작성시 순서 틀리지 않게 조심할 것 
+-->
+<configuration>
+	<!-- 1. 마이바티스 기본세팅 선언 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!--
+		 만약 null 형태로 데이터가 전달이 된 경우 
+		빈칸이 아닌 NULL(반드시 대문자로! // 글자로 인식하는 경우도 있기 때문)로 
+		인식해라 라는 의미의 설정 
+		-->
+	</settings>
+	
+	<!-- VO 클래스의 풀 네임을 매번 호출하기 번거롭기 때문에 별도의 별칭을 등록하는 부분 -->
+	<typeAliases>
+		<!-- mybatis는 별칭 alias가 없으면 type에 있는 full name으로 불러야 하므로 꼭 지정해줄 것! -->
+		<typeAlias type="com.kh.mybatis.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.mybatis.board.model.vo.Board" alias="Board"/>
+	</typeAliases>
+
+
+
+	<!-- environments : DB 연결에 대한 설정 정보를 선언하는 부분-->
+	<environments default="development">
+		<environment id="development">
+			
+			<!--
+				마이바티스 설정 중 핵심은 트랜잭션 제어를 위한 transactionManager,
+				데이터 베이스 Connection 인스턴스를 얻어오기 위한 dataSource 설정이다.
+			-->
+			
+			<!-- 
+			transactionManager는 JDBC, MANAGED 두가지 타입 제공 
+			
+				MANAGED : 개발자가 트랜잭션 처리에 대해 어떤 영향도
+						  행사하지 않는다는 옵션 (자동 commit)
+						  - 컨테이너 트랜잭션의 모든 생명주기를 관리함
+						  + 기본값으로 사용된 커넥션을 close함.
+						  
+				JDBC : JDBC가 commit, rollback을 직접 제어하는 옵션 (수동 commit)
+					- 트랜잭션의 scope (몇개의 쿼리문을 트랜잭션으로 볼 것인지의 범위)를 관리하기 위해
+					dataSource로부터 커넥션 인스턴스를 얻어와야 함. 
+		  -->
+			<transactionManager type="JDBC" />
+			
+			<!-- POOLED : Connection Pool을 사용한다는 설정
+						Connection 개수가 Pool에 지정되어 있고 사용하고 반환됨...
+						줄서있게 되고 접속종료 상황등이 발생하지 않음 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="server" />
+				<property name="password" value="server" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	
+	<!-- mapper : DB에 사용되는 쿼리문들을 담은 파일을 등록하는 부분 -->	
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml"/>
+							<!-- resources 폴더가 source폴더로 등록되어 있기 때문에 최상단으로 인식된다 -->
+		<mapper resource="/mappers/board-mapper.xml"/>
+	</mappers>
+	
+</configuration>

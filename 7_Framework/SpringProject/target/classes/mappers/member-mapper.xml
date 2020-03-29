@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	
+	<!-- 
+	1) mybatis-config.xml에 typeAlias, mapper 등록
+	2) resultMap 등록
+	3) 쿼리문 작성 
+	 -->
+	 
+	<resultMap type="Member" id="memberResultSet">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+  		<result property="memberPwd" column="MEMBER_PWD"/>
+  		<result property="memberName" column="MEMBER_NM"/>
+  		<result property="memberPhone" column="MEMBER_PHONE"/>
+  		<result property="memberEmail" column="MEMBER_EMAIL"/>
+  		<result property="memberAddress" column="MEMBER_ADDR"/>
+  		<result property="memberInterest" column="MEMBER_INTEREST"/>
+  		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
+  		<result property="memberStatus" column="MEMBER_STATUS"/>
+  		<result property="memberGrade" column="MEMBER_GRADE"/>
+	</resultMap>
+	 
+	<!-- 로그인 --> 
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet"> <!-- 컬럼명 == 필드명일 경우 resultType사용해도 됨 -->
+		SELECT * FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		<!-- AND MEMBER_PWD = #{memberPwd} : bCrypt 암호화 때문에 나가리 -->
+		AND MEMBER_STATUS = 'Y'
+	</select>
+	
+	
+	<!-- 회원가입 --> 
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES (SEQ_UNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName}, #{memberPhone}, 
+			#{memberEmail}, #{memberAddress}, #{memberInterest}, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+	</select>
+	
+	
+	
+	<!-- 마이페이지 조회 -->
+	<select id="selectMember" parameterType="_int" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_EMAIL = #{memberEmail},
+		MEMBER_ADDR = #{memberAddress},
+		MEMBER_INTEREST = #{memberInterest}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	
+	<!-- 현재 비밀번호 확인 -->
+	<select id="checkCurrent" parameterType="_int" resultType="string">
+		SELECT MEMBER_PWD FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd" parameterType="Member">
+		UPDATE MEMBER SET
+		MEMBER_PWD = #{memberPwd}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+
+	
+	
+	<!-- 회원 탈퇴 -->
+	<update id="deleteMember" parameterType="_int">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'N'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+
+
+
+</mapper>

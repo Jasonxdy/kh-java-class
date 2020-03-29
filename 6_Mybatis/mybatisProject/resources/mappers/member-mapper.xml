@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- mapper의 네임스페이스 먼저 지정해주자. 네임스페이스는 이 매퍼의 별칭처럼 사용된다.-->
+<mapper namespace="memberMapper">
+
+
+	<!--  2. ResultMap 작성
+		resultMap 엘리먼트는 마이바티스에서 가장 중요하고 강력한 엘리먼트
+		ResultSet에서 데이터를 가져올 때 작성되는 JDBC 코드를 대부분 줄여주는 역할을 담당하고
+		DB와 자바 클래스를 매핑 시켜줄 때 보통 사용한다.
+		
+		type : ResultSet을 담을 VO 클래스명으로 어떤 타입을 참조할 것인지 기술(alias 사용가능)
+		id : 해당 ResultMap의 고유 아이디 => select문에서의 resultMap 값으로 사용하는 부분->
+	-->
+	 
+	<!-- ResultMap을 작성하기 앞서서 type부분에 클래스 작성 시
+		com.kh.membner.model.vo.Member' 의 평식을 패키지 + 클래스명으로(풀네임)으로 적어야 함.
+		하지만 매번 이렇게 패키지를 포함한 클래스명을 쓰는건 너무 귀찮으므로 
+		 mybatis-config.xml에 가서  클래스명으로만 쓸 수 있도록 별칭을 지정함.	-->
+	<resultMap type="Member" id="memberResultSet">
+		<!-- property : 자바의 필드 변수 이름 / column : DB의 해당 컬럼 -->	
+		
+		<!-- DB의 기본 키 -->
+		<id property="memberNo" column="MEMBER_NO"/>
+		
+		<!-- DB의 일반 컬럼들 -->
+   		<result property="memberId" column="MEMBER_ID"/>
+  		<result property="memberPwd" column="MEMBER_PWD"/>
+  		<result property="memberName" column="MEMBER_NM"/>
+  		<result property="memberPhone" column="MEMBER_PHONE"/>
+  		<result property="memberEmail" column="MEMBER_EMAIL"/>
+  		<result property="memberAddress" column="MEMBER_ADDR"/>
+  		<result property="memberInterest" column="MEMBER_INTEREST"/>
+  		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT"/>
+  		<result property="memberStatus" column="MEMBER_STATUS"/>
+  		<result property="memberGrade" column="MEMBER_GRADE"/>
+	</resultMap>
+
+
+	<!-- Select 구문 -->
+	<!-- 
+		id : 외부(DAO)에서 참조하기 위한 쿼리문의 고유 아아디(네임스페이스 내 유일한 구분자) // key값
+		parameterType : 구문에 전달될 파라미터의 패키지 경로를 포함한 전체 클래스 명이나 별칭(mybatis-config.xml에 설정된 alias 이용가능)
+		resultType/resultMap : 쿼리 실행 후 조회된 결과(ResultSet)를 자바에서 사용되게 끔 담게되는 객체
+		resultType : resultset 결과를 매핑해서 반환되는 타입의 전체 클래스명이나 별명
+		resultMap : resultset 결과를 매핑할 resultMap 참조 아이디명
+		
+	 -->
+	 <!-- 
+	 	쿼리문은 기본적으로 preparedStatment이다.
+	 	?(위치 홀더) 대신 직접 파라미터로 전달받은 객체의 값을 꺼낼 때 #{필드명} 으로 값을 꺼낸다.
+	 	
+	 	그리고 여러줄로 줄바꿈 문자를 섞어 사용도 가능하다.
+	 	단, 문장 마침을 나타내는 세미콜론은 여기서도 역시 에러를 유발한다!!
+ 	-->
+	<!-- 1. select 기본형-->
+	<!-- <select id="loginMember" parameterType="com.kh.member.model.vo.Member" 
+	 							resultType="com.kh.member.model.vo.Member">
+	 	SELECT * 
+	 	FROM MEMBER 
+	 	WHERE MEMBER_ID= #{memberId} 
+	 	AND MEMBER_PWD= #{memberPwd} 
+	 	AND MEMBER_STATUS='Y'
+	</select> -->
+	
+	<!-- id : key값, 쿼리문 : value값이 됨 (properties에서와 같음) -->
+	
+	<!-- 
+	 	해당 쿼리문 수행 결과가가 담긴 ResultSet은 resultType의 객체에 자동으로 mapping되어 리턴된다.
+	 	
+	 	DB에 존재하는 Member라는 테이블의 컬럼명과 자바에서의 Member클래스 필드명이 동일할 경우
+
+	 	자동으로 컬럼과 필드가 mapping이 되어 Member 객체가 리턴이 됨
+	 	
+	 	하지만 현재 상황을 보면.. Member테이블들의 컬럼과 Member클래스의 필드명이 다르므로
+	 	이때는 resultType보다 resultMap을 이용하여 명시적으로 컬럼명과 필드명을 mapping 시켜주는 작업이 필요하다.
+	-->
+	  
+	<!-- 3. resultMap, Alias 적용 -->
+	<!-- 처음에 작성했던 loginMember는 주석 후 -->
+													<!-- Mapping이 필요한 ResultSet이 나오므로 -->
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT * 
+	 	FROM MEMBER 
+	 	WHERE MEMBER_ID= #{memberId} 
+	 	AND MEMBER_PWD= #{memberPwd} 
+	 	AND MEMBER_STATUS='Y'
+	</select>	  
+	<!-- #{필드명} : getter가 알아서 작동함 -->
+	
+	
+	
+	<!-- 4. 아이디 중복 체크 -->
+	<!-- SELECT를 할 경우 반드시 resultType 또는 resultMap을 반드시 지정해야 함!! -->
+	<select id="idDupCheck" parameterType="string" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{id}
+		
+	</select>
+	
+	
+	<!-- 5. 회원 가입 -->
+	<!--
+	INSERT, UPDATE, DELETE 등의 DML은 설정할 수 있는 속성이 모두 동일하고 반환되는 타입(resultType)이 무조건
+	쿼리 수행이 성공한 행의 개수 (int)이기 때문에 resultType이 _int로 고정되어 있어 생략한다.
+	-->
+	<insert id="signUp" parameterType="Member">
+	
+		INSERT INTO MEMBER
+		VALUES(SEQ_UNO.NEXTVAL, 
+				#{memberId}, #{memberPwd}, #{memberName}, 
+				#{memberPhone}, #{memberEmail}, #{memberAddress}, 
+				#{memberInterest}, DEFAULT, DEFAULT, DEFAULT)
+	
+	</insert>
+	
+	
+	<!-- 6. 회원 정보 조회 -->
+	<select id="selectMember" parameterType="string" resultMap="memberResultSet">
+	
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NM, MEMBER_PHONE, 
+				MEMBER_EMAIL, MEMBER_ADDR, MEMBER_INTEREST
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+	
+		UPDATE MEMBER SET
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_EMAIL = #{memberEmail},
+		MEMBER_ADDR = #{memberAddress},
+		MEMBER_INTEREST = #{memberInterest}
+		WHERE MEMBER_ID = #{memberId}
+	
+	</update>
+	
+	<select id="checkPwd" parameterType="Member" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memberId}
+		AND MEMBER_PWD = #{memberPwd}
+	</select>
+	
+	
+	<update id="deleteMember" parameterType="Member">
+		UPDATE MEMBER SET
+		MEMBER_STATUS = 'N'
+		WHERE MEMBER_ID = #{memberId}
+	</update>
+
+	
+</mapper>
